@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/view/start_screen2.dart';
 
@@ -44,8 +45,8 @@ class _StartScreen1State extends State<StartScreen1> {
                           decoration: BoxDecoration(border: Border.all(color: const Color.fromRGBO(224, 224, 225, 1)), borderRadius: const BorderRadius.all(Radius.circular(3.28))),
                         ),
                         Container(
-                          height: 6.57,
-                          width: 17.51,
+                          height: 6.57.h,
+                          width: 17.51.w,
                           decoration: BoxDecoration(border: Border.all(color: const Color.fromRGBO(224, 224, 225, 1)), borderRadius: const BorderRadius.all(Radius.circular(3.28))),
                         )
                       ],
