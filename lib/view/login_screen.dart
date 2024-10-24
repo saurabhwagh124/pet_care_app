@@ -14,11 +14,11 @@ class _LoginscreenState extends State<Loginscreen> {
       body: Stack(
         // fit: StackFit.expand,
         children: [
-          SizedBox(
+          const SizedBox(
             width: double.maxFinite,
           ),
           Image.asset("assets/images/login bg.png"),
-          Positioned(
+          const Positioned(
             top: -300,
             left: 130,
             child: CircleAvatar(
@@ -26,7 +26,7 @@ class _LoginscreenState extends State<Loginscreen> {
               backgroundColor: Color.fromRGBO(248, 174, 31, 0.97),
             ),
           ),
-          Positioned(
+          const Positioned(
             top: -220,
             left: 270,
             child: CircleAvatar(
@@ -37,7 +37,7 @@ class _LoginscreenState extends State<Loginscreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
+              const SizedBox(
                 width: double.maxFinite,
               ),
               Image.asset(
@@ -45,7 +45,7 @@ class _LoginscreenState extends State<Loginscreen> {
                 height: 225,
               ),
               TextFormField(
-                decoration: InputDecoration(border: InputBorder.none),
+                decoration: const InputDecoration(border: InputBorder.none),
               )
             ],
           )

@@ -43,29 +43,29 @@ class _StartScreen3State extends State<StartScreen3> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(right: 8.76),
+                            margin: const EdgeInsets.only(right: 8.76),
                             height: 6.57,
                             width: 17.51,
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: Color.fromRGBO(224, 224, 225, 1)),
+                                    color: const Color.fromRGBO(224, 224, 225, 1)),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(3.28))),
+                                    const BorderRadius.all(Radius.circular(3.28))),
                           ),
                           Container(
                             height: 6.57,
                             width: 17.51,
-                            margin: EdgeInsets.only(right: 8.76),
+                            margin: const EdgeInsets.only(right: 8.76),
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: Color.fromRGBO(224, 224, 225, 1)),
+                                    color: const Color.fromRGBO(224, 224, 225, 1)),
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(3.28))),
+                                    const BorderRadius.all(Radius.circular(3.28))),
                           ),
                           Container(
                             height: 6.57,
                             width: 17.51,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 color: Color.fromRGBO(60, 60, 60, 1),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(3.28))),
@@ -105,14 +105,14 @@ class _StartScreen3State extends State<StartScreen3> {
                       Container(
                         height: 52.54,
                         width: 300,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             color: Color.fromRGBO(245, 146, 69, 1),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(8.76))),
                         child: Row(
                           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 100,
                             ),
                             Text("Get Started",
@@ -122,10 +122,10 @@ class _StartScreen3State extends State<StartScreen3> {
                                       fontSize: 20,
                                       fontWeight: FontWeight.w700),
                                 )),
-                            SizedBox(
+                            const SizedBox(
                               width: 50,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.arrow_forward_ios,
                               size: 15,
                               color: Color.fromRGBO(255, 255, 255, 0.9),
@@ -149,7 +149,7 @@ class _StartScreen3State extends State<StartScreen3> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Loginscreen(),
+                                    builder: (context) => const Loginscreen(),
                                   ));
                             },
                             child: Text("Login ",
