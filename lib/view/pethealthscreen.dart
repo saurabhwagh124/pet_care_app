@@ -1,7 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/view/veterinarydoctorscreen.dart';
 
 class PetHealth extends StatefulWidget {
   const PetHealth({super.key});
@@ -105,8 +104,15 @@ class _PetHealthState extends State<PetHealth> {
                     Center(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromRGBO(245, 146, 69, 1)),
-                        onPressed: () {},
+                            backgroundColor:
+                                const Color.fromRGBO(245, 146, 69, 1)),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => VeterinaryDoctor(),
+                              ));
+                        },
                         child: Text(
                           'Start',
                           style: GoogleFonts.fredoka(
