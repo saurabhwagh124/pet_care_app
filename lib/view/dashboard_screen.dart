@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/view/petscreen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -14,11 +15,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.orangeAccent,
         automaticallyImplyLeading: false,
         title: Text(
           "Hey Saurabh Wagh, ",
-          style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.w600, color: Colors.white),
+          style: GoogleFonts.fredoka(
+              fontSize: 15, fontWeight: FontWeight.w600, color: Colors.white),
         ),
         actions: [
           Container(
@@ -42,11 +44,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(8), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(0, 1),
+                          blurRadius: 3.5,
+                          color: Color.fromRGBO(0, 0, 0, 0.20))
+                    ]),
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+                      padding:
+                          const EdgeInsets.only(top: 15, left: 20, right: 20),
                       child: Row(
                         children: [
                           SizedBox(
@@ -58,7 +68,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           Text(
                             "My Pets",
-                            style: GoogleFonts.fredoka(fontWeight: FontWeight.w700, fontSize: 20),
+                            style: GoogleFonts.fredoka(
+                                fontWeight: FontWeight.w700, fontSize: 20),
                           ),
                           const Spacer()
                         ],
@@ -74,15 +85,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         children: [
                           Column(
                             children: [
-                              Container(
-                                height: 90,
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                                clipBehavior: Clip.hardEdge,
-                                child: Image.asset('assets/images/puppy1.png'),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const Petscreen(),
+                                      ));
+                                },
+                                child: Container(
+                                  height: 90,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  clipBehavior: Clip.hardEdge,
+                                  child:
+                                      Image.asset('assets/images/puppy1.png'),
+                                ),
                               ),
                               const Text(
                                 "Pomy",
-                                style: TextStyle(fontSize: 15, color: Colors.grey),
+                                style:
+                                    TextStyle(fontSize: 15, color: Colors.grey),
                               )
                             ],
                           ),
@@ -90,13 +113,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             children: [
                               Container(
                                 height: 90,
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)),
                                 clipBehavior: Clip.hardEdge,
                                 child: Image.asset('assets/images/rabbit1.png'),
                               ),
                               const Text(
                                 "Fixi",
-                                style: TextStyle(fontSize: 15, color: Colors.grey),
+                                style:
+                                    TextStyle(fontSize: 15, color: Colors.grey),
                               )
                             ],
                           ),
@@ -104,7 +129,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             children: [
                               Container(
                                 height: 90,
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                                width: 90,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)),
                                 clipBehavior: Clip.hardEdge,
                                 child: Image.asset(
                                   'assets/images/cat1.png',
@@ -113,7 +140,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               ),
                               const Text(
                                 "Trix",
-                                style: TextStyle(fontSize: 15, color: Colors.grey),
+                                style:
+                                    TextStyle(fontSize: 15, color: Colors.grey),
                               )
                             ],
                           )
@@ -126,7 +154,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
               SizedBox(height: 20),
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(8), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(0, 1),
+                          blurRadius: 3.5,
+                          color: Color.fromRGBO(0, 0, 0, 0.20))
+                    ]),
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
@@ -155,7 +190,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       children: [
                         const CircleAvatar(
                           radius: 25,
-                          backgroundImage: AssetImage('assets/images/puppy1.png'),
+                          backgroundImage:
+                              AssetImage('assets/images/puppy1.png'),
                         ),
                         const SizedBox(
                           width: 20,
@@ -166,7 +202,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               children: [
                                 const Text(
                                   "Health",
-                                  style: TextStyle(fontSize: 14, color: Colors.black),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.black),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -185,7 +222,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 const Text(
                                   "80%",
-                                  style: TextStyle(fontSize: 14, color: Colors.greenAccent),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.greenAccent),
                                 ),
                               ],
                             ),
@@ -193,7 +231,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               children: [
                                 const Text(
                                   "Food",
-                                  style: TextStyle(fontSize: 14, color: Colors.black),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.black),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -212,7 +251,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 const Text(
                                   "50%",
-                                  style: TextStyle(fontSize: 14, color: Colors.pinkAccent),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.pinkAccent),
                                 ),
                               ],
                             ),
@@ -220,7 +260,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               children: [
                                 const Text(
                                   "Mood",
-                                  style: TextStyle(fontSize: 14, color: Colors.black),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.black),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -239,7 +280,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 const Text(
                                   "80%",
-                                  style: TextStyle(fontSize: 14, color: Colors.pinkAccent),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.pinkAccent),
                                 ),
                               ],
                             )
@@ -252,7 +294,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       children: [
                         const CircleAvatar(
                           radius: 25,
-                          backgroundImage: AssetImage('assets/images/rabbit1.png'),
+                          backgroundImage:
+                              AssetImage('assets/images/rabbit1.png'),
                         ),
                         const SizedBox(
                           width: 20,
@@ -263,7 +306,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               children: [
                                 const Text(
                                   "Health",
-                                  style: TextStyle(fontSize: 14, color: Colors.black),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.black),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -282,7 +326,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 const Text(
                                   "80%",
-                                  style: TextStyle(fontSize: 14, color: Colors.greenAccent),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.greenAccent),
                                 ),
                               ],
                             ),
@@ -290,7 +335,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               children: [
                                 const Text(
                                   "Food",
-                                  style: TextStyle(fontSize: 14, color: Colors.black),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.black),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -309,7 +355,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 const Text(
                                   "50%",
-                                  style: TextStyle(fontSize: 14, color: Colors.pinkAccent),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.pinkAccent),
                                 ),
                               ],
                             ),
@@ -317,7 +364,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               children: [
                                 const Text(
                                   "Mood",
-                                  style: TextStyle(fontSize: 14, color: Colors.black),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.black),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -336,7 +384,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 const Text(
                                   "80%",
-                                  style: TextStyle(fontSize: 14, color: Colors.pinkAccent),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.pinkAccent),
                                 ),
                               ],
                             )
@@ -360,7 +409,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               children: [
                                 const Text(
                                   "Health",
-                                  style: TextStyle(fontSize: 14, color: Colors.black),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.black),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -379,7 +429,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 const Text(
                                   "80%",
-                                  style: TextStyle(fontSize: 14, color: Colors.greenAccent),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.greenAccent),
                                 ),
                               ],
                             ),
@@ -387,7 +438,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               children: [
                                 const Text(
                                   "Food",
-                                  style: TextStyle(fontSize: 14, color: Colors.black),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.black),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -406,7 +458,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 const Text(
                                   "50%",
-                                  style: TextStyle(fontSize: 14, color: Colors.pinkAccent),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.pinkAccent),
                                 ),
                               ],
                             ),
@@ -414,7 +467,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               children: [
                                 const Text(
                                   "Mood",
-                                  style: TextStyle(fontSize: 14, color: Colors.black),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.black),
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -433,7 +487,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 ),
                                 const Text(
                                   "80%",
-                                  style: TextStyle(fontSize: 14, color: Colors.pinkAccent),
+                                  style: TextStyle(
+                                      fontSize: 14, color: Colors.pinkAccent),
                                 ),
                               ],
                             ),
@@ -457,7 +512,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(8), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(0, 1),
+                          blurRadius: 3.5,
+                          color: Color.fromRGBO(0, 0, 0, 0.20))
+                    ]),
                 child: Column(
                   children: [
                     Row(
@@ -471,7 +533,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                         Text(
                           "Pet Food",
-                          style: GoogleFonts.fredoka(fontSize: 20, fontWeight: FontWeight.w700),
+                          style: GoogleFonts.fredoka(
+                              fontSize: 20, fontWeight: FontWeight.w700),
                         )
                       ],
                     ),
@@ -481,7 +544,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                          color: Colors.white, borderRadius: BorderRadius.circular(8), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: const [
+                            BoxShadow(
+                                offset: Offset(0, 1),
+                                blurRadius: 3.5,
+                                color: Color.fromRGBO(0, 0, 0, 0.20))
+                          ]),
                       child: Row(
                         children: [
                           SizedBox(
@@ -493,12 +563,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           Text(
                             "Josi Dog Master Mix\n 900g",
-                            style: GoogleFonts.fredoka(fontSize: 16, fontWeight: FontWeight.w600),
+                            style: GoogleFonts.fredoka(
+                                fontSize: 12, fontWeight: FontWeight.w600),
                           ),
                           const Spacer(),
                           Container(
-                            margin: const EdgeInsets.all(10),
-                            decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
+                            margin: const EdgeInsets.all(5),
+                            decoration: const BoxDecoration(
+                                color: Colors.black, shape: BoxShape.circle),
                             padding: const EdgeInsets.all(5),
                             child: const Icon(
                               Icons.shopping_bag_outlined,
@@ -515,24 +587,34 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                          color: Colors.white, borderRadius: BorderRadius.circular(8), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: const [
+                            BoxShadow(
+                                offset: Offset(0, 1),
+                                blurRadius: 3.5,
+                                color: Color.fromRGBO(0, 0, 0, 0.20))
+                          ]),
                       child: Row(
                         children: [
                           SizedBox(
                             height: 67,
-                            child: Image.asset('assets/images/HappyDogFood.png'),
+                            child:
+                                Image.asset('assets/images/HappyDogFood.png'),
                           ),
                           const SizedBox(
                             width: 10,
                           ),
                           Text(
                             "Happy Dog Profi Mix\n 500g",
-                            style: GoogleFonts.fredoka(fontSize: 16, fontWeight: FontWeight.w600),
+                            style: GoogleFonts.fredoka(
+                                fontSize: 12, fontWeight: FontWeight.w600),
                           ),
                           const Spacer(),
                           Container(
-                            margin: const EdgeInsets.all(10),
-                            decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
+                            margin: const EdgeInsets.all(5),
+                            decoration: const BoxDecoration(
+                                color: Colors.black, shape: BoxShape.circle),
                             padding: const EdgeInsets.all(5),
                             child: const Icon(
                               Icons.shopping_bag_outlined,
@@ -551,7 +633,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
       ),
       bottomNavigationBar: NavigationBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.orangeAccent,
         selectedIndex: 0,
         destinations: const [
           Icon(
