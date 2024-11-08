@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/view/start_screen2.dart';
 
@@ -16,37 +17,40 @@ class _StartScreen1State extends State<StartScreen1> {
       body: Stack(
         clipBehavior: Clip.none,
         children: [
-          Image.asset('assets/images/start_screen_1.png'),
+          Image.asset(
+            'assets/images/start_screen_1.png',
+            fit: BoxFit.fill,
+          ),
           Positioned(
-            top: MediaQuery.sizeOf(context).height / 2,
+            top: MediaQuery.sizeOf(context).height / 2.h,
             child: Container(
-              height: MediaQuery.sizeOf(context).height / 2,
+              height: MediaQuery.sizeOf(context).height / 2.h,
               width: MediaQuery.sizeOf(context).width,
-              decoration: const BoxDecoration(color: Color.fromRGBO(255, 255, 255, 0.9), borderRadius: BorderRadius.only(topLeft: Radius.circular(27), topRight: Radius.circular(27))),
+              decoration: BoxDecoration(color: const Color.fromRGBO(255, 255, 255, 0.9), borderRadius: BorderRadius.only(topLeft: Radius.circular(27.r), topRight: Radius.circular(27.r))),
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
                   Positioned(
                     top: 20.72,
-                    left: MediaQuery.sizeOf(context).width / 2.4,
+                    left: MediaQuery.sizeOf(context).width / 2.4.r,
                     child: Row(
                       children: [
                         Container(
-                          margin: const EdgeInsets.only(right: 8.76),
-                          height: 6.57,
-                          width: 17.51,
-                          decoration: const BoxDecoration(color: Color.fromRGBO(60, 60, 60, 1), borderRadius: BorderRadius.all(Radius.circular(3.28))),
+                          margin: EdgeInsets.only(right: 8.76.w),
+                          height: 6.57.h,
+                          width: 17.51.w,
+                          decoration: BoxDecoration(color: const Color.fromRGBO(60, 60, 60, 1), borderRadius: BorderRadius.all(Radius.circular(3.28.r))),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(right: 8.76),
-                          height: 6.57,
-                          width: 17.51,
-                          decoration: BoxDecoration(border: Border.all(color: const Color.fromRGBO(224, 224, 225, 1)), borderRadius: const BorderRadius.all(Radius.circular(3.28))),
+                          margin: EdgeInsets.only(right: 8.76.w),
+                          height: 6.57.h,
+                          width: 17.51.w,
+                          decoration: BoxDecoration(border: Border.all(color: const Color.fromRGBO(224, 224, 225, 1)), borderRadius: BorderRadius.all(Radius.circular(3.28.r))),
                         ),
                         Container(
-                          height: 6.57,
-                          width: 17.51,
-                          decoration: BoxDecoration(border: Border.all(color: const Color.fromRGBO(224, 224, 225, 1)), borderRadius: const BorderRadius.all(Radius.circular(3.28))),
+                          height: 6.57.h,
+                          width: 17.51.w,
+                          decoration: BoxDecoration(border: Border.all(color: const Color.fromRGBO(224, 224, 225, 1)), borderRadius: BorderRadius.all(Radius.circular(3.28.r))),
                         )
                       ],
                     ),
