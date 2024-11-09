@@ -56,12 +56,12 @@ class _PetHealthState extends State<PetHealth> {
                       children: [
                         VaccinationCard(
                           title: 'Rabies vaccination',
-                          date: '24th Jan 2022',
+                          date: '24th Sep 2024',
                           doctor: 'Dr. Rafeeqa',
                         ),
                         VaccinationCard(
                           title: 'Calicivirus',
-                          date: '12th Feb 2022',
+                          date: '12th Feb 2024',
                           doctor: 'Dr. Arham',
                         ),
                       ],
