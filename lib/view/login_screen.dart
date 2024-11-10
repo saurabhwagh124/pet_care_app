@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
+import 'package:pet_care_app/utils/auth_service.dart';
 import 'package:pet_care_app/view/dashboard_screen.dart';
 import 'package:pet_care_app/view/forgot_password.dart';
 
@@ -14,6 +17,10 @@ class Loginscreen extends StatefulWidget {
 }
 
 class _LoginscreenState extends State<Loginscreen> {
+  final _auth = AuthService();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,17 +130,23 @@ class _LoginscreenState extends State<Loginscreen> {
               SizedBox(
                 height: 20.h,
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 25.w, right: 25.w),
-                child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const DashboardScreen()));
-                    },
-                    style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(245, 146, 69, 1), minimumSize: const Size(double.infinity, 50)),
-                    child: Text("Login",
-                        style: GoogleFonts.fredoka(
-                          textStyle: const TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontSize: 25, fontWeight: FontWeight.w500),
-                        ))),
+              GestureDetector(
+                onTap: _loginWithEmail,
+                child: Container(
+                  height: 40.h,
+                  width: 300.w,
+                  decoration: BoxDecoration(color: AppColors.orangeButton, borderRadius: BorderRadius.circular(10.r)),
+                  margin: EdgeInsets.only(left: 25.w, right: 25.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Login",
+                        style: TextStyle(color: AppColors.white, fontSize: 20.sp, fontWeight: FontWeight.w400),
+                      )
+                    ],
+                  ),
+                ),
               ),
               SizedBox(
                 height: 20.h,
@@ -145,20 +158,31 @@ class _LoginscreenState extends State<Loginscreen> {
               SizedBox(
                 height: 20.h,
               ),
-              Padding(
-                padding: EdgeInsets.only(left: 25.w, right: 25.w, bottom: 20.h),
-                child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: CircleAvatar(
-                      radius: 10.r,
-                      backgroundColor: AppColors.orangeButton,
-                      backgroundImage: AssetImage(AppImages.googleLogoImg),
-                    ),
-                    style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(245, 146, 69, 1), minimumSize: const Size(double.infinity, 50)),
-                    label: Text("Login With Google",
-                        style: GoogleFonts.fredoka(
-                          textStyle: const TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontSize: 20, fontWeight: FontWeight.w400),
-                        ))),
+              GestureDetector(
+                onTap: _signInWithGoogle,
+                child: Container(
+                  height: 40.h,
+                  width: 300.w,
+                  decoration: BoxDecoration(color: AppColors.orangeButton, borderRadius: BorderRadius.circular(10.r)),
+                  margin: EdgeInsets.only(left: 25.w, right: 25.w, bottom: 20.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 10.r,
+                        backgroundColor: AppColors.orangeButton,
+                        backgroundImage: AssetImage(AppImages.googleLogoImg),
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Text(
+                        "Login with Google",
+                        style: TextStyle(color: AppColors.white, fontSize: 16.sp, fontWeight: FontWeight.w400),
+                      )
+                    ],
+                  ),
+                ),
               ),
               // Padding(
               //   padding: EdgeInsets.only(left: 25.w, right: 25.w, bottom: 20.h),
@@ -210,5 +234,28 @@ class _LoginscreenState extends State<Loginscreen> {
         ],
       ),
     );
+  }
+
+  _loginWithEmail() async {
+    final user = await _auth.loginUserWithMailAndPassword(_emailController.text, _passwordController.text);
+    if (user != null) {
+      log("user logged in with email");
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashboardScreen()));
+    } else {
+      log("Login with email unsuccessfull");
+      _emailController.clear();
+      _passwordController.clear();
+      // ScaffoldMessenger.of(context).showSnackBar()
+    }
+  }
+
+  _signInWithGoogle() async {
+    final userCred = await _auth.loginWithGoogle();
+    if (userCred != null) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashboardScreen()));
+      log("Gooogle login success");
+    } else {
+      log("Google login failed");
+    }
   }
 }
