@@ -24,7 +24,7 @@ class _LoginscreenState extends State<Loginscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           SizedBox(
@@ -53,7 +53,7 @@ class _LoginscreenState extends State<Loginscreen> {
           ),
           Column(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
@@ -184,30 +184,6 @@ class _LoginscreenState extends State<Loginscreen> {
                   ),
                 ),
               ),
-              // Padding(
-              //   padding: EdgeInsets.only(left: 25.w, right: 25.w, bottom: 20.h),
-              //   child: ElevatedButton.icon(
-              //       onPressed: () {},
-              //       icon: const Icon(Icons.facebook),
-              //       style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(245, 146, 69, 1), minimumSize: const Size(double.infinity, 50)),
-              //       label: Text("Login With Facebook",
-              //           style: GoogleFonts.fredoka(
-              //             textStyle: const TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontSize: 20, fontWeight: FontWeight.w400),
-              //           ))),
-              // ),
-              // Padding(
-              //   padding: EdgeInsets.only(left: 25.w, right: 25.w, bottom: 25.h),
-              //   child: ElevatedButton.icon(
-              //       onPressed: () {},
-              //       icon: const Icon(
-              //         Icons.apple,
-              //       ),
-              //       style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(245, 146, 69, 1), minimumSize: const Size(double.infinity, 50)),
-              //       label: Text("Login With Apple",
-              //           style: GoogleFonts.fredoka(
-              //             textStyle: const TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontSize: 20, fontWeight: FontWeight.w400),
-              //           ))),
-              // ),
               Container(
                 width: double.infinity,
                 height: 25.h,

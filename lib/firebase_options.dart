@@ -41,47 +41,50 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCarMxpK5SsKAMQwhcD_u1WV1x9I3lkDuk',
-    appId: '1:1095557243603:web:8ae2ff9faffe84428aea26',
-    messagingSenderId: '1095557243603',
-    projectId: 'pet-care-app-project',
-    authDomain: 'pet-care-app-project.firebaseapp.com',
-    storageBucket: 'pet-care-app-project.firebasestorage.app',
+    apiKey: 'AIzaSyC9KU8BHNiu1GtOQ-4WT6RSVGxLagoGl2k',
+    appId: '1:726567938075:web:555f8b48a23dba777f70be',
+    messagingSenderId: '726567938075',
+    projectId: 'project-petcare-app',
+    authDomain: 'project-petcare-app.firebaseapp.com',
+    storageBucket: 'project-petcare-app.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCJ9m2tSZnLTP9eKQNvffIxHUMN9eVnM_g',
-    appId: '1:1095557243603:android:3921f8f4f35371fc8aea26',
-    messagingSenderId: '1095557243603',
-    projectId: 'pet-care-app-project',
-    storageBucket: 'pet-care-app-project.firebasestorage.app',
+    apiKey: 'AIzaSyCB_XaM7d_MLIfMHW6jmtsf8HyQTTa_LZc',
+    appId: '1:726567938075:android:ab9d846a13f7985a7f70be',
+    messagingSenderId: '726567938075',
+    projectId: 'project-petcare-app',
+    storageBucket: 'project-petcare-app.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCkV2Q6dAW1H9p0ZeH-gMbPM33Im8j_a5U',
-    appId: '1:1095557243603:ios:f0624492238a9a578aea26',
-    messagingSenderId: '1095557243603',
-    projectId: 'pet-care-app-project',
-    storageBucket: 'pet-care-app-project.firebasestorage.app',
+    apiKey: 'AIzaSyCmq-XdS21hzDfppXmH5ltEgIMDVr_sDZU',
+    appId: '1:726567938075:ios:118f4e3003cb28037f70be',
+    messagingSenderId: '726567938075',
+    projectId: 'project-petcare-app',
+    storageBucket: 'project-petcare-app.firebasestorage.app',
+    androidClientId: '726567938075-hbfhq8dqkbki0n7km67l5iig7pfa4b3u.apps.googleusercontent.com',
+    iosClientId: '726567938075-n5i785s2ffsclpq4cmri2dv125rm0ne2.apps.googleusercontent.com',
     iosBundleId: 'com.example.petCareApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCkV2Q6dAW1H9p0ZeH-gMbPM33Im8j_a5U',
-    appId: '1:1095557243603:ios:f0624492238a9a578aea26',
-    messagingSenderId: '1095557243603',
-    projectId: 'pet-care-app-project',
-    storageBucket: 'pet-care-app-project.firebasestorage.app',
+    apiKey: 'AIzaSyCmq-XdS21hzDfppXmH5ltEgIMDVr_sDZU',
+    appId: '1:726567938075:ios:118f4e3003cb28037f70be',
+    messagingSenderId: '726567938075',
+    projectId: 'project-petcare-app',
+    storageBucket: 'project-petcare-app.firebasestorage.app',
+    androidClientId: '726567938075-hbfhq8dqkbki0n7km67l5iig7pfa4b3u.apps.googleusercontent.com',
+    iosClientId: '726567938075-n5i785s2ffsclpq4cmri2dv125rm0ne2.apps.googleusercontent.com',
     iosBundleId: 'com.example.petCareApp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyCarMxpK5SsKAMQwhcD_u1WV1x9I3lkDuk',
-    appId: '1:1095557243603:web:e555ff2e0c1a0d368aea26',
-    messagingSenderId: '1095557243603',
-    projectId: 'pet-care-app-project',
-    authDomain: 'pet-care-app-project.firebaseapp.com',
-    storageBucket: 'pet-care-app-project.firebasestorage.app',
+    apiKey: 'AIzaSyC9KU8BHNiu1GtOQ-4WT6RSVGxLagoGl2k',
+    appId: '1:726567938075:web:37c2fc494490c64d7f70be',
+    messagingSenderId: '726567938075',
+    projectId: 'project-petcare-app',
+    authDomain: 'project-petcare-app.firebaseapp.com',
+    storageBucket: 'project-petcare-app.firebasestorage.app',
   );
-
 }
