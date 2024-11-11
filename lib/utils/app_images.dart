@@ -16,10 +16,17 @@ class AppImages {
   static String rabbit1Img = "${assetImgPath}rabbit1.png";
   static String statusIconImg = "${assetImgPath}statusIcon.png";
   static String googleLogoImg = "${assetImgPath}google.png";
-//   static String boardLogoImg = "${assetImgPath}google.png";
-//   static String googleLogoImg = "${assetImgPath}google.png";
-//   static String googleLogoImg = "${assetImgPath}google.png";
-//   static String googleLogoImg = "${assetImgPath}google.png";
-//   static String googleLogoImg = "${assetImgPath}google.png";
-//   static String googleLogoImg = "${assetImgPath}google.png";
+  static String boardLogoImg = "${assetImgPath}boardLogo.png";
+  static String groomLogoImg = "${assetImgPath}groomLogo.png";
+  static String vetLogoImg = "${assetImgPath}vetLogo.png";
+  static String arfaPersonImg = "${assetImgPath}arfa.png";
+  static String rehanPersonImg = "${assetImgPath}rehan_shah.png";
+  static String irfanPersonImg = "${assetImgPath}irfan_akram.png";
+  static String combAndCollarImg = "${assetImgPath}combAndCollar.png";
+  static String cosmoDogCaresImg = "${assetImgPath}cosmoDogCares.png";
+  static String cutiePawsImg = '${assetImgPath}cutiePaws.png';
+  static String goldenBoneImg = '${assetImgPath}goldenBone.png';
+  static String silverPawLodge = '${assetImgPath}silverPawLogo.png';
+  static String dirtyPawDogSpaImg = '${assetImgPath}dirtyPawDogSpa.png';
+  static String tailsOfTheCity = '${assetImgPath}tailsOfTheCity.png';
 }
