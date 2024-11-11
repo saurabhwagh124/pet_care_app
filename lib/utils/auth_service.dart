@@ -43,6 +43,7 @@ class AuthService {
     try {
       await _googleSignIn.signOut();
       await _auth.signOut();
+      log("Logout success");
     } catch (e) {
       log("Sign out error: ->$e");
     }
