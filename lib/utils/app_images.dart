@@ -28,5 +28,5 @@ class AppImages {
   static String goldenBoneImg = '${assetImgPath}goldenBone.png';
   static String silverPawLodge = '${assetImgPath}silverPawLogo.png';
   static String dirtyPawDogSpaImg = '${assetImgPath}dirtyPawDogSpa.png';
-  static String tailsOfTheCity = '${assetImgPath}tailsOfTheCity.png';
+  static String tailsOfTheCityImg = '${assetImgPath}tailsOfTheCity.png';
 }
