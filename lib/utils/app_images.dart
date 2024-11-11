@@ -16,4 +16,10 @@ class AppImages {
   static String rabbit1Img = "${assetImgPath}rabbit1.png";
   static String statusIconImg = "${assetImgPath}statusIcon.png";
   static String googleLogoImg = "${assetImgPath}google.png";
+//   static String boardLogoImg = "${assetImgPath}google.png";
+//   static String googleLogoImg = "${assetImgPath}google.png";
+//   static String googleLogoImg = "${assetImgPath}google.png";
+//   static String googleLogoImg = "${assetImgPath}google.png";
+//   static String googleLogoImg = "${assetImgPath}google.png";
+//   static String googleLogoImg = "${assetImgPath}google.png";
 }
