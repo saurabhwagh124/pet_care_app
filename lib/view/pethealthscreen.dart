@@ -100,7 +100,6 @@ class _PetHealthState extends State<PetHealth> {
                     const SizedBox(height: 5),
                     Center(
                       child: ElevatedButton(
-<<<<<<< HEAD
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromRGBO(245, 146, 69, 1)),
@@ -111,10 +110,6 @@ class _PetHealthState extends State<PetHealth> {
                                 builder: (context) => VeterinaryDoctor(),
                               ));
                         },
-=======
-                        style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(245, 146, 69, 1)),
-                        onPressed: () {},
->>>>>>> a89f53f54229cc77fe098960cd4e555d739ac65f
                         child: Text(
                           'Start',
                           style: GoogleFonts.fredoka(color: Colors.white, fontSize: 22),
