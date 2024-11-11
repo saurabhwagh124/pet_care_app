@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddReviewPage extends StatefulWidget {
+  const AddReviewPage({super.key});
+
   @override
-  _AddReviewPageState createState() => _AddReviewPageState();
+  State<AddReviewPage> createState() => _AddReviewPageState();
 }
 
 class _AddReviewPageState extends State<AddReviewPage> {
@@ -45,22 +47,22 @@ class _AddReviewPageState extends State<AddReviewPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFF8AE1F),
-        title:  Text(
+        title: Text(
           'Add Review',
           style: GoogleFonts.fredoka(
-            textStyle: const TextStyle(
-                fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
+            textStyle: const TextStyle(fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
           ),
         ),
         leading: IconButton(
-    icon: const Icon(Icons.arrow_back_ios_rounded,color: Colors.white,),
-    onPressed: () {
-      Navigator.pop(context); // Custom back button behavior
-    },
-  ),
-),
-      
-      
+          icon: const Icon(
+            Icons.arrow_back_ios_rounded,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context); // Custom back button behavior
+          },
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -80,8 +82,7 @@ class _AddReviewPageState extends State<AddReviewPage> {
                   children: [
                     Text(
                       'Haylie Aminoff',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       'Posting Publicly*',
@@ -92,20 +93,18 @@ class _AddReviewPageState extends State<AddReviewPage> {
               ],
             ),
             const SizedBox(height: 24),
-             Text(
-              'Rate your experience',
-              style: GoogleFonts.fredoka(
-                textStyle:  TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-              )
-            ),
+            Text('Rate your experience',
+                style: GoogleFonts.fredoka(
+                  textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                )),
             Row(
               children: List.generate(5, (index) => _buildStar(index)),
             ),
             const SizedBox(height: 24),
-             Text(
+            Text(
               'Share more about your experience',
-               style: GoogleFonts.fredoka(
-                textStyle:  TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+              style: GoogleFonts.fredoka(
+                textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
             ),
             const SizedBox(height: 8),
@@ -122,13 +121,15 @@ class _AddReviewPageState extends State<AddReviewPage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: _submitReview,
-                style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   backgroundColor: Colors.orange,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
-                child:  Text('Post Review',  style: GoogleFonts.fredoka(
-                textStyle:  TextStyle(fontSize: 18, fontWeight: FontWeight.w500,color: Colors.white),
-              )),
+                child: Text('Post Review',
+                    style: GoogleFonts.fredoka(
+                      textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white),
+                    )),
               ),
             ),
           ],

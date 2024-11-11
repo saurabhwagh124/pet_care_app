@@ -2,27 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/view/add_review_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: ReviewsScreen(),
-    );
-  }
-}
-
 class ReviewsScreen extends StatefulWidget {
   const ReviewsScreen({super.key});
 
   @override
-  _ReviewsScreenState createState() => _ReviewsScreenState();
+  State<ReviewsScreen> createState() => _ReviewsScreenState();
 }
 
 class _ReviewsScreenState extends State<ReviewsScreen> {
@@ -53,7 +37,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
   void _navigateToAddReviewPage() async {
     final newReview = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => AddReviewPage()),
+      MaterialPageRoute(builder: (context) => const AddReviewPage()),
     );
 
     if (newReview != null) {
