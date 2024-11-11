@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/view/pethealthscreen.dart';
+import 'package:pet_care_app/view/shopfoodscreen.dart';
 
 class Petscreen extends StatefulWidget {
   const Petscreen({super.key});
@@ -139,7 +138,6 @@ class _PetscreenState extends State<Petscreen> {
                     buttonText: 'Contact Vet',
                     buttonColor: Colors.redAccent,
                     onPressed: () {
-                      log("buttton press");
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -158,7 +156,7 @@ class _PetscreenState extends State<Petscreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const PetHealth(),
+                          builder: (context) => const shopFood(),
                         ));
                   },
                 ),
