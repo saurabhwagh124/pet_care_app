@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
-import 'package:pet_care_app/view/petscreen.dart';
+import 'package:pet_care_app/view/explore_screen.dart';
+import 'package:pet_care_app/view/pet_screen.dart';
 import 'package:pet_care_app/view/wrapper.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -17,6 +18,8 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   final auth = AuthService();
   final User? user = FirebaseAuth.instance.currentUser;
+  int _selectedIndex = 0;
+  List<Widget> screens = [const DashboardScreen(), const ExploreScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -615,26 +618,45 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       bottomNavigationBar: NavigationBar(
         backgroundColor: Colors.orangeAccent,
-        selectedIndex: 0,
+        selectedIndex: _selectedIndex,
         destinations: const [
-          Icon(
-            Icons.house_outlined,
-            color: Colors.white,
+          NavigationDestination(
+            icon: Icon(
+              Icons.house_outlined,
+              color: Colors.white,
+            ),
+            label: 'Home',
           ),
-          Icon(
-            Icons.location_pin,
-            color: Colors.white,
+          NavigationDestination(
+            icon: Icon(
+              Icons.navigation,
+              color: Colors.white,
+            ),
+            label: 'Explore',
           ),
-          Icon(
-            Icons.devices,
-            color: Colors.white,
+          NavigationDestination(
+            icon: Icon(
+              Icons.devices,
+              color: Colors.white,
+            ),
+            label: 'Manage',
           ),
-          Icon(
-            Icons.pets,
-            color: Colors.white,
+          NavigationDestination(
+            icon: Icon(
+              Icons.pets,
+              color: Colors.white,
+            ),
+            label: 'Profile',
           )
         ],
-        indicatorColor: Colors.red,
+        onDestinationSelected: (value) {
+          setState(() {
+            _selectedIndex = value;
+            Navigator.push(context, MaterialPageRoute(builder: (context) => screens[value]));
+            _selectedIndex = 0;
+          });
+        },
+        indicatorColor: Colors.orange,
         indicatorShape: Border.all(color: Colors.red),
       ),
     );

@@ -26,7 +26,11 @@ class AppImages {
   static String cosmoDogCaresImg = "${assetImgPath}cosmoDogCares.png";
   static String cutiePawsImg = '${assetImgPath}cutiePaws.png';
   static String goldenBoneImg = '${assetImgPath}goldenBone.png';
-  static String silverPawLodge = '${assetImgPath}silverPawLogo.png';
+  static String silverPawLodgeImg = '${assetImgPath}silverPawLogo.png';
   static String dirtyPawDogSpaImg = '${assetImgPath}dirtyPawDogSpa.png';
   static String tailsOfTheCity = '${assetImgPath}tailsOfTheCity.png';
+  static String docRafeeqaImg = '${assetImgPath}docRaqueena.png';
+  static String docArhamImg = '${assetImgPath}docArham.png';
+  static String docNatashaImg = '${assetImgPath}docNatasha.png';
+  static String docRehmatImg = '${assetImgPath}docRehmat.png';
 }
