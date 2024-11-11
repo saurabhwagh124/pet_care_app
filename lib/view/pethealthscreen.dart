@@ -27,8 +27,7 @@ class _PetHealthState extends State<PetHealth> {
           backgroundColor: const Color.fromRGBO(248, 174, 31, 1),
           title: const Text(
             'Pet Health',
-            style: TextStyle(
-                fontSize: 30, color: Colors.white, fontWeight: FontWeight.w500),
+            style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.w500),
           ),
           bottom: const TabBar(
             tabs: [
@@ -48,7 +47,7 @@ class _PetHealthState extends State<PetHealth> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Section(
+                const Section(
                   title: 'Vaccinations',
                   seeAll: true,
                   children: [
@@ -69,7 +68,7 @@ class _PetHealthState extends State<PetHealth> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                Section(
+                const Section(
                   title: 'Allergies',
                   seeAll: true,
                   children: [
@@ -77,14 +76,12 @@ class _PetHealthState extends State<PetHealth> {
                       children: [
                         AllergyCard(
                           title: 'Skin Allergies',
-                          description:
-                              'May be accompanied by \ngastrointestinal symptoms.',
+                          description: 'May be accompanied by \ngastrointestinal symptoms.',
                           doctor: 'Dr. Irfan',
                         ),
                         AllergyCard(
                           title: 'Food Allergies',
-                          description:
-                              'Vomiting and diarrhea,\nor dermatologicsigns.',
+                          description: 'Vomiting and diarrhea,\nor dermatologicsigns.',
                           doctor: 'Dr. Imran',
                         ),
                       ],
@@ -103,6 +100,7 @@ class _PetHealthState extends State<PetHealth> {
                     const SizedBox(height: 5),
                     Center(
                       child: ElevatedButton(
+<<<<<<< HEAD
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 const Color.fromRGBO(245, 146, 69, 1)),
@@ -113,10 +111,13 @@ class _PetHealthState extends State<PetHealth> {
                                 builder: (context) => VeterinaryDoctor(),
                               ));
                         },
+=======
+                        style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(245, 146, 69, 1)),
+                        onPressed: () {},
+>>>>>>> a89f53f54229cc77fe098960cd4e555d739ac65f
                         child: Text(
                           'Start',
-                          style: GoogleFonts.fredoka(
-                              color: Colors.white, fontSize: 22),
+                          style: GoogleFonts.fredoka(color: Colors.white, fontSize: 22),
                         ),
                       ),
                     ),
@@ -130,7 +131,7 @@ class _PetHealthState extends State<PetHealth> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Section(title: "Past Vaccinations", seeAll: true, children: [
+                const Section(title: "Past Vaccinations", seeAll: true, children: [
                   Row(
                     children: [
                       VaccinationCard(
@@ -150,10 +151,9 @@ class _PetHealthState extends State<PetHealth> {
                 Section(title: "Past Treatment", seeAll: false, children: [
                   Text(
                     "Allergies",
-                    style: GoogleFonts.fredoka(
-                        fontSize: 20, fontWeight: FontWeight.w600),
+                    style: GoogleFonts.fredoka(fontSize: 20, fontWeight: FontWeight.w600),
                   ),
-                  Row(
+                  const Row(
                     children: [
                       TreatmentCard(
                         title: 'Skin Allergies',
@@ -165,10 +165,10 @@ class _PetHealthState extends State<PetHealth> {
                         date: 'Thu 14 Apr',
                         doctor: 'Dr. Imran',
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 4,
                       ),
-                      const Icon(Icons.arrow_forward_ios_outlined)
+                      Icon(Icons.arrow_forward_ios_outlined)
                     ],
                   ),
                   const SizedBox(
@@ -176,10 +176,9 @@ class _PetHealthState extends State<PetHealth> {
                   ),
                   Text(
                     "Cough",
-                    style: GoogleFonts.fredoka(
-                        fontSize: 20, fontWeight: FontWeight.w600),
+                    style: GoogleFonts.fredoka(fontSize: 20, fontWeight: FontWeight.w600),
                   ),
-                  Row(
+                  const Row(
                     children: [
                       TreatmentCard(
                         title: 'Kennel Cough',
@@ -191,10 +190,10 @@ class _PetHealthState extends State<PetHealth> {
                         date: 'Wed 16 Jun',
                         doctor: 'Dr. Ali',
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 8,
                       ),
-                      const Icon(Icons.arrow_forward_ios_outlined)
+                      Icon(Icons.arrow_forward_ios_outlined)
                     ],
                   ),
                   Column(
@@ -208,10 +207,7 @@ class _PetHealthState extends State<PetHealth> {
                       ),
                       Text(
                         'See all',
-                        style: GoogleFonts.fredoka(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: const Color.fromRGBO(59, 115, 143, 1)),
+                        style: GoogleFonts.fredoka(fontSize: 16, fontWeight: FontWeight.w500, color: const Color.fromRGBO(59, 115, 143, 1)),
                       ),
                       const Icon(Icons.keyboard_arrow_down_outlined)
                     ],
@@ -230,7 +226,7 @@ class Section extends StatelessWidget {
   final String title;
   final bool seeAll;
   final List<Widget> children;
-  Section({required this.title, required this.seeAll, required this.children});
+  const Section({super.key, required this.title, required this.seeAll, required this.children});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -244,18 +240,14 @@ class Section extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.fredoka(
-                      fontSize: 20, fontWeight: FontWeight.bold),
+                  style: GoogleFonts.fredoka(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 if (seeAll)
                   Row(
                     children: [
                       Text(
                         'See all',
-                        style: GoogleFonts.fredoka(
-                            color: const Color.fromRGBO(59, 115, 143, 1),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500),
+                        style: GoogleFonts.fredoka(color: const Color.fromRGBO(59, 115, 143, 1), fontSize: 16, fontWeight: FontWeight.w500),
                       ),
                       const SizedBox(
                         width: 5,
@@ -282,8 +274,7 @@ class VaccinationCard extends StatelessWidget {
   final String title;
   final String date;
   final String doctor;
-  VaccinationCard(
-      {required this.title, required this.date, required this.doctor});
+  const VaccinationCard({super.key, required this.title, required this.date, required this.doctor});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -294,8 +285,7 @@ class VaccinationCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: GoogleFonts.fredoka(
-                  fontSize: 15, fontWeight: FontWeight.bold),
+              style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
@@ -315,8 +305,7 @@ class AllergyCard extends StatelessWidget {
   final String title;
   final String description;
   final String doctor;
-  AllergyCard(
-      {required this.title, required this.description, required this.doctor});
+  const AllergyCard({super.key, required this.title, required this.description, required this.doctor});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -327,8 +316,7 @@ class AllergyCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: GoogleFonts.fredoka(
-                  fontSize: 15, fontWeight: FontWeight.bold),
+              style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(description, style: GoogleFonts.fredoka(fontSize: 10)),
@@ -345,8 +333,7 @@ class TreatmentCard extends StatelessWidget {
   final String title;
   final String date;
   final String doctor;
-  TreatmentCard(
-      {required this.title, required this.date, required this.doctor});
+  const TreatmentCard({super.key, required this.title, required this.date, required this.doctor});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -357,8 +344,7 @@ class TreatmentCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style:
-                GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.bold),
+            style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
           Text(
