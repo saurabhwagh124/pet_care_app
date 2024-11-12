@@ -1,11 +1,13 @@
+import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pet_care_app/model/gromming.dart';
+import 'package:pet_care_app/model/grooming_model.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
-import 'package:pet_care_app/utils/app_images.dart';
 
 class GrommingCard extends StatefulWidget {
-  GrommingCard({
+  final GroomingModel data;
+  const GrommingCard({
+    required this.data,
     super.key,
   });
 
@@ -14,54 +16,13 @@ class GrommingCard extends StatefulWidget {
 }
 
 class _GrommingCardState extends State<GrommingCard> {
-  List<Gromming> gromming = [
-    Gromming(
-      name: 'Comb and Collar',
-      imageUrl: AppImages.combAndCollarImg,
-      rating: 5.0,
-      reviewCount: 100,
-      isOpen: true,
-      distance: 2.5,
-      price: 100,
-      hours: 'Monday - Friday at 8.00 am - 5.00 pm',
-    ),
-    Gromming(
-      name: 'Comb and Collar',
-      imageUrl: AppImages.combAndCollarImg,
-      rating: 5.0,
-      reviewCount: 100,
-      isOpen: true,
-      distance: 2.5,
-      price: 100,
-      hours: 'Monday - Friday at 8.00 am - 5.00 pm',
-    ),
-    Gromming(
-      name: 'Comb and Collar',
-      imageUrl: AppImages.combAndCollarImg,
-      rating: 5.0,
-      reviewCount: 100,
-      isOpen: true,
-      distance: 2.5,
-      price: 100,
-      hours: 'Monday - Friday at 8.00 am - 5.00 pm',
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(20),
-      height: 161.h,
+      height: 131.h,
+      margin: EdgeInsets.all(20.r),
       decoration: BoxDecoration(
-          boxShadow: const [
-            BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 1),
-                blurRadius: 4,
-                offset: Offset(0, 4))
-          ],
-          border: Border.all(),
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15)),
+          boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 1), blurRadius: 4, offset: Offset(0, 4))], border: Border.all(), color: Colors.white, borderRadius: BorderRadius.circular(15.r)),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -72,32 +33,36 @@ class _GrommingCardState extends State<GrommingCard> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Image.asset(
-                    gromming[0].imageUrl,
-                    width: 60,
-                    height: 40,
-                    fit: BoxFit.cover,
+                    widget.data.imageUrl,
+                    width: 60.w,
                   ),
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: 15.w),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        gromming[0].name,
-                        style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
+                        widget.data.name,
+                        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold, color: Colors.black),
                       ),
-                      Row(
+                      Wrap(
                         children: [
-                          const Icon(Icons.star, color: Colors.amber, size: 10),
-                          const SizedBox(width: 4),
+                          RatingBar.readOnly(
+                            halfFilledIcon: Icons.star_half,
+                            halfFilledColor: Colors.amberAccent,
+                            isHalfAllowed: true,
+                            filledIcon: Icons.star,
+                            emptyIcon: Icons.star_border,
+                            initialRating: widget.data.rating,
+                            maxRating: 5,
+                            filledColor: Colors.amberAccent,
+                            emptyColor: Colors.grey,
+                          ),
+                          SizedBox(width: 4.w),
                           Text(
-                            '${gromming[0].rating} (${gromming[0].reviewCount} reviews)',
-                            style: const TextStyle(
-                                fontSize: 10, color: Colors.black),
+                            '${widget.data.rating} (${widget.data.reviewCount} reviews)',
+                            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: Colors.black),
                           ),
                         ],
                       ),
@@ -110,37 +75,37 @@ class _GrommingCardState extends State<GrommingCard> {
             Row(
               children: [
                 Text(
-                  gromming[0].isOpen ? 'OPEN' : 'CLOSED',
+                  widget.data.isOpen ? 'OPEN' : 'CLOSED',
                   style: TextStyle(
-                    color: gromming[0].isOpen ? Colors.green : Colors.red,
-                    fontSize: 10,
+                    color: widget.data.isOpen ? Colors.green : Colors.red,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const Spacer(),
-                const Icon(Icons.location_on, size: 16, color: Colors.grey),
-                const SizedBox(width: 4),
+                Icon(Icons.location_pin, size: 10.sp, color: Colors.grey),
+                SizedBox(width: 4.w),
                 Text(
-                  '${gromming[0].distance} km',
-                  style: const TextStyle(
-                      fontSize: 10, color: AppColors.lightGreyText),
+                  '${widget.data.distance} km',
+                  style: const TextStyle(fontSize: 10, color: AppColors.lightGreyText),
                 ),
                 const Spacer(),
-                const Icon(Icons.attach_money, size: 16, color: Colors.grey),
-                const SizedBox(width: 4),
-                Text('${gromming[0].price.toStringAsFixed(0)}\$',
-                    style: const TextStyle(
-                        fontSize: 10, color: AppColors.lightGreyText)),
+                Icon(
+                  Icons.currency_rupee_outlined,
+                  color: AppColors.greyTextColor,
+                  size: 10.sp,
+                ),
+                Text(widget.data.price.toStringAsFixed(0), style: TextStyle(fontSize: 10.sp, color: AppColors.lightGreyText)),
               ],
             ),
             const SizedBox(height: 8),
             Row(
               children: [
-                const Icon(Icons.access_time, size: 16, color: Colors.grey),
-                const SizedBox(width: 4),
+                Icon(Icons.access_time, size: 10.sp, color: Colors.grey),
+                SizedBox(width: 4.w),
                 Text(
-                  gromming[0].hours,
-                  style: const TextStyle(fontSize: 10, color: Colors.grey),
+                  widget.data.hours,
+                  style: TextStyle(fontSize: 12.sp, color: Colors.grey),
                 ),
               ],
             ),

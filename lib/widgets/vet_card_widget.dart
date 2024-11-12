@@ -36,13 +36,15 @@ class VetCardWidget extends StatelessWidget {
           children: [
             Row(
               children: [
-                SizedBox(
-                  width: 60.w,
-                  child: Image.asset(data.profileImg),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.asset(
+                    data.profileImg,
+                    width: 60.w,
+                  ),
                 ),
                 SizedBox(width: 5.w),
                 Expanded(
-                  // Wrap Column in Expanded to prevent overflow
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

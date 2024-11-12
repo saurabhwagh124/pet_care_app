@@ -63,7 +63,7 @@ class _VeterniaryTabViewState extends State<VeterniaryTabView> {
     return ListView(
       children: [
         Padding(
-          padding: EdgeInsets.only(top: 10.h),
+          padding: EdgeInsets.only(top: 10.h, left: 20.w, right: 20.w),
           child: Row(
             children: [
               Text(
@@ -106,7 +106,7 @@ class _VeterniaryTabViewState extends State<VeterniaryTabView> {
           height: 15.h,
         ),
         Padding(
-          padding: EdgeInsets.only(top: 10.h),
+          padding: EdgeInsets.only(top: 10.h, left: 20.w, right: 20.w),
           child: Row(
             children: [
               Text(
