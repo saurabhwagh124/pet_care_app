@@ -2,7 +2,6 @@ import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pet_care_app/model/grooming_model.dart';
-import 'package:pet_care_app/utils/app_colors.dart';
 
 class GrommingCard extends StatefulWidget {
   final GroomingModel data;
@@ -24,7 +23,7 @@ class _GrommingCardState extends State<GrommingCard> {
       decoration: BoxDecoration(
           boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 1), blurRadius: 4, offset: Offset(0, 4))], border: Border.all(), color: Colors.white, borderRadius: BorderRadius.circular(15.r)),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(10.r),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -83,29 +82,29 @@ class _GrommingCardState extends State<GrommingCard> {
                   ),
                 ),
                 const Spacer(),
-                Icon(Icons.location_pin, size: 10.sp, color: Colors.grey),
+                Icon(Icons.location_pin, size: 15.sp, color: Colors.black),
                 SizedBox(width: 4.w),
                 Text(
                   '${widget.data.distance} km',
-                  style: const TextStyle(fontSize: 10, color: AppColors.lightGreyText),
+                  style: TextStyle(fontSize: 12.sp, color: Colors.black),
                 ),
                 const Spacer(),
                 Icon(
                   Icons.currency_rupee_outlined,
-                  color: AppColors.greyTextColor,
-                  size: 10.sp,
+                  color: Colors.black,
+                  size: 15.sp,
                 ),
-                Text(widget.data.price.toStringAsFixed(0), style: TextStyle(fontSize: 10.sp, color: AppColors.lightGreyText)),
+                Text(widget.data.price.toStringAsFixed(0), style: TextStyle(fontSize: 12.sp, color: Colors.black)),
               ],
             ),
             const SizedBox(height: 8),
             Row(
               children: [
-                Icon(Icons.access_time, size: 10.sp, color: Colors.grey),
+                Icon(Icons.access_time, size: 15.sp, color: Colors.black),
                 SizedBox(width: 4.w),
                 Text(
                   widget.data.hours,
-                  style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+                  style: TextStyle(fontSize: 12.sp, color: Colors.black),
                 ),
               ],
             ),

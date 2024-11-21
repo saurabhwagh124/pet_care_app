@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/view/login_screen.dart';
+import 'package:pet_care_app/view/signup_screen.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -290,9 +291,7 @@ class _StartScreenState extends State<StartScreen> {
         GestureDetector(
           onTap: () {
             if (screen == 2) {
-              setState(() {
-                screen = 0;
-              });
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupScreen()));
             } else {
               setState(() {
                 screen += 1;

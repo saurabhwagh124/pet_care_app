@@ -17,8 +17,8 @@ class VetCardWidget extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.all(10.r),
-        height: 130.h,
-        width: 280.w,
+        // height: 130.h,
+        // width: 280.w,
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(10.r),
@@ -43,7 +43,7 @@ class VetCardWidget extends StatelessWidget {
                     width: 60.w,
                   ),
                 ),
-                SizedBox(width: 5.w),
+                SizedBox(width: 20.w),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,44 +97,53 @@ class VetCardWidget extends StatelessWidget {
                           const Spacer(),
                           Icon(
                             Icons.location_pin,
-                            color: AppColors.greyTextColor,
-                            size: 10.sp,
+                            color: Colors.black,
+                            size: 15.sp,
                           ),
-                          Text("${data.distance} km"),
+                          Text(
+                            "${data.distance} km",
+                            style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, color: Colors.black),
+                          ),
                           const Spacer(),
                           Icon(
                             Icons.currency_rupee_outlined,
-                            color: AppColors.greyTextColor,
-                            size: 10.sp,
+                            color: Colors.black,
+                            size: 15.sp,
                           ),
                           Text(
                             "${data.fees}",
                             style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w400,
-                              color: AppColors.greyTextColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.access_time,
-                            color: AppColors.greyTextColor,
-                            size: 10.sp,
-                          ),
-                          Text(
-                            "${data.startDay} - ${data.endDay} at ${data.startTime} am - ${data.endTime} pm",
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors.greyTextColor,
+                              color: Colors.black,
                             ),
                           ),
                         ],
                       ),
                     ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            Row(
+              children: [
+                Icon(
+                  Icons.access_time,
+                  color: Colors.black,
+                  size: 15.sp,
+                ),
+                SizedBox(
+                  width: 10.w,
+                ),
+                Text(
+                  "${data.startDay} - ${data.endDay} at ${data.startTime} am - ${data.endTime} pm",
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black,
                   ),
                 ),
               ],
