@@ -1,45 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care_app/model/product.dart';
 
-class shopFood extends StatefulWidget {
-  const shopFood({super.key});
+class ShopFood extends StatefulWidget {
+  const ShopFood({super.key});
 
   @override
-  State<shopFood> createState() => _shopFoodState();
+  State<ShopFood> createState() => _ShopFoodState();
 }
 
-class _shopFoodState extends State<shopFood> {
-  final List<Product> products = [
-    Product(
-      name: 'Josera Mini Deluxe',
-      price: 2000.00,
-      image: 'assets/images/josiDogFood.png',
-      category: 'Furry',
-      weight: '900g',
-    ),
-    Product(
-      name: 'Pedigree Chicken & Vege',
-      price: 1500.00,
-      image: 'assets/images/josiDogFood.png',
-      category: 'Basic',
-      weight: '900g',
-    ),
-    Product(
-      name: 'BlackHawk Puppy Lamb',
-      price: 3800.00,
-      image: 'assets/images/josiDogFood.png',
-      category: 'Puppy',
-      weight: '20kg',
-    ),
-    Product(
-      name: 'Royal Canin Labrador P',
-      price: 4500.00,
-      image: 'assets/images/josiDogFood.png',
-      category: 'Puppy',
-      weight: '3kg',
-    ),
-  ];
+class _ShopFoodState extends State<ShopFood>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
 
+  final Map<String, List<Product>> categoryProducts = {
+    'Food': [
+      Product(
+        name: 'Josera Mini Deluxe',
+        price: 2000.00,
+        image: 'assets/images/josiDogFood.png',
+        category: 'Furry',
+        weight: '900g',
+      ),
+      Product(
+        name: 'Pedigree Chicken & Vege',
+        price: 1500.00,
+        image: 'assets/images/josiDogFood.png',
+        category: 'Basic',
+        weight: '900g',
+      ),
+    ],
+    'Vet Items': [
+      Product(
+        name: 'Vet Supplement A',
+        price: 1200.00,
+        image: 'assets/images/vetSupplement.png',
+        category: 'Health',
+        weight: '500g',
+      ),
+    ],
+    'Accessories': [],
+    'DIY Services': [],
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController =
+        TabController(length: categoryProducts.keys.length, vsync: this);
+    _tabController.addListener(_onTabChange);
+  }
+
+  void _onTabChange() {
+    setState(() {}); // Trigger rebuild on tab change
+  }
+
+  @override
+  void dispose() {
+    _tabController.removeListener(_onTabChange);
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -52,109 +74,110 @@ class _shopFoodState extends State<shopFood> {
             onPressed: () {},
           ),
         ],
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search keywords...',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor: Colors.grey[200],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 100,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              children: const [
-                CategoryItem(icon: Icons.pets, label: 'Food'),
-                CategoryItem(icon: Icons.medical_services, label: 'Vet Items'),
-                CategoryItem(icon: Icons.toys, label: 'Accessories'),
-                CategoryItem(
-                    icon: Icons.cleaning_services, label: 'DIY Services'),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Recommended Food',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(180),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search keywords...',
+                    prefixIcon: const Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                 ),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text('Check Retail Stores'),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.all(16),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.75,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
               ),
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                return ProductCard(product: products[index]);
-              },
-            ),
+              Container(
+                color: Colors.white,
+                child: TabBar(
+                  controller: _tabController,
+                  isScrollable: true,
+                  labelColor: Colors.black,
+                  indicatorColor: Colors.blue,
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  unselectedLabelColor: Colors.black,
+                  labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                  unselectedLabelStyle:
+                      const TextStyle(fontWeight: FontWeight.normal),
+                  tabs: categoryProducts.keys.map((category) {
+                    IconData icon;
+                    switch (category) {
+                      case 'Food':
+                        icon = Icons.food_bank;
+                        break;
+                      case 'Vet Items':
+                        icon = Icons.medical_services;
+                        break;
+                      case 'Accessories':
+                        icon = Icons.toys;
+                        break;
+                      case 'DIY Services':
+                        icon = Icons.build;
+                        break;
+                      default:
+                        icon = Icons.help;
+                    }
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: _tabController.index ==
+                                    categoryProducts.keys
+                                        .toList()
+                                        .indexOf(category)
+                                ? Colors.blue
+                                : Colors.grey[200],
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(icon, size: 30, color: Colors.black),
+                        ),
+                        Text(
+                          category,
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    );
+                  }).toList(),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
-    );
-  }
-}
-
-class CategoryItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-
-  const CategoryItem({
-    super.key,
-    required this.icon,
-    required this.label,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
+      body: TabBarView(
+        controller: _tabController,
+        children: categoryProducts.entries.map((entry) {
+          final products = entry.value;
+          if (products.isEmpty) {
+            return const Center(
+              child: Text('No products available for this category.'),
+            );
+          }
+          return GridView.builder(
             padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.blue[100],
-              borderRadius: BorderRadius.circular(12),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.75,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
             ),
-            child: Icon(icon, size: 30, color: Colors.blue[900]),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            label,
-            style: const TextStyle(fontSize: 12),
-          ),
-        ],
+            itemCount: products.length,
+            itemBuilder: (context, index) {
+              return ProductCard(product: products[index]);
+            },
+          );
+        }).toList(),
       ),
     );
   }
@@ -173,12 +196,12 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-  int _quantity = 0; // Counter for the number of items
+  int _quantity = 0;
 
   void _addToCart() {
     setState(() {
       if (_quantity == 0) {
-        _quantity = 1; // Start with 1 when adding to cart
+        _quantity = 1;
       }
     });
   }
@@ -194,7 +217,7 @@ class _ProductCardState extends State<ProductCard> {
       if (_quantity > 1) {
         _quantity--;
       } else {
-        _quantity = 0; // Remove from cart when reaching zero
+        _quantity = 0;
       }
     });
   }
@@ -214,17 +237,16 @@ class _ProductCardState extends State<ProductCard> {
               fit: BoxFit.cover,
             ),
           ),
-          // Furry Label
           Positioned(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                 color: Colors.orange[100],
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
                 widget.product.category,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 10,
                   color: Colors.orange,
                   fontWeight: FontWeight.bold,
@@ -232,7 +254,6 @@ class _ProductCardState extends State<ProductCard> {
               ),
             ),
           ),
-          // Content
           Positioned(
             top: 100,
             child: SizedBox(
@@ -240,31 +261,28 @@ class _ProductCardState extends State<ProductCard> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Price
                   Text(
                     "RS.${widget.product.price}",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
-                  // Product Title
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       widget.product.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  // Weight
                   Text(
                     widget.product.weight,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.grey,
                     ),
@@ -273,11 +291,11 @@ class _ProductCardState extends State<ProductCard> {
                     InkWell(
                       onTap: _addToCart,
                       child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         alignment: Alignment.center,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                          children: const [
                             Icon(Icons.shopping_bag_outlined,
                                 color: Colors.black),
                             SizedBox(width: 8),
@@ -294,24 +312,24 @@ class _ProductCardState extends State<ProductCard> {
                     )
                   else
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 8),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
                       alignment: Alignment.center,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                            icon: Icon(Icons.remove),
+                            icon: const Icon(Icons.remove),
                             onPressed: _decrement,
                           ),
                           Text(
                             '$_quantity',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           IconButton(
-                            icon: Icon(Icons.add),
+                            icon: const Icon(Icons.add),
                             onPressed: _increment,
                           ),
                         ],
