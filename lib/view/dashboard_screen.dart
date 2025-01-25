@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
@@ -51,8 +52,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               GestureDetector(
                                 onTap: () async {
                                   await auth.signOut();
-                                  Navigator.pop(context);
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Wrapper()));
+                                  Get.back();
+                                  Get.to(() => const Wrapper());
                                 },
                                 child: Row(
                                   children: [
@@ -132,11 +133,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const Petscreen(),
-                                      ));
+                                  Get.to(() => const Petscreen());
                                 },
                                 child: Container(
                                   height: 80.h,
@@ -652,7 +649,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         onDestinationSelected: (value) {
           setState(() {
             _selectedIndex = value;
-            Navigator.push(context, MaterialPageRoute(builder: (context) => screens[value]));
+            Get.to(() => screens[value]);
             _selectedIndex = 0;
           });
         },

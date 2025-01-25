@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/view/add_review_page.dart';
 
@@ -35,10 +36,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
   ];
 
   void _navigateToAddReviewPage() async {
-    final newReview = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const AddReviewPage()),
-    );
+    final newReview = await Get.to(() => const AddReviewPage());
 
     if (newReview != null) {
       setState(() {

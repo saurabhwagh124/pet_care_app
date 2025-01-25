@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/view/book_appointment_screen.dart';
 
@@ -17,7 +18,7 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
         appBar: AppBar(
             leading: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Get.back();
                 },
                 icon: const Icon(
                   Icons.arrow_back_ios,
@@ -137,11 +138,7 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
             const SizedBox(height: 10),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const BookAppoinmentScreen(),
-                    ));
+                Get.to(() => const BookAppoinmentScreen());
               },
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),

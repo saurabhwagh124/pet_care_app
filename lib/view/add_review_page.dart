@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddReviewPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class _AddReviewPageState extends State<AddReviewPage> {
 
   void _submitReview() {
     if (_rating > 0 && _reviewController.text.isNotEmpty) {
-      Navigator.pop(context, {
+      Get.back(result: {
         'name': 'New User', // Replace with actual user data if available
         'timeAgo': 'Just now',
         'rating': _rating,
@@ -59,7 +60,7 @@ class _AddReviewPageState extends State<AddReviewPage> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pop(context); // Custom back button behavior
+            Get.back(); // Custom back button behavior
           },
         ),
       ),

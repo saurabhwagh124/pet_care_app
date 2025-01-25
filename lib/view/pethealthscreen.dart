@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/view/veterinary_doctor_screen.dart';
 
@@ -18,7 +19,7 @@ class _PetHealthState extends State<PetHealth> {
         appBar: AppBar(
           leading: IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                Get.back();
               },
               icon: const Icon(
                 Icons.arrow_back_ios,
@@ -102,11 +103,7 @@ class _PetHealthState extends State<PetHealth> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(245, 146, 69, 1)),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const VeterinaryDoctor(),
-                              ));
+                          Get.to(() => const VeterinaryDoctor());
                         },
                         child: Text(
                           'Start',

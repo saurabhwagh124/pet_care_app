@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/view/pethealthscreen.dart';
-import 'package:pet_care_app/view/shop_food_screen.dart';
 
 class Petscreen extends StatefulWidget {
   const Petscreen({super.key});
@@ -127,11 +127,7 @@ class _PetscreenState extends State<Petscreen> {
                     buttonText: 'Contact Vet',
                     buttonColor: Colors.redAccent,
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const PetHealth(),
-                          ));
+                      Get.to(() => const PetHealth());
                     }),
                 const SizedBox(height: 12),
                 PetStatusCard(
@@ -142,11 +138,7 @@ class _PetscreenState extends State<Petscreen> {
                   buttonText: 'Check food',
                   buttonColor: Colors.purple,
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const shopFood(),
-                        ));
+                    Get.to(() => const PetHealth());
                   },
                 ),
                 const SizedBox(height: 12),
@@ -158,11 +150,7 @@ class _PetscreenState extends State<Petscreen> {
                     buttonText: 'Whistle',
                     buttonColor: Colors.blue,
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const PetHealth(),
-                          ));
+                      Get.to(() => const PetHealth());
                     }),
               ],
             ),

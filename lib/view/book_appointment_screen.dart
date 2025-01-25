@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BookAppoinmentScreen extends StatefulWidget {
@@ -42,7 +43,7 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
       appBar: AppBar(
           leading: IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                Get.back();
               },
               icon: const Icon(
                 Icons.arrow_back_ios,
@@ -103,11 +104,7 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
             ),
             GestureDetector(
               // onTap: () {
-              //   Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => BookAppoinmentScreen(),
-              //       ));
+              //   Get.to(() => BookAppoinmentScreen());
               // },
               child: Container(
                 margin: const EdgeInsets.only(top: 20),

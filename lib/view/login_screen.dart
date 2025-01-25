@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
@@ -114,11 +115,7 @@ class _LoginscreenState extends State<Loginscreen> {
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ForgotPassword(),
-                          ));
+                      Get.to(() => const ForgotPassword());
                     },
                     child: Text("Forgot Password?",
                         style: GoogleFonts.fredoka(
@@ -216,7 +213,7 @@ class _LoginscreenState extends State<Loginscreen> {
     final user = await _auth.loginUserWithMailAndPassword(_emailController.text, _passwordController.text);
     if (user != null) {
       log("user logged in with email");
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashboardScreen()));
+      Get.off(() => const DashboardScreen());
     } else {
       log("Login with email unsuccessfull");
       _emailController.clear();
@@ -228,7 +225,7 @@ class _LoginscreenState extends State<Loginscreen> {
   _signInWithGoogle() async {
     final userCred = await _auth.loginWithGoogle();
     if (userCred != null) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashboardScreen()));
+      Get.off(() => const DashboardScreen());
       log("Gooogle login success");
     } else {
       log("Google login failed");

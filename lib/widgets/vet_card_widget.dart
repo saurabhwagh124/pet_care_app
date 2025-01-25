@@ -1,6 +1,7 @@
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/route_manager.dart';
 import 'package:pet_care_app/model/vet_doctor_model.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/view/veterinary_doctor_screen.dart';
@@ -13,7 +14,7 @@ class VetCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => const VeterinaryDoctor()));
+        Get.to(() => const VeterinaryDoctor());
       },
       child: Container(
         margin: EdgeInsets.all(10.r),

@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/view/login_screen.dart';
@@ -291,7 +293,7 @@ class _StartScreenState extends State<StartScreen> {
         GestureDetector(
           onTap: () {
             if (screen == 2) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupScreen()));
+              Get.off(const SignupScreen());
             } else {
               setState(() {
                 screen += 1;
@@ -333,11 +335,7 @@ class _StartScreenState extends State<StartScreen> {
             GestureDetector(
               onTap: () {
                 log("Login tapped");
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Loginscreen(),
-                    ));
+                Get.off(const Loginscreen());
               },
               child: const Text(
                 "Login ",
