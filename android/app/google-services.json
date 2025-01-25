@@ -1,0 +1,70 @@
+{
+  "project_info": {
+    "project_number": "726567938075",
+    "project_id": "project-petcare-app",
+    "storage_bucket": "project-petcare-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:726567938075:android:ab9d846a13f7985a7f70be",
+        "android_client_info": {
+          "package_name": "com.example.pet_care_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "726567938075-a9qdqf9l7s3co16a7re08h782tefepkd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pet_care_app",
+            "certificate_hash": "05dc031420dd71a743990aac7aa69b2679838eb5"
+          }
+        },
+        {
+          "client_id": "726567938075-e4tehohbehuooohj4sve8pk1qra1rab4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pet_care_app",
+            "certificate_hash": "37db5c9dc43e097b0d38ac7428df5d7b97f5aae3"
+          }
+        },
+        {
+          "client_id": "726567938075-n8aeevfjkkfcee0igulngrguptgh3kfr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pet_care_app",
+            "certificate_hash": "08a9420381b2f6de164fefb19fed6a96839bb461"
+          }
+        },
+        {
+          "client_id": "726567938075-hm27uknk7bdh68d3ljt6016i23185h5d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB_XaM7d_MLIfMHW6jmtsf8HyQTTa_LZc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "726567938075-hm27uknk7bdh68d3ljt6016i23185h5d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "726567938075-n5i785s2ffsclpq4cmri2dv125rm0ne2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.petCareApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
