@@ -21,7 +21,15 @@ class _GrommingCardState extends State<GrommingCard> {
       height: 131.h,
       margin: EdgeInsets.all(20.r),
       decoration: BoxDecoration(
-          boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 1), blurRadius: 4, offset: Offset(0, 4))], border: Border.all(), color: Colors.white, borderRadius: BorderRadius.circular(15.r)),
+          boxShadow: const [
+            BoxShadow(
+                color: Color.fromRGBO(0, 0, 0, 1),
+                blurRadius: 4,
+                offset: Offset(0, 4))
+          ],
+          border: Border.all(),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15.r)),
       child: Padding(
         padding: EdgeInsets.all(10.r),
         child: Column(
@@ -43,7 +51,10 @@ class _GrommingCardState extends State<GrommingCard> {
                     children: [
                       Text(
                         widget.data.name,
-                        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold, color: Colors.black),
+                        style: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
                       ),
                       Wrap(
                         children: [
@@ -61,7 +72,10 @@ class _GrommingCardState extends State<GrommingCard> {
                           SizedBox(width: 4.w),
                           Text(
                             '${widget.data.rating} (${widget.data.reviewCount} reviews)',
-                            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: Colors.black),
+                            style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
                           ),
                         ],
                       ),
@@ -94,7 +108,8 @@ class _GrommingCardState extends State<GrommingCard> {
                   color: Colors.black,
                   size: 15.sp,
                 ),
-                Text(widget.data.price.toStringAsFixed(0), style: TextStyle(fontSize: 12.sp, color: Colors.black)),
+                Text(widget.data.price.toStringAsFixed(0),
+                    style: TextStyle(fontSize: 12.sp, color: Colors.black)),
               ],
             ),
             const SizedBox(height: 8),

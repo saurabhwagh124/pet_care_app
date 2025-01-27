@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
 import 'package:pet_care_app/view/explore_screen.dart';
+import 'package:pet_care_app/view/forgot_password_screen.dart';
 import 'package:pet_care_app/view/pet_screen.dart';
 import 'package:pet_care_app/view/wrapper.dart';
 
@@ -49,27 +50,59 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              GestureDetector(
-                                onTap: () async {
-                                  await auth.signOut();
-                                  Get.back();
-                                  Get.to(() => const Wrapper());
-                                },
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.logout_outlined,
-                                      color: Colors.red,
-                                      size: 20.sp,
-                                    ),
-                                    SizedBox(
-                                      width: 20.w,
-                                    ),
-                                    Text(
-                                      "Sign out",
-                                      style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
-                                    )
-                                  ],
+                              Container(
+                                color: const Color.fromARGB(255, 242, 188, 184),
+                                padding: const EdgeInsets.all(3),
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await auth.signOut();
+                                    Get.back();
+                                    Get.to(() => const Wrapper());
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.logout_outlined,
+                                        color: Colors.red,
+                                        size: 20.sp,
+                                      ),
+                                      SizedBox(
+                                        width: 20.w,
+                                      ),
+                                      Text(
+                                        "Sign out",
+                                        style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                              Container(
+                                color: const Color.fromARGB(255, 219, 245, 128),
+                                padding: const EdgeInsets.all(3),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => const ForgotPasswordScreen());
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.lock_reset_outlined,
+                                        color: Colors.yellow,
+                                        size: 20.sp,
+                                      ),
+                                      SizedBox(
+                                        width: 20.w,
+                                      ),
+                                      Text(
+                                        "Forgot Password",
+                                        style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
+                                      )
+                                    ],
+                                  ),
                                 ),
                               )
                             ],

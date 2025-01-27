@@ -27,7 +27,8 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
                 )),
             title: const Text('Dr. Rafeeqa'),
             centerTitle: true,
-            titleTextStyle: GoogleFonts.fredoka(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
+            titleTextStyle: GoogleFonts.fredoka(
+                fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
             backgroundColor: const Color.fromRGBO(248, 174, 31, 1)),
         body: Column(
           children: [
@@ -38,7 +39,14 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
               margin: const EdgeInsets.symmetric(horizontal: 20),
               height: 175,
               decoration: const BoxDecoration(
-                  boxShadow: [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.15), offset: Offset(0, 6), blurRadius: 44)], color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(26))),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Color.fromRGBO(0, 0, 0, 0.15),
+                        offset: Offset(0, 6),
+                        blurRadius: 44)
+                  ],
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(26))),
               child: Stack(
                 children: [
                   Text(
@@ -51,69 +59,83 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
                   ),
                   Positioned(
                     top: 35,
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Text(
-                        'Bachelor of Veterinary Science',
-                        style: GoogleFonts.fredoka(
-                          fontSize: 17,
-                          color: const Color.fromRGBO(6, 78, 87, 1),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            '5.0',
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-                          ),
-                          const Icon(Icons.star, color: Colors.yellow),
-                          const Icon(Icons.star, color: Colors.yellow),
-                          const Icon(Icons.star, color: Colors.yellow),
-                          const Icon(Icons.star, color: Colors.yellow),
-                          const Icon(Icons.star, color: Colors.yellow),
-                          const SizedBox(width: 8),
                           Text(
-                            '(100 reviews)',
-                            style: GoogleFonts.poppins(color: const Color.fromRGBO(134, 136, 137, 1), fontSize: 12, fontWeight: FontWeight.w500),
+                            'Bachelor of Veterinary Science',
+                            style: GoogleFonts.fredoka(
+                              fontSize: 17,
+                              color: const Color.fromRGBO(6, 78, 87, 1),
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.access_time,
-                            size: 12,
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            'Monday - Friday at 8:00 am - 5:00 pm',
-                            style: GoogleFonts.fredoka(fontSize: 10, color: const Color.fromRGBO(166, 166, 166, 1)),
-                          ),
-                          const SizedBox(width: 8),
+                          const SizedBox(height: 8),
                           Row(
                             children: [
-                              const Icon(
-                                Icons.location_on_outlined,
-                                size: 10,
+                              const Text(
+                                '5.0',
+                                style: TextStyle(
+                                    fontSize: 12, fontWeight: FontWeight.w500),
                               ),
-                              const SizedBox(width: 5),
+                              const Icon(Icons.star, color: Colors.yellow),
+                              const Icon(Icons.star, color: Colors.yellow),
+                              const Icon(Icons.star, color: Colors.yellow),
+                              const Icon(Icons.star, color: Colors.yellow),
+                              const Icon(Icons.star, color: Colors.yellow),
+                              const SizedBox(width: 8),
                               Text(
-                                '2.5 km',
-                                style: GoogleFonts.fredoka(textStyle: const TextStyle(fontSize: 11, color: Color.fromRGBO(166, 166, 166, 1))),
+                                '(100 reviews)',
+                                style: GoogleFonts.poppins(
+                                    color:
+                                        const Color.fromRGBO(134, 136, 137, 1),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500),
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      const Text('1000 PKR for an Appointment',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ))
-                    ]),
+                          const SizedBox(height: 12),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.access_time,
+                                size: 12,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Monday - Friday at 8:00 am - 5:00 pm',
+                                style: GoogleFonts.fredoka(
+                                    fontSize: 10,
+                                    color:
+                                        const Color.fromRGBO(166, 166, 166, 1)),
+                              ),
+                              const SizedBox(width: 8),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.location_on_outlined,
+                                    size: 10,
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    '2.5 km',
+                                    style: GoogleFonts.fredoka(
+                                        textStyle: const TextStyle(
+                                            fontSize: 11,
+                                            color: Color.fromRGBO(
+                                                166, 166, 166, 1))),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          const Text('1000 PKR for an Appointment',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ))
+                        ]),
                   ),
                 ],
               ),
@@ -143,7 +165,9 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(color: const Color.fromRGBO(245, 146, 69, 1), borderRadius: BorderRadius.circular(5)),
+                decoration: BoxDecoration(
+                    color: const Color.fromRGBO(245, 146, 69, 1),
+                    borderRadius: BorderRadius.circular(5)),
                 child: Row(
                   children: [
                     const SizedBox(
@@ -151,7 +175,10 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
                     ),
                     Text(
                       "Book an Appointment",
-                      style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.white),
+                      style: GoogleFonts.fredoka(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
                     ),
                     const SizedBox(
                       width: 35,

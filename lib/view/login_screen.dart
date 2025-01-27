@@ -8,7 +8,7 @@ import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
 import 'package:pet_care_app/view/dashboard_screen.dart';
-import 'package:pet_care_app/view/forgot_password.dart';
+import 'package:pet_care_app/view/forgot_password_screen.dart';
 
 class Loginscreen extends StatefulWidget {
   const Loginscreen({super.key});
@@ -69,6 +69,7 @@ class _LoginscreenState extends State<Loginscreen> {
                 height: 45.h,
                 width: 300.w,
                 child: TextFormField(
+                  controller: _emailController,
                   decoration: InputDecoration(
                       labelText: "Email Address",
                       labelStyle: TextStyle(
@@ -90,6 +91,7 @@ class _LoginscreenState extends State<Loginscreen> {
                 height: 45.h,
                 width: 300.w,
                 child: TextFormField(
+                  controller: _passwordController,
                   obscureText: true,
                   obscuringCharacter: "*",
                   decoration: InputDecoration(
@@ -115,7 +117,7 @@ class _LoginscreenState extends State<Loginscreen> {
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
-                      Get.to(() => const ForgotPassword());
+                      Get.to(() => const ForgotPasswordScreen());
                     },
                     child: Text("Forgot Password?",
                         style: GoogleFonts.fredoka(

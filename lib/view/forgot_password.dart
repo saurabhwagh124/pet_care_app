@@ -29,17 +29,22 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           children: [
             Text('Forgot password',
                 style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  textStyle: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w600),
                 )),
             const SizedBox(height: 10),
             Text('Please enter your email to reset the password',
                 style: GoogleFonts.inter(
-                  textStyle: const TextStyle(color: Color.fromRGBO(152, 152, 152, 1), fontSize: 16, fontWeight: FontWeight.w600),
+                  textStyle: const TextStyle(
+                      color: Color.fromRGBO(152, 152, 152, 1),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600),
                 )),
             const SizedBox(height: 30),
             Text('Your Email',
                 style: GoogleFonts.inter(
-                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  textStyle: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w600),
                 )),
             TextFormField(
               decoration: InputDecoration(

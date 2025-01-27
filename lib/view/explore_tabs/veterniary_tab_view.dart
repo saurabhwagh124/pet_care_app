@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pet_care_app/model/vet_doctor_model.dart';
@@ -13,6 +16,12 @@ class VeterniaryTabView extends StatefulWidget {
 }
 
 class _VeterniaryTabViewState extends State<VeterniaryTabView> {
+  @override
+  void initState() {
+    super.initState();
+    getId();
+  }
+
   List<VetDoctorModel> doctorList = [
     VetDoctorModel(
       name: 'Rafeeqa',
@@ -132,7 +141,9 @@ class _VeterniaryTabViewState extends State<VeterniaryTabView> {
           child: SizedBox(
             height: 260.h,
             child: ListView.separated(
-              separatorBuilder: (context, index) => const Divider(),
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) => VetCardWidget(data: doctorList[index]),
               itemCount: doctorList.length,
@@ -141,5 +152,12 @@ class _VeterniaryTabViewState extends State<VeterniaryTabView> {
         )
       ],
     );
+  }
+
+  void getId() async {
+    final user = FirebaseAuth.instance.currentUser!;
+    final id = await user.getIdToken();
+    log("user $user");
+    log(id ?? "");
   }
 }

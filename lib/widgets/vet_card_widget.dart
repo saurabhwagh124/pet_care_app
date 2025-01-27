@@ -81,7 +81,8 @@ class VetCardWidget extends StatelessWidget {
                           ),
                           Text(
                             "${data.reviewStars} (${data.numberOfReview} reviews)",
-                            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                fontSize: 14.sp, fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -103,7 +104,10 @@ class VetCardWidget extends StatelessWidget {
                           ),
                           Text(
                             "${data.distance} km",
-                            style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, color: Colors.black),
+                            style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black),
                           ),
                           const Spacer(),
                           Icon(

@@ -32,7 +32,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 padding: EdgeInsets.all(10.r),
                 child: Text(
                   "Hello, How may I help you?",
-                  style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                  style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                 ),
               ),
               TabBar(
@@ -55,7 +56,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     ),
                     child: Text(
                       "Veterinary",
-                      style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: AppColors.greyTextColor),
+                      style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.greyTextColor),
                     ),
                   ),
                   Tab(
@@ -72,7 +76,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     ),
                     child: Text(
                       "Grooming",
-                      style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: AppColors.greyTextColor),
+                      style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.greyTextColor),
                     ),
                   ),
                   Tab(
@@ -89,14 +96,21 @@ class _ExploreScreenState extends State<ExploreScreen> {
                     ),
                     child: Text(
                       "Boarding",
-                      style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: AppColors.greyTextColor),
+                      style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.greyTextColor),
                     ),
                   )
                 ],
               ),
               const Expanded(
                 child: TabBarView(
-                  children: [VeterniaryTabView(), GroomTabView(), BoardingTabView()],
+                  children: [
+                    VeterniaryTabView(),
+                    GroomTabView(),
+                    BoardingTabView()
+                  ],
                 ),
               ),
             ],

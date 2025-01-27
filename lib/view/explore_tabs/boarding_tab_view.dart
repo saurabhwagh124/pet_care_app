@@ -36,7 +36,10 @@ class _BoardingTabViewState extends State<BoardingTabView> {
           children: [
             Text(
               "Nearby Boarding",
-              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: Colors.black),
+              style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black),
             ),
             const Spacer(),
             Text(
@@ -58,7 +61,8 @@ class _BoardingTabViewState extends State<BoardingTabView> {
             child: ListView.separated(
               separatorBuilder: (context, index) => const Divider(),
               scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) => BoardingCard(data: boardingList[index]),
+              itemBuilder: (context, index) =>
+                  BoardingCard(data: boardingList[index]),
               itemCount: boardingList.length,
             ),
           ),
