@@ -5,9 +5,9 @@ import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
-import 'package:pet_care_app/view/explore_screen.dart';
-import 'package:pet_care_app/view/forgot_password_screen.dart';
-import 'package:pet_care_app/view/pet_screen.dart';
+import 'package:pet_care_app/view/user_views/explore_screen.dart';
+import 'package:pet_care_app/view/user_views/forgot_password_screen.dart';
+import 'package:pet_care_app/view/user_views/pet_screen.dart';
 import 'package:pet_care_app/view/wrapper.dart';
 
 class DashboardScreen extends StatefulWidget {

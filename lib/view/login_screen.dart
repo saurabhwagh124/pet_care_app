@@ -7,8 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
-import 'package:pet_care_app/view/dashboard_screen.dart';
-import 'package:pet_care_app/view/forgot_password_screen.dart';
+import 'package:pet_care_app/view/user_views/dashboard_screen.dart';
+import 'package:pet_care_app/view/user_views/forgot_password_screen.dart';
 
 class Loginscreen extends StatefulWidget {
   const Loginscreen({super.key});

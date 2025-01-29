@@ -8,8 +8,8 @@ import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/app_validator.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
-import 'package:pet_care_app/view/dashboard_screen.dart';
-import 'package:pet_care_app/view/email_verification_screen.dart';
+import 'package:pet_care_app/view/user_views/dashboard_screen.dart';
+import 'package:pet_care_app/view/user_views/email_verification_screen.dart';
 import 'package:pet_care_app/view/login_screen.dart';
 
 class SignupScreen extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pet_care_app/view/add_review_page.dart';
+import 'package:pet_care_app/view/user_views/add_review_page.dart';
 
 class ReviewsScreen extends StatefulWidget {
   const ReviewsScreen({super.key});
@@ -16,8 +16,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
       'name': 'Saurabh Wagh',
       'timeAgo': 'Just now',
       'rating': 4.5,
-      'review':
-          'The thing I like best about COCO is the amount of time it has saved while trying to manage my three pets.',
+      'review': 'The thing I like best about COCO is the amount of time it has saved while trying to manage my three pets.',
       'avatarUrl': 'assets/images/rehan_shah.png',
     },
     {
@@ -48,8 +47,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
 
   double _calculateAverageRating() {
     if (reviews.isEmpty) return 0.0;
-    double totalRating =
-        reviews.fold(0.0, (sum, review) => sum + review['rating']);
+    double totalRating = reviews.fold(0.0, (sum, review) => sum + review['rating']);
     return totalRating / reviews.length;
   }
 
@@ -68,8 +66,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
         title: Text(
           'Reviews',
           style: GoogleFonts.fredoka(
-            textStyle: const TextStyle(
-                fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
+            textStyle: const TextStyle(fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
           ),
         ),
         centerTitle: true,
@@ -94,9 +91,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: List.generate(5, (index) {
                       return Icon(
-                        index < averageRating.floor()
-                            ? Icons.star
-                            : Icons.star_border,
+                        index < averageRating.floor() ? Icons.star : Icons.star_border,
                         color: Colors.orange,
                         size: 24,
                       );
@@ -105,8 +100,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                   Text(
                     'Based on $reviewCount reviews',
                     style: GoogleFonts.fredoka(
-                      textStyle:
-                          const TextStyle(color: Colors.grey, fontSize: 14),
+                      textStyle: const TextStyle(color: Colors.grey, fontSize: 14),
                     ),
                   ),
                 ],
@@ -200,9 +194,7 @@ class ReviewCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
-              backgroundImage: avatarUrl.isNotEmpty
-                  ? AssetImage(avatarUrl)
-                  : const NetworkImage('https://via.placeholder.com/150'),
+              backgroundImage: avatarUrl.isNotEmpty ? AssetImage(avatarUrl) : const NetworkImage('https://via.placeholder.com/150'),
               radius: 24,
             ),
             const SizedBox(width: 16),
@@ -223,8 +215,7 @@ class ReviewCard extends StatelessWidget {
                   Text(
                     timeAgo,
                     style: GoogleFonts.fredoka(
-                      textStyle:
-                          const TextStyle(color: Colors.grey, fontSize: 12),
+                      textStyle: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                   ),
                   Row(
@@ -240,8 +231,7 @@ class ReviewCard extends StatelessWidget {
                   Text(
                     review,
                     style: GoogleFonts.fredoka(
-                      textStyle:
-                          const TextStyle(fontSize: 14, color: Colors.black),
+                      textStyle: const TextStyle(fontSize: 14, color: Colors.black),
                     ),
                   ),
                 ],
