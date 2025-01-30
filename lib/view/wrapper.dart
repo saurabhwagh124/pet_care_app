@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pet_care_app/view/dashboard_screen.dart';
 import 'package:pet_care_app/view/start_screen.dart';
+import 'package:pet_care_app/view/user_views/dashboard_screen.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({super.key});

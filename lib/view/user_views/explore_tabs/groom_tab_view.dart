@@ -56,7 +56,10 @@ class _GroomTabViewState extends State<GroomTabView> {
             children: [
               Text(
                 "Nearby Grooming room",
-                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.black),
+                style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black),
               ),
               const Spacer(),
               Text(
@@ -78,7 +81,8 @@ class _GroomTabViewState extends State<GroomTabView> {
             height: 300.h,
             child: ListView.builder(
               scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) => GrommingCard(data: grooming[index]),
+              itemBuilder: (context, index) =>
+                  GrommingCard(data: grooming[index]),
               itemCount: grooming.length,
             ),
           ),
@@ -95,7 +99,10 @@ class _GroomTabViewState extends State<GroomTabView> {
             children: [
               Text(
                 "Recomended Grooming room",
-                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.black),
+                style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black),
               ),
               const Spacer(),
               Text(
@@ -117,7 +124,8 @@ class _GroomTabViewState extends State<GroomTabView> {
             height: 300.h,
             child: ListView.builder(
               scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) => GrommingCard(data: grooming[index]),
+              itemBuilder: (context, index) =>
+                  GrommingCard(data: grooming[index]),
               itemCount: grooming.length,
             ),
           ),

@@ -1,10 +1,14 @@
+import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pet_care_app/view/book_appointment_screen.dart';
+import 'package:pet_care_app/model/vet_doc_model.dart';
+import 'package:pet_care_app/view/user_views/book_appointment_screen.dart';
 
 class VeterinaryDoctor extends StatefulWidget {
-  const VeterinaryDoctor({super.key});
+  final VetDocModel data;
+  const VeterinaryDoctor({super.key, required this.data});
 
   @override
   State<VeterinaryDoctor> createState() => _VeterinaryDoctorState();
@@ -25,13 +29,13 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
                   size: 20,
                   color: Colors.white,
                 )),
-            title: const Text('Dr. Rafeeqa'),
+            title: Text(widget.data.name!),
             centerTitle: true,
             titleTextStyle: GoogleFonts.fredoka(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
             backgroundColor: const Color.fromRGBO(248, 174, 31, 1)),
         body: Column(
           children: [
-            Image.asset("assets/images/VeterinaryDoctor.png"),
+            Image.network(widget.data.photoUrl!),
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -42,7 +46,7 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
               child: Stack(
                 children: [
                   Text(
-                    'Dr. Rafeeqa',
+                    widget.data.name!,
                     style: GoogleFonts.fredoka(
                       color: Colors.black,
                       fontSize: 24,
@@ -53,7 +57,7 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
                     top: 35,
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                       Text(
-                        'Bachelor of Veterinary Science',
+                        widget.data.specialization!,
                         style: GoogleFonts.fredoka(
                           fontSize: 17,
                           color: const Color.fromRGBO(6, 78, 87, 1),
@@ -63,19 +67,24 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
                       const SizedBox(height: 8),
                       Row(
                         children: [
-                          const Text(
-                            '5.0',
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-                          ),
-                          const Icon(Icons.star, color: Colors.yellow),
-                          const Icon(Icons.star, color: Colors.yellow),
-                          const Icon(Icons.star, color: Colors.yellow),
-                          const Icon(Icons.star, color: Colors.yellow),
-                          const Icon(Icons.star, color: Colors.yellow),
-                          const SizedBox(width: 8),
                           Text(
-                            '(100 reviews)',
-                            style: GoogleFonts.poppins(color: const Color.fromRGBO(134, 136, 137, 1), fontSize: 12, fontWeight: FontWeight.w500),
+                            widget.data.reviewScore.toString(),
+                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+                          ),
+                          RatingBar.readOnly(
+                            halfFilledIcon: Icons.star_half,
+                            halfFilledColor: Colors.amberAccent,
+                            isHalfAllowed: true,
+                            filledIcon: Icons.star,
+                            emptyIcon: Icons.star_border,
+                            initialRating: widget.data.reviewScore!.toDouble(),
+                            maxRating: 5,
+                            filledColor: Colors.amberAccent,
+                            emptyColor: Colors.grey,
+                          ),
+                          Text(
+                            "${widget.data.reviewScore} (${widget.data.noOfReviews} reviews)",
+                            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -88,28 +97,28 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            'Monday - Friday at 8:00 am - 5:00 pm',
+                            '${widget.data.startDay} - ${widget.data.endDay} at ${widget.data.startTime} am - ${widget.data.closeTime} pm',
                             style: GoogleFonts.fredoka(fontSize: 10, color: const Color.fromRGBO(166, 166, 166, 1)),
                           ),
                           const SizedBox(width: 8),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.location_on_outlined,
-                                size: 10,
-                              ),
-                              const SizedBox(width: 5),
-                              Text(
-                                '2.5 km',
-                                style: GoogleFonts.fredoka(textStyle: const TextStyle(fontSize: 11, color: Color.fromRGBO(166, 166, 166, 1))),
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   children: [
+                          //     const Icon(
+                          //       Icons.location_on_outlined,
+                          //       size: 10,
+                          //     ),
+                          //     const SizedBox(width: 5),
+                          //     Text(
+                          //       '2.5 km',
+                          //       style: GoogleFonts.fredoka(textStyle: const TextStyle(fontSize: 11, color: Color.fromRGBO(166, 166, 166, 1))),
+                          //     ),
+                          //   ],
+                          // ),
                         ],
                       ),
                       const SizedBox(height: 16),
-                      const Text('1000 PKR for an Appointment',
-                          style: TextStyle(
+                      Text('${widget.data.fees} ₹ for an Appointment',
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ))
@@ -121,20 +130,20 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               child: Text(
-                'Dr. Shehan, one of the most skilled and experienced veterinarians and the owner of the most convenient animal clinic "Petz & Vetz". Our paradise is situated in the heart of the town with a pleasant environment. We are ready to treat your beloved doggos & puppers with love and involvement. Book the appointment now!',
+                widget.data.description!,
                 style: GoogleFonts.fredoka(fontSize: 12),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 20),
-              child: SizedBox(
-                width: double.infinity,
-                child: Text(
-                  'Recommended For: Bella',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-                ),
-              ),
-            ),
+            // const Padding(
+            //   padding: EdgeInsets.only(left: 20),
+            //   child: SizedBox(
+            //     width: double.infinity,
+            //     child: Text(
+            //       'Recommended For: Bella',
+            //       style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+            //     ),
+            //   ),
+            // ),
             const SizedBox(height: 10),
             GestureDetector(
               onTap: () {

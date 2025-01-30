@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pet_care_app/view/add_review_page.dart';
+import 'package:pet_care_app/view/user_views/add_review_page.dart';
 
 class ReviewsScreen extends StatefulWidget {
   const ReviewsScreen({super.key});

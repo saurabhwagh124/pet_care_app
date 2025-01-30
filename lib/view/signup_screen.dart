@@ -8,7 +8,8 @@ import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/app_validator.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
-import 'package:pet_care_app/view/dashboard_screen.dart';
+import 'package:pet_care_app/view/user_views/dashboard_screen.dart';
+import 'package:pet_care_app/view/user_views/email_verification_screen.dart';
 import 'package:pet_care_app/view/login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -265,8 +266,7 @@ class _SignupScreenState extends State<SignupScreen> {
   _signInWithEmail() async {
     final user = await _auth.createUserWithMailAndPassword(_emailController.text.trim(), _passwordController.text.trim());
     if (user != null) {
-      user.sendEmailVerification();
-      Get.off(() => const DashboardScreen());
+      Get.off(() => const EmailVerificationScreen());
       log('Sign in with mail successfull');
     } else {
       log("Error");

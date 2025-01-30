@@ -27,10 +27,18 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
         decoration: BoxDecoration(
             color: selectedTime == time ? Colors.orange : Colors.white,
             borderRadius: BorderRadius.circular(10),
-            boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.25), offset: Offset(0, 4), blurRadius: 4)]),
+            boxShadow: const [
+              BoxShadow(
+                  color: Color.fromRGBO(0, 0, 0, 0.25),
+                  offset: Offset(0, 4),
+                  blurRadius: 4)
+            ]),
         child: Text(
           time,
-          style: GoogleFonts.openSans(fontSize: 16, fontWeight: FontWeight.w600, color: selectedTime == time ? Colors.white : Colors.black),
+          style: GoogleFonts.openSans(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: selectedTime == time ? Colors.white : Colors.black),
         ),
       ),
     );
@@ -52,7 +60,8 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
               )),
           title: const Text('Dr. Rafeeqa'),
           centerTitle: true,
-          titleTextStyle: GoogleFonts.fredoka(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
+          titleTextStyle: GoogleFonts.fredoka(
+              fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
           backgroundColor: const Color.fromRGBO(248, 174, 31, 1)),
       body: Padding(
         padding: const EdgeInsets.all(25.0),
@@ -61,7 +70,8 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
           children: [
             Text(
               'Choose a Date',
-              style: GoogleFonts.fredoka(fontSize: 24, fontWeight: FontWeight.w500),
+              style: GoogleFonts.fredoka(
+                  fontSize: 24, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 10),
             Container(
@@ -69,8 +79,14 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
               decoration: BoxDecoration(
                   color: Colors.white,
                   boxShadow: const [
-                    BoxShadow(color: Color.fromRGBO(19, 10, 46, 0.03), offset: Offset(0, 3), blurRadius: 14),
-                    BoxShadow(color: Color.fromRGBO(19, 10, 46, 0.13), offset: Offset(0, 1), blurRadius: 3),
+                    BoxShadow(
+                        color: Color.fromRGBO(19, 10, 46, 0.03),
+                        offset: Offset(0, 3),
+                        blurRadius: 14),
+                    BoxShadow(
+                        color: Color.fromRGBO(19, 10, 46, 0.13),
+                        offset: Offset(0, 1),
+                        blurRadius: 3),
                   ],
                   borderRadius: BorderRadius.circular(12)),
               child: CalendarDatePicker(
@@ -87,7 +103,8 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
             const SizedBox(height: 20),
             Text(
               'Pick a Time',
-              style: GoogleFonts.fredoka(fontSize: 24, fontWeight: FontWeight.w500),
+              style: GoogleFonts.fredoka(
+                  fontSize: 24, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 10),
             Wrap(
@@ -109,7 +126,9 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
               child: Container(
                 margin: const EdgeInsets.only(top: 20),
                 padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(color: const Color.fromRGBO(245, 146, 69, 1), borderRadius: BorderRadius.circular(5)),
+                decoration: BoxDecoration(
+                    color: const Color.fromRGBO(245, 146, 69, 1),
+                    borderRadius: BorderRadius.circular(5)),
                 child: Row(
                   children: [
                     const SizedBox(
@@ -117,7 +136,10 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
                     ),
                     Text(
                       "Book an Appointment",
-                      style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.white),
+                      style: GoogleFonts.fredoka(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
                     ),
                     const SizedBox(
                       width: 35,

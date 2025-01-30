@@ -11,5 +11,16 @@ class BoardingModel {
   final double startTime;
   final double endTime;
 
-  BoardingModel({required this.name, required this.imageUrl, required this.distance, required this.startDay, required this.endDay, required this.endTime, required this.startTime, required this.isOpen, required this.price, required this.rating, required this.reviewCount});
+  BoardingModel(
+      {required this.name,
+      required this.imageUrl,
+      required this.distance,
+      required this.startDay,
+      required this.endDay,
+      required this.endTime,
+      required this.startTime,
+      required this.isOpen,
+      required this.price,
+      required this.rating,
+      required this.reviewCount});
 }

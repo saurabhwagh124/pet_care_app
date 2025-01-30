@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pet_care_app/view/pethealthscreen.dart';
-import 'package:pet_care_app/view/shop_food_screen.dart';
+import 'package:pet_care_app/view/user_views/pethealthscreen.dart';
+import 'package:pet_care_app/view/user_views/shop_food_screen.dart';
 
 class Petscreen extends StatefulWidget {
   const Petscreen({super.key});

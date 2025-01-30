@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
-import 'package:pet_care_app/view/explore_tabs/boarding_tab_view.dart';
-import 'package:pet_care_app/view/explore_tabs/groom_tab_view.dart';
-import 'package:pet_care_app/view/explore_tabs/veterniary_tab_view.dart';
+import 'package:pet_care_app/view/user_views/explore_tabs/boarding_tab_view.dart';
+import 'package:pet_care_app/view/user_views/explore_tabs/groom_tab_view.dart';
+import 'package:pet_care_app/view/user_views/explore_tabs/veterniary_tab_view.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});

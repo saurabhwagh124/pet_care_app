@@ -51,7 +51,8 @@ class _AddReviewPageState extends State<AddReviewPage> {
         title: Text(
           'Add Review',
           style: GoogleFonts.fredoka(
-            textStyle: const TextStyle(fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
+            textStyle: const TextStyle(
+                fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
           ),
         ),
         leading: IconButton(
@@ -83,7 +84,8 @@ class _AddReviewPageState extends State<AddReviewPage> {
                   children: [
                     Text(
                       'Haylie Aminoff',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       'Posting Publicly*',
@@ -96,7 +98,8 @@ class _AddReviewPageState extends State<AddReviewPage> {
             const SizedBox(height: 24),
             Text('Rate your experience',
                 style: GoogleFonts.fredoka(
-                  textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  textStyle: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.w500),
                 )),
             Row(
               children: List.generate(5, (index) => _buildStar(index)),
@@ -105,7 +108,8 @@ class _AddReviewPageState extends State<AddReviewPage> {
             Text(
               'Share more about your experience',
               style: GoogleFonts.fredoka(
-                textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                textStyle:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
             ),
             const SizedBox(height: 8),
@@ -123,13 +127,17 @@ class _AddReviewPageState extends State<AddReviewPage> {
               child: ElevatedButton(
                 onPressed: _submitReview,
                 style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
                   backgroundColor: Colors.orange,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
                 child: Text('Post Review',
                     style: GoogleFonts.fredoka(
-                      textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white),
+                      textStyle: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
                     )),
               ),
             ),
