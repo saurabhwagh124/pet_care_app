@@ -10,7 +10,7 @@ class CartController extends GetxController {
     } else {
       cartItems[product] = 1;
     }
-    update(); // Notify UI
+    update(); 
   }
 
   void removeFromCart(Product product) {
@@ -21,7 +21,7 @@ class CartController extends GetxController {
         cartItems.remove(product);
       }
     }
-    update(); // Notify UI
+    update(); 
   }
 
   int getQuantity(Product product) {
@@ -31,7 +31,7 @@ class CartController extends GetxController {
   double get subtotal => cartItems.entries
       .fold(0, (sum, item) => sum + (item.key.price * item.value));
 
-  double get shippingCharges => cartItems.isEmpty ? 0.0 : 50.0; // Flat rate
+  double get shippingCharges => cartItems.isEmpty ? 0.0 : 50.0; 
 
   double get total => subtotal + shippingCharges;
 
