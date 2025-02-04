@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ManageScreen extends StatelessWidget {
@@ -10,25 +10,24 @@ class ManageScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color(0XFFF8AE1F),
+        backgroundColor: const Color(0XFFF8AE1F),
         title: Text(
           'Manage',
           style: GoogleFonts.fredoka(
-            textStyle: const TextStyle(
-                fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
+            textStyle: const TextStyle(fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
           ),
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
         ),
       ),
-      body: Center(
+      body: const Center(
         child: Text("Manage Screen"),
       ),
     );

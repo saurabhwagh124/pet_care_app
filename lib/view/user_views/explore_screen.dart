@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/view/user_views/explore_tabs/boarding_tab_view.dart';
-import 'package:pet_care_app/view/user_views/explore_tabs/groom_tab_view.dart';
+import 'package:pet_care_app/view/user_views/explore_tabs/pet_services_tab_view.dart';
 import 'package:pet_care_app/view/user_views/explore_tabs/veterniary_tab_view.dart';
 
 class ExploreScreen extends StatefulWidget {
@@ -71,7 +71,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                       child: Image.asset(AppImages.groomLogoImg),
                     ),
                     child: Text(
-                      "Grooming",
+                      "Pet Services",
                       style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: AppColors.greyTextColor),
                     ),
                   ),
@@ -96,7 +96,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               ),
               const Expanded(
                 child: TabBarView(
-                  children: [VeterniaryTabView(), GroomTabView(), BoardingTabView()],
+                  children: [VeterniaryTabView(), PetServicesTabView(), BoardingTabView()],
                 ),
               ),
             ],

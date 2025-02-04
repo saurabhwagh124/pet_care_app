@@ -15,13 +15,7 @@ class BoardingCard extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.all(20.r),
         padding: EdgeInsets.all(10.r),
-        decoration: BoxDecoration(
-            color: AppColors.white,
-            borderRadius: BorderRadius.circular(15.r),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.black, blurRadius: 4.r, offset: Offset(0, 1.h))
-            ]),
+        decoration: BoxDecoration(color: AppColors.white, borderRadius: BorderRadius.circular(15.r), boxShadow: [BoxShadow(color: Colors.black, blurRadius: 4.r, offset: Offset(0, 1.h))]),
         child: Column(
           children: [
             Row(
@@ -32,7 +26,7 @@ class BoardingCard extends StatelessWidget {
                     SizedBox(
                       height: 40.h,
                       width: 70.w,
-                      child: Image.asset(data.imageUrl),
+                      child: Image.network(data.photoUrls.first),
                     ),
                   ],
                 ),
@@ -44,11 +38,8 @@ class BoardingCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      data.name,
-                      style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                      data.name ?? "",
+                      style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.black),
                     ),
                     Wrap(
                       direction: Axis.vertical,
@@ -62,14 +53,11 @@ class BoardingCard extends StatelessWidget {
                           halfFilledColor: Colors.amberAccent,
                           isHalfAllowed: true,
                           maxRating: 5,
-                          initialRating: data.rating,
+                          initialRating: data.reviewScore ?? 0.0,
                         ),
                         Text(
-                          "${data.rating} {${data.reviewCount}reviews}",
-                          style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black),
+                          "${data.reviewScore} {${data.noOfReviews}reviews}",
+                          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: Colors.black),
                         )
                       ],
                     )
@@ -79,26 +67,26 @@ class BoardingCard extends StatelessWidget {
             ),
             Row(
               children: [
-                Text(
-                  (data.isOpen) ? "Open" : "Closed",
-                  style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: (data.isOpen) ? Colors.green : Colors.red),
-                ),
-                const Spacer(),
-                Icon(
-                  Icons.location_pin,
-                  size: 15.sp,
-                  color: Colors.black,
-                ),
-                Text(
-                  "${data.distance}km",
-                  style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black),
-                ),
+                // Text(
+                //   (data.) ? "Open" : "Closed",
+                //   style: TextStyle(
+                //       fontSize: 14.sp,
+                //       fontWeight: FontWeight.w400,
+                //       color: (data.isOpen) ? Colors.green : Colors.red),
+                // ),
+                // const Spacer(),
+                // Icon(
+                //   Icons.location_pin,
+                //   size: 15.sp,
+                //   color: Colors.black,
+                // ),
+                // Text(
+                //   "${data.distance}km",
+                //   style: TextStyle(
+                //       fontSize: 14.sp,
+                //       fontWeight: FontWeight.w400,
+                //       color: Colors.black),
+                // ),
                 SizedBox(
                   width: 10.w,
                 ),
@@ -108,11 +96,8 @@ class BoardingCard extends StatelessWidget {
                   color: Colors.black,
                 ),
                 Text(
-                  "${data.price}",
-                  style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                  "${data.fees}",
+                  style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400, color: Colors.black),
                 )
               ],
             ),
@@ -130,11 +115,8 @@ class BoardingCard extends StatelessWidget {
                   width: 10.w,
                 ),
                 Text(
-                  "${data.startDay} - ${data.endDay} at ${data.startTime}am - ${data.endTime}pm",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 14.sp,
-                      color: Colors.black),
+                  "${data.startDay} - ${data.endDay} at ${data.startTime} - ${data.closeTime}",
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12.sp, color: Colors.black),
                 )
               ],
             )
