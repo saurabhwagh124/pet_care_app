@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,9 @@ class VetDocService extends GetxService {
     try {
       final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {"Authorization": "Bearer $token"};
-      final response = await http.get(Uri.parse(ApiEndpoints.getAllDoctorsUrl), headers: headers);
+      final response = await http.get(Uri.parse(ApiEndpoints.getAllDoctorsUrl),
+          headers: headers);
+      log("Fetching data");
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body) as List<dynamic>;
         return data.map((json) => VetDocModel.fromJson(json)).toList();
