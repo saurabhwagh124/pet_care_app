@@ -4,12 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
+
 import '../../utils/app_images.dart';
 import '../../utils/auth_service.dart';
 import '../wrapper.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -23,32 +24,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color(0XFFF8AE1F),
+        backgroundColor: const Color(0XFFF8AE1F),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back();
           },
         ),
         title: Text(
           user?.displayName ?? "No Name Available",
-          style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
+          style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
         ),
         actions: [
           if (user?.photoURL != null)
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
-                backgroundImage: NetworkImage(user!.photoURL!),
+                backgroundImage: NetworkImage(user!.photoURL ?? "https://i.pinimg.com/736x/1a/a8/d7/1aa8d75f3498784bcd2617b3e3d1e0c4.jpg"),
               ),
             )
           else
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
                 backgroundImage: AssetImage(AppImages.logoImg),
               ),
@@ -62,9 +62,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               alignment: Alignment.center,
               children: [
                 Image.network(
-                  user!.photoURL!,
+                  user!.photoURL ?? "",
                   width: double.infinity,
-                  height: 200,
+                  height: 200.h,
                   fit: BoxFit.cover,
                 )
               ],
@@ -75,44 +75,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(15),
-                    height: 180.h,
+                    padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),
+                    // height: 180.h,
                     decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              color: Color.fromRGBO(0, 0, 0, 0.15),
-                              offset: Offset(0, 5.47),
-                              blurRadius: 43.48)
-                        ],
-                        borderRadius: BorderRadius.circular(27),
-                        color: Colors.white),
+                        boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.15), offset: Offset(0, 5.47), blurRadius: 43.48)], borderRadius: BorderRadius.circular(27), color: Colors.white),
                     child: Column(
                       children: [
                         Row(
                           children: [
                             Text(
                               user?.displayName ?? "No Name Available",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             GestureDetector(
                               onTap: () async {
                                 await auth.signOut();
                                 Get.back();
                                 Get.to(() => const Wrapper());
                               },
-                              child: Text(
+                              child: const Text(
                                 "Sign Out",
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600),
+                                style: TextStyle(color: Colors.red, fontSize: 12, fontWeight: FontWeight.w600),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Icon(
@@ -146,54 +136,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 16),
+                        // const SizedBox(height: 16),
                       ],
                     ),
                   )
                 ],
               ),
             ),
-            Container(
-              height: 300,
-              child: ListView(
-                padding: EdgeInsets.all(16),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
                 children: [
                   buildMenuTile(
                     context,
                     icon: Icons.person,
                     title: "About me",
-                    screen: AddPetsPage(),
+                    screen: const AddPetsPage(),
                   ),
                   buildMenuTile(
                     context,
                     icon: Icons.shopping_bag_outlined,
                     title: "My Orders",
-                    screen: AddPetsPage(),
+                    screen: const AddPetsPage(),
                   ),
                   buildMenuTile(
                     context,
                     icon: Icons.location_on_outlined,
                     title: "My Address",
-                    screen: AddPetsPage(),
+                    screen: const AddPetsPage(),
                   ),
                   buildMenuTile(
                     context,
                     icon: Icons.pets_outlined,
                     title: "Add Pet",
-                    screen: AddPetsPage(),
+                    screen: const AddPetsPage(),
                   ),
-                  buildMenuTile(
-                    context,
-                    icon: Icons.devices_outlined,
-                    title: "Add Device",
-                    screen: AddPetsPage(),
-                  ),
-                  buildMenuTile(
-                    context,
-                    icon: Icons.search,
-                    title: "Find Lost Pets",
-                    screen: AddPetsPage(),
-                  ),
+                  // buildMenuTile(
+                  //   context,
+                  //   icon: Icons.devices_outlined,
+                  //   title: "Add Device",
+                  //   screen: const AddPetsPage(),
+                  // ),
+                  // buildMenuTile(
+                  //   context,
+                  //   icon: Icons.search,
+                  //   title: "Find Lost Pets",
+                  //   screen: const AddPetsPage(),
+                  // ),
                 ],
               ),
             ),
@@ -204,15 +193,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-Widget buildMenuTile(BuildContext context,
-    {required IconData icon, required String title, required Widget screen}) {
+Widget buildMenuTile(BuildContext context, {required IconData icon, required String title, required Widget screen}) {
   return Container(
-    margin: EdgeInsets.only(bottom: 12),
-    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+    margin: const EdgeInsets.only(bottom: 12),
+    padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(12),
-      boxShadow: [
+      boxShadow: const [
         BoxShadow(
           color: Colors.black12,
           blurRadius: 4,
@@ -221,20 +209,19 @@ Widget buildMenuTile(BuildContext context,
       ],
     ),
     child: InkWell(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => screen),
-      ),
+      onTap: () {
+        Get.to(() => screen);
+      },
       child: Row(
         children: [
           Icon(icon, color: Colors.black),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Text(
             title,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
-          Spacer(),
-          Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black54),
+          const Spacer(),
+          const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black54),
         ],
       ),
     ),
