@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:pet_care_app/controller/pet_services_controller.dart';
 import 'package:pet_care_app/widgets/pet_services_card_widget.dart';
 
@@ -11,11 +12,11 @@ class PetServicesTabView extends StatefulWidget {
 }
 
 class _PetServicesTabViewState extends State<PetServicesTabView> {
-  final PetServicesController controller = PetServicesController();
+  final PetServicesController _controller = PetServicesController();
 
   @override
   void initState() {
-    controller.fetchAllPetServices();
+    _controller.fetchAllPetServices();
     super.initState();
   }
 
@@ -48,10 +49,12 @@ class _PetServicesTabViewState extends State<PetServicesTabView> {
         ),
         Expanded(
           // height: 300.h,
-          child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) => PetServicesCardWidget(data: controller.petServiceList[index]),
-            itemCount: controller.petServiceList.length,
+          child: Obx(
+            () => ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) => PetServicesCardWidget(data: _controller.petServiceList[index]),
+              itemCount: _controller.petServiceList.length,
+            ),
           ),
         ),
         // const Divider(
