@@ -1,16 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/controller/user_pet_controller.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
 import 'package:pet_care_app/view/user_views/explore_screen.dart';
 import 'package:pet_care_app/view/user_views/forgot_password_screen.dart';
 import 'package:pet_care_app/view/user_views/manage_screen.dart';
-import 'package:pet_care_app/view/user_views/pet_screen.dart';
 import 'package:pet_care_app/view/user_views/profile_screen.dart';
 import 'package:pet_care_app/view/wrapper.dart';
+import 'package:pet_care_app/widgets/user_pet_widget_icon.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -20,15 +22,17 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  final userPetController = UserPetController();
   final auth = AuthService();
   final User? user = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 0;
-  List<Widget> screens = [
-    const DashboardScreen(),
-    const ExploreScreen(),
-    const ManageScreen(),
-    const ProfileScreen()
-  ];
+  List<Widget> screens = [const DashboardScreen(), const ExploreScreen(), const ManageScreen(), const ProfileScreen()];
+
+  @override
+  void initState() {
+    userPetController.fetchUserPets();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -179,72 +183,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 10.h,
+                      height: 20.h,
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 21.w, right: 21.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Get.to(() => const Petscreen());
-                                },
-                                child: Container(
-                                  height: 80.h,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.circular(10.r)),
-                                  clipBehavior: Clip.hardEdge,
-                                  child: Image.asset(AppImages.puppy1Img),
+                      child: SizedBox(
+                        height: 160.h,
+                        child: Obx(() => ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) => UserPetWidgetIcon(
+                                  data: userPetController.userPetList[index],
                                 ),
-                              ),
-                              Text(
-                                "Pomy",
-                                style: TextStyle(
-                                    fontSize: 15.sp, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Container(
-                                height: 80.h,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.r)),
-                                clipBehavior: Clip.hardEdge,
-                                child: Image.asset(AppImages.rabbit1Img),
-                              ),
-                              Text(
-                                "Fixi",
-                                style: TextStyle(
-                                    fontSize: 15.sp, color: Colors.grey),
-                              )
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Container(
-                                height: 80.h,
-                                width: 80.w,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.r)),
-                                clipBehavior: Clip.hardEdge,
-                                child: Image.asset(
-                                  AppImages.cat1Img,
-                                  fit: BoxFit.fitHeight,
+                            separatorBuilder: (context, index) => SizedBox(
+                                  width: 10.h,
                                 ),
-                              ),
-                              Text(
-                                "Trix",
-                                style: TextStyle(
-                                    fontSize: 15.sp, color: Colors.grey),
-                              )
-                            ],
-                          )
-                        ],
+                            itemCount: userPetController.userPetList.length)),
                       ),
                     )
                   ],
@@ -253,21 +206,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
               const SizedBox(height: 20),
               Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8.r),
-                      boxShadow: const [
-                        BoxShadow(
-                            offset: Offset(0, 1),
-                            blurRadius: 3.5,
-                            color: Color.fromRGBO(0, 0, 0, 0.20))
-                      ]),
+                      color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
                   padding: EdgeInsets.all(20.r),
                   child: Column(children: [
                     Row(
                       children: [
                         SizedBox(
                           height: 25.h,
-                          child: Icon(Icons.access_time_rounded),
+                          child: const Icon(Icons.access_time_rounded),
                         ),
                         SizedBox(
                           width: 5.w,
