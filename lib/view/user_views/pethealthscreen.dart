@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/view/user_views/explore_screen.dart';
 
 class PetHealth extends StatefulWidget {
   const PetHealth({super.key});
@@ -29,7 +30,8 @@ class _PetHealthState extends State<PetHealth> {
           backgroundColor: const Color.fromRGBO(248, 174, 31, 1),
           title: const Text(
             'Pet Health',
-            style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.w500),
+            style: TextStyle(
+                fontSize: 30, color: Colors.white, fontWeight: FontWeight.w500),
           ),
           bottom: const TabBar(
             tabs: [
@@ -78,12 +80,14 @@ class _PetHealthState extends State<PetHealth> {
                       children: [
                         AllergyCard(
                           title: 'Skin Allergies',
-                          description: 'May be accompanied by \ngastrointestinal symptoms.',
+                          description:
+                              'May be accompanied by \ngastrointestinal symptoms.',
                           doctor: 'Dr. Irfan',
                         ),
                         AllergyCard(
                           title: 'Food Allergies',
-                          description: 'Vomiting and diarrhea,\nor dermatologicsigns.',
+                          description:
+                              'Vomiting and diarrhea,\nor dermatologicsigns.',
                           doctor: 'Dr. Imran',
                         ),
                       ],
@@ -102,14 +106,17 @@ class _PetHealthState extends State<PetHealth> {
                     const SizedBox(height: 5),
                     Center(
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(backgroundColor: const Color.fromRGBO(245, 146, 69, 1)),
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromRGBO(245, 146, 69, 1)),
                         onPressed: () {
                           log("Get not added so won't get to next screen");
-                          // Get.to(() =>  VeterinaryDoctor(data: VetDo));
+                          Get.to(() => ExploreScreen());
                         },
                         child: Text(
                           'Start',
-                          style: GoogleFonts.fredoka(color: Colors.white, fontSize: 22),
+                          style: GoogleFonts.fredoka(
+                              color: Colors.white, fontSize: 22),
                         ),
                       ),
                     ),
@@ -123,27 +130,31 @@ class _PetHealthState extends State<PetHealth> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Section(title: "Past Vaccinations", seeAll: true, children: [
-                  Row(
+                const Section(
+                    title: "Past Vaccinations",
+                    seeAll: true,
                     children: [
-                      VaccinationCard(
-                        title: 'Rabies vaccination',
-                        date: 'Mon 24 Jan',
-                        doctor: 'Dr. Ikram',
+                      Row(
+                        children: [
+                          VaccinationCard(
+                            title: 'Rabies vaccination',
+                            date: 'Mon 24 Jan',
+                            doctor: 'Dr. Ikram',
+                          ),
+                          VaccinationCard(
+                            title: 'Calicivirus',
+                            date: 'Tue 12 Feb',
+                            doctor: 'Dr. Rafeeqa',
+                          ),
+                        ],
                       ),
-                      VaccinationCard(
-                        title: 'Calicivirus',
-                        date: 'Tue 12 Feb',
-                        doctor: 'Dr. Rafeeqa',
-                      ),
-                    ],
-                  ),
-                ]),
+                    ]),
                 const SizedBox(height: 10),
                 Section(title: "Past Treatment", seeAll: false, children: [
                   Text(
                     "Allergies",
-                    style: GoogleFonts.fredoka(fontSize: 20, fontWeight: FontWeight.w600),
+                    style: GoogleFonts.fredoka(
+                        fontSize: 20, fontWeight: FontWeight.w600),
                   ),
                   const Row(
                     children: [
@@ -168,7 +179,8 @@ class _PetHealthState extends State<PetHealth> {
                   ),
                   Text(
                     "Cough",
-                    style: GoogleFonts.fredoka(fontSize: 20, fontWeight: FontWeight.w600),
+                    style: GoogleFonts.fredoka(
+                        fontSize: 20, fontWeight: FontWeight.w600),
                   ),
                   const Row(
                     children: [
@@ -199,7 +211,10 @@ class _PetHealthState extends State<PetHealth> {
                       ),
                       Text(
                         'See all',
-                        style: GoogleFonts.fredoka(fontSize: 16, fontWeight: FontWeight.w500, color: const Color.fromRGBO(59, 115, 143, 1)),
+                        style: GoogleFonts.fredoka(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: const Color.fromRGBO(59, 115, 143, 1)),
                       ),
                       const Icon(Icons.keyboard_arrow_down_outlined)
                     ],
@@ -218,7 +233,11 @@ class Section extends StatelessWidget {
   final String title;
   final bool seeAll;
   final List<Widget> children;
-  const Section({super.key, required this.title, required this.seeAll, required this.children});
+  const Section(
+      {super.key,
+      required this.title,
+      required this.seeAll,
+      required this.children});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -232,14 +251,18 @@ class Section extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.fredoka(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: GoogleFonts.fredoka(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 if (seeAll)
                   Row(
                     children: [
                       Text(
                         'See all',
-                        style: GoogleFonts.fredoka(color: const Color.fromRGBO(59, 115, 143, 1), fontSize: 16, fontWeight: FontWeight.w500),
+                        style: GoogleFonts.fredoka(
+                            color: const Color.fromRGBO(59, 115, 143, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
                       ),
                       const SizedBox(
                         width: 5,
@@ -266,7 +289,11 @@ class VaccinationCard extends StatelessWidget {
   final String title;
   final String date;
   final String doctor;
-  const VaccinationCard({super.key, required this.title, required this.date, required this.doctor});
+  const VaccinationCard(
+      {super.key,
+      required this.title,
+      required this.date,
+      required this.doctor});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -277,7 +304,8 @@ class VaccinationCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.bold),
+              style: GoogleFonts.fredoka(
+                  fontSize: 15, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
@@ -297,7 +325,11 @@ class AllergyCard extends StatelessWidget {
   final String title;
   final String description;
   final String doctor;
-  const AllergyCard({super.key, required this.title, required this.description, required this.doctor});
+  const AllergyCard(
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.doctor});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -308,7 +340,8 @@ class AllergyCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.bold),
+              style: GoogleFonts.fredoka(
+                  fontSize: 15, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(description, style: GoogleFonts.fredoka(fontSize: 10)),
@@ -325,7 +358,11 @@ class TreatmentCard extends StatelessWidget {
   final String title;
   final String date;
   final String doctor;
-  const TreatmentCard({super.key, required this.title, required this.date, required this.doctor});
+  const TreatmentCard(
+      {super.key,
+      required this.title,
+      required this.date,
+      required this.doctor});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -336,7 +373,8 @@ class TreatmentCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.bold),
+            style:
+                GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
           Text(

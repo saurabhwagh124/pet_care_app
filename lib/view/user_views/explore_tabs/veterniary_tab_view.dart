@@ -21,7 +21,7 @@ class _VeterniaryTabViewState extends State<VeterniaryTabView> {
   void initState() {
     super.initState();
     _vetDocController.fetchVetDocs();
-    getId();
+    // getId();
   }
 
   @override
@@ -34,7 +34,10 @@ class _VeterniaryTabViewState extends State<VeterniaryTabView> {
             children: [
               Text(
                 "Veterinarian",
-                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.black),
+                style: TextStyle(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black),
               ),
               const Spacer(),
             ],
@@ -50,7 +53,8 @@ class _VeterniaryTabViewState extends State<VeterniaryTabView> {
                 height: 10.h,
               ),
               scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) => VetCardWidget(data: _vetDocController.vetDoctorsList[index]),
+              itemBuilder: (context, index) =>
+                  VetCardWidget(data: _vetDocController.vetDoctorsList[index]),
               itemCount: _vetDocController.vetDoctorsList.length,
             ),
           ),
