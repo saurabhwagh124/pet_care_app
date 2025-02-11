@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:pet_care_app/model/product.dart';
-
 import '../service/shop_service.dart';
 
 class ShopController extends GetxController {
@@ -47,6 +46,7 @@ class ShopController extends GetxController {
     if (apiCategory == "UNKNOWN") {
       return;
     }
+    
 
     List<Product> products =
         await shopService.fetchProductsByCategory(apiCategory);
