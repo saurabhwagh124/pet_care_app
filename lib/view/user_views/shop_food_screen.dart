@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pet_care_app/model/product.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pet_care_app/controller/shop_controller.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
+import 'package:pet_care_app/utils/app_images.dart';
+import 'package:pet_care_app/view/product_card.dart';
 
 class ShopFood extends StatefulWidget {
   const ShopFood({super.key});
@@ -8,45 +12,14 @@ class ShopFood extends StatefulWidget {
   State<ShopFood> createState() => _ShopFoodState();
 }
 
-class _ShopFoodState extends State<ShopFood>
-    with SingleTickerProviderStateMixin {
+class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-
-  final Map<String, List<Product>> categoryProducts = {
-    'Food': [
-      Product(
-        name: 'Josera Mini Deluxe',
-        price: 2000.00,
-        image: 'assets/images/josiDogFood.png',
-        category: 'Furry',
-        weight: '900g',
-      ),
-      Product(
-        name: 'Pedigree Chicken & Vege',
-        price: 1500.00,
-        image: 'assets/images/josiDogFood.png',
-        category: 'Basic',
-        weight: '900g',
-      ),
-    ],
-    'Vet Items': [
-      Product(
-        name: 'Vet Supplement A',
-        price: 1200.00,
-        image: 'assets/images/vetSupplement.png',
-        category: 'Health',
-        weight: '500g',
-      ),
-    ],
-    'Accessories': [],
-    'DIY Services': [],
-  };
+  final shopController = ShopController();
 
   @override
   void initState() {
     super.initState();
-    _tabController =
-        TabController(length: categoryProducts.keys.length, vsync: this);
+    _tabController = TabController(length: shopController.categoryProducts.keys.length, vsync: this);
     _tabController.addListener(_onTabChange);
   }
 
@@ -97,56 +70,49 @@ class _ShopFoodState extends State<ShopFood>
                 color: Colors.white,
                 child: TabBar(
                   controller: _tabController,
-                  isScrollable: true,
+                  isScrollable: false,
                   labelColor: Colors.black,
-                  indicatorColor: Colors.blue,
+                  indicatorColor: Colors.lightBlueAccent,
                   indicator: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                   ),
                   unselectedLabelColor: Colors.black,
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-                  unselectedLabelStyle:
-                      const TextStyle(fontWeight: FontWeight.normal),
-                  tabs: categoryProducts.keys.map((category) {
-                    IconData icon;
+                  unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+                  tabs: shopController.categoryProducts.keys.map((category) {
+                    String icon;
                     switch (category) {
                       case 'Food':
-                        icon = Icons.food_bank;
+                        icon = AppImages.foodLogoImg;
                         break;
                       case 'Vet Items':
-                        icon = Icons.medical_services;
+                        icon = AppImages.vetItemImg;
                         break;
                       case 'Accessories':
-                        icon = Icons.toys;
+                        icon = AppImages.accessoriesImg;
                         break;
-                      case 'DIY Services':
-                        icon = Icons.build;
+                      case 'IOT Devices':
+                        icon = AppImages.iotDevicesImg;
                         break;
                       default:
-                        icon = Icons.help;
+                        icon = AppImages.pawIconImg;
                     }
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.all(8),
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: _tabController.index ==
-                                    categoryProducts.keys
-                                        .toList()
-                                        .indexOf(category)
-                                ? Colors.blue
-                                : Colors.grey[200],
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Icon(icon, size: 30, color: Colors.black),
+                    return Tab(
+                      height: 70.h,
+                      icon: Container(
+                        height: 40.h,
+                        width: 40.w,
+                        padding: EdgeInsets.all(10.sp),
+                        decoration: BoxDecoration(
+                          color: _tabController.index == shopController.categoryProducts.keys.toList().indexOf(category) ? const Color.fromARGB(255, 134, 208, 243) : AppColors.greyIconBox,
+                          borderRadius: BorderRadius.circular(10.r),
                         ),
-                        Text(
-                          category,
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                      ],
+                        child: Image.asset(icon, color: _tabController.index == shopController.categoryProducts.keys.toList().indexOf(category) ? Colors.white : Colors.black),
+                      ),
+                      child: Text(
+                        category,
+                        style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, color: AppColors.greyTextColor, overflow: TextOverflow.ellipsis),
+                      ),
                     );
                   }).toList(),
                 ),
@@ -157,7 +123,7 @@ class _ShopFoodState extends State<ShopFood>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: categoryProducts.entries.map((entry) {
+        children: shopController.categoryProducts.entries.map((entry) {
           final products = entry.value;
           if (products.isEmpty) {
             return const Center(
@@ -178,168 +144,6 @@ class _ShopFoodState extends State<ShopFood>
             },
           );
         }).toList(),
-      ),
-    );
-  }
-}
-
-class ProductCard extends StatefulWidget {
-  final Product product;
-
-  const ProductCard({
-    super.key,
-    required this.product,
-  });
-
-  @override
-  State<ProductCard> createState() => _ProductCardState();
-}
-
-class _ProductCardState extends State<ProductCard> {
-  int _quantity = 0;
-
-  void _addToCart() {
-    setState(() {
-      if (_quantity == 0) {
-        _quantity = 1;
-      }
-    });
-  }
-
-  void _increment() {
-    setState(() {
-      _quantity++;
-    });
-  }
-
-  void _decrement() {
-    setState(() {
-      if (_quantity > 1) {
-        _quantity--;
-      } else {
-        _quantity = 0;
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Stack(
-        children: [
-          Positioned(
-            top: 15,
-            left: 40,
-            child: Image.asset(
-              widget.product.image,
-              height: 90,
-              fit: BoxFit.cover,
-            ),
-          ),
-          Positioned(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: Colors.orange[100],
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                widget.product.category,
-                style: const TextStyle(
-                  fontSize: 10,
-                  color: Colors.orange,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 100,
-            child: SizedBox(
-              height: 120,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "RS.${widget.product.price}",
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      widget.product.name,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Text(
-                    widget.product.weight,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  if (_quantity == 0)
-                    InkWell(
-                      onTap: _addToCart,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        alignment: Alignment.center,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(Icons.shopping_bag_outlined,
-                                color: Colors.black),
-                            SizedBox(width: 8),
-                            Text(
-                              'Add to cart',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                  else
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      alignment: Alignment.center,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.remove),
-                            onPressed: _decrement,
-                          ),
-                          Text(
-                            '$_quantity',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.add),
-                            onPressed: _increment,
-                          ),
-                        ],
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

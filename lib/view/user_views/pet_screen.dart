@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/model/user_pet_model.dart';
+import 'package:pet_care_app/view/user_views/pethealthscreen.dart';
+import 'package:pet_care_app/view/user_views/shop_food_screen.dart';
 
 class Petscreen extends StatelessWidget {
   final UserPetModel data;
@@ -97,64 +100,64 @@ class Petscreen extends StatelessWidget {
           ),
 
           // Pet Status Section
-          // Padding(
-          //   padding:  EdgeInsets.all(8.r),
-          //   child: Column(
-          //     crossAxisAlignment: CrossAxisAlignment.start,
-          //     children: [
-          //       Row(
-          //         children: [
-          //           const ImageIcon(AssetImage("assets/images/statusIcon.png")),
-          //           const SizedBox(width: 8),
-          //           Text(
-          //             "Pomy's Status",
-          //             style: GoogleFonts.fredoka(
-          //               textStyle: const TextStyle(
-          //                 fontSize: 20,
-          //                 fontWeight: FontWeight.w700,
-          //                 color: Colors.black,
-          //               ),
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //       const SizedBox(height: 16),
-          //       PetStatusCard(
-          //           icon: Icons.favorite,
-          //           title: 'Health',
-          //           subtitle: 'Abnormal',
-          //           description: 'Last Vaccinated (2mon Ago)',
-          //           buttonText: 'Contact Vet',
-          //           buttonColor: Colors.redAccent,
-          //           onPressed: () {
-          //             Get.to(() => const PetHealth());
-          //           }),
-          //       const SizedBox(height: 12),
-          //       PetStatusCard(
-          //         icon: Icons.restaurant,
-          //         title: 'Food',
-          //         subtitle: 'Hungry',
-          //         description: 'Last Fed (4h Ago)',
-          //         buttonText: 'Check food',
-          //         buttonColor: Colors.purple,
-          //         onPressed: () {
-          //           Get.to(() => const ShopFood());
-          //         },
-          //       ),
-          //       const SizedBox(height: 12),
-          //       PetStatusCard(
-          //           icon: Icons.mood,
-          //           title: 'Mood',
-          //           subtitle: 'Abnormal',
-          //           description: 'Seems restless',
-          //           buttonText: 'Whistle',
-          //           buttonColor: Colors.blue,
-          //           onPressed: () {
-          //             Get.to(() => const PetHealth());
-          //           }),
-          //     ],
-          //   ),
-          // ),
+          Padding(
+            padding: EdgeInsets.all(8.r),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const ImageIcon(AssetImage("assets/images/statusIcon.png")),
+                    const SizedBox(width: 8),
+                    Text(
+                      "Pomy's Status",
+                      style: GoogleFonts.fredoka(
+                        textStyle: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                PetStatusCard(
+                    icon: Icons.favorite,
+                    title: 'Health',
+                    subtitle: 'Abnormal',
+                    description: 'Last Vaccinated (2mon Ago)',
+                    buttonText: 'Contact Vet',
+                    buttonColor: Colors.redAccent,
+                    onPressed: () {
+                      Get.to(() => const PetHealth());
+                    }),
+                const SizedBox(height: 12),
+                PetStatusCard(
+                  icon: Icons.restaurant,
+                  title: 'Food',
+                  subtitle: 'Hungry',
+                  description: 'Last Fed (4h Ago)',
+                  buttonText: 'Check food',
+                  buttonColor: Colors.purple,
+                  onPressed: () {
+                    Get.to(() => const ShopFood());
+                  },
+                ),
+                const SizedBox(height: 12),
+                PetStatusCard(
+                    icon: Icons.mood,
+                    title: 'Mood',
+                    subtitle: 'Abnormal',
+                    description: 'Seems restless',
+                    buttonText: 'Whistle',
+                    buttonColor: Colors.blue,
+                    onPressed: () {
+                      Get.to(() => const PetHealth());
+                    }),
+              ],
+            ),
+          ),
         ])));
   }
 }
