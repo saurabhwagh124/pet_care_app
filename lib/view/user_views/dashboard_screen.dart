@@ -9,8 +9,8 @@ import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
 import 'package:pet_care_app/view/user_views/explore_screen.dart';
 import 'package:pet_care_app/view/user_views/forgot_password_screen.dart';
-import 'package:pet_care_app/view/user_views/manage_screen.dart';
 import 'package:pet_care_app/view/user_views/profile_screen.dart';
+import 'package:pet_care_app/view/user_views/shop_food_screen.dart';
 import 'package:pet_care_app/view/wrapper.dart';
 import 'package:pet_care_app/widgets/user_pet_widget_icon.dart';
 
@@ -26,7 +26,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final auth = AuthService();
   final User? user = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 0;
-  List<Widget> screens = [const DashboardScreen(), const ExploreScreen(), const ManageScreen(), const ProfileScreen()];
+  List<Widget> screens = [const DashboardScreen(), const ExploreScreen(), const ShopFood(), const ProfileScreen()];
 
   @override
   void initState() {

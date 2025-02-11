@@ -4,6 +4,8 @@ class ApiEndpoints {
   static String registerUrl = "$baseUrl/register";
   static String getAllDoctorsUrl = "$baseUrl/doctors";
   static String getAllBoardingsUrl = "$baseUrl/boarding";
-  static String getAllPetServicesUrl = "$baseUrl/petService";
+  static String getAllPetServicesUrl = "$baseUrl/pet-service";
   static String getAllPetsOfUserUrl = "$baseUrl/users/{userEmail}/pets";
+  static String postUploadFileUrl = "$baseUrl/upload-file";
+  static String postUploadMultipleFilesUrl = "$baseUrl/upload-multiple-files";
 }
