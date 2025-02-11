@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -21,5 +22,19 @@ class VetDocService extends GetxService {
     } catch (e) {
       throw Exception('Error fetching data: $e');
     }
+  }
+
+  Future<VetDocModel?> addVet(VetDocModel vet) async {
+    log("Vet service add vet method:${vet.toJson()}");
+    try {
+      final response = await http.post(Uri.parse(ApiEndpoints.getAllDoctorsUrl), body: vet.toJson());
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final json = jsonDecode(response.body);
+        return VetDocModel.fromJson(json);
+      }
+    } catch (e) {
+      log("Vet service add vet method: $e");
+    }
+    return null;
   }
 }

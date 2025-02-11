@@ -15,4 +15,16 @@ class PetServicesController extends GetxController {
       log("Error Fetching pet services list: $e");
     }
   }
+
+  void addPetService(PetServicesModel service) {
+    petServiceList.add(service);
+  }
+
+  void updatePetService(int index, PetServicesModel updatedService) {
+    petServiceList[index] = updatedService;
+  }
+
+  void deletePetService(int index) {
+    petServiceList.removeAt(index);
+  }
 }
