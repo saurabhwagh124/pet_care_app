@@ -1,44 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pet_care_app/model/product.dart';
+import '../controller/cart_controller.dart';
+import '../model/product.dart';
 
 class ProductCard extends StatefulWidget {
   final Product product;
 
-  const ProductCard({
-    super.key,
-    required this.product,
-  });
+  const ProductCard({super.key, required this.product});
 
   @override
   State<ProductCard> createState() => _ProductCardState();
 }
 
 class _ProductCardState extends State<ProductCard> {
-  int _quantity = 0;
+  final CartController cartController = Get.find<CartController>(); // GetX Controller
+
+  int get _quantity => cartController.cartItems[widget.product] ?? 0;
 
   void _addToCart() {
-    setState(() {
-      if (_quantity == 0) {
-        _quantity = 1;
-      }
-    });
+    cartController.addToCart(widget.product);
   }
 
   void _increment() {
-    setState(() {
-      _quantity++;
-    });
+    cartController.addToCart(widget.product);
   }
 
   void _decrement() {
-    setState(() {
-      if (_quantity > 1) {
-        _quantity--;
-      } else {
-        _quantity = 0;
-      }
-    });
+    cartController.removeFromCart(widget.product);
   }
 
   @override
@@ -51,7 +40,7 @@ class _ProductCardState extends State<ProductCard> {
             top: 15,
             left: 40,
             child: Image.network(
-              widget.product.photoUrl ?? "",
+              widget.product.photoUrl!,
               height: 90,
               fit: BoxFit.cover,
             ),
@@ -67,7 +56,7 @@ class _ProductCardState extends State<ProductCard> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
-                    widget.product.recommendedFor ?? "",
+                    widget.product.category ?? "",
                     style: const TextStyle(
                       fontSize: 10,
                       color: Colors.orange,
@@ -75,15 +64,6 @@ class _ProductCardState extends State<ProductCard> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 3.h,
-                ),
-                (widget.product.discount! == 0)
-                    ? const SizedBox.shrink()
-                    : Text(
-                        widget.product.discount.toString(),
-                        style: const TextStyle(fontSize: 10, color: Colors.redAccent, fontWeight: FontWeight.bold),
-                      ),
               ],
             ),
           ),
@@ -105,7 +85,7 @@ class _ProductCardState extends State<ProductCard> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      widget.product.itemName ?? "",
+                      widget.product.itemName!,
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -113,60 +93,45 @@ class _ProductCardState extends State<ProductCard> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  // Text(
-                  //   widget.product.weight,
-                  //   style: const TextStyle(
-                  //     fontSize: 12,
-                  //     color: Colors.grey,
-                  //   ),
-                  // ),
-                  if (_quantity == 0)
-                    InkWell(
-                      onTap: _addToCart,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        alignment: Alignment.center,
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.shopping_bag_outlined, color: Colors.black),
-                            SizedBox(width: 8),
-                            Text(
-                              'Add to cart',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
+                  Obx(() {
+                    return _quantity == 0
+                        ? InkWell(
+                            onTap: _addToCart,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              alignment: Alignment.center,
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.shopping_bag_outlined, color: Colors.black),
+                                  SizedBox(width: 8),
+                                  Text(
+                                    'Add to cart',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    )
-                  else
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      alignment: Alignment.center,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.remove),
-                            onPressed: _decrement,
-                          ),
-                          Text(
-                            '$_quantity',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                          )
+                        : Container(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            alignment: Alignment.center,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                IconButton(icon: const Icon(Icons.remove), onPressed: _decrement),
+                                Text(
+                                  '$_quantity',
+                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                                ),
+                                IconButton(icon: const Icon(Icons.add), onPressed: _increment),
+                              ],
                             ),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.add),
-                            onPressed: _increment,
-                          ),
-                        ],
-                      ),
-                    ),
+                          );
+                  }),
                 ],
               ),
             ),

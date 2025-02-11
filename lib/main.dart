@@ -5,10 +5,14 @@ import 'package:get/get.dart';
 import 'package:pet_care_app/view/wrapper.dart';
 
 import 'controller/cart_controller.dart';
+import 'controller/shop_controller.dart';
 import 'firebase_options.dart';
+import 'service/shop_service.dart';
 
 void main() async {
-  Get.put(CartController()); // Initialize GetX controller
+  Get.put(CartController());
+  Get.put(ShopService());
+  Get.put(ShopController());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

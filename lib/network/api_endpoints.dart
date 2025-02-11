@@ -1,5 +1,6 @@
 class ApiEndpoints {
-  static String baseUrl = "http://192.168.126.22:5000/public";
+  static String baseUrl =
+      "http://petcarebackend1-env.eba-pkcec8a7.ap-south-1.elasticbeanstalk.com:5000/public";
   static String loginUrl = "$baseUrl/login";
   static String registerUrl = "$baseUrl/register";
   static String getAllDoctorsUrl = "$baseUrl/doctors";
@@ -8,4 +9,5 @@ class ApiEndpoints {
   static String getAllPetsOfUserUrl = "$baseUrl/users/{userEmail}/pets";
   static String postUploadFileUrl = "$baseUrl/upload-file";
   static String postUploadMultipleFilesUrl = "$baseUrl/upload-multiple-files";
+  static String getAllShopItem = "$baseUrl/shopItem-by-category/category";
 }

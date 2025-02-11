@@ -43,23 +43,47 @@ class CartScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final product = cartController.cartItems.keys.toList()[index];
                   final quantity = cartController.cartItems[product]!;
+                  final double discountedPrice =
+                      product.price! * (1 - (product.discount! / 100));
 
                   return Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
                       decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                color: Color.fromRGBO(0, 0, 0, 0.25),
-                                offset: Offset(0, 4),
-                                blurRadius: 4)
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(4)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromRGBO(0, 0, 0, 0.25),
+                            offset: Offset(0, 4),
+                            blurRadius: 4,
+                          )
+                        ],
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(4),
+                      ),
                       child: ListTile(
-                        leading: Image.asset(product.image, width: 50),
-                        title: Text(product.name),
-                        subtitle: Text("RS.${product.price} x $quantity"),
+                        leading: Image.network(product.photoUrl!, width: 50),
+                        title: Text(product.itemName!),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "RS.${product.price} x $quantity",
+                              style: const TextStyle(
+                                fontSize: 12,
+                                decoration: TextDecoration.lineThrough,
+                                color: Colors.red,
+                              ),
+                            ),
+                            Text(
+                              "RS.${discountedPrice.toStringAsFixed(2)} x $quantity",
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
+                        ),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -94,6 +118,10 @@ class CartScreen extends StatelessWidget {
                 children: [
                   SummaryRow(title: "Subtotal", value: cartController.subtotal),
                   SummaryRow(
+                      title: "Discount Applied",
+                      value: cartController.totalDiscount,
+                      isDiscount: true),
+                  SummaryRow(
                       title: "Shipping Charges",
                       value: cartController.shippingCharges),
                   const Divider(),
@@ -113,9 +141,10 @@ class CartScreen extends StatelessWidget {
                     child: const Text(
                       "Checkout",
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ],
@@ -132,12 +161,14 @@ class SummaryRow extends StatelessWidget {
   final String title;
   final double value;
   final bool isBold;
+  final bool isDiscount;
 
   const SummaryRow({
     super.key,
     required this.title,
     required this.value,
     this.isBold = false,
+    this.isDiscount = false,
   });
 
   @override
@@ -147,14 +178,24 @@ class SummaryRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title,
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: isBold ? FontWeight.bold : FontWeight.normal)),
-          Text("RS.${value.toStringAsFixed(2)}",
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: isBold ? FontWeight.bold : FontWeight.normal)),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+              color: isDiscount ? Colors.green : Colors.black,
+            ),
+          ),
+          Text(
+            isDiscount
+                ? "- RS.${value.toStringAsFixed(2)}"
+                : "RS.${value.toStringAsFixed(2)}",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+              color: isDiscount ? Colors.green : Colors.black,
+            ),
+          ),
         ],
       ),
     );
