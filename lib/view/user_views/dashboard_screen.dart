@@ -43,7 +43,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
         automaticallyImplyLeading: false,
         title: Text(
           "Hey ${user!.displayName}, ",
-          style: GoogleFonts.fredoka(fontSize: 15.sp, fontWeight: FontWeight.w600, color: Colors.white),
+          style: GoogleFonts.fredoka(
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.white),
         ),
         actions: [
           GestureDetector(
@@ -53,7 +56,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   builder: (context) => AlertDialog(
                         title: Text(
                           "Profile Options",
-                          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
+                          style: TextStyle(
+                              fontSize: 16.sp, fontWeight: FontWeight.w800),
                         ),
                         content: SizedBox(
                           height: 100.h,
@@ -82,7 +86,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       ),
                                       Text(
                                         "Sign out",
-                                        style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
+                                        style: TextStyle(
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w800),
                                       )
                                     ],
                                   ),
@@ -110,7 +116,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       ),
                                       Text(
                                         "Forgot Password",
-                                        style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
+                                        style: TextStyle(
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w800),
                                       )
                                     ],
                                   ),
@@ -143,11 +151,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.r),
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(0, 1),
+                          blurRadius: 3.5,
+                          color: Color.fromRGBO(0, 0, 0, 0.20))
+                    ]),
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 15.h, left: 20.w, right: 20.w),
+                      padding:
+                          EdgeInsets.only(top: 15.h, left: 20.w, right: 20.w),
                       child: Row(
                         children: [
                           SizedBox(
@@ -159,7 +175,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           Text(
                             "My Pets",
-                            style: GoogleFonts.fredoka(fontWeight: FontWeight.w700, fontSize: 20.sp),
+                            style: GoogleFonts.fredoka(
+                                fontWeight: FontWeight.w700, fontSize: 20.sp),
                           ),
                           const Spacer()
                         ],
@@ -218,7 +235,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
               Container(
                 padding: EdgeInsets.all(20.sp),
                 decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.r),
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(0, 1),
+                          blurRadius: 3.5,
+                          color: Color.fromRGBO(0, 0, 0, 0.20))
+                    ]),
                 child: Column(
                   children: [
                     Row(
@@ -232,7 +256,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                         Text(
                           "Pet Food",
-                          style: GoogleFonts.fredoka(fontSize: 20.sp, fontWeight: FontWeight.w700),
+                          style: GoogleFonts.fredoka(
+                              fontSize: 20.sp, fontWeight: FontWeight.w700),
                         )
                       ],
                     ),
@@ -242,7 +267,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Container(
                       padding: EdgeInsets.all(10.sp),
                       decoration: BoxDecoration(
-                          color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8.r),
+                          boxShadow: const [
+                            BoxShadow(
+                                offset: Offset(0, 1),
+                                blurRadius: 3.5,
+                                color: Color.fromRGBO(0, 0, 0, 0.20))
+                          ]),
                       child: Row(
                         children: [
                           SizedBox(
@@ -254,12 +286,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           Text(
                             "Josi Dog Master Mix\n 900g",
-                            style: GoogleFonts.fredoka(fontSize: 12.sp, fontWeight: FontWeight.w600),
+                            style: GoogleFonts.fredoka(
+                                fontSize: 12.sp, fontWeight: FontWeight.w600),
                           ),
                           const Spacer(),
                           Container(
                             margin: EdgeInsets.all(5.sp),
-                            decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
+                            decoration: const BoxDecoration(
+                                color: Colors.black, shape: BoxShape.circle),
                             padding: EdgeInsets.all(5.sp),
                             child: Icon(
                               Icons.shopping_bag_outlined,
@@ -276,24 +310,34 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     Container(
                       padding: EdgeInsets.all(10.sp),
                       decoration: BoxDecoration(
-                          color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(8.r),
+                          boxShadow: const [
+                            BoxShadow(
+                                offset: Offset(0, 1),
+                                blurRadius: 3.5,
+                                color: Color.fromRGBO(0, 0, 0, 0.20))
+                          ]),
                       child: Row(
                         children: [
                           SizedBox(
                             height: 67.h,
-                            child: Image.asset('assets/images/HappyDogFood.png'),
+                            child:
+                                Image.asset('assets/images/HappyDogFood.png'),
                           ),
                           SizedBox(
                             width: 10.h,
                           ),
                           Text(
                             "Happy Dog Profi Mix\n 500g",
-                            style: GoogleFonts.fredoka(fontSize: 12.sp, fontWeight: FontWeight.w600),
+                            style: GoogleFonts.fredoka(
+                                fontSize: 12.sp, fontWeight: FontWeight.w600),
                           ),
                           const Spacer(),
                           Container(
                             margin: EdgeInsets.all(5.sp),
-                            decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
+                            decoration: const BoxDecoration(
+                                color: Colors.black, shape: BoxShape.circle),
                             padding: EdgeInsets.all(5.sp),
                             child: Icon(
                               Icons.shopping_bag_outlined,
