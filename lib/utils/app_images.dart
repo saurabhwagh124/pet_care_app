@@ -34,4 +34,8 @@ class AppImages {
   static String docNatashaImg = '${assetImgPath}docNatasha.png';
   static String docRehmatImg = '${assetImgPath}docRehmat.png';
   static String profileImg = '${assetImgPath}profileImage.png';
+  static String foodLogoImg = "${assetImgPath}foodLogo.png";
+  static String vetItemImg = "${assetImgPath}vetItemsLogo.png";
+  static String accessoriesImg = "${assetImgPath}accessoriesLogo.png";
+  static String iotDevicesImg = "${assetImgPath}iotDevicesLogo.png";
 }

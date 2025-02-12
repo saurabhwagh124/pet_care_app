@@ -13,94 +13,114 @@ class ExploreScreen extends StatefulWidget {
   State<ExploreScreen> createState() => _ExploreScreenState();
 }
 
-class _ExploreScreenState extends State<ExploreScreen> {
+class _ExploreScreenState extends State<ExploreScreen> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  final screenList = [const VeterniaryTabView(), const PetServicesTabView(), const BoardingTabView()];
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: screenList.length, vsync: this);
+    _tabController.addListener(_onTabChange);
+  }
+
+  void _onTabChange() {
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _tabController.removeListener(_onTabChange);
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        backgroundColor: AppColors.white,
-        appBar: AppBar(
-          backgroundColor: AppColors.yellowCircle,
-        ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(10.r),
-                child: Text(
-                  "Hello, How may I help you?",
-                  style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-                ),
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      appBar: AppBar(
+        backgroundColor: AppColors.yellowCircle,
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(10.r),
+              child: Text(
+                "Hello, How may I help you?",
+                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
               ),
-              TabBar(
-                labelColor: Colors.blue,
-                dividerColor: Colors.black,
-                indicatorColor: Colors.transparent,
-                unselectedLabelColor: Colors.grey,
-                tabs: [
-                  Tab(
-                    height: 60.h,
-                    icon: Container(
-                      height: 40.h,
-                      width: 40.w,
-                      padding: EdgeInsets.all(10.sp),
-                      decoration: BoxDecoration(
-                        color: AppColors.greyIconBox,
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      child: Image.asset(AppImages.vetLogoImg),
+            ),
+            TabBar(
+              controller: _tabController,
+              labelColor: Colors.blue,
+              dividerColor: Colors.black,
+              indicatorColor: Colors.transparent,
+              unselectedLabelColor: Colors.grey,
+              tabs: [
+                Tab(
+                  height: 60.h,
+                  icon: Container(
+                    height: 40.h,
+                    width: 40.w,
+                    padding: EdgeInsets.all(10.sp),
+                    decoration: BoxDecoration(
+                      color: (_tabController.index == 0) ? const Color.fromARGB(255, 134, 208, 243) : AppColors.greyIconBox,
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
-                    child: Text(
-                      "Veterinary",
-                      style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: AppColors.greyTextColor),
-                    ),
+                    child: Image.asset(AppImages.vetLogoImg),
                   ),
-                  Tab(
-                    height: 60.h,
-                    icon: Container(
-                      height: 40.h,
-                      width: 40.w,
-                      padding: EdgeInsets.all(10.sp),
-                      decoration: BoxDecoration(
-                        color: AppColors.greyIconBox,
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      child: Image.asset(AppImages.groomLogoImg),
-                    ),
-                    child: Text(
-                      "Pet Services",
-                      style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: AppColors.greyTextColor),
-                    ),
+                  child: Text(
+                    "Veterinary",
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: AppColors.greyTextColor),
                   ),
-                  Tab(
-                    height: 60.h,
-                    icon: Container(
-                      height: 40.h,
-                      width: 40.w,
-                      padding: EdgeInsets.all(10.sp),
-                      decoration: BoxDecoration(
-                        color: AppColors.greyIconBox,
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      child: Image.asset(AppImages.boardLogoImg),
-                    ),
-                    child: Text(
-                      "Boarding",
-                      style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: AppColors.greyTextColor),
-                    ),
-                  )
-                ],
-              ),
-              const Expanded(
-                child: TabBarView(
-                  children: [VeterniaryTabView(), PetServicesTabView(), BoardingTabView()],
                 ),
+                Tab(
+                  height: 60.h,
+                  icon: Container(
+                    height: 40.h,
+                    width: 40.w,
+                    padding: EdgeInsets.all(10.sp),
+                    decoration: BoxDecoration(
+                      color: (_tabController.index == 1) ? const Color.fromARGB(255, 134, 208, 243) : AppColors.greyIconBox,
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Image.asset(AppImages.groomLogoImg),
+                  ),
+                  child: Text(
+                    "Pet Services",
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: AppColors.greyTextColor),
+                  ),
+                ),
+                Tab(
+                  height: 60.h,
+                  icon: Container(
+                    height: 40.h,
+                    width: 40.w,
+                    padding: EdgeInsets.all(10.sp),
+                    decoration: BoxDecoration(
+                      color: (_tabController.index == 2) ? const Color.fromARGB(255, 134, 208, 243) : AppColors.greyIconBox,
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Image.asset(AppImages.boardLogoImg),
+                  ),
+                  child: Text(
+                    "Boarding",
+                    style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: AppColors.greyTextColor),
+                  ),
+                )
+              ],
+            ),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: screenList,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

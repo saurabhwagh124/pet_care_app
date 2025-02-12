@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
+import 'package:pet_care_app/view/admin_dashboard_screen.dart';
 import 'package:pet_care_app/view/user_views/dashboard_screen.dart';
 import 'package:pet_care_app/view/user_views/forgot_password_screen.dart';
 
@@ -183,6 +184,32 @@ class _LoginscreenState extends State<Loginscreen> {
                   ),
                 ),
               ),
+              GestureDetector(
+                onTap: _signInWithGoogle,
+                child: Container(
+                  height: 40.h,
+                  width: 300.w,
+                  decoration: BoxDecoration(color: AppColors.orangeButton, borderRadius: BorderRadius.circular(10.r)),
+                  margin: EdgeInsets.only(left: 25.w, right: 25.w, bottom: 20.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 10.r,
+                        backgroundColor: AppColors.orangeButton,
+                        backgroundImage: AssetImage(AppImages.googleLogoImg),
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Text(
+                        "Admin Login with Google",
+                        style: TextStyle(color: AppColors.white, fontSize: 16.sp, fontWeight: FontWeight.w400),
+                      )
+                    ],
+                  ),
+                ),
+              ),
               Container(
                 width: double.infinity,
                 height: 25.h,
@@ -227,7 +254,7 @@ class _LoginscreenState extends State<Loginscreen> {
   _signInWithGoogle() async {
     final userCred = await _auth.loginWithGoogle();
     if (userCred != null) {
-      Get.off(() => const DashboardScreen());
+      Get.off(() => const AdminDashboardScreen());
       log("Gooogle login success");
     } else {
       log("Google login failed");

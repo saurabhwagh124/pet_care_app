@@ -15,4 +15,16 @@ class BoardingController extends GetxController {
       log("Error fetching Boarding list: $e");
     }
   }
+
+  void addBoarding(BoardingModel boarding) {
+    boardingList.add(boarding);
+  }
+
+  void deleteBoarding(int index) {
+    boardingList.removeAt(index);
+  }
+
+  void updateBoarding(int index, BoardingModel updatedBoarding) {
+    boardingList[index] = updatedBoarding;
+  }
 }

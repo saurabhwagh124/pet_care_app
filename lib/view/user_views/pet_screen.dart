@@ -1,51 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/model/user_pet_model.dart';
 import 'package:pet_care_app/view/user_views/pethealthscreen.dart';
 import 'package:pet_care_app/view/user_views/shop_food_screen.dart';
 
-class Petscreen extends StatefulWidget {
-  const Petscreen({super.key});
+class Petscreen extends StatelessWidget {
+  final UserPetModel data;
+  const Petscreen({super.key, required this.data});
 
-  @override
-  State<Petscreen> createState() => _PetscreenState();
-}
-
-class _PetscreenState extends State<Petscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.orangeAccent,
+          automaticallyImplyLeading: true,
+        ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
             child: Column(children: [
           Container(
-            height: 400,
+            height: 300.h,
             width: MediaQuery.of(context).size.width,
-            decoration: const BoxDecoration(
-              image: DecorationImage(image: AssetImage('assets/images/pomy.png'), fit: BoxFit.cover),
+            decoration: BoxDecoration(
+              image: DecorationImage(image: NetworkImage(data.photoUrl ?? ""), fit: BoxFit.contain),
             ),
           ),
-          const SizedBox(
-            height: 10,
+          SizedBox(
+            height: 10.h,
           ),
           Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 60,
-              vertical: 16,
+            padding: EdgeInsets.symmetric(
+              horizontal: 60.w,
+              vertical: 16.h,
             ),
             decoration: BoxDecoration(
               boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.15), offset: Offset(1, 5.47), blurRadius: 43.78)],
               color: const Color.fromRGBO(255, 255, 255, 0.4),
-              borderRadius: BorderRadius.circular(27),
+              borderRadius: BorderRadius.circular(27.r),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Pomy',
+                  data.name ?? "",
                   style: GoogleFonts.fredoka(
-                    textStyle: const TextStyle(
-                      fontSize: 28,
+                    textStyle: TextStyle(
+                      fontSize: 28.sp,
                       fontWeight: FontWeight.w700,
                       color: Colors.black,
                     ),
@@ -53,34 +55,34 @@ class _PetscreenState extends State<Petscreen> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Border Collie',
+                  data.breed ?? "",
                   style: GoogleFonts.fredoka(
-                    textStyle: const TextStyle(
-                      fontSize: 17,
+                    textStyle: TextStyle(
+                      fontSize: 17.sp,
                       fontWeight: FontWeight.w500,
-                      color: Color.fromRGBO(6, 78, 87, 1),
+                      color: const Color.fromRGBO(6, 78, 87, 1),
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(
-            height: 10,
+          SizedBox(
+            height: 10.h,
           ),
           // Pet Info Card
           Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Row(
                   children: [
                     const ImageIcon(AssetImage("assets/images/pawIcon.png")),
-                    const SizedBox(width: 8),
+                    SizedBox(width: 8.w),
                     Text(
                       'About Pomy',
                       style: GoogleFonts.fredoka(
-                        textStyle: const TextStyle(
-                          fontSize: 20,
+                        textStyle: TextStyle(
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.w700,
                           color: Colors.black,
                         ),
@@ -89,17 +91,17 @@ class _PetscreenState extends State<Petscreen> {
                   ],
                 ),
               ])),
-          const PetInfoCard(
-            age: '1y 4m 11d',
-            weight: '7.5 kg',
-            height: '54 cm',
+          PetInfoCard(
+            age: "${data.age} yrs",
+            weight: '${data.weight}kg',
+            height: '${data.height}cm',
             color: 'Black',
-            description: 'My first dog which was gifted by my mother for my 20th birthday.',
+            description: data.description.toString(),
           ),
 
           // Pet Status Section
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(8.r),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
