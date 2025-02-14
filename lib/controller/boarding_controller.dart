@@ -16,7 +16,8 @@ class BoardingController extends GetxController {
     }
   }
 
-  void addBoarding(BoardingModel boarding) {
+  void addBoarding(BoardingModel payload) async {
+    BoardingModel boarding = await boardingService.addBoarding(payload);
     boardingList.add(boarding);
   }
 

@@ -20,6 +20,7 @@ class Loginscreen extends StatefulWidget {
 
 class _LoginscreenState extends State<Loginscreen> {
   final _auth = AuthService();
+  ValueNotifier<bool> isVisible = ValueNotifier(false);
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -91,22 +92,32 @@ class _LoginscreenState extends State<Loginscreen> {
               SizedBox(
                 height: 45.h,
                 width: 300.w,
-                child: TextFormField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  obscuringCharacter: "*",
-                  decoration: InputDecoration(
-                      labelText: "Password",
-                      labelStyle: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w500,
-                        color: const Color.fromRGBO(166, 166, 166, 1),
-                      ),
-                      prefixIcon: const Icon(Icons.lock_outlined),
-                      prefixIconColor: const Color.fromRGBO(166, 166, 166, 1),
-                      filled: true,
-                      fillColor: const Color.fromRGBO(212, 212, 212, 1),
-                      border: const OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(10)))),
+                child: ValueListenableBuilder(
+                  valueListenable: isVisible,
+                  builder: (context, value, _) => TextFormField(
+                    controller: _passwordController,
+                    obscureText: !value,
+                    obscuringCharacter: "*",
+                    decoration: InputDecoration(
+                        labelText: "Password",
+                        labelStyle: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w500,
+                          color: const Color.fromRGBO(166, 166, 166, 1),
+                        ),
+                        prefixIcon: const Icon(Icons.lock_outlined),
+                        prefixIconColor: const Color.fromRGBO(166, 166, 166, 1),
+                        filled: true,
+                        fillColor: const Color.fromRGBO(212, 212, 212, 1),
+                        suffixIcon: IconButton(
+                          icon: Icon((value) ? Icons.visibility_outlined : Icons.visibility_off_outlined),
+                          onPressed: () {
+                            isVisible.value = !isVisible.value;
+                          },
+                        ),
+                        suffixIconColor: const Color.fromRGBO(166, 166, 166, 1),
+                        border: const OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(10)))),
+                  ),
                 ),
               ),
               SizedBox(

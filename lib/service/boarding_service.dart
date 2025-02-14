@@ -8,9 +8,16 @@ import 'package:pet_care_app/model/boarding_model.dart';
 import 'package:pet_care_app/network/api_endpoints.dart';
 
 class BoardingService extends GetxService {
+  String token = "";
+
+  @override
+  Future<void> onInit() async {
+    token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+    super.onInit();
+  }
+
   Future<List<BoardingModel>> fetchBoardings() async {
     try {
-      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {"Authorization": "Bearer $token"};
       log(ApiEndpoints.getAllBoardingsUrl);
       final response = await http.get(Uri.parse(ApiEndpoints.getAllBoardingsUrl), headers: headers);
@@ -22,6 +29,23 @@ class BoardingService extends GetxService {
       }
     } catch (e) {
       throw Exception("Error fetching data: $e");
+    }
+  }
+
+  Future<BoardingModel> addBoarding(BoardingModel boarding) async {
+    try {
+      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
+      log("${ApiEndpoints.getAllBoardingsUrl}Post");
+      log("Payload ${jsonEncode(boarding)}");
+      final response = await http.post(Uri.parse(ApiEndpoints.getAllBoardingsUrl), headers: headers, body: jsonEncode(boarding.toJson()));
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final responseBody = jsonDecode(response.body);
+        return BoardingModel.fromJson(responseBody);
+      } else {
+        throw Exception("Failed to add boarding : ${response.statusCode}");
+      }
+    } catch (e) {
+      throw Exception("Error adding boarding to db : ${e.toString()}");
     }
   }
 }

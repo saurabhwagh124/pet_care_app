@@ -6,6 +6,8 @@ class ApiEndpoints {
   static String getAllBoardingsUrl = "$baseUrl/boarding";
   static String getAllPetServicesUrl = "$baseUrl/pet-service";
   static String getAllPetsOfUserUrl = "$baseUrl/users/{userEmail}/pets";
+  static String postUserPetUrl = "$baseUrl/pet";
   static String postUploadFileUrl = "$baseUrl/upload-file";
   static String postUploadMultipleFilesUrl = "$baseUrl/upload-multiple-files";
+  static String getAllShopItem = "$baseUrl/shopItem-by-category/category";
 }

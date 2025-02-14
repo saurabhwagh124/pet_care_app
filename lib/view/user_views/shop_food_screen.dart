@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/controller/shop_controller.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
-import 'package:pet_care_app/view/product_card.dart';
+import 'package:pet_care_app/view/user_views/shop_tabs/accessories_tab_view.dart';
+import 'package:pet_care_app/view/user_views/shop_tabs/food_tab_view.dart';
+import 'package:pet_care_app/view/user_views/shop_tabs/iot_tab_view.dart';
+import 'package:pet_care_app/view/user_views/shop_tabs/vet_items_tab_view.dart';
+
+import 'shop_cart_screen.dart';
 
 class ShopFood extends StatefulWidget {
   const ShopFood({super.key});
@@ -14,17 +20,21 @@ class ShopFood extends StatefulWidget {
 
 class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final shopController = ShopController();
+  final ShopController shopController = ShopController();
+  List<Widget> screenList = const [FoodTabView(), VetItemsTabView(), AccessoriesTabView(), IotTabView()];
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: shopController.categoryProducts.keys.length, vsync: this);
+    _tabController = TabController(
+      length: shopController.category.length,
+      vsync: this,
+    );
     _tabController.addListener(_onTabChange);
   }
 
   void _onTabChange() {
-    setState(() {}); // Trigger rebuild on tab change
+    setState(() {});
   }
 
   @override
@@ -38,13 +48,26 @@ class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(color: Colors.black),
-        title: const Text('Shop', style: TextStyle(color: Colors.black)),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+          onPressed: () => Get.back(),
+        ),
+        title: Text(
+          'Shop',
+          style: GoogleFonts.fredoka(
+            textStyle: const TextStyle(
+              fontSize: 23,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
+        ),
         backgroundColor: Colors.orange,
         actions: [
           IconButton(
-            icon: const Icon(Icons.shopping_cart, color: Colors.black),
-            onPressed: () {},
+            icon: const Icon(Icons.shopping_cart, color: Colors.white),
+            onPressed: () => Get.to(() => const CartScreen()),
           ),
         ],
         bottom: PreferredSize(
@@ -55,7 +78,7 @@ class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin
                 padding: const EdgeInsets.all(16.0),
                 child: TextField(
                   decoration: InputDecoration(
-                    hintText: 'Search keywords...',
+                    hintText: 'Search products...',
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -70,7 +93,7 @@ class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin
                 color: Colors.white,
                 child: TabBar(
                   controller: _tabController,
-                  isScrollable: false,
+                  isScrollable: true,
                   labelColor: Colors.black,
                   indicatorColor: Colors.lightBlueAccent,
                   indicator: BoxDecoration(
@@ -79,39 +102,46 @@ class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin
                   unselectedLabelColor: Colors.black,
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                   unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
-                  tabs: shopController.categoryProducts.keys.map((category) {
+                  tabs: shopController.category.map((category) {
                     String icon;
                     switch (category) {
-                      case 'Food':
+                      case 'FOOD':
                         icon = AppImages.foodLogoImg;
                         break;
-                      case 'Vet Items':
+                      case 'VET_ITEMS':
                         icon = AppImages.vetItemImg;
                         break;
-                      case 'Accessories':
+                      case 'ACCESSORIES':
                         icon = AppImages.accessoriesImg;
                         break;
-                      case 'IOT Devices':
+                      case 'IOT_DEVICES':
                         icon = AppImages.iotDevicesImg;
                         break;
                       default:
                         icon = AppImages.pawIconImg;
                     }
                     return Tab(
-                      height: 70.h,
+                      height: 70,
                       icon: Container(
-                        height: 40.h,
-                        width: 40.w,
-                        padding: EdgeInsets.all(10.sp),
+                        height: 40,
+                        width: 40,
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: _tabController.index == shopController.categoryProducts.keys.toList().indexOf(category) ? const Color.fromARGB(255, 134, 208, 243) : AppColors.greyIconBox,
-                          borderRadius: BorderRadius.circular(10.r),
+                          color: _tabController.index == shopController.category.toList().indexOf(category) ? const Color.fromARGB(255, 134, 208, 243) : AppColors.greyIconBox,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Image.asset(icon, color: _tabController.index == shopController.categoryProducts.keys.toList().indexOf(category) ? Colors.white : Colors.black),
+                        child: Image.asset(
+                          icon,
+                          color: _tabController.index == shopController.category.toList().indexOf(category) ? Colors.white : Colors.black,
+                        ),
                       ),
                       child: Text(
                         category,
-                        style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500, color: AppColors.greyTextColor, overflow: TextOverflow.ellipsis),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     );
                   }).toList(),
@@ -121,30 +151,7 @@ class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin
           ),
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: shopController.categoryProducts.entries.map((entry) {
-          final products = entry.value;
-          if (products.isEmpty) {
-            return const Center(
-              child: Text('No products available for this category.'),
-            );
-          }
-          return GridView.builder(
-            padding: const EdgeInsets.all(16),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 0.75,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-            ),
-            itemCount: products.length,
-            itemBuilder: (context, index) {
-              return ProductCard(product: products[index]);
-            },
-          );
-        }).toList(),
-      ),
+      body: TabBarView(controller: _tabController, children: screenList),
     );
   }
 }

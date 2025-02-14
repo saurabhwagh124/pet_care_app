@@ -1,8 +1,10 @@
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:pet_care_app/model/boarding_model.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
+import 'package:pet_care_app/view/user_views/boarding_details_screen.dart';
 
 class BoardingCard extends StatelessWidget {
   final BoardingModel data;
@@ -11,7 +13,11 @@ class BoardingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+         Get.to(() => BoardingDetailsScreen(
+              data:data,
+            ));
+      },
       child: Container(
         margin: EdgeInsets.all(20.r),
         padding: EdgeInsets.all(10.r),

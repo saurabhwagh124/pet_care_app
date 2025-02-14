@@ -25,4 +25,21 @@ class UserPetService extends GetxService {
       throw Exception("Error fetching data: $e");
     }
   }
+
+  Future<UserPetModel> addPetToUser(UserPetModel payload) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser!;
+      final headers = {"Authorization": "Bearer ${user.getIdToken()}", "Content-Type": "application/json"};
+      log(ApiEndpoints.postUserPetUrl);
+      final response = await http.post(Uri.parse(ApiEndpoints.postUserPetUrl), headers: headers, body: jsonEncode(payload.toJson()));
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = jsonDecode(response.body);
+        return UserPetModel.fromJson(data);
+      } else {
+        throw Exception("Failed to load data: ${response.statusCode}");
+      }
+    } catch (e) {
+      throw Exception("Error fetching data: $e");
+    }
+  }
 }

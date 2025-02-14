@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/controller/user_pet_controller.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
+import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
 import 'package:pet_care_app/view/user_views/explore_screen.dart';
 import 'package:pet_care_app/view/user_views/forgot_password_screen.dart';
 import 'package:pet_care_app/view/user_views/profile_screen.dart';
@@ -172,15 +172,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       padding: EdgeInsets.only(left: 21.w, right: 21.w),
                       child: SizedBox(
                         height: 160.h,
-                        child: Obx(() => ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) => UserPetWidgetIcon(
-                                  data: userPetController.userPetList[index],
-                                ),
-                            separatorBuilder: (context, index) => SizedBox(
-                                  width: 10.h,
-                                ),
-                            itemCount: userPetController.userPetList.length)),
+                        child: Obx(() => (userPetController.userPetList.isEmpty)
+                            ? Column(
+                                spacing: 10.h,
+                                children: [
+                                  Text("No Pets Found", style: GoogleFonts.fredoka(fontWeight: FontWeight.w700, fontSize: 16.sp)),
+                                  IconButton(
+                                    onPressed: () {
+                                      Get.to(() => const AddPetsPage());
+                                    },
+                                    icon: CircleAvatar(
+                                      radius: 35.r,
+                                      backgroundColor: const Color.fromARGB(255, 159, 221, 250),
+                                      child: Icon(
+                                        Icons.add_outlined,
+                                        color: Colors.white,
+                                        size: 40.sp,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            : ListView.separated(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) => UserPetWidgetIcon(
+                                      data: userPetController.userPetList[index],
+                                    ),
+                                separatorBuilder: (context, index) => SizedBox(
+                                      width: 10.h,
+                                    ),
+                                itemCount: userPetController.userPetList.length)),
                       ),
                     )
                   ],
@@ -331,10 +352,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           NavigationDestination(
             icon: Icon(
-              Icons.devices,
+              Icons.shopping_bag_outlined,
               color: Colors.white,
             ),
-            label: 'Manage',
+            label: 'Shop',
           ),
           NavigationDestination(
             icon: Icon(

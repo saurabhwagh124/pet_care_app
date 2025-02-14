@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controller/shopitem_controller.dart';
-import '../widgets/admin/add_edit_shopitem.dart';
+import 'package:pet_care_app/controller/shopitem_controller.dart';
+import 'package:pet_care_app/widgets/admin/add_edit_shopitem.dart';
 
 class ShopItemScreen extends StatelessWidget {
   ShopItemScreen({super.key});
-  final ShopController shopController = ShopController();
+  final shopController = ShopItemController();
 
   @override
   Widget build(BuildContext context) {
