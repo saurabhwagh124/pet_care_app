@@ -15,4 +15,13 @@ class UserPetController extends GetxController {
       log("Error fetching user pet list: $e");
     }
   }
+
+  void addUserPet(UserPetModel payload) async {
+    try {
+      UserPetModel response = await service.addPetToUser(payload);
+      userPetList.add(response);
+    } catch (e) {
+      log("Error adding pet to user: $e");
+    }
+  }
 }

@@ -24,7 +24,7 @@ class VetDocController extends GetxController {
   // Add or Edit Veterinarian
   void add(VetDocModel vet) async {
     final response = await _vetDocService.addVet(vet);
-    vets.value.add(response!);
+    vets.add(response!);
   }
 
   // Assign a vet to a specific time slot

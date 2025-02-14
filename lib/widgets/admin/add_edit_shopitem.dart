@@ -7,7 +7,7 @@ import '../../model/shopitem_model.dart';
 class AddUpdateItemView extends StatelessWidget {
   final ShopItem? item;
   final int? index;
-  final ShopController shopController = Get.find();
+  final ShopItemController shopController = Get.find();
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();

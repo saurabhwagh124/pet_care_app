@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
+
 import '../model/shopitem_model.dart';
 
-class ShopController extends GetxController {
+class ShopItemController extends GetxController {
   var shopItems = <ShopItem>[].obs;
 
   // Add Item

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../controller/cart_controller.dart';
-import '../model/product.dart';
+import 'package:pet_care_app/controller/cart_controller.dart';
+import 'package:pet_care_app/model/product.dart';
 
 class ProductCard extends StatefulWidget {
   final Product product;
@@ -14,7 +13,7 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-  final CartController cartController = Get.find<CartController>(); // GetX Controller
+  final CartController cartController = CartController(); // GetX Controller
 
   int get _quantity => cartController.cartItems[widget.product] ?? 0;
 
@@ -32,69 +31,72 @@ class _ProductCardState extends State<ProductCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Stack(
-        children: [
-          Positioned(
-            top: 15,
-            left: 40,
-            child: Image.network(
-              widget.product.photoUrl!,
-              height: 90,
-              fit: BoxFit.cover,
+    return Obx(() {
+      return Container(
+        color: Colors.white,
+        child: Stack(
+          children: [
+            Positioned(
+              top: 15,
+              left: 40,
+              child: Image.network(widget.product.photoUrl!, height: 90, fit: BoxFit.cover, errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.grey[300], // Placeholder background
+                  child: const Icon(Icons.error, color: Colors.red, size: 40), // Error icon
+                );
+              }),
             ),
-          ),
-          Positioned(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: Colors.orange[100],
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    widget.product.category ?? "",
-                    style: const TextStyle(
-                      fontSize: 10,
-                      color: Colors.orange,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 100,
-            child: SizedBox(
-              height: 120,
+            Positioned(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    "RS.${widget.product.price}",
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.orange[100],
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      widget.product.itemName!,
+                      widget.product.category ?? "",
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 10,
+                        color: Colors.orange,
                         fontWeight: FontWeight.bold,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
-                  Obx(() {
-                    return _quantity == 0
+                ],
+              ),
+            ),
+            Positioned(
+              top: 100,
+              child: SizedBox(
+                height: 120,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "RS.${widget.product.price}",
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        widget.product.itemName!,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    (_quantity == 0)
                         ? InkWell(
                             onTap: _addToCart,
                             child: Container(
@@ -130,14 +132,14 @@ class _ProductCardState extends State<ProductCard> {
                                 IconButton(icon: const Icon(Icons.add), onPressed: _increment),
                               ],
                             ),
-                          );
-                  }),
-                ],
+                          ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }

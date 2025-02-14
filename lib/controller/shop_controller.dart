@@ -1,59 +1,28 @@
 import 'package:get/get.dart';
 import 'package:pet_care_app/model/product.dart';
-import '../service/shop_service.dart';
+import 'package:pet_care_app/service/shop_service.dart';
 
 class ShopController extends GetxController {
-  final ShopService shopService = Get.find<ShopService>();
+  final ShopService shopService = ShopService();
+  RxList<Product> foodList = <Product>[].obs;
+  RxList<Product> vetItemsList = <Product>[].obs;
+  RxList<Product> accList = <Product>[].obs;
+  RxList<Product> iotList = <Product>[].obs;
+  List<String> category = ["FOOD", "VET_ITEMS", "ACCESSORIES", "IOT_DEVICES"];
 
-  RxMap<String, List> categoryProducts = {
-    "FOOD": [],
-    "Vet Items": [],
-    "Accessories": [],
-    "IOT Devices": [],
-  }.obs;
-
-  @override
-  void onInit() {
-    super.onInit();
-    fetchAllProducts();
+  void fetchFoodProducts() async {
+    foodList.value = await shopService.fetchProductsByCategory("FOOD");
   }
 
-  void fetchAllProducts() {
-    for (String category in categoryProducts.keys) {
-      fetchProductsByCategory(category);
-    }
+  void fetchVetItemsProducts() async {
+    vetItemsList.value = await shopService.fetchProductsByCategory("VET_ITEMS");
   }
 
-  Future<void> fetchProductsByCategory(String category) async {
-    String apiCategory;
-    switch (category) {
-      case "FOOD":
-        apiCategory = "FOOD";
-        break;
-      case "Vet Items":
-        apiCategory = "VET_ITEMS";
-        break;
-      case "Accessories":
-        apiCategory = "ACCESSORIES";
-        break;
-      case "IOT Devices":
-        apiCategory = "IOT_DEVICES";
-        break;
-      default:
-        apiCategory = "UNKNOWN";
-    }
+  void fetchAccessoriesProducts() async {
+    accList.value = await shopService.fetchProductsByCategory("ACCESSORIES");
+  }
 
-    if (apiCategory == "UNKNOWN") {
-      return;
-    }
-    
-
-    List<Product> products =
-        await shopService.fetchProductsByCategory(apiCategory);
-
-    if (products.isNotEmpty) {
-      categoryProducts[category] = products;
-      categoryProducts.refresh();
-    } else {}
+  void fetchIotProducts() async {
+    iotList.value = await shopService.fetchProductsByCategory("IOT_DEVICES");
   }
 }

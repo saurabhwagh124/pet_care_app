@@ -1,17 +1,36 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pet_care_app/controller/user_pet_controller.dart';
+import 'package:pet_care_app/model/user_pet_model.dart';
+import 'package:pet_care_app/service/upload_service.dart';
+import 'package:pet_care_app/widgets/user_pet_widget_icon.dart';
 
 class AddPetsPage extends StatefulWidget {
   const AddPetsPage({super.key});
 
   @override
-  _AddPetsPageState createState() => _AddPetsPageState();
+  State createState() => _AddPetsPageState();
 }
 
 class _AddPetsPageState extends State<AddPetsPage> {
   final userPetController = UserPetController();
+  final uploadService = UploadService();
+  String? photoUrl;
+  XFile? image;
+  final _picker = ImagePicker();
+
+  Future<void> _pickImages() async {
+    final XFile? pickedFiles = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      image = pickedFiles;
+    });
+  }
 
   @override
   void initState() {
@@ -21,13 +40,13 @@ class _AddPetsPageState extends State<AddPetsPage> {
 
   // Controllers for bottom sheet input fields
   final TextEditingController petNameController = TextEditingController();
+  final TextEditingController speciesController = TextEditingController();
   final TextEditingController breedNameController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
   final TextEditingController ageController = TextEditingController();
   final TextEditingController colorController = TextEditingController();
-  final TextEditingController genderController =
-      TextEditingController(); // New controller
-  final TextEditingController heightController =
-      TextEditingController(); // New controller
+  final TextEditingController genderController = TextEditingController(); // New controller
+  final TextEditingController heightController = TextEditingController(); // New controller
   final TextEditingController weightController = TextEditingController();
 
   void _showBottomSheet() {
@@ -35,26 +54,30 @@ class _AddPetsPageState extends State<AddPetsPage> {
       context: context,
       isScrollControlled: true,
       builder: (context) {
-        return Padding(
-          padding: EdgeInsets.only(
+        return Container(
+          height: 600.h,
+          padding: const EdgeInsets.only(
             left: 16.0,
             right: 16.0,
             top: 16.0,
-            bottom:
-                MediaQuery.of(context).viewInsets.bottom, // Adjust for keyboard
+            bottom: 0.0, // Adjust for keyboard
           ),
           child: SingleChildScrollView(
             child: Column(
+              spacing: 10.h,
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   "Add New Pet",
                   style: GoogleFonts.fredoka(
-                    textStyle: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w600),
+                    textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                   ),
                 ),
-                const SizedBox(height: 16),
+                IconButton(
+                  onPressed: _pickImages,
+                  icon: const Icon(Icons.add_photo_alternate_outlined),
+                ),
+                (image == null) ? const SizedBox.shrink() : SizedBox(width: 50.w, child: Image.file(File(image!.path))),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[200], // Light grey background
@@ -72,15 +95,35 @@ class _AddPetsPageState extends State<AddPetsPage> {
                     decoration: InputDecoration(
                       labelText: 'Pet Name',
                       labelStyle: GoogleFonts.fredoka(),
-                      border: const OutlineInputBorder(
-                          borderSide: BorderSide.none), // Remove inner border
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
+                      border: const OutlineInputBorder(borderSide: BorderSide.none), // Remove inner border
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                     style: GoogleFonts.fredoka(),
                   ),
                 ),
-                const SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200], // Light grey background
+                    borderRadius: BorderRadius.circular(8), // Rounded corners
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12, // Light shadow
+                        blurRadius: 4, // Slight blur
+                        offset: Offset(2, 2), // Shadow position
+                      ),
+                    ],
+                  ),
+                  child: TextField(
+                    controller: speciesController,
+                    decoration: InputDecoration(
+                      labelText: 'Species ',
+                      labelStyle: GoogleFonts.fredoka(),
+                      border: const OutlineInputBorder(borderSide: BorderSide.none), // Remove inner border
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    ),
+                    style: GoogleFonts.fredoka(),
+                  ),
+                ),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -98,15 +141,35 @@ class _AddPetsPageState extends State<AddPetsPage> {
                     decoration: InputDecoration(
                       labelText: 'Breed',
                       labelStyle: GoogleFonts.fredoka(),
-                      border:
-                          const OutlineInputBorder(borderSide: BorderSide.none),
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
+                      border: const OutlineInputBorder(borderSide: BorderSide.none),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                     style: GoogleFonts.fredoka(),
                   ),
                 ),
-                const SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200], // Light grey background
+                    borderRadius: BorderRadius.circular(8), // Rounded corners
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12, // Light shadow
+                        blurRadius: 4, // Slight blur
+                        offset: Offset(2, 2), // Shadow position
+                      ),
+                    ],
+                  ),
+                  child: TextField(
+                    controller: descriptionController,
+                    decoration: InputDecoration(
+                      labelText: 'Pet Description',
+                      labelStyle: GoogleFonts.fredoka(),
+                      border: const OutlineInputBorder(borderSide: BorderSide.none), // Remove inner border
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    ),
+                    style: GoogleFonts.fredoka(),
+                  ),
+                ),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -124,15 +187,12 @@ class _AddPetsPageState extends State<AddPetsPage> {
                     decoration: InputDecoration(
                       labelText: 'Age',
                       labelStyle: GoogleFonts.fredoka(),
-                      border:
-                          const OutlineInputBorder(borderSide: BorderSide.none),
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
+                      border: const OutlineInputBorder(borderSide: BorderSide.none),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                     style: GoogleFonts.fredoka(),
                   ),
                 ),
-                const SizedBox(height: 16),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -150,15 +210,12 @@ class _AddPetsPageState extends State<AddPetsPage> {
                     decoration: InputDecoration(
                       labelText: 'Color',
                       labelStyle: GoogleFonts.fredoka(),
-                      border:
-                          const OutlineInputBorder(borderSide: BorderSide.none),
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
+                      border: const OutlineInputBorder(borderSide: BorderSide.none),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                     style: GoogleFonts.fredoka(),
                   ),
                 ),
-                const SizedBox(height: 16),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -176,15 +233,12 @@ class _AddPetsPageState extends State<AddPetsPage> {
                     decoration: InputDecoration(
                       labelText: 'Gender',
                       labelStyle: GoogleFonts.fredoka(),
-                      border:
-                          const OutlineInputBorder(borderSide: BorderSide.none),
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
+                      border: const OutlineInputBorder(borderSide: BorderSide.none),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                     style: GoogleFonts.fredoka(),
                   ),
                 ),
-                const SizedBox(height: 16),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -202,15 +256,12 @@ class _AddPetsPageState extends State<AddPetsPage> {
                     decoration: InputDecoration(
                       labelText: 'Height',
                       labelStyle: GoogleFonts.fredoka(),
-                      border:
-                          const OutlineInputBorder(borderSide: BorderSide.none),
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
+                      border: const OutlineInputBorder(borderSide: BorderSide.none),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                     style: GoogleFonts.fredoka(),
                   ),
                 ),
-                const SizedBox(height: 16),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -228,47 +279,27 @@ class _AddPetsPageState extends State<AddPetsPage> {
                     decoration: InputDecoration(
                       labelText: 'Weight',
                       labelStyle: GoogleFonts.fredoka(),
-                      border:
-                          const OutlineInputBorder(borderSide: BorderSide.none),
-                      contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 12),
+                      border: const OutlineInputBorder(borderSide: BorderSide.none),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                     style: GoogleFonts.fredoka(),
                   ),
                 ),
-                const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () {
-                    if (petNameController.text.isNotEmpty &&
-                        breedNameController.text.isNotEmpty &&
-                        ageController.text.isNotEmpty) {
-                      setState(() {
-                        // addedPets.add({
-                        //   "name": petNameController.text,
-                        //   "image": "assets/images/logo.png"
-                        // });
-                      });
-                      petNameController.clear();
-                      breedNameController.clear();
-                      ageController.clear();
-                      colorController.clear();
-                      genderController.clear(); // Clear new controller
-                      heightController.clear(); // Clear new controller
-                      weightController.clear();
-                      Get.back();
+                  onPressed: () async {
+                    if (petNameController.text.isNotEmpty && breedNameController.text.isNotEmpty && ageController.text.isNotEmpty && (image != null)) {
+                      photoUrl = await uploadService.uploadImage(image!);
+                      addPet();
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content:
-                                Text('Please fill in all required fields.')),
+                        const SnackBar(content: Text('Please fill in all required fields Or add image of pet')),
                       );
                     }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
                     fixedSize: const Size.fromWidth(500),
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5))),
                   ),
                   child: Text(
                     'Add Pet',
@@ -279,6 +310,9 @@ class _AddPetsPageState extends State<AddPetsPage> {
                 ),
                 const SizedBox(
                   height: 20,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).viewInsets.bottom,
                 )
               ],
             ),
@@ -298,8 +332,7 @@ class _AddPetsPageState extends State<AddPetsPage> {
         title: Text(
           'Add Pets',
           style: GoogleFonts.fredoka(
-            textStyle: const TextStyle(
-                fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
+            textStyle: const TextStyle(fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
           ),
         ),
         leading: IconButton(
@@ -318,44 +351,26 @@ class _AddPetsPageState extends State<AddPetsPage> {
             padding: const EdgeInsets.all(16.0),
             child: Align(
                 alignment: Alignment.centerLeft, // Ensures left alignment
-                child: Text('Added Pets',
-                    style: GoogleFonts.fredoka(
-                      textStyle: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w500),
-                    ))),
+                child: (userPetController.userPetList.isEmpty)
+                    ? Text('No Pets Added',
+                        style: GoogleFonts.fredoka(
+                          textStyle: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
+                        ))
+                    : Text('Added Pets',
+                        style: GoogleFonts.fredoka(
+                          textStyle: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
+                        ))),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: userPetController.userPetList.length,
-              itemBuilder: (context, index) {
-                final pet = userPetController.userPetList[index];
-                return SizedBox(
-                    height: 70, // Adjust the height of the individual card
-                    child: Card(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 64, vertical: 8),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          radius: MediaQuery.of(context).size.width * 0.1,
-                          backgroundColor: null,
-                          child: Image.network(
-                            pet.photoUrl ?? "",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        title: Text(
-                          pet.name ?? "",
-                          style: GoogleFonts.fredoka(
-                              textStyle: const TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight
-                                      .w500)), // Apply Fredoka to the title
-                        ),
+              child: Obx(() => ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => UserPetWidgetIcon(
+                        data: userPetController.userPetList[index],
                       ),
-                    ));
-              },
-            ),
-          ),
+                  separatorBuilder: (context, index) => SizedBox(
+                        width: 10.h,
+                      ),
+                  itemCount: userPetController.userPetList.length))),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -364,5 +379,20 @@ class _AddPetsPageState extends State<AddPetsPage> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  void addPet() {
+    final user = FirebaseAuth.instance.currentUser!;
+    userPetController.addUserPet(UserPetModel(
+        id: 0,
+        name: petNameController.text.trim(),
+        species: speciesController.text.trim(),
+        breed: breedNameController.text.trim(),
+        description: descriptionController.text.trim(),
+        age: double.tryParse(ageController.text.trim()),
+        height: double.tryParse(heightController.text.trim()),
+        weight: double.tryParse(weightController.text.trim()),
+        photoUrl: photoUrl,
+        ownerEmail: user.email));
   }
 }

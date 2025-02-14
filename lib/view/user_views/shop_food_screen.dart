@@ -4,7 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/controller/shop_controller.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
-import 'package:pet_care_app/view/product_card.dart';
+import 'package:pet_care_app/view/user_views/shop_tabs/accessories_tab_view.dart';
+import 'package:pet_care_app/view/user_views/shop_tabs/food_tab_view.dart';
+import 'package:pet_care_app/view/user_views/shop_tabs/iot_tab_view.dart';
+import 'package:pet_care_app/view/user_views/shop_tabs/vet_items_tab_view.dart';
+
 import 'shop_cart_screen.dart';
 
 class ShopFood extends StatefulWidget {
@@ -14,16 +18,16 @@ class ShopFood extends StatefulWidget {
   State<ShopFood> createState() => _ShopFoodState();
 }
 
-class _ShopFoodState extends State<ShopFood>
-    with SingleTickerProviderStateMixin {
+class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final ShopController shopController = Get.find<ShopController>();
+  final ShopController shopController = ShopController();
+  List<Widget> screenList = const [FoodTabView(), VetItemsTabView(), AccessoriesTabView(), IotTabView()];
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(
-      length: shopController.categoryProducts.keys.length,
+      length: shopController.category.length,
       vsync: this,
     );
     _tabController.addListener(_onTabChange);
@@ -46,8 +50,7 @@ class _ShopFoodState extends State<ShopFood>
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          icon:
-              const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
           onPressed: () => Get.back(),
         ),
         title: Text(
@@ -86,107 +89,69 @@ class _ShopFoodState extends State<ShopFood>
                   ),
                 ),
               ),
-              Obx(
-                () => Container(
-                  color: Colors.white,
-                  child: TabBar(
-                    controller: _tabController,
-                    isScrollable: true,
-                    labelColor: Colors.black,
-                    indicatorColor: Colors.lightBlueAccent,
-                    indicator: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    unselectedLabelColor: Colors.black,
-                    labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-                    unselectedLabelStyle:
-                        const TextStyle(fontWeight: FontWeight.normal),
-                    tabs: shopController.categoryProducts.keys.map((category) {
-                      String icon;
-                      switch (category) {
-                        case 'FOOD':
-                          icon = AppImages.foodLogoImg;
-                          break;
-                        case 'Vet Items':
-                          icon = AppImages.vetItemImg;
-                          break;
-                        case 'Accessories':
-                          icon = AppImages.accessoriesImg;
-                          break;
-                        case 'IOT Devices':
-                          icon = AppImages.iotDevicesImg;
-                          break;
-                        default:
-                          icon = AppImages.pawIconImg;
-                      }
-                      return Tab(
-                        height: 70,
-                        icon: Container(
-                          height: 40,
-                          width: 40,
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: _tabController.index ==
-                                    shopController.categoryProducts.keys
-                                        .toList()
-                                        .indexOf(category)
-                                ? const Color.fromARGB(255, 134, 208, 243)
-                                : AppColors.greyIconBox,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Image.asset(
-                            icon,
-                            color: _tabController.index ==
-                                    shopController.categoryProducts.keys
-                                        .toList()
-                                        .indexOf(category)
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                        ),
-                        child: Text(
-                          category,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      );
-                    }).toList(),
+              Container(
+                color: Colors.white,
+                child: TabBar(
+                  controller: _tabController,
+                  isScrollable: true,
+                  labelColor: Colors.black,
+                  indicatorColor: Colors.lightBlueAccent,
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
                   ),
+                  unselectedLabelColor: Colors.black,
+                  labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                  unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+                  tabs: shopController.category.map((category) {
+                    String icon;
+                    switch (category) {
+                      case 'FOOD':
+                        icon = AppImages.foodLogoImg;
+                        break;
+                      case 'VET_ITEMS':
+                        icon = AppImages.vetItemImg;
+                        break;
+                      case 'ACCESSORIES':
+                        icon = AppImages.accessoriesImg;
+                        break;
+                      case 'IOT_DEVICES':
+                        icon = AppImages.iotDevicesImg;
+                        break;
+                      default:
+                        icon = AppImages.pawIconImg;
+                    }
+                    return Tab(
+                      height: 70,
+                      icon: Container(
+                        height: 40,
+                        width: 40,
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: _tabController.index == shopController.category.toList().indexOf(category) ? const Color.fromARGB(255, 134, 208, 243) : AppColors.greyIconBox,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Image.asset(
+                          icon,
+                          color: _tabController.index == shopController.category.toList().indexOf(category) ? Colors.white : Colors.black,
+                        ),
+                      ),
+                      child: Text(
+                        category,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    );
+                  }).toList(),
                 ),
               ),
             ],
           ),
         ),
       ),
-      body: Obx(
-        () => TabBarView(
-          controller: _tabController,
-          children: shopController.categoryProducts.entries.map((entry) {
-            final products = entry.value;
-            if (products.isEmpty) {
-              return const Center(
-                child: Text('No products available for this category.'),
-              );
-            }
-            return GridView.builder(
-              padding: const EdgeInsets.all(16),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.75,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-              ),
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                return ProductCard(product: products[index]);
-              },
-            );
-          }).toList(),
-        ),
-      ),
+      body: TabBarView(controller: _tabController, children: screenList),
     );
   }
 }

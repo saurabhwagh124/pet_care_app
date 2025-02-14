@@ -1,7 +1,8 @@
-import 'package:get/get.dart';
-import 'package:pet_care_app/model/product.dart';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:pet_care_app/model/product.dart';
 
 import '../network/api_endpoints.dart';
 
@@ -18,7 +19,7 @@ class ShopService extends GetxService {
         List<dynamic> data = jsonDecode(response.body);
         return data.map((json) => Product.fromJson(json)).toList();
       } else {
-        return [];
+        throw Exception("Failed to load data: ${response.statusCode} ");
       }
     } catch (e) {
       return [];

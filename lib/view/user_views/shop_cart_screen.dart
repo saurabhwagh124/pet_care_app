@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../controller/cart_controller.dart';
+import 'package:pet_care_app/controller/cart_controller.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final CartController cartController = Get.find<CartController>();
+    final CartController cartController = CartController();
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Color(0XFFF8AE1F),
+        backgroundColor: const Color(0XFFF8AE1F),
         title: Text(
           'Cart',
           style: GoogleFonts.fredoka(
-            textStyle: const TextStyle(
-                fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
+            textStyle: const TextStyle(fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
           ),
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
             color: Colors.white,
           ),
@@ -43,14 +42,13 @@ class CartScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final product = cartController.cartItems.keys.toList()[index];
                   final quantity = cartController.cartItems[product]!;
-                  final double discountedPrice =
-                      product.price! * (1 - (product.discount! / 100));
+                  final double discountedPrice = product.price! * (1 - (product.discount! / 100));
 
                   return Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             color: Color.fromRGBO(0, 0, 0, 0.25),
                             offset: Offset(0, 4),
@@ -89,14 +87,12 @@ class CartScreen extends StatelessWidget {
                           children: [
                             IconButton(
                               icon: const Icon(Icons.remove),
-                              onPressed: () =>
-                                  cartController.removeFromCart(product),
+                              onPressed: () => cartController.removeFromCart(product),
                             ),
                             Text('$quantity'),
                             IconButton(
                               icon: const Icon(Icons.add),
-                              onPressed: () =>
-                                  cartController.addToCart(product),
+                              onPressed: () => cartController.addToCart(product),
                             ),
                           ],
                         ),
@@ -117,18 +113,10 @@ class CartScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SummaryRow(title: "Subtotal", value: cartController.subtotal),
-                  SummaryRow(
-                      title: "Discount Applied",
-                      value: cartController.totalDiscount,
-                      isDiscount: true),
-                  SummaryRow(
-                      title: "Shipping Charges",
-                      value: cartController.shippingCharges),
+                  SummaryRow(title: "Discount Applied", value: cartController.totalDiscount, isDiscount: true),
+                  SummaryRow(title: "Shipping Charges", value: cartController.shippingCharges),
                   const Divider(),
-                  SummaryRow(
-                      title: "Total",
-                      value: cartController.total,
-                      isBold: true),
+                  SummaryRow(title: "Total", value: cartController.total, isBold: true),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
@@ -187,9 +175,7 @@ class SummaryRow extends StatelessWidget {
             ),
           ),
           Text(
-            isDiscount
-                ? "- RS.${value.toStringAsFixed(2)}"
-                : "RS.${value.toStringAsFixed(2)}",
+            isDiscount ? "- RS.${value.toStringAsFixed(2)}" : "RS.${value.toStringAsFixed(2)}",
             style: TextStyle(
               fontSize: 16,
               fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
