@@ -1,41 +1,50 @@
-import 'dart:convert';
-
 class User {
-  String? username;
-  String? password;
-  String? contact;
-  String? token;
+  User({
+    required this.id,
+    required this.uid,
+    required this.email,
+    required this.displayName,
+    required this.photoUrl,
+    required this.phoneNumber,
+    required this.role,
+    required this.emailVerified,
+  });
 
-  User({this.username, this.password, this.contact, this.token});
+  final int? id;
+  final String? uid;
+  final String? email;
+  final String? displayName;
+  final String? photoUrl;
+  final dynamic phoneNumber;
+  final String? role;
+  final bool? emailVerified;
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      id: json["id"],
+      uid: json["uid"],
+      email: json["email"],
+      displayName: json["displayName"],
+      photoUrl: json["photoUrl"],
+      phoneNumber: json["phoneNumber"],
+      role: json["role"],
+      emailVerified: json["emailVerified"],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "uid": uid,
+        "email": email,
+        "displayName": displayName,
+        "photoUrl": photoUrl,
+        "phoneNumber": phoneNumber,
+        "role": role,
+        "emailVerified": emailVerified,
+      };
 
   @override
   String toString() {
-    return 'User(username: $username, password: $password, contact: $contact, token: $token)';
+    return "$id, $uid, $email, $displayName, $photoUrl, $phoneNumber, $role, $emailVerified, ";
   }
-
-  factory User.fromMap(Map<String, dynamic> data) => User(
-        username: data['username'] as String?,
-        password: data['password'] as String?,
-        contact: data['contact'] as String?,
-        token: data['token'] as String?,
-      );
-
-  Map<String, dynamic> toMap() => {
-        'username': username,
-        'password': password,
-        'contact': contact,
-        'token': token,
-      };
-
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [User].
-  factory User.fromJson(String data) {
-    return User.fromMap(json.decode(data) as Map<String, dynamic>);
-  }
-
-  /// `dart:convert`
-  ///
-  /// Converts [User] to a JSON string.
-  String toJson() => json.encode(toMap());
 }

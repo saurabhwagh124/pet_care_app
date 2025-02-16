@@ -1,3 +1,3 @@
 enum Enums { app }
 
-enum ApiStatus { loading, success, error }
+enum ApiStatus { LOADING, SUCCESS, ERROR }

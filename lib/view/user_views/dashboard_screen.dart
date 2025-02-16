@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/controller/user_pet_controller.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
+import 'package:pet_care_app/utils/enums.dart';
 import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
 import 'package:pet_care_app/view/user_views/explore_screen.dart';
 import 'package:pet_care_app/view/user_views/forgot_password_screen.dart';
@@ -169,9 +170,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       height: 20.h,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 21.w, right: 21.w),
+                      padding: EdgeInsets.only(left: 21.w, right: 11.w, bottom: 15.h),
                       child: SizedBox(
-                        height: 160.h,
+                        height: 180.h,
                         child: Obx(() => (userPetController.userPetList.isEmpty)
                             ? Column(
                                 spacing: 10.h,
@@ -193,15 +194,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   )
                                 ],
                               )
-                            : ListView.separated(
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) => UserPetWidgetIcon(
-                                      data: userPetController.userPetList[index],
+                            : (userPetController.userPetListStatus == ApiStatus.LOADING)
+                                ? Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.greenAccent,
+                                      strokeWidth: 4.sp,
                                     ),
-                                separatorBuilder: (context, index) => SizedBox(
-                                      width: 10.h,
-                                    ),
-                                itemCount: userPetController.userPetList.length)),
+                                  )
+                                : (userPetController.userPetListStatus == ApiStatus.SUCCESS)
+                                    ? ListView.separated(
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (context, index) => UserPetWidgetIcon(
+                                              data: userPetController.userPetList[index],
+                                            ),
+                                        separatorBuilder: (context, index) => SizedBox(
+                                              width: 10.h,
+                                            ),
+                                        itemCount: userPetController.userPetList.length)
+                                    : const SnackBar(content: Text("Something went wrong"))),
                       ),
                     )
                   ],

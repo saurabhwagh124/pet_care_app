@@ -15,29 +15,37 @@ class UserPetWidgetIcon extends StatefulWidget {
 class _UserPetWidgetIconState extends State<UserPetWidgetIcon> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 150,
-      child: Column(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Get.to(() => Petscreen(
-                    data: widget.data,
-                  ));
-            },
-            child: Container(
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => Petscreen(
+              data: widget.data,
+            ));
+      },
+      child: Container(
+        decoration: BoxDecoration(border: Border.all(color: Colors.deepOrangeAccent, width: 1.5.w), color: const Color.fromARGB(255, 255, 192, 110), borderRadius: BorderRadius.circular(15.r)),
+        height: 150.h,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 10.w),
               height: 125.h,
-              width: 110.w,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
-              clipBehavior: Clip.hardEdge,
-              child: Image.network(widget.data.photoUrl ?? ""),
+              width: 94.w,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(30.r)),
+              // clipBehavior: Clip.hardEdge,
+              child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.r)), child: Image.network(widget.data.photoUrl ?? "")),
             ),
-          ),
-          Text(
-            widget.data.name ?? "",
-            style: TextStyle(fontSize: 15.sp, color: Colors.grey),
-          )
-        ],
+            Container(
+              padding: EdgeInsets.all(10.sp),
+              decoration: BoxDecoration(border: Border.all(color: Colors.deepOrange), borderRadius: BorderRadius.circular(15.r)),
+              child: Text(
+                widget.data.name ?? "",
+                style: TextStyle(fontSize: 15.sp, color: Colors.white, fontWeight: FontWeight.w600),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
