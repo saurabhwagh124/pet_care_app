@@ -8,7 +8,7 @@ import '../network/api_endpoints.dart';
 
 class ShopService extends GetxService {
   Future<List<Product>> fetchProductsByCategory(String category) async {
-    String url = "${ApiEndpoints.baseUrl}/shopItem-by-category/$category";
+    String url = "${ApiEndpoints.getAllShopItemUrl}$category";
 
     try {
       final response = await http.get(Uri.parse(url));
@@ -22,7 +22,7 @@ class ShopService extends GetxService {
         throw Exception("Failed to load data: ${response.statusCode} ");
       }
     } catch (e) {
-      return [];
+      throw Exception(e);
     }
   }
 }

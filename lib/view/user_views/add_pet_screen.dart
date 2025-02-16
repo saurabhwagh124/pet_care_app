@@ -349,7 +349,7 @@ class _AddPetsPageState extends State<AddPetsPage> {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Align(
+            child: Obx(() => Align(
                 alignment: Alignment.centerLeft, // Ensures left alignment
                 child: (userPetController.userPetList.isEmpty)
                     ? Text('No Pets Added',
@@ -359,16 +359,15 @@ class _AddPetsPageState extends State<AddPetsPage> {
                     : Text('Added Pets',
                         style: GoogleFonts.fredoka(
                           textStyle: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
-                        ))),
+                        )))),
           ),
           Expanded(
-              child: Obx(() => ListView.separated(
-                  scrollDirection: Axis.horizontal,
+              child: Obx(() => GridView.builder(
+                  padding: EdgeInsets.all(10.sp),
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 200.w, mainAxisSpacing: 20.h, crossAxisSpacing: 20.w, mainAxisExtent: 200.h),
+                  scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) => UserPetWidgetIcon(
                         data: userPetController.userPetList[index],
-                      ),
-                  separatorBuilder: (context, index) => SizedBox(
-                        width: 10.h,
                       ),
                   itemCount: userPetController.userPetList.length))),
         ],

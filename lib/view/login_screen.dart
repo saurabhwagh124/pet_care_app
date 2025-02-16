@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/controller/user_controller.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
@@ -20,6 +21,7 @@ class Loginscreen extends StatefulWidget {
 
 class _LoginscreenState extends State<Loginscreen> {
   final _auth = AuthService();
+  final userController = UserController();
   ValueNotifier<bool> isVisible = ValueNotifier(false);
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -252,6 +254,7 @@ class _LoginscreenState extends State<Loginscreen> {
   _loginWithEmail() async {
     final user = await _auth.loginUserWithMailAndPassword(_emailController.text, _passwordController.text);
     if (user != null) {
+      userController.fetchUserData(user.email ?? "");
       log("user logged in with email");
       Get.off(() => const DashboardScreen());
     } else {
@@ -265,6 +268,7 @@ class _LoginscreenState extends State<Loginscreen> {
   _signInWithGoogle() async {
     final userCred = await _auth.loginWithGoogle();
     if (userCred != null) {
+      userController.fetchUserData(userCred.user?.email ?? "");
       Get.off(() => const AdminDashboardScreen());
       log("Gooogle login success");
     } else {
