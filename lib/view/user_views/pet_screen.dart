@@ -6,11 +6,44 @@ import 'package:pet_care_app/model/user_pet_model.dart';
 import 'package:pet_care_app/view/user_views/pethealthscreen.dart';
 import 'package:pet_care_app/view/user_views/shop_food_screen.dart';
 
-class Petscreen extends StatelessWidget {
+class Petscreen extends StatefulWidget {
   final UserPetModel data;
   const Petscreen({super.key, required this.data});
 
   @override
+  State<Petscreen> createState() => _PetscreenState();
+}
+
+class _PetscreenState extends State<Petscreen> {
+  bool _isEditing = false;
+
+  late TextEditingController _nameController;
+  late TextEditingController _breedController;
+  late TextEditingController _ageController;
+  late TextEditingController _weightController;
+  late TextEditingController _heightController;
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget.data.name);
+    _breedController = TextEditingController(text: widget.data.breed);
+    _ageController = TextEditingController(text: widget.data.age?.toString());
+    _weightController =
+        TextEditingController(text: widget.data.weight?.toString());
+    _heightController =
+        TextEditingController(text: widget.data.height?.toString());
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _breedController.dispose();
+    _ageController.dispose();
+    _weightController.dispose();
+    _heightController.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -25,7 +58,7 @@ class Petscreen extends StatelessWidget {
                 color: Colors.white,
               )),
           title: Text(
-            data.name ?? "",
+            widget.data.name ?? "",
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 20.sp,
@@ -41,7 +74,7 @@ class Petscreen extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: NetworkImage(data.photoUrl ?? ""),
+                  image: NetworkImage(widget.data.photoUrl ?? ""),
                   fit: BoxFit.contain),
             ),
           ),
@@ -66,27 +99,53 @@ class Petscreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  data.name ?? "",
-                  style: GoogleFonts.fredoka(
-                    textStyle: TextStyle(
-                      fontSize: 28.sp,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
+                _isEditing
+                    ? SizedBox(
+                        width: 80.w,
+                        height: 25.h,
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          textAlignVertical: TextAlignVertical.bottom,
+                          controller: _nameController,
+                          decoration: InputDecoration(
+                            hintText: "Pet Name",
+                          ),
+                        ),
+                      )
+                    : Text(
+                        widget.data.name ?? "",
+                        style: GoogleFonts.fredoka(
+                          textStyle: TextStyle(
+                            fontSize: 28.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
                 const SizedBox(height: 4),
-                Text(
-                  data.breed ?? "",
-                  style: GoogleFonts.fredoka(
-                    textStyle: TextStyle(
-                      fontSize: 17.sp,
-                      fontWeight: FontWeight.w500,
-                      color: const Color.fromRGBO(6, 78, 87, 1),
-                    ),
-                  ),
-                ),
+                _isEditing
+                    ? SizedBox(
+                        width: 80.w,
+                        height: 25.h,
+                        child: TextField(
+                          textAlign: TextAlign.center,
+                          textAlignVertical: TextAlignVertical.bottom,
+                          controller: _breedController,
+                          decoration: InputDecoration(
+                            hintText: "Breed",
+                          ),
+                        ),
+                      )
+                    : Text(
+                        widget.data.breed ?? "",
+                        style: GoogleFonts.fredoka(
+                          textStyle: TextStyle(
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w500,
+                            color: const Color.fromRGBO(6, 78, 87, 1),
+                          ),
+                        ),
+                      ),
               ],
             ),
           ),
@@ -118,11 +177,15 @@ class Petscreen extends StatelessWidget {
                     ),
                   ])),
           PetInfoCard(
-            age: "${data.age} yrs",
-            weight: '${data.weight}kg',
-            height: '${data.height}cm',
+            age: "${widget.data.age} yrs",
+            weight: '${widget.data.weight}kg',
+            height: '${widget.data.height}cm',
             color: 'Black',
-            description: data.description.toString(),
+            description: widget.data.description.toString(),
+            isEditing: _isEditing,
+            ageController: _ageController,
+            weightController: _weightController,
+            heightController: _heightController,
           ),
 
           // Pet Status Section
@@ -184,6 +247,59 @@ class Petscreen extends StatelessWidget {
               ],
             ),
           ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    if (_isEditing) {
+                      setState(() {
+                        widget.data.name = _nameController.text;
+                        widget.data.breed = _breedController.text;
+                        widget.data.age = double.tryParse(_ageController.text);
+                        widget.data.weight =
+                            double.tryParse(_weightController.text);
+                        widget.data.height =
+                            double.tryParse(_heightController.text);
+                      });
+                    }
+                    setState(() {
+                      _isEditing = !_isEditing;
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    backgroundColor: _isEditing ? Colors.green : Colors.blue,
+                  ),
+                  child: Text(
+                    _isEditing ? "Save" : "Edit",
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.redAccent,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    "Delete",
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          )
         ])));
   }
 }
@@ -194,6 +310,10 @@ class PetInfoCard extends StatelessWidget {
   final String height;
   final String color;
   final String description;
+  final bool isEditing;
+  final TextEditingController ageController;
+  final TextEditingController weightController;
+  final TextEditingController heightController;
 
   const PetInfoCard({
     super.key,
@@ -202,6 +322,10 @@ class PetInfoCard extends StatelessWidget {
     required this.height,
     required this.color,
     required this.description,
+    required this.isEditing,
+    required this.ageController,
+    required this.weightController,
+    required this.heightController,
   });
 
   @override
@@ -219,16 +343,118 @@ class PetInfoCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildInfoChip(age, 'Age'),
-                _buildInfoChip(weight, 'Weight'),
-                _buildInfoChip(
-                  height,
-                  'Height',
-                ),
-                _buildInfoChip(
-                  color,
-                  'Color',
-                ),
+                isEditing
+                    ? Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromRGBO(79, 144, 166, 1),
+                                  offset: Offset(0, 2),
+                                  blurRadius: 1)
+                            ]),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Age",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 45.w,
+                              height: 20.h,
+                              child: TextField(
+                                cursorHeight: 18,
+                                keyboardType: TextInputType.number,
+                                textAlign: TextAlign.center,
+                                controller: ageController,
+                                decoration: const InputDecoration(),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    : _buildInfoChip(age, 'Age'),
+                isEditing
+                    ? Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromRGBO(79, 144, 166, 1),
+                                  offset: Offset(0, 2),
+                                  blurRadius: 1)
+                            ]),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Weight",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 45.w,
+                              height: 20.h,
+                              child: TextField(
+                                cursorHeight: 18,
+                                keyboardType: TextInputType.number,
+                                textAlign: TextAlign.center,
+                                controller: weightController,
+                                decoration: const InputDecoration(),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    : _buildInfoChip(weight, 'Weight'),
+                isEditing
+                    ? Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromRGBO(79, 144, 166, 1),
+                                  offset: Offset(0, 2),
+                                  blurRadius: 1)
+                            ]),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Height",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 45.w,
+                              height: 20.h,
+                              child: TextField(
+                                cursorHeight: 18,
+                                keyboardType: TextInputType.number,
+                                textAlign: TextAlign.center,
+                                controller: heightController,
+                                decoration: const InputDecoration(),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    : _buildInfoChip(
+                        height,
+                        'Height',
+                      ),
+                // _buildInfoChip(
+                //   color,
+                //   'Color',
+                // ),
               ],
             ),
             const SizedBox(height: 16),
@@ -368,3 +594,5 @@ class PetStatusCard extends StatelessWidget {
     );
   }
 }
+
+// text field

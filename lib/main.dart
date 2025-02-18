@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:pet_care_app/controller/cart_controller.dart';
 import 'package:pet_care_app/view/admin_dashboard_screen.dart';
 import 'package:pet_care_app/view/appointmentscreen.dart';
 import 'package:pet_care_app/view/boardingmanagement.dart';
@@ -17,6 +18,7 @@ import 'package:pet_care_app/view/wrapper.dart';
 import 'firebase_options.dart';
 
 void main() async {
+   Get.put(CartController());
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await Firebase.initializeApp(

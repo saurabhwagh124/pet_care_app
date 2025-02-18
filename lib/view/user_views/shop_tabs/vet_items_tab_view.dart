@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/shop_controller.dart';
-import 'package:pet_care_app/view/product_card.dart';
+import 'package:pet_care_app/widgets/product_card.dart';
 
 class VetItemsTabView extends StatefulWidget {
   const VetItemsTabView({super.key});
