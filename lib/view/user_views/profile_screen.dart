@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:http/http.dart';
 import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
 
 import '../../utils/app_images.dart';

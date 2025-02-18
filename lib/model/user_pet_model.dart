@@ -13,13 +13,13 @@ class UserPetModel {
   });
 
   final int? id;
-  final String? name;
+  late final String? name;
   final String? species;
-  final String? breed;
+  late final String? breed;
   final String? description;
-  final double? age;
-  final double? height;
-  final double? weight;
+  late final double? age;
+  late final double? height;
+  late final double? weight;
   final String? photoUrl;
   final String? ownerEmail;
 
