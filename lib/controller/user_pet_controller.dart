@@ -10,6 +10,7 @@ class UserPetController extends GetxController {
   RxList<UserPetModel> userPetList = <UserPetModel>[].obs;
   ApiStatus userPetListStatus = ApiStatus.LOADING;
   ApiStatus addPetStatus = ApiStatus.LOADING;
+  ApiStatus editPetStatus = ApiStatus.LOADING;
 
   void fetchUserPets() async {
     try {
@@ -29,6 +30,19 @@ class UserPetController extends GetxController {
     } catch (e) {
       addPetStatus = ApiStatus.ERROR;
       log("Error adding pet to user: $e");
+    }
+  }
+
+  Future<UserPetModel> editUserPet(UserPetModel payload) async {
+    try {
+      userPetList.removeWhere((element) => element.id == payload.id);
+      UserPetModel response = await service.editPet(payload);
+      userPetList.add(response);
+      editPetStatus = ApiStatus.SUCCESS;
+      return response;
+    } catch (e) {
+      editPetStatus = ApiStatus.ERROR;
+      throw Exception("error editing pet information: $e");
     }
   }
 }

@@ -8,10 +8,18 @@ import 'package:pet_care_app/model/user_pet_model.dart';
 import 'package:pet_care_app/network/api_endpoints.dart';
 
 class UserPetService extends GetxService {
+  String token = "";
+
+  @override
+  Future<void> onInit() async {
+    token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+    super.onInit();
+  }
+
   Future<List<UserPetModel>> fetchUserPets() async {
     try {
       final user = FirebaseAuth.instance.currentUser!;
-      final headers = {"Authorization": "Bearer ${user.getIdToken()}"};
+      final headers = {"Authorization": "Bearer $token"};
       final url = ApiEndpoints.getAllPetsOfUserUrl.replaceAll("{userEmail}", user.email ?? "");
       log(url);
       final response = await http.get(Uri.parse(url), headers: headers);
@@ -28,8 +36,7 @@ class UserPetService extends GetxService {
 
   Future<UserPetModel> addPetToUser(UserPetModel payload) async {
     try {
-      final user = FirebaseAuth.instance.currentUser!;
-      final headers = {"Authorization": "Bearer ${user.getIdToken()}", "Content-Type": "application/json"};
+      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
       log(ApiEndpoints.postUserPetUrl);
       final response = await http.post(Uri.parse(ApiEndpoints.postUserPetUrl), headers: headers, body: jsonEncode(payload.toJson()));
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -40,6 +47,22 @@ class UserPetService extends GetxService {
       }
     } catch (e) {
       throw Exception("Error fetching data: $e");
+    }
+  }
+
+  Future<UserPetModel> editPet(UserPetModel payload) async {
+    try {
+      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
+      log("Edit Pet Api");
+      final response = await http.put(Uri.parse(ApiEndpoints.postUserPetUrl), headers: headers, body: jsonEncode(payload.toJson()));
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = jsonDecode(response.body);
+        return UserPetModel.fromJson(data);
+      } else {
+        throw Exception("Edit Request Failed");
+      }
+    } catch (e) {
+      throw Exception("Edit Pet Api: $e");
     }
   }
 }

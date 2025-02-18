@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:pet_care_app/controller/user_pet_controller.dart';
 import 'package:pet_care_app/model/user_pet_model.dart';
+import 'package:pet_care_app/service/upload_service.dart';
 import 'package:pet_care_app/view/user_views/pethealthscreen.dart';
 import 'package:pet_care_app/view/user_views/shop_food_screen.dart';
 
@@ -15,23 +20,25 @@ class Petscreen extends StatefulWidget {
 }
 
 class _PetscreenState extends State<Petscreen> {
+  UserPetController userPetController = UserPetController();
   bool _isEditing = false;
-
+  String? photoUrl;
+  XFile? imageFile;
+  final _picker = ImagePicker();
   late TextEditingController _nameController;
   late TextEditingController _breedController;
   late TextEditingController _ageController;
   late TextEditingController _weightController;
   late TextEditingController _heightController;
+
   @override
   void initState() {
     super.initState();
     _nameController = TextEditingController(text: widget.data.name);
     _breedController = TextEditingController(text: widget.data.breed);
     _ageController = TextEditingController(text: widget.data.age?.toString());
-    _weightController =
-        TextEditingController(text: widget.data.weight?.toString());
-    _heightController =
-        TextEditingController(text: widget.data.height?.toString());
+    _weightController = TextEditingController(text: widget.data.weight?.toString());
+    _heightController = TextEditingController(text: widget.data.height?.toString());
   }
 
   @override
@@ -44,6 +51,14 @@ class _PetscreenState extends State<Petscreen> {
     super.dispose();
   }
 
+  Future<void> _pickImages() async {
+    final XFile? pickedFiles = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageFile = pickedFiles;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -59,25 +74,41 @@ class _PetscreenState extends State<Petscreen> {
               )),
           title: Text(
             widget.data.name ?? "",
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w600),
+            style: TextStyle(color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.w600),
           ),
           backgroundColor: Colors.orangeAccent,
         ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
             child: Column(children: [
-          Container(
-            height: 300.h,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: NetworkImage(widget.data.photoUrl ?? ""),
-                  fit: BoxFit.contain),
+          Stack(children: [
+            Container(
+              height: 300.h,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                image: DecorationImage(image: (imageFile != null) ? FileImage(File(imageFile!.path)) : NetworkImage(widget.data.photoUrl ?? ""), fit: BoxFit.contain),
+              ),
             ),
-          ),
+            (_isEditing)
+                ? Positioned(
+                    bottom: 10,
+                    right: 0,
+                    child: GestureDetector(
+                      onTap: _pickImages,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15.r), border: Border.all(color: Colors.lightBlueAccent)),
+                        child: Row(
+                          spacing: 10.w,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [Text("edit Image"), Icon(Icons.edit_outlined)],
+                        ),
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink()
+          ]),
           SizedBox(
             height: 10.h,
           ),
@@ -87,12 +118,7 @@ class _PetscreenState extends State<Petscreen> {
               vertical: 16.h,
             ),
             decoration: BoxDecoration(
-              boxShadow: const [
-                BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.15),
-                    offset: Offset(1, 5.47),
-                    blurRadius: 43.78)
-              ],
+              boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.15), offset: Offset(1, 5.47), blurRadius: 43.78)],
               color: const Color.fromRGBO(255, 255, 255, 0.4),
               borderRadius: BorderRadius.circular(27.r),
             ),
@@ -107,7 +133,7 @@ class _PetscreenState extends State<Petscreen> {
                           textAlign: TextAlign.center,
                           textAlignVertical: TextAlignVertical.bottom,
                           controller: _nameController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: "Pet Name",
                           ),
                         ),
@@ -131,7 +157,7 @@ class _PetscreenState extends State<Petscreen> {
                           textAlign: TextAlign.center,
                           textAlignVertical: TextAlignVertical.bottom,
                           controller: _breedController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: "Breed",
                           ),
                         ),
@@ -155,32 +181,28 @@ class _PetscreenState extends State<Petscreen> {
           // Pet Info Card
           Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        const ImageIcon(
-                            AssetImage("assets/images/pawIcon.png")),
-                        SizedBox(width: 8.w),
-                        Text(
-                          'About Pomy',
-                          style: GoogleFonts.fredoka(
-                            textStyle: TextStyle(
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black,
-                            ),
-                          ),
+                    const ImageIcon(AssetImage("assets/images/pawIcon.png")),
+                    SizedBox(width: 8.w),
+                    Text(
+                      'About ${widget.data.name}',
+                      style: GoogleFonts.fredoka(
+                        textStyle: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black,
                         ),
-                      ],
+                      ),
                     ),
-                  ])),
+                  ],
+                ),
+              ])),
           PetInfoCard(
             age: "${widget.data.age} yrs",
             weight: '${widget.data.weight}kg',
             height: '${widget.data.height}cm',
-            color: 'Black',
             description: widget.data.description.toString(),
             isEditing: _isEditing,
             ageController: _ageController,
@@ -199,7 +221,7 @@ class _PetscreenState extends State<Petscreen> {
                     const ImageIcon(AssetImage("assets/images/statusIcon.png")),
                     const SizedBox(width: 8),
                     Text(
-                      "Pomy's Status",
+                      "${widget.data.name}'s Status",
                       style: GoogleFonts.fredoka(
                         textStyle: const TextStyle(
                           fontSize: 20,
@@ -253,17 +275,23 @@ class _PetscreenState extends State<Petscreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_isEditing) {
-                      setState(() {
-                        widget.data.name = _nameController.text;
-                        widget.data.breed = _breedController.text;
-                        widget.data.age = double.tryParse(_ageController.text);
-                        widget.data.weight =
-                            double.tryParse(_weightController.text);
-                        widget.data.height =
-                            double.tryParse(_heightController.text);
-                      });
+                      if (imageFile != null) {
+                        UploadService service = UploadService();
+                        photoUrl = await service.uploadImage(imageFile!);
+                      }
+                      updatePet(UserPetModel(
+                          id: widget.data.id,
+                          name: _nameController.text.trim(),
+                          species: widget.data.species,
+                          breed: _breedController.text.trim(),
+                          description: widget.data.description,
+                          age: double.tryParse(_ageController.text.trim()),
+                          height: double.tryParse(_heightController.text.trim()),
+                          weight: double.tryParse(_weightController.text.trim()),
+                          photoUrl: photoUrl ?? widget.data.photoUrl,
+                          ownerEmail: widget.data.ownerEmail));
                     }
                     setState(() {
                       _isEditing = !_isEditing;
@@ -292,9 +320,9 @@ class _PetscreenState extends State<Petscreen> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Delete",
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ],
@@ -302,13 +330,17 @@ class _PetscreenState extends State<Petscreen> {
           )
         ])));
   }
+
+  void updatePet(UserPetModel pet) async {
+    UserPetModel temp = await userPetController.editUserPet(pet);
+    Get.off(() => Petscreen(data: temp));
+  }
 }
 
 class PetInfoCard extends StatelessWidget {
   final String age;
   final String weight;
   final String height;
-  final String color;
   final String description;
   final bool isEditing;
   final TextEditingController ageController;
@@ -320,7 +352,6 @@ class PetInfoCard extends StatelessWidget {
     required this.age,
     required this.weight,
     required this.height,
-    required this.color,
     required this.description,
     required this.isEditing,
     required this.ageController,
@@ -347,19 +378,12 @@ class PetInfoCard extends StatelessWidget {
                     ? Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Color.fromRGBO(79, 144, 166, 1),
-                                  offset: Offset(0, 2),
-                                  blurRadius: 1)
-                            ]),
+                            color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: const [BoxShadow(color: Color.fromRGBO(79, 144, 166, 1), offset: Offset(0, 2), blurRadius: 1)]),
                         child: Column(
                           children: [
-                            Text(
+                            const Text(
                               "Age",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -382,19 +406,12 @@ class PetInfoCard extends StatelessWidget {
                     ? Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Color.fromRGBO(79, 144, 166, 1),
-                                  offset: Offset(0, 2),
-                                  blurRadius: 1)
-                            ]),
+                            color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: const [BoxShadow(color: Color.fromRGBO(79, 144, 166, 1), offset: Offset(0, 2), blurRadius: 1)]),
                         child: Column(
                           children: [
-                            Text(
+                            const Text(
                               "Weight",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -417,19 +434,12 @@ class PetInfoCard extends StatelessWidget {
                     ? Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Color.fromRGBO(79, 144, 166, 1),
-                                  offset: Offset(0, 2),
-                                  blurRadius: 1)
-                            ]),
+                            color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: const [BoxShadow(color: Color.fromRGBO(79, 144, 166, 1), offset: Offset(0, 2), blurRadius: 1)]),
                         child: Column(
                           children: [
-                            Text(
+                            const Text(
                               "Height",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -474,15 +484,8 @@ class PetInfoCard extends StatelessWidget {
   Widget _buildInfoChip(String label, String value) {
     return Container(
       padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: const [
-            BoxShadow(
-                color: Color.fromRGBO(79, 144, 166, 1),
-                offset: Offset(0, 2),
-                blurRadius: 1)
-          ]),
+      decoration:
+          BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: const [BoxShadow(color: Color.fromRGBO(79, 144, 166, 1), offset: Offset(0, 2), blurRadius: 1)]),
       child: Column(
         children: [
           Text(
@@ -493,8 +496,7 @@ class PetInfoCard extends StatelessWidget {
           ),
           Text(
             label,
-            style: const TextStyle(
-                fontSize: 14, color: Color.fromRGBO(6, 78, 87, 1)),
+            style: const TextStyle(fontSize: 14, color: Color.fromRGBO(6, 78, 87, 1)),
           ),
         ],
       ),
@@ -512,14 +514,7 @@ class PetStatusCard extends StatelessWidget {
   final VoidCallback onPressed;
 
   const PetStatusCard(
-      {super.key,
-      required this.title,
-      required this.subtitle,
-      required this.description,
-      required this.buttonText,
-      required this.buttonColor,
-      required this.icon,
-      required this.onPressed});
+      {super.key, required this.title, required this.subtitle, required this.description, required this.buttonText, required this.buttonColor, required this.icon, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
