@@ -1,6 +1,8 @@
+// import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class AddReviewPage extends StatefulWidget {
   const AddReviewPage({super.key});
@@ -26,21 +28,6 @@ class _AddReviewPageState extends State<AddReviewPage> {
       // Show an error or validation if needed
       print("Please provide a rating and review.");
     }
-  }
-
-  Widget _buildStar(int index) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _rating = index + 1.0;
-        });
-      },
-      child: Icon(
-        Icons.star,
-        color: index < _rating ? Colors.orange : Colors.grey,
-        size: 40,
-      ),
-    );
   }
 
   @override
@@ -87,10 +74,6 @@ class _AddReviewPageState extends State<AddReviewPage> {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      'Posting Publicly*',
-                      style: TextStyle(color: Colors.grey),
-                    ),
                   ],
                 ),
               ],
@@ -101,8 +84,25 @@ class _AddReviewPageState extends State<AddReviewPage> {
                   textStyle: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.w500),
                 )),
-            Row(
-              children: List.generate(5, (index) => _buildStar(index)),
+            const SizedBox(height: 8),
+            RatingBar.builder(
+              initialRating: _rating,
+              minRating: 0,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemSize: 40,
+              glow: false,
+              itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+              itemBuilder: (context, _) => const Icon(
+                Icons.star,
+                color: Colors.amberAccent,
+              ),
+              onRatingUpdate: (rating) {
+                setState(() {
+                  _rating = rating;
+                });
+              },
             ),
             const SizedBox(height: 24),
             Text(
