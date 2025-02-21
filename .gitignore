@@ -4,9 +4,6 @@
 *.pyc
 *.swp
 .DS_Store
-.AppleDouble
-.LSOverride
-Icon?
 .atom/
 .buildlog/
 .history
@@ -33,13 +30,6 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-
-# Xcode (macOS) specific
-*.pbxuser
-*.mode1v3
-*.mode2v3
-*.perspectivev3
-xcuserdata/
 
 # Symbolication related
 app.*.symbols

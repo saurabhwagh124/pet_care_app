@@ -1,10 +1,8 @@
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:pet_care_app/model/boarding_model.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
-import 'package:pet_care_app/view/user_views/boarding_details_screen.dart';
 
 class BoardingCard extends StatelessWidget {
   final BoardingModel data;
@@ -13,11 +11,7 @@ class BoardingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-         Get.to(() => BoardingDetailsScreen(
-              data:data,
-            ));
-      },
+      onTap: () {},
       child: Container(
         margin: EdgeInsets.all(20.r),
         padding: EdgeInsets.all(10.r),
@@ -32,7 +26,7 @@ class BoardingCard extends StatelessWidget {
                     SizedBox(
                       height: 40.h,
                       width: 70.w,
-                      child: Image.network(data.photoUrls.first),
+                      child: Image.asset(data.imageUrl),
                     ),
                   ],
                 ),
@@ -44,7 +38,7 @@ class BoardingCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      data.name ?? "",
+                      data.name,
                       style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.black),
                     ),
                     Wrap(
@@ -59,10 +53,10 @@ class BoardingCard extends StatelessWidget {
                           halfFilledColor: Colors.amberAccent,
                           isHalfAllowed: true,
                           maxRating: 5,
-                          initialRating: data.reviewScore ?? 0.0,
+                          initialRating: data.rating,
                         ),
                         Text(
-                          "${data.reviewScore} {${data.noOfReviews}reviews}",
+                          "${data.rating} {${data.reviewCount}reviews}",
                           style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: Colors.black),
                         )
                       ],
@@ -73,26 +67,20 @@ class BoardingCard extends StatelessWidget {
             ),
             Row(
               children: [
-                // Text(
-                //   (data.) ? "Open" : "Closed",
-                //   style: TextStyle(
-                //       fontSize: 14.sp,
-                //       fontWeight: FontWeight.w400,
-                //       color: (data.isOpen) ? Colors.green : Colors.red),
-                // ),
-                // const Spacer(),
-                // Icon(
-                //   Icons.location_pin,
-                //   size: 15.sp,
-                //   color: Colors.black,
-                // ),
-                // Text(
-                //   "${data.distance}km",
-                //   style: TextStyle(
-                //       fontSize: 14.sp,
-                //       fontWeight: FontWeight.w400,
-                //       color: Colors.black),
-                // ),
+                Text(
+                  (data.isOpen) ? "Open" : "Closed",
+                  style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400, color: (data.isOpen) ? Colors.green : Colors.red),
+                ),
+                const Spacer(),
+                Icon(
+                  Icons.location_pin,
+                  size: 15.sp,
+                  color: Colors.black,
+                ),
+                Text(
+                  "${data.distance}km",
+                  style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400, color: Colors.black),
+                ),
                 SizedBox(
                   width: 10.w,
                 ),
@@ -102,7 +90,7 @@ class BoardingCard extends StatelessWidget {
                   color: Colors.black,
                 ),
                 Text(
-                  "${data.fees}",
+                  "${data.price}",
                   style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400, color: Colors.black),
                 )
               ],
@@ -121,8 +109,8 @@ class BoardingCard extends StatelessWidget {
                   width: 10.w,
                 ),
                 Text(
-                  "${data.startDay} - ${data.endDay} at ${data.startTime} - ${data.closeTime}",
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12.sp, color: Colors.black),
+                  "${data.startDay} - ${data.endDay} at ${data.startTime}am - ${data.endTime}pm",
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14.sp, color: Colors.black),
                 )
               ],
             )
