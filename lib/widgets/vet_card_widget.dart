@@ -1,22 +1,19 @@
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/route_manager.dart';
-import 'package:pet_care_app/model/vet_doc_model.dart';
+import 'package:pet_care_app/model/vet_doctor_model.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
-import 'package:pet_care_app/view/user_views/veterinary_doctor_screen.dart';
+import 'package:pet_care_app/view/veterinary_doctor_screen.dart';
 
 class VetCardWidget extends StatelessWidget {
-  final VetDocModel data;
+  final VetDoctorModel data;
   const VetCardWidget({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => VeterinaryDoctor(
-              data: data,
-            ));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => const VeterinaryDoctor()));
       },
       child: Container(
         margin: EdgeInsets.all(10.r),
@@ -41,8 +38,8 @@ class VetCardWidget extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child: Image.network(
-                    data.photoUrl ?? "",
+                  child: Image.asset(
+                    data.profileImg,
                     width: 60.w,
                   ),
                 ),
@@ -52,7 +49,7 @@ class VetCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        data.name ?? "",
+                        "Dr. ${data.name}",
                         style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w500,
@@ -60,7 +57,7 @@ class VetCardWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        data.specialization ?? "",
+                        data.degree,
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w400,
@@ -76,13 +73,13 @@ class VetCardWidget extends StatelessWidget {
                             isHalfAllowed: true,
                             filledIcon: Icons.star,
                             emptyIcon: Icons.star_border,
-                            initialRating: data.reviewScore!.toDouble(),
+                            initialRating: data.reviewStars,
                             maxRating: 5,
                             filledColor: Colors.amberAccent,
                             emptyColor: Colors.grey,
                           ),
                           Text(
-                            "${data.reviewScore} (${data.noOfReviews} reviews)",
+                            "${data.reviewStars} (${data.numberOfReview} reviews)",
                             style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
                           ),
                         ],
@@ -90,7 +87,7 @@ class VetCardWidget extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "${data.experienceYears} years of experience",
+                            "${data.yearsOfExp} years of experience",
                             style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w400,
@@ -98,16 +95,16 @@ class VetCardWidget extends StatelessWidget {
                             ),
                           ),
                           const Spacer(),
-                          // Icon(
-                          //   Icons.location_pin,
-                          //   color: Colors.black,
-                          //   size: 15.sp,
-                          // ),
-                          // Text(
-                          //   "${data.distance} km",
-                          //   style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, color: Colors.black),
-                          // ),
-                          // const Spacer(),
+                          Icon(
+                            Icons.location_pin,
+                            color: Colors.black,
+                            size: 15.sp,
+                          ),
+                          Text(
+                            "${data.distance} km",
+                            style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400, color: Colors.black),
+                          ),
+                          const Spacer(),
                           Icon(
                             Icons.currency_rupee_outlined,
                             color: Colors.black,
@@ -142,7 +139,7 @@ class VetCardWidget extends StatelessWidget {
                   width: 10.w,
                 ),
                 Text(
-                  "${data.startDay} - ${data.endDay} at ${data.startTime} am - ${data.closeTime} pm",
+                  "${data.startDay} - ${data.endDay} at ${data.startTime} am - ${data.endTime} pm",
                   style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w400,

@@ -13,8 +13,6 @@ class AuthService {
   Future<User?> createUserWithMailAndPassword(String email, String password) async {
     try {
       final cred = await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      String logger = cred.user!.getIdToken().toString();
-      log(logger);
       return cred.user;
     } catch (e) {
       log("create user with mail and password error: ->$e");
@@ -24,12 +22,10 @@ class AuthService {
 
   Future<User?> loginUserWithMailAndPassword(String email, String password) async {
     try {
-      log("email: $email");
-      log("pass: $password");
       final cred = await _auth.signInWithEmailAndPassword(email: email, password: password);
       return cred.user;
     } catch (e) {
-      log("login with email and password error: -> $e");
+      log("Signin with email and password error: -> $e");
       Fluttertoast.showToast(msg: e.toString(), backgroundColor: Colors.red[300], gravity: ToastGravity.BOTTOM, toastLength: Toast.LENGTH_LONG, fontSize: 16.sp);
     }
     return null;
