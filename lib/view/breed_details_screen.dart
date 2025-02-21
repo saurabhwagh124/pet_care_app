@@ -16,11 +16,13 @@ class BreedDetailsScreen extends StatelessWidget {
         backgroundColor: const Color(0xFFFFA726),
         title: Text(
           breed.name,
-          style: GoogleFonts.fredoka(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
+          style: GoogleFonts.fredoka(
+              fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white), // Set arrow color to white
+          icon: Icon(Icons.arrow_back_ios_rounded,
+              color: Colors.white), // Set arrow color to white
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -33,7 +35,7 @@ class BreedDetailsScreen extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
-                breed.imageUrl.toString(),
+                breed.imageUrl,
                 height: 300,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -42,7 +44,8 @@ class BreedDetailsScreen extends StatelessWidget {
                   return Container(
                     height: 200,
                     color: Colors.grey.shade300,
-                    child: const Icon(Icons.image_not_supported, size: 100, color: Colors.grey),
+                    child: Icon(Icons.image_not_supported,
+                        size: 100, color: Colors.grey),
                   );
                 },
               ),
@@ -50,13 +53,16 @@ class BreedDetailsScreen extends StatelessWidget {
             const SizedBox(height: 16),
 
             // Details Section
-            _buildDetailTile("Size & Lifespan", "${breed.size} | ${breed.lifespan}"),
+            _buildDetailTile(
+                "Size & Lifespan", "${breed.size} | ${breed.lifespan}"),
             _buildDetailTile("Temperament", breed.temperament),
             _buildDetailTile("Health Issues", breed.healthIssues),
             _buildDetailTile("Grooming Needs", breed.groomingNeeds),
             _buildDetailTile("Diet & Nutrition", breed.dietNutrition),
-            _buildDetailTile("Exercise Requirements", breed.exerciseRequirements),
-            _buildDetailTile("Trainability & Intelligence", breed.trainabilityIntelligence),
+            _buildDetailTile(
+                "Exercise Requirements", breed.exerciseRequirements),
+            _buildDetailTile(
+                "Trainability & Intelligence", breed.trainabilityIntelligence),
             _buildDetailTile("Climate Suitability", breed.climateSuitability),
             _buildDetailTile("Space Needs", breed.apartmentSpaceNeeds),
             _buildDetailTile("Purpose & Suitability", breed.purposeSuitability),
@@ -75,13 +81,17 @@ class BreedDetailsScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey.shade300,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(2, 2))],
+        boxShadow: [
+          BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(2, 2))
+        ],
       ),
       child: RichText(
         text: TextSpan(
           style: GoogleFonts.fredoka(fontSize: 16, color: Colors.black87),
           children: [
-            TextSpan(text: "$title: ", style: const TextStyle(fontWeight: FontWeight.bold)),
+            TextSpan(
+                text: "$title: ",
+                style: TextStyle(fontWeight: FontWeight.bold)),
             TextSpan(text: value),
           ],
         ),
