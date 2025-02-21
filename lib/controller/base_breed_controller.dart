@@ -1,4 +1,6 @@
-import '../model/base_breed_model.dart';
+
+
+import 'package:pet_care_app/model/base_breed_model.dart';
 
 class BaseBreedController {
   List<BaseBreed> getBreeds(String category) {
@@ -7,7 +9,7 @@ class BaseBreedController {
         return [
           BaseBreed(
             name: 'German Shepherd',
-            imageUrl:'assets/images/DOGS/german.jpg',
+            imageUrl: "assets/images/DOGS/german.jpg",
             size: 'Large breed;',
             lifespan: 'lifespan of 9–13 years.',
             temperament: 'Loyal, intelligent, protective; can be friendly if socialized well.',
@@ -20,7 +22,8 @@ class BaseBreedController {
             apartmentSpaceNeeds: 'Not ideal for apartments; needs a large area to move around.',
             purposeSuitability: 'Great for guarding, security, and active families; requires experienced handling.',
             adoptionBuying: 'Buying is expensive; better suited for those who can handle their exercise and training needs.',
-          ),BaseBreed(
+          ),
+          BaseBreed(
             name: 'Chow Chow',
             imageUrl: 'assets/images/DOGS/chow.jpg',
             size: 'Medium to large breed',
@@ -38,7 +41,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Bulldog',
-            imageUrl:'assets/images/DOGS/bulldog.jpg',
+            imageUrl: 'assets/images/DOGS/bulldog.jpg',
             size: 'Medium breed',
             lifespan: 'lifespan of 8–12 years.',
             temperament: 'Calm, courageous, friendly, and affectionate; great companion.',
@@ -54,7 +57,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Labrador Retriever',
-            imageUrl:'assets/images/DOGS/labraa.jpg',
+            imageUrl: 'assets/images/DOGS/labraa.jpg',
             size: 'Medium to large breed',
             lifespan: 'lifespan of 10–14 years.',
             temperament: 'Friendly, affectionate, intelligent, and social; great with families and kids.',
@@ -70,7 +73,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Rottweiler',
-            imageUrl:'assets/images/DOGS/rott.jpg',
+            imageUrl: 'assets/images/DOGS/rott.jpg',
             size: 'Large breed;',
             lifespan: 'lifespan of 9–12 years.',
             temperament: 'Loyal, confident, protective, and intelligent.',
@@ -86,7 +89,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Beagle',
-            imageUrl:'assets/images/DOGS/beagle.jpg',
+            imageUrl: 'assets/images/DOGS/beagle.jpg',
             size: 'Small to medium breed',
             lifespan: 'lifespan of 12–15 years.',
             temperament: 'Friendly, curious, energetic, and playful.',
@@ -105,7 +108,7 @@ class BaseBreedController {
         return [
           BaseBreed(
             name: 'Persian',
-            imageUrl:'assets/images/CATS/persian.jpg',
+            imageUrl: 'assets/images/CATS/persian.jpg',
             size: 'Medium-sized',
             lifespan: '12–16 years',
             temperament: 'Calm, affectionate, and independent; can be reserved but loves attention.',
@@ -122,7 +125,7 @@ class BaseBreedController {
           BaseBreed(
             name: 'British Shorthair',
             size: 'Medium to large',
-            imageUrl:'assets/images/CATS/shorthair.jpg',
+            imageUrl: 'assets/images/CATS/shorthair.jpg',
             lifespan: '12–20 years',
             temperament: 'Calm, independent, and affectionate.',
             healthIssues: 'Prone to heart disease, dental problems, and obesity.',
@@ -137,7 +140,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'British Longhair',
-            imageUrl:'assets/images/CATS/longhair.jpg',
+            imageUrl: 'assets/images/CATS/longhair.jpg',
             size: 'Medium to large',
             lifespan: '12–16 years',
             temperament: 'Calm, gentle, and affectionate.',
@@ -153,7 +156,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Scottish Fold',
-            imageUrl:'assets/images/CATS/foldd.jpg',
+            imageUrl: 'assets/images/CATS/foldd.jpg',
             size: 'Medium-sized',
             lifespan: '11–15 years',
             temperament: 'Sweet, calm, and affectionate.',
@@ -169,7 +172,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Bombay Cat',
-            imageUrl:'assets/images/CATS/bombay.jpg',
+            imageUrl: 'assets/images/CATS/bombay.jpg',
             size: 'Medium-sized',
             lifespan: '12–16 years',
             temperament: 'Affectionate, playful, and confident.',
@@ -184,7 +187,7 @@ class BaseBreedController {
             adoptionBuying: 'Available for adoption.',
           ),
           BaseBreed(
-            imageUrl:'assets/images/CATS/ragdoll.JPG',
+            imageUrl: 'assets/images/CATS/ragdoll.JPG',
             name: 'Ragdoll',
             size: 'Large',
             lifespan: '12–15 years',
@@ -201,7 +204,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Sphynx cat',
-            imageUrl:'assets/images/CATS/sphynxx.jpg',
+            imageUrl: 'assets/images/CATS/sphynxx.jpg',
             size: 'Medium-sized',
             lifespan: '12–16 years',
             temperament: 'Affectionate, energetic, and curious.',
@@ -218,123 +221,122 @@ class BaseBreedController {
         ];
       case 'Bird':
         return [
-
-             BaseBreed(
-    name: "Parrot",
-    imageUrl: "assets/images/parrot.jpg",
-    size: "Varies by species",
-    lifespan: "10–80 years",
-    temperament: "Affectionate, energetic, and social",
-    healthIssues: "Prone to feather plucking, respiratory issues, and obesity",
-    groomingNeeds: "Moderate; requires feather care, nail trimming, and beak maintenance",
-    dietNutrition: "Balanced diet of pellets, fruits, vegetables, and occasional seeds",
-    exerciseRequirements: "High; need regular physical and mental stimulation",
-    trainabilityIntelligence: "Highly intelligent and trainable",
-    apartmentSpaceNeeds: "Suitable for apartment living if given adequate space and interaction",
-    climateSuitability: "Best suited for warm climates",
-    purposeSuitability: "Ideal companion pet; not suited for those unable to commit to their care",
-    adoptionBuying: "Available for adoption, a great option for providing a forever home",
-  ),
-  BaseBreed(
-    name: "Cockatiel",
-    imageUrl: "assets/images/cockatiel.jpg",
-    size: "Small to medium-sized",
-    lifespan: "10–20 years",
-    temperament: "Friendly, affectionate, and playful",
-    healthIssues: "Prone to respiratory issues, feather plucking, and obesity",
-    groomingNeeds: "Low to moderate; requires regular feather care, nail trimming, and beak maintenance",
-    dietNutrition: "Balanced diet of pellets, seeds, fruits, and vegetables",
-    exerciseRequirements: "Moderate to high; need daily stimulation",
-    trainabilityIntelligence: "Intelligent and trainable",
-    apartmentSpaceNeeds: "Well-suited for apartment living",
-    climateSuitability: "Best suited for moderate climates",
-    purposeSuitability: "Ideal companion pet; perfect for families and singles",
-    adoptionBuying: "Available for adoption, a great option for providing a loving home",
-  ),
-  BaseBreed(
-    name: "Hyacinth Macaw",
-    imageUrl: "assets/images/hyacinath.jpg",
-    size: "Large breed",
-    lifespan: "50–60 years",
-    temperament: "Affectionate, playful, and intelligent",
-    healthIssues: "Prone to feather plucking, heart disease, and respiratory issues",
-    groomingNeeds: "Moderate; requires regular feather maintenance and beak care",
-    dietNutrition: "Varied diet of high-quality pellets, nuts, seeds, fruits, and vegetables",
-    exerciseRequirements: "High; need daily physical and mental exercise",
-    trainabilityIntelligence: "Highly intelligent and trainable",
-    apartmentSpaceNeeds: "Not well-suited for apartment living; need a large aviary or open space",
-    climateSuitability: "Best suited for warm climates",
-    purposeSuitability: "Ideal for experienced bird owners",
-    adoptionBuying: "Available for adoption, though often expensive",
-  ),
-  BaseBreed(
-    name: "Lovebird",
-    imageUrl: "assets/images/lovebird.jpg",
-    size: "Small breed",
-    lifespan: "10–15 years",
-    temperament: "Affectionate, social, and playful",
-    healthIssues: "Prone to respiratory infections, feather plucking, and obesity",
-    groomingNeeds: "Low to moderate; requires regular beak care, nail trimming, and occasional baths",
-    dietNutrition: "Balanced diet of pellets, seeds, fruits, and vegetables",
-    exerciseRequirements: "Moderate to high; active and enjoy flying and climbing",
-    trainabilityIntelligence: "Intelligent and trainable",
-    apartmentSpaceNeeds: "Well-suited for apartment living; require a cage with space",
-    climateSuitability: "Best suited for moderate climates",
-    purposeSuitability: "Ideal companion pet; perfect for people looking for a small, social bird",
-    adoptionBuying: "Available for adoption, a great option for those looking to provide a loving home",
-  ),
-  BaseBreed(
-    name: "Scarlet Macaw",
-    imageUrl: "assets/images/scarlet.jpg",
-    size: "Large breed",
-    lifespan: "40–50 years",
-    temperament: "Affectionate, intelligent, and playful",
-    healthIssues: "Prone to feather plucking, obesity, and respiratory issues",
-    groomingNeeds: "Moderate; requires regular beak and nail trimming",
-    dietNutrition: "Requires a varied diet of pellets, seeds, nuts, fruits, and vegetables",
-    exerciseRequirements: "High; need daily physical and mental exercise",
-    trainabilityIntelligence: "Highly intelligent and trainable",
-    apartmentSpaceNeeds: "Not ideal for apartment living; requires ample space",
-    climateSuitability: "Best suited for warm climates",
-    purposeSuitability: "Ideal companion for experienced bird owners",
-    adoptionBuying: "Available for adoption, often expensive",
-  ),
-  BaseBreed(
-    name: "Columbidae (Pigeon/Dove)",
-    imageUrl: "assets/images/pigeon.jpg",
-    size: "Medium-sized birds",
-    lifespan: "5–15 years",
-    temperament: "Gentle, peaceful, and social",
-    healthIssues: "Prone to respiratory infections, parasites, and obesity",
-    groomingNeeds: "Low; require regular cage cleaning and occasional nail trimming",
-    dietNutrition: "Diet of seeds, grains, and occasional fruits and vegetables",
-    exerciseRequirements: "Moderate; need space to fly and exercise",
-    trainabilityIntelligence: "Moderate intelligence; can learn simple tricks",
-    apartmentSpaceNeeds: "Suitable for apartment living if given adequate space",
-    climateSuitability: "Best suited for temperate climates",
-    purposeSuitability: "Ideal for low-maintenance, calm companionship",
-    adoptionBuying: "Available for adoption from rescues or sanctuaries",
-  ),
-  BaseBreed(
-    name: "House Sparrow",
-    imageUrl: "assets/images/sparrow.jpg",
-    size: "Small breed",
-    lifespan: "3–5 years in the wild",
-    temperament: "Social, active, and curious",
-    healthIssues: "Prone to respiratory infections, mites, and parasites",
-    groomingNeeds: "Low; generally self-sufficient in grooming",
-    dietNutrition: "Primarily seeds, grains, and fruits",
-    exerciseRequirements: "Moderate; need space to move and fly",
-    trainabilityIntelligence: "Moderate intelligence; adaptable to their environment",
-    apartmentSpaceNeeds: "Can be kept in a large indoor aviary or protected outdoor area",
-    climateSuitability: "Best suited for temperate climates",
-    purposeSuitability: "Ideal for bird enthusiasts looking for a low-maintenance pet",
-    adoptionBuying: "Can be adopted from local rescues or rehabilitated if wild-caught",
-  ),
-  ];
-   case 'Aquatic':
+          BaseBreed(
+            name: "Parrot",
+            imageUrl: "assets/images/parrot.jpg",
+            size: "Varies by species",
+            lifespan: "10–80 years",
+            temperament: "Affectionate, energetic, and social",
+            healthIssues: "Prone to feather plucking, respiratory issues, and obesity",
+            groomingNeeds: "Moderate; requires feather care, nail trimming, and beak maintenance",
+            dietNutrition: "Balanced diet of pellets, fruits, vegetables, and occasional seeds",
+            exerciseRequirements: "High; need regular physical and mental stimulation",
+            trainabilityIntelligence: "Highly intelligent and trainable",
+            apartmentSpaceNeeds: "Suitable for apartment living if given adequate space and interaction",
+            climateSuitability: "Best suited for warm climates",
+            purposeSuitability: "Ideal companion pet; not suited for those unable to commit to their care",
+            adoptionBuying: "Available for adoption, a great option for providing a forever home",
+          ),
+          BaseBreed(
+            name: "Cockatiel",
+            imageUrl: "assets/images/cockatiel.jpg",
+            size: "Small to medium-sized",
+            lifespan: "10–20 years",
+            temperament: "Friendly, affectionate, and playful",
+            healthIssues: "Prone to respiratory issues, feather plucking, and obesity",
+            groomingNeeds: "Low to moderate; requires regular feather care, nail trimming, and beak maintenance",
+            dietNutrition: "Balanced diet of pellets, seeds, fruits, and vegetables",
+            exerciseRequirements: "Moderate to high; need daily stimulation",
+            trainabilityIntelligence: "Intelligent and trainable",
+            apartmentSpaceNeeds: "Well-suited for apartment living",
+            climateSuitability: "Best suited for moderate climates",
+            purposeSuitability: "Ideal companion pet; perfect for families and singles",
+            adoptionBuying: "Available for adoption, a great option for providing a loving home",
+          ),
+          BaseBreed(
+            name: "Hyacinth Macaw",
+            imageUrl: "assets/images/hyacinath.jpg",
+            size: "Large breed",
+            lifespan: "50–60 years",
+            temperament: "Affectionate, playful, and intelligent",
+            healthIssues: "Prone to feather plucking, heart disease, and respiratory issues",
+            groomingNeeds: "Moderate; requires regular feather maintenance and beak care",
+            dietNutrition: "Varied diet of high-quality pellets, nuts, seeds, fruits, and vegetables",
+            exerciseRequirements: "High; need daily physical and mental exercise",
+            trainabilityIntelligence: "Highly intelligent and trainable",
+            apartmentSpaceNeeds: "Not well-suited for apartment living; need a large aviary or open space",
+            climateSuitability: "Best suited for warm climates",
+            purposeSuitability: "Ideal for experienced bird owners",
+            adoptionBuying: "Available for adoption, though often expensive",
+          ),
+          BaseBreed(
+            name: "Lovebird",
+            imageUrl: "assets/images/lovebird.jpg",
+            size: "Small breed",
+            lifespan: "10–15 years",
+            temperament: "Affectionate, social, and playful",
+            healthIssues: "Prone to respiratory infections, feather plucking, and obesity",
+            groomingNeeds: "Low to moderate; requires regular beak care, nail trimming, and occasional baths",
+            dietNutrition: "Balanced diet of pellets, seeds, fruits, and vegetables",
+            exerciseRequirements: "Moderate to high; active and enjoy flying and climbing",
+            trainabilityIntelligence: "Intelligent and trainable",
+            apartmentSpaceNeeds: "Well-suited for apartment living; require a cage with space",
+            climateSuitability: "Best suited for moderate climates",
+            purposeSuitability: "Ideal companion pet; perfect for people looking for a small, social bird",
+            adoptionBuying: "Available for adoption, a great option for those looking to provide a loving home",
+          ),
+          BaseBreed(
+            name: "Scarlet Macaw",
+            imageUrl: "assets/images/scarlet.jpg",
+            size: "Large breed",
+            lifespan: "40–50 years",
+            temperament: "Affectionate, intelligent, and playful",
+            healthIssues: "Prone to feather plucking, obesity, and respiratory issues",
+            groomingNeeds: "Moderate; requires regular beak and nail trimming",
+            dietNutrition: "Requires a varied diet of pellets, seeds, nuts, fruits, and vegetables",
+            exerciseRequirements: "High; need daily physical and mental exercise",
+            trainabilityIntelligence: "Highly intelligent and trainable",
+            apartmentSpaceNeeds: "Not ideal for apartment living; requires ample space",
+            climateSuitability: "Best suited for warm climates",
+            purposeSuitability: "Ideal companion for experienced bird owners",
+            adoptionBuying: "Available for adoption, often expensive",
+          ),
+          BaseBreed(
+            name: "Columbidae (Pigeon/Dove)",
+            imageUrl: "assets/images/pigeon.jpg",
+            size: "Medium-sized birds",
+            lifespan: "5–15 years",
+            temperament: "Gentle, peaceful, and social",
+            healthIssues: "Prone to respiratory infections, parasites, and obesity",
+            groomingNeeds: "Low; require regular cage cleaning and occasional nail trimming",
+            dietNutrition: "Diet of seeds, grains, and occasional fruits and vegetables",
+            exerciseRequirements: "Moderate; need space to fly and exercise",
+            trainabilityIntelligence: "Moderate intelligence; can learn simple tricks",
+            apartmentSpaceNeeds: "Suitable for apartment living if given adequate space",
+            climateSuitability: "Best suited for temperate climates",
+            purposeSuitability: "Ideal for low-maintenance, calm companionship",
+            adoptionBuying: "Available for adoption from rescues or sanctuaries",
+          ),
+          BaseBreed(
+            name: "House Sparrow",
+            imageUrl: "assets/images/sparrow.jpg",
+            size: "Small breed",
+            lifespan: "3–5 years in the wild",
+            temperament: "Social, active, and curious",
+            healthIssues: "Prone to respiratory infections, mites, and parasites",
+            groomingNeeds: "Low; generally self-sufficient in grooming",
+            dietNutrition: "Primarily seeds, grains, and fruits",
+            exerciseRequirements: "Moderate; need space to move and fly",
+            trainabilityIntelligence: "Moderate intelligence; adaptable to their environment",
+            apartmentSpaceNeeds: "Can be kept in a large indoor aviary or protected outdoor area",
+            climateSuitability: "Best suited for temperate climates",
+            purposeSuitability: "Ideal for bird enthusiasts looking for a low-maintenance pet",
+            adoptionBuying: "Can be adopted from local rescues or rehabilitated if wild-caught",
+          ),
+        ];
+      case 'Aquatic':
         return [
-           BaseBreed(
+          BaseBreed(
             name: 'Goldfish',
             imageUrl: 'assets/images/FISH/goldfish.jpg',
             size: '15-30 cm',
@@ -433,8 +435,7 @@ class BaseBreedController {
         ];
       case 'Others':
         return [
-
-            BaseBreed(
+          BaseBreed(
             name: 'Rabbit',
             imageUrl: 'assets/images/OTHERS/rabbit.png', // Replace with actual image URL
             size: '1-6+ kg (varies by breed)',
@@ -484,7 +485,6 @@ class BaseBreedController {
             purposeSuitability: 'Ideal for small living spaces, requires regular interaction and care',
             adoptionBuying: 'Low cost but requires regular care, cleaning, and interaction',
           ),
-
         ];
       default:
         return [];

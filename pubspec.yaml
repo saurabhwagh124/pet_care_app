@@ -32,6 +32,12 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/birds/
+    - assets/images/cats/
+    - assets/images/dogs/
+    - assets/images/fish/
+    - assets/images/others/
+
   # fonts:
   #   - family: Fredoka
   #     fonts:
