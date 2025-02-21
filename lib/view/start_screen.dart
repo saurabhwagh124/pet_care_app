@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/view/login_screen.dart';
@@ -16,7 +18,11 @@ class StartScreen extends StatefulWidget {
 
 class _StartScreenState extends State<StartScreen> {
   int screen = 0;
-  List<String> imageList = [AppImages.splash1Img, AppImages.splash2Img, AppImages.splash3Img];
+  List<String> imageList = [
+    AppImages.splash1Img,
+    AppImages.splash2Img,
+    AppImages.splash3Img
+  ];
   List<String> buttonTextList = ['Next', 'Next', 'GetStarted'];
 
   @override
@@ -38,7 +44,11 @@ class _StartScreenState extends State<StartScreen> {
               ),
               Expanded(
                 child: Container(
-                  decoration: BoxDecoration(color: AppColors.white90, borderRadius: BorderRadius.only(topLeft: Radius.circular(30.r), topRight: Radius.circular(30.r))),
+                  decoration: BoxDecoration(
+                      color: AppColors.white90,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30.r),
+                          topRight: Radius.circular(30.r))),
                   padding: EdgeInsets.all(20.h),
                   child: (screen > 0)
                       ? (screen == 2)
@@ -69,17 +79,26 @@ class _StartScreenState extends State<StartScreen> {
             Container(
               height: 7.h,
               width: 50.w,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(40.r), color: (screen == 0) ? Colors.grey : AppColors.white90, border: Border.all(color: Colors.grey)),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  color: (screen == 0) ? Colors.grey : AppColors.white90,
+                  border: Border.all(color: Colors.grey)),
             ),
             Container(
               height: 7.h,
               width: 50.w,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(40.r), color: (screen == 1) ? Colors.grey : AppColors.white90, border: Border.all(color: Colors.grey)),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  color: (screen == 1) ? Colors.grey : AppColors.white90,
+                  border: Border.all(color: Colors.grey)),
             ),
             Container(
               height: 7.h,
               width: 50.w,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(40.r), color: (screen == 2) ? Colors.grey : AppColors.white90, border: Border.all(color: Colors.grey)),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  color: (screen == 2) ? Colors.grey : AppColors.white90,
+                  border: Border.all(color: Colors.grey)),
             )
           ],
         ),
@@ -95,11 +114,17 @@ class _StartScreenState extends State<StartScreen> {
           children: [
             Text(
               "Sit back and relax we'll take care",
-              style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.lightGreyText, fontSize: 16.sp),
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.lightGreyText,
+                  fontSize: 16.sp),
             ),
             Text(
               "of your pet needs",
-              style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.lightGreyText, fontSize: 16.sp),
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.lightGreyText,
+                  fontSize: 16.sp),
             ),
           ],
         ),
@@ -118,13 +143,18 @@ class _StartScreenState extends State<StartScreen> {
           child: Container(
             height: 50.h,
             width: 350.w,
-            decoration: BoxDecoration(color: AppColors.orangeButton, borderRadius: BorderRadius.circular(10.r)),
+            decoration: BoxDecoration(
+                color: AppColors.orangeButton,
+                borderRadius: BorderRadius.circular(10.r)),
             child: Row(
               children: [
                 const Spacer(),
                 Text(
                   buttonTextList[screen],
-                  style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700, color: const Color(0xFFFFFFFF)),
+                  style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w700,
+                      color: const Color(0xFFFFFFFF)),
                 ),
                 const Spacer(),
                 Icon(
@@ -159,17 +189,26 @@ class _StartScreenState extends State<StartScreen> {
             Container(
               height: 7.h,
               width: 50.w,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(40.r), color: (screen == 0) ? Colors.grey : AppColors.white90, border: Border.all(color: Colors.grey)),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  color: (screen == 0) ? Colors.grey : AppColors.white90,
+                  border: Border.all(color: Colors.grey)),
             ),
             Container(
               height: 7.h,
               width: 50.w,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(40.r), color: (screen == 1) ? Colors.grey : AppColors.white90, border: Border.all(color: Colors.grey)),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  color: (screen == 1) ? Colors.grey : AppColors.white90,
+                  border: Border.all(color: Colors.grey)),
             ),
             Container(
               height: 7.h,
               width: 50.w,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(40.r), color: (screen == 2) ? Colors.grey : AppColors.white90, border: Border.all(color: Colors.grey)),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  color: (screen == 2) ? Colors.grey : AppColors.white90,
+                  border: Border.all(color: Colors.grey)),
             )
           ],
         ),
@@ -181,19 +220,31 @@ class _StartScreenState extends State<StartScreen> {
           children: [
             Text(
               "One tap for foods, accessories, health ",
-              style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.lightGreyText, fontSize: 16.sp),
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.lightGreyText,
+                  fontSize: 16.sp),
             ),
             Text(
               "care products & digital gadgets",
-              style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.lightGreyText, fontSize: 16.sp),
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.lightGreyText,
+                  fontSize: 16.sp),
             ),
             Text(
               "Grooming & boarding",
-              style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.lightGreyText, fontSize: 16.sp),
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.lightGreyText,
+                  fontSize: 16.sp),
             ),
             Text(
               "Easy & best consultation bookings",
-              style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.lightGreyText, fontSize: 16.sp),
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.lightGreyText,
+                  fontSize: 16.sp),
             ),
           ],
         ),
@@ -212,13 +263,18 @@ class _StartScreenState extends State<StartScreen> {
           child: Container(
             height: 50.h,
             width: 350.w,
-            decoration: BoxDecoration(color: AppColors.orangeButton, borderRadius: BorderRadius.circular(10.r)),
+            decoration: BoxDecoration(
+                color: AppColors.orangeButton,
+                borderRadius: BorderRadius.circular(10.r)),
             child: Row(
               children: [
                 const Spacer(),
                 Text(
                   buttonTextList[screen],
-                  style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700, color: const Color(0xFFFFFFFF)),
+                  style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w700,
+                      color: const Color(0xFFFFFFFF)),
                 ),
                 const Spacer(),
                 Icon(
@@ -253,17 +309,26 @@ class _StartScreenState extends State<StartScreen> {
             Container(
               height: 7.h,
               width: 50.w,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(40.r), color: (screen == 0) ? Colors.grey : AppColors.white90, border: Border.all(color: Colors.grey)),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  color: (screen == 0) ? Colors.grey : AppColors.white90,
+                  border: Border.all(color: Colors.grey)),
             ),
             Container(
               height: 7.h,
               width: 50.w,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(40.r), color: (screen == 1) ? Colors.grey : AppColors.white90, border: Border.all(color: Colors.grey)),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  color: (screen == 1) ? Colors.grey : AppColors.white90,
+                  border: Border.all(color: Colors.grey)),
             ),
             Container(
               height: 7.h,
               width: 50.w,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(40.r), color: (screen == 2) ? Colors.grey : AppColors.white90, border: Border.all(color: Colors.grey)),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(40.r),
+                  color: (screen == 2) ? Colors.grey : AppColors.white90,
+                  border: Border.all(color: Colors.grey)),
             )
           ],
         ),
@@ -276,22 +341,31 @@ class _StartScreenState extends State<StartScreen> {
           children: [
             Text(
               "24hrs health tracking and health updates",
-              style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.lightGreyText, fontSize: 16.sp),
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.lightGreyText,
+                  fontSize: 16.sp),
             ),
             Text(
               "On time feeding",
-              style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.lightGreyText, fontSize: 16.sp),
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.lightGreyText,
+                  fontSize: 16.sp),
             ),
             Text(
               "updates",
-              style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.lightGreyText, fontSize: 16.sp),
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.lightGreyText,
+                  fontSize: 16.sp),
             ),
           ],
         ),
         GestureDetector(
           onTap: () {
             if (screen == 2) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupScreen()));
+              Get.off(const SignupScreen());
             } else {
               setState(() {
                 screen += 1;
@@ -301,13 +375,18 @@ class _StartScreenState extends State<StartScreen> {
           child: Container(
             height: 50.h,
             width: 350.w,
-            decoration: BoxDecoration(color: AppColors.orangeButton, borderRadius: BorderRadius.circular(10.r)),
+            decoration: BoxDecoration(
+                color: AppColors.orangeButton,
+                borderRadius: BorderRadius.circular(10.r)),
             child: Row(
               children: [
                 const Spacer(),
                 Text(
                   buttonTextList[screen],
-                  style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700, color: AppColors.white),
+                  style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.white),
                 ),
                 const Spacer(),
                 Icon(
@@ -328,20 +407,22 @@ class _StartScreenState extends State<StartScreen> {
           children: [
             const Text(
               "Already have an account? ",
-              style: TextStyle(color: Color.fromRGBO(161, 161, 161, 1), fontSize: 15, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  color: Color.fromRGBO(161, 161, 161, 1),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600),
             ),
             GestureDetector(
               onTap: () {
                 log("Login tapped");
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Loginscreen(),
-                    ));
+                Get.off(const Loginscreen());
               },
               child: const Text(
                 "Login ",
-                style: TextStyle(color: Color.fromRGBO(0, 0, 0, 1), fontSize: 15, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                    color: Color.fromRGBO(0, 0, 0, 1),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700),
               ),
             ),
           ],
