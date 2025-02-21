@@ -5,6 +5,7 @@ import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/model/vet_doc_model.dart';
 import 'package:pet_care_app/view/user_views/book_appointment_screen.dart';
+import 'package:pet_care_app/view/user_views/review_screen.dart';
 
 class VeterinaryDoctor extends StatefulWidget {
   final VetDocModel data;
@@ -69,10 +70,6 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
                         const SizedBox(height: 8),
                         Row(
                           children: [
-                            Text(
-                              widget.data.reviewScore.toString(),
-                              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-                            ),
                             RatingBar.readOnly(
                               halfFilledIcon: Icons.star_half,
                               halfFilledColor: Colors.amberAccent,
@@ -162,6 +159,37 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
                       ),
                       Text(
                         "Book an Appointment",
+                        style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.white),
+                      ),
+                      const SizedBox(
+                        width: 35,
+                      ),
+                      const ImageIcon(
+                        AssetImage(
+                          "assets/images/deadlineIcon.png",
+                        ),
+                        color: Colors.white,
+                        size: 18,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => const ReviewsScreen());
+                },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(color: const Color.fromRGBO(245, 146, 69, 1), borderRadius: BorderRadius.circular(5)),
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 75,
+                      ),
+                      Text(
+                        "Review Screen",
                         style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.white),
                       ),
                       const SizedBox(
