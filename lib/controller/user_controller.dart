@@ -13,8 +13,9 @@ class UserController extends GetxController {
   void fetchUserData(String email) async {
     try {
       User temp = await userService.fetchUserData(email);
+      _userData.write("userId", temp.id);
       _userData.write("user", jsonEncode(temp.toJson()));
-      log( "Fetched user success" +_userData.read("user"));
+      log("Fetched user success ${_userData.read("user")}");
     } catch (e) {
       log("Error fetching user Data: $e");
     }

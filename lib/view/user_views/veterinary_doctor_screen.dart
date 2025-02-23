@@ -146,7 +146,7 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
               const SizedBox(height: 10),
               GestureDetector(
                 onTap: () {
-                  Get.to(() => const BookAppoinmentScreen());
+                  Get.to(() =>  BookAppoinmentScreen(doctor: widget.data,));
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -177,7 +177,7 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(() => const ReviewsScreen());
+                  Get.to(() =>  ReviewsScreen());
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
