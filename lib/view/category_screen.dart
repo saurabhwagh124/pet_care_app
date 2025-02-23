@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'breed_list_screen.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -11,28 +13,28 @@ class CategoryScreen extends StatelessWidget {
     {'name': 'Others', 'image': 'assets/images/cate_rab.jpg'},
   ];
 
+  CategoryScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar
-      (
+      appBar: AppBar(
         title: Text(
           "Pet Categories",
           style: GoogleFonts.fredoka(fontWeight: FontWeight.w700, fontSize: 22, color: Colors.white),
         ),
-        backgroundColor: Color(0xFFFFA726),
+        backgroundColor: const Color(0xFFFFA726),
         elevation: 0,
-          leading: IconButton(
-         icon: Icon(Icons.arrow_back_ios_rounded, color: Colors.white), // Set arrow color to white
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white), // Set arrow color to white
           onPressed: () => Navigator.pop(context),
-          ),
+        ),
       ),
-    
       body: Container(
         color: Colors.white,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 3 / 4,
             crossAxisSpacing: 10,
@@ -42,11 +44,8 @@ class CategoryScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BreedListScreen(category: categories[index]['name']!),
-                  ),
+                Get.to(
+                  () => BreedListScreen(category: categories[index]['name']!),
                 );
               },
               child: Container(
@@ -66,7 +65,7 @@ class CategoryScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ClipRRect(
-                        borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+                        borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
                         child: Image.asset(
                           categories[index]['image']!,
                           fit: BoxFit.cover,
@@ -75,7 +74,7 @@ class CategoryScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(
                         categories[index]['name']!,
                         style: GoogleFonts.fredoka(

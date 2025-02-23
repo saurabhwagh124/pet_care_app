@@ -1,17 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../model/base_breed_model.dart';
+import 'package:pet_care_app/model/base_breed_model.dart';
 
 class BreedDetailsScreen extends StatelessWidget {
   final BaseBreed breed;
 
-  BreedDetailsScreen({required this.breed});
+  const BreedDetailsScreen({super.key, required this.breed});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFFFA726),
+        backgroundColor: const Color(0xFFFFA726),
         title: Text(
           breed.name,
           style: GoogleFonts.fredoka(
@@ -38,6 +40,7 @@ class BreedDetailsScreen extends StatelessWidget {
                 width: double.infinity,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
+                  log("image errrororororor$error");
                   return Container(
                     height: 200,
                     color: Colors.grey.shade300,
@@ -47,7 +50,7 @@ class BreedDetailsScreen extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
 
             // Details Section
             _buildDetailTile(
@@ -73,8 +76,8 @@ class BreedDetailsScreen extends StatelessWidget {
   // Custom Styled Detail Tile
   Widget _buildDetailTile(String title, String value) {
     return Container(
-      margin: EdgeInsets.only(bottom: 12),
-      padding: EdgeInsets.all(12),
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.grey.shade300,
         borderRadius: BorderRadius.circular(10),

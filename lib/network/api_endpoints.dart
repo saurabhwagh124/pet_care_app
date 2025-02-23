@@ -6,11 +6,11 @@ class ApiEndpoints {
   static String getAllDoctorsUrl = "$baseUrl/doctors";
   static String getAllBoardingsUrl = "$baseUrl/boarding";
   static String getAllPetServicesUrl = "$baseUrl/pet-service";
-  static String getAllPetsOfUserUrl = "$baseUrl/users/{userEmail}/pets";
+  static String getAllPetsOfUserUrl = "$baseUrl/pet/users/{userEmail}";
   static String postUserPetUrl = "$baseUrl/pet";
   static String postUploadFileUrl = "$baseUrl/upload-file";
   static String postUploadMultipleFilesUrl = "$baseUrl/upload-multiple-files";
-  static String getAllShopItemUrl = "$baseUrl/shopItem-by-category/";
+  static String getAllShopItemUrl = "$baseUrl/shopItem/";
   static String checkAdminUrl = "$baseUrl/admin-access?email={MAIL}";
   static String getUserDataUrl = "$baseUrl/users?email={MAIL}";
 }

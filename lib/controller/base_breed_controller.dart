@@ -1,4 +1,6 @@
-import '../model/base_breed_model.dart';
+
+
+import 'package:pet_care_app/model/base_breed_model.dart';
 
 class BaseBreedController {
   List<BaseBreed> getBreeds(String category) {
@@ -20,7 +22,8 @@ class BaseBreedController {
             apartmentSpaceNeeds: 'Not ideal for apartments; needs a large area to move around.',
             purposeSuitability: 'Great for guarding, security, and active families; requires experienced handling.',
             adoptionBuying: 'Buying is expensive; better suited for those who can handle their exercise and training needs.',
-          ),BaseBreed(
+          ),
+          BaseBreed(
             name: 'Chow Chow',
             imageUrl: 'assets/images/dogs/chow.jpg',
             size: 'Medium to large breed',
@@ -334,7 +337,7 @@ class BaseBreedController {
   ];
    case 'Aquatic':
         return [
-           BaseBreed(
+          BaseBreed(
             name: 'Goldfish',
             imageUrl: 'assets/images/fish/goldfish.jpg',
             size: '15-30 cm',
@@ -433,8 +436,7 @@ class BaseBreedController {
         ];
       case 'Others':
         return [
-
-            BaseBreed(
+          BaseBreed(
             name: 'Rabbit',
             imageUrl: 'assets/images/others/rabbit.png', // Replace with actual image URL
             size: '1-6+ kg (varies by breed)',
@@ -484,7 +486,6 @@ class BaseBreedController {
             purposeSuitability: 'Ideal for small living spaces, requires regular interaction and care',
             adoptionBuying: 'Low cost but requires regular care, cleaning, and interaction',
           ),
-
         ];
       default:
         return [];
