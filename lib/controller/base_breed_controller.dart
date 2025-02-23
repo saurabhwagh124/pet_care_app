@@ -1,4 +1,6 @@
-import '../model/base_breed_model.dart';
+
+
+import 'package:pet_care_app/model/base_breed_model.dart';
 
 class BaseBreedController {
   List<BaseBreed> getBreeds(String category) {
@@ -7,7 +9,7 @@ class BaseBreedController {
         return [
           BaseBreed(
             name: 'German Shepherd',
-            imageUrl:'assets/images/DOGS/german.jpg',
+            imageUrl:'assets/images/dogs/german.jpg',
             size: 'Large breed;',
             lifespan: 'lifespan of 9–13 years.',
             temperament: 'Loyal, intelligent, protective; can be friendly if socialized well.',
@@ -20,9 +22,10 @@ class BaseBreedController {
             apartmentSpaceNeeds: 'Not ideal for apartments; needs a large area to move around.',
             purposeSuitability: 'Great for guarding, security, and active families; requires experienced handling.',
             adoptionBuying: 'Buying is expensive; better suited for those who can handle their exercise and training needs.',
-          ),BaseBreed(
+          ),
+          BaseBreed(
             name: 'Chow Chow',
-            imageUrl: 'assets/images/DOGS/chow.jpg',
+            imageUrl: 'assets/images/dogs/chow.jpg',
             size: 'Medium to large breed',
             lifespan: 'Lifespan of 8–12 years.',
             temperament: 'Independent, aloof, loyal, and sometimes stubborn; not overly affectionate but protective of family.',
@@ -38,7 +41,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Bulldog',
-            imageUrl:'assets/images/DOGS/bulldog.jpg',
+            imageUrl:'assets/images/dogs/bulldog.jpg',
             size: 'Medium breed',
             lifespan: 'lifespan of 8–12 years.',
             temperament: 'Calm, courageous, friendly, and affectionate; great companion.',
@@ -54,7 +57,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Labrador Retriever',
-            imageUrl:'assets/images/DOGS/labraa.jpg',
+            imageUrl:'assets/images/dogs/labraa.jpg',
             size: 'Medium to large breed',
             lifespan: 'lifespan of 10–14 years.',
             temperament: 'Friendly, affectionate, intelligent, and social; great with families and kids.',
@@ -70,7 +73,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Rottweiler',
-            imageUrl:'assets/images/DOGS/rott.jpg',
+            imageUrl:'assets/images/dogs/rott.jpg',
             size: 'Large breed;',
             lifespan: 'lifespan of 9–12 years.',
             temperament: 'Loyal, confident, protective, and intelligent.',
@@ -86,7 +89,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Beagle',
-            imageUrl:'assets/images/DOGS/beagle.jpg',
+            imageUrl:'assets/images/dogs/beagle.jpg',
             size: 'Small to medium breed',
             lifespan: 'lifespan of 12–15 years.',
             temperament: 'Friendly, curious, energetic, and playful.',
@@ -105,7 +108,7 @@ class BaseBreedController {
         return [
           BaseBreed(
             name: 'Persian',
-            imageUrl:'assets/images/CATS/persian.jpg',
+            imageUrl:'assets/images/cats/persian.jpg',
             size: 'Medium-sized',
             lifespan: '12–16 years',
             temperament: 'Calm, affectionate, and independent; can be reserved but loves attention.',
@@ -122,7 +125,7 @@ class BaseBreedController {
           BaseBreed(
             name: 'British Shorthair',
             size: 'Medium to large',
-            imageUrl:'assets/images/CATS/shorthair.jpg',
+            imageUrl:'assets/images/cats/shorthair.jpg',
             lifespan: '12–20 years',
             temperament: 'Calm, independent, and affectionate.',
             healthIssues: 'Prone to heart disease, dental problems, and obesity.',
@@ -137,7 +140,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'British Longhair',
-            imageUrl:'assets/images/CATS/longhair.jpg',
+            imageUrl:'assets/images/cats/longhair.jpg',
             size: 'Medium to large',
             lifespan: '12–16 years',
             temperament: 'Calm, gentle, and affectionate.',
@@ -153,7 +156,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Scottish Fold',
-            imageUrl:'assets/images/CATS/foldd.jpg',
+            imageUrl:'assets/images/cats/foldd.jpg',
             size: 'Medium-sized',
             lifespan: '11–15 years',
             temperament: 'Sweet, calm, and affectionate.',
@@ -169,7 +172,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Bombay Cat',
-            imageUrl:'assets/images/CATS/bombay.jpg',
+            imageUrl:'assets/images/cats/bombay.jpg',
             size: 'Medium-sized',
             lifespan: '12–16 years',
             temperament: 'Affectionate, playful, and confident.',
@@ -184,7 +187,7 @@ class BaseBreedController {
             adoptionBuying: 'Available for adoption.',
           ),
           BaseBreed(
-            imageUrl:'assets/images/CATS/ragdoll.JPG',
+            imageUrl:'assets/images/cats/ragdoll.JPG',
             name: 'Ragdoll',
             size: 'Large',
             lifespan: '12–15 years',
@@ -201,7 +204,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Sphynx cat',
-            imageUrl:'assets/images/CATS/sphynxx.jpg',
+            imageUrl:'assets/images/cats/sphynxx.jpg',
             size: 'Medium-sized',
             lifespan: '12–16 years',
             temperament: 'Affectionate, energetic, and curious.',
@@ -221,7 +224,7 @@ class BaseBreedController {
 
              BaseBreed(
     name: "Parrot",
-    imageUrl: "assets/images/parrot.jpg",
+    imageUrl: "assets/images/birds/parrot.jpg",
     size: "Varies by species",
     lifespan: "10–80 years",
     temperament: "Affectionate, energetic, and social",
@@ -237,7 +240,7 @@ class BaseBreedController {
   ),
   BaseBreed(
     name: "Cockatiel",
-    imageUrl: "assets/images/cockatiel.jpg",
+    imageUrl: "assets/images/birds/cockatiel.jpg",
     size: "Small to medium-sized",
     lifespan: "10–20 years",
     temperament: "Friendly, affectionate, and playful",
@@ -253,7 +256,7 @@ class BaseBreedController {
   ),
   BaseBreed(
     name: "Hyacinth Macaw",
-    imageUrl: "assets/images/hyacinath.jpg",
+    imageUrl: "assets/images/birds/hyacinath.jpg",
     size: "Large breed",
     lifespan: "50–60 years",
     temperament: "Affectionate, playful, and intelligent",
@@ -269,7 +272,7 @@ class BaseBreedController {
   ),
   BaseBreed(
     name: "Lovebird",
-    imageUrl: "assets/images/lovebird.jpg",
+    imageUrl: "assets/images/birds/lovebird.jpg",
     size: "Small breed",
     lifespan: "10–15 years",
     temperament: "Affectionate, social, and playful",
@@ -285,7 +288,7 @@ class BaseBreedController {
   ),
   BaseBreed(
     name: "Scarlet Macaw",
-    imageUrl: "assets/images/scarlet.jpg",
+    imageUrl: "assets/images/birds/scarlet.jpg",
     size: "Large breed",
     lifespan: "40–50 years",
     temperament: "Affectionate, intelligent, and playful",
@@ -301,7 +304,7 @@ class BaseBreedController {
   ),
   BaseBreed(
     name: "Columbidae (Pigeon/Dove)",
-    imageUrl: "assets/images/pigeon.jpg",
+    imageUrl: "assets/images/birds/pigeon.jpg",
     size: "Medium-sized birds",
     lifespan: "5–15 years",
     temperament: "Gentle, peaceful, and social",
@@ -317,7 +320,7 @@ class BaseBreedController {
   ),
   BaseBreed(
     name: "House Sparrow",
-    imageUrl: "assets/images/sparrow.jpg",
+    imageUrl: "assets/images/birds/sparrow.jpg",
     size: "Small breed",
     lifespan: "3–5 years in the wild",
     temperament: "Social, active, and curious",
@@ -334,9 +337,9 @@ class BaseBreedController {
   ];
    case 'Aquatic':
         return [
-           BaseBreed(
+          BaseBreed(
             name: 'Goldfish',
-            imageUrl: 'assets/images/FISH/goldfish.jpg',
+            imageUrl: 'assets/images/fish/goldfish.jpg',
             size: '15-30 cm',
             lifespan: '10-20+ years',
             temperament: 'Peaceful, but can be territorial',
@@ -352,7 +355,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Siamese Fighting Fish (Betta)',
-            imageUrl: 'assets/images/FISH/betta.jpg',
+            imageUrl: 'assets/images/fish/betta.jpg',
             size: '6-8 cm',
             lifespan: '3-5 years',
             temperament: 'Aggressive, territorial',
@@ -368,7 +371,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Guppy',
-            imageUrl: 'assets/images/FISH/guppy.jpg',
+            imageUrl: 'assets/images/fish/guppy.jpg',
             size: '4-6 cm',
             lifespan: '2-3 years',
             temperament: 'Peaceful and social',
@@ -384,7 +387,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Tetra',
-            imageUrl: 'assets/images/FISH/tetra.jpg',
+            imageUrl: 'assets/images/fish/tetra.jpg',
             size: '3-5 cm',
             lifespan: '3-5 years',
             temperament: 'Peaceful, schooling fish',
@@ -400,7 +403,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Catfish',
-            imageUrl: 'assets/images/FISH/catfish.jpg',
+            imageUrl: 'assets/images/fish/catfish.jpg',
             size: '5 cm to over 50 cm, depending on species',
             lifespan: '3-5 years (small species), 10+ years (large species)',
             temperament: 'Peaceful, bottom-dwellers',
@@ -416,7 +419,7 @@ class BaseBreedController {
           ),
           BaseBreed(
             name: 'Turtle',
-            imageUrl: 'assets/images/FISH/turtle.jpg',
+            imageUrl: 'assets/images/fish/turtle.jpg',
             size: '15-30 cm, depending on species',
             lifespan: '20-50+ years',
             temperament: 'Calm but can be solitary',
@@ -433,10 +436,9 @@ class BaseBreedController {
         ];
       case 'Others':
         return [
-
-            BaseBreed(
+          BaseBreed(
             name: 'Rabbit',
-            imageUrl: 'assets/images/OTHERS/rabbit.png', // Replace with actual image URL
+            imageUrl: 'assets/images/others/rabbit.png', // Replace with actual image URL
             size: '1-6+ kg (varies by breed)',
             lifespan: '8-12 years',
             temperament: 'Social, prefers gentle handling',
@@ -453,7 +455,7 @@ class BaseBreedController {
           // Guinea Pigs
           BaseBreed(
             name: 'Guinea Pig',
-            imageUrl: 'assets/images/OTHERS/guinea.png', // Replace with actual image URL
+            imageUrl: 'assets/images/others/guinea.png', // Replace with actual image URL
             size: '20-30 cm long',
             lifespan: '5-7 years',
             temperament: 'Highly social, vocal, and expressive',
@@ -470,7 +472,7 @@ class BaseBreedController {
           // Hamsters
           BaseBreed(
             name: 'Hamster',
-            imageUrl: 'assets/images/OTHERS/hamster.png', // Replace with actual image URL
+            imageUrl: 'assets/images/others/hamster.png', // Replace with actual image URL
             size: '5-18 cm (depending on species)',
             lifespan: '2-3 years',
             temperament: 'Nocturnal, dislikes sudden handling, can be tamed with patience',
@@ -484,7 +486,6 @@ class BaseBreedController {
             purposeSuitability: 'Ideal for small living spaces, requires regular interaction and care',
             adoptionBuying: 'Low cost but requires regular care, cleaning, and interaction',
           ),
-
         ];
       default:
         return [];
