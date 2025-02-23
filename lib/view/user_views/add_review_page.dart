@@ -1,8 +1,13 @@
 // import 'package:custom_rating_bar/custom_rating_bar.dart';
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:pet_care_app/model/user.dart';
+import 'package:pet_care_app/utils/user_data.dart';
 
 class AddReviewPage extends StatefulWidget {
   const AddReviewPage({super.key});
@@ -14,6 +19,16 @@ class AddReviewPage extends StatefulWidget {
 class _AddReviewPageState extends State<AddReviewPage> {
   double _rating = 0.0;
   final TextEditingController _reviewController = TextEditingController();
+  final UserData _userData = UserData();
+
+  late User _user;
+
+  @override
+  void initState() {
+    final response = jsonDecode(_userData.read("user"));
+    _user = User.fromJson(response);
+    log("user data fetched: ${_user.toString()}");
+  }
 
   void _submitReview() {
     if (_rating > 0 && _reviewController.text.isNotEmpty) {
