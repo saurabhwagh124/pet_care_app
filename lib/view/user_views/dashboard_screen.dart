@@ -25,6 +25,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  bool nightMode = false;
   final userPetController = UserPetController();
   final auth = AuthService();
   final User? user = FirebaseAuth.instance.currentUser;
@@ -37,124 +38,122 @@ class _DashboardScreenState extends State<DashboardScreen> {
     super.initState();
   }
 
-final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
- Widget build(BuildContext context) {
-  return Scaffold(
-    key: _scaffoldKey, 
-    backgroundColor: Colors.white,
-    appBar: AppBar(
-      backgroundColor: Colors.orangeAccent,
-      title: Text(
-        "Hey ${user!.displayName}, ",
-        style: GoogleFonts.fredoka(fontSize: 15.sp, fontWeight: FontWeight.w600, color: Colors.white),
-      ),
-      leading: IconButton(
-        icon: Icon(Icons.menu, color: Colors.white),
-        onPressed: () {
-  _scaffoldKey.currentState?.openDrawer();  // Open drawer using key
-},
-
-      ),
-      actions: [
-        GestureDetector(
-          onTap: () async {
-            await showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: Text(
-                  "Profile Options",
-                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
-                ),
-                content: SizedBox(
-                  height: 100.h,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        color: const Color.fromARGB(255, 242, 188, 184),
-                        padding: const EdgeInsets.all(3),
-                        child: GestureDetector(
-                          onTap: () async {
-                            await auth.signOut();
-                            Get.back();
-                            Get.to(() => const Wrapper());
-                          },
-                          child: Row(
-                            children: [
-                              Icon(Icons.logout_outlined, color: Colors.red, size: 20.sp),
-                              SizedBox(width: 20.w),
-                              Text(
-                                "Sign out",
-                                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
-                              ),
-                            ],
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.orangeAccent,
+        title: Text(
+          "Hey ${user!.displayName}, ",
+          style: GoogleFonts.fredoka(fontSize: 15.sp, fontWeight: FontWeight.w600, color: Colors.white),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.menu, color: Colors.white),
+          onPressed: () {
+            _scaffoldKey.currentState?.openDrawer(); // Open drawer using key
+          },
+        ),
+        actions: [
+          GestureDetector(
+            onTap: () async {
+              await showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text(
+                    "Profile Options",
+                    style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
+                  ),
+                  content: SizedBox(
+                    height: 100.h,
+                    child: Column(
+                      spacing: 10.h,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          color: const Color.fromARGB(255, 242, 188, 184),
+                          padding: const EdgeInsets.all(3),
+                          child: GestureDetector(
+                            onTap: () async {
+                              await auth.signOut();
+                              Get.back();
+                              Get.to(() => const Wrapper());
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.logout_outlined, color: Colors.red, size: 20.sp),
+                                SizedBox(width: 20.w),
+                                Text(
+                                  "Sign out",
+                                  style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 10.h),
-                      Container(
-                        color: const Color.fromARGB(255, 219, 245, 128),
-                        padding: const EdgeInsets.all(3),
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.to(() => const ForgotPasswordScreen());
-                          },
-                          child: Row(
-                            children: [
-                              Icon(Icons.lock_reset_outlined, color: Colors.yellow, size: 20.sp),
-                              SizedBox(width: 20.w),
-                              Text(
-                                "Forgot Password",
-                                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
-                              ),
-                            ],
+                        Container(
+                          color: const Color.fromARGB(255, 219, 245, 128),
+                          padding: const EdgeInsets.all(3),
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.to(() => const ForgotPasswordScreen());
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.lock_reset_outlined, color: Colors.yellow, size: 20.sp),
+                                SizedBox(width: 20.w),
+                                Text(
+                                  "Forgot Password",
+                                  style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
-            padding: EdgeInsets.all(2.r),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              color: Colors.white,
-            ),
-            child: Image.asset(AppImages.logoImg),
-          ),
-        ),
-      ],
-    ),
-    drawer: Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(color: Colors.orangeAccent),
-            child: Text(
-              "Menu",
-              style: TextStyle(color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.bold),
-            ),
-          ),
-          ListTile(
-            leading: Icon(Icons.info_outline, color: Colors.black),
-            title: Text("General Breeds Info"),
-            onTap: () {
-              Navigator.pop(context); // Close drawer
-              Get.to(() => CategoryScreen()); // Navigate to your page
+              );
             },
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
+              padding: EdgeInsets.all(2.r),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                color: Colors.white,
+              ),
+              child: Image.asset(AppImages.logoImg),
+            ),
           ),
         ],
       ),
-    ),
-   
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: const BoxDecoration(color: Colors.orangeAccent),
+              child: Text(
+                "Menu",
+                style: TextStyle(color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.bold),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.info_outline, color: Colors.black),
+              title: Text("General Breeds Info"),
+              onTap: () {
+                Navigator.pop(context); // Close drawer
+                Get.to(() => CategoryScreen()); // Navigate to your page
+              },
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(top: 45.h, right: 17.w, left: 17.w),

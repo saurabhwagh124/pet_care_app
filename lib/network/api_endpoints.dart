@@ -3,14 +3,24 @@ class ApiEndpoints {
   static String baseUrl = "http://192.168.0.107:5000/public";
   static String loginUrl = "$baseUrl/login";
   static String registerUrl = "$baseUrl/register";
+
+  // ALL Get
   static String getAllDoctorsUrl = "$baseUrl/doctors";
   static String getAllBoardingsUrl = "$baseUrl/boarding";
   static String getAllPetServicesUrl = "$baseUrl/pet-service";
   static String getAllPetsOfUserUrl = "$baseUrl/pet/users/{userEmail}";
-  static String postUserPetUrl = "$baseUrl/pet";
-  static String postUploadFileUrl = "$baseUrl/upload-file";
-  static String postUploadMultipleFilesUrl = "$baseUrl/upload-multiple-files";
   static String getAllShopItemUrl = "$baseUrl/shopItem/";
   static String checkAdminUrl = "$baseUrl/admin-access?email={MAIL}";
   static String getUserDataUrl = "$baseUrl/users?email={MAIL}";
+  static String getDoctorAppointmentsSlotsUrl = "$baseUrl/appointments/doctor/{id}/timeslots/{date}";
+  static String getBoardingAppointmentsSlotsUrl = "$baseUrl/appointments/boarding/{id}/timeslots/{date}";
+  static String getServiceAppointmentsSlotsUrl = "$baseUrl/appointments/service/{id}/timeslots/{date}";
+
+  // ALL Post
+  static String postUserPetUrl = "$baseUrl/pet";
+  static String postUploadFileUrl = "$baseUrl/upload-file";
+  static String postUploadMultipleFilesUrl = "$baseUrl/upload-multiple-files";
+  static String postDoctorAppointmentUrl = "$baseUrl/appointments/doctors";
+  static String postBoardingAppointmentUrl = "$baseUrl/appointments/boarding";
+  static String postServiceAppointmentUrl = "$baseUrl/appointments/service";
 }
