@@ -21,13 +21,13 @@ class _AddReviewPageState extends State<AddReviewPage> {
   final TextEditingController _reviewController = TextEditingController();
   final UserData _userData = UserData();
 
-  late User _user;
+  User? user =  null;
 
   @override
   void initState() {
-    final response = jsonDecode(_userData.read("user"));
-    _user = User.fromJson(response);
-    log("user data fetched: ${_user.toString()}");
+    final response = jsonDecode(_userData.read<String>("user")!);
+    user = User.fromJson(response);
+    log("user data fetched: ${user.toString()}");
   }
 
   void _submitReview() {
@@ -48,6 +48,7 @@ class _AddReviewPageState extends State<AddReviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: const Color(0xFFF8AE1F),
         title: Text(
@@ -72,20 +73,23 @@ class _AddReviewPageState extends State<AddReviewPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+             Row(
               children: [
                 CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage(
-                    'assets/images/haylie.png',
+                  backgroundColor: Colors.grey,
+                  backgroundImage: NetworkImage(
+                  user!.photoUrl!
                   ),
+
+
                 ),
                 SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Haylie Aminoff',
+                      user!.displayName!,
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
