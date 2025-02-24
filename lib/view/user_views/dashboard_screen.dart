@@ -28,6 +28,7 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   bool nightMode = false;
   final userPetController = UserPetController();
+  final shopController = ShopController();
   final auth = AuthService();
   final User? user = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 0;
@@ -56,7 +57,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
         backgroundColor: Colors.orangeAccent,
         title: Text(
           "Hey ${user!.displayName}, ",
-          style: GoogleFonts.fredoka(fontSize: 15.sp, fontWeight: FontWeight.w600, color: Colors.white),
+          style: GoogleFonts.fredoka(
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.white),
         ),
         leading: IconButton(
           icon: Icon(Icons.menu, color: Colors.white),
@@ -72,7 +76,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 builder: (context) => AlertDialog(
                   title: Text(
                     "Profile Options",
-                    style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
+                    style:
+                        TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
                   ),
                   content: SizedBox(
                     height: 100.h,
@@ -92,11 +97,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             },
                             child: Row(
                               children: [
-                                Icon(Icons.logout_outlined, color: Colors.red, size: 20.sp),
+                                Icon(Icons.logout_outlined,
+                                    color: Colors.red, size: 20.sp),
                                 SizedBox(width: 20.w),
                                 Text(
                                   "Sign out",
-                                  style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
+                                  style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w800),
                                 ),
                               ],
                             ),
@@ -111,11 +119,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             },
                             child: Row(
                               children: [
-                                Icon(Icons.lock_reset_outlined, color: Colors.yellow, size: 20.sp),
+                                Icon(Icons.lock_reset_outlined,
+                                    color: Colors.yellow, size: 20.sp),
                                 SizedBox(width: 20.w),
                                 Text(
                                   "Forgot Password",
-                                  style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
+                                  style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w800),
                                 ),
                               ],
                             ),
@@ -147,7 +158,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
               decoration: const BoxDecoration(color: Colors.orangeAccent),
               child: Text(
                 "Menu",
-                style: TextStyle(color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold),
               ),
             ),
             ListTile(
