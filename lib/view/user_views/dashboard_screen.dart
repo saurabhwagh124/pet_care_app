@@ -26,7 +26,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  final shopController = ShopController();
+  bool nightMode = false;
   final userPetController = UserPetController();
   final auth = AuthService();
   final User? user = FirebaseAuth.instance.currentUser;
@@ -56,10 +56,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         backgroundColor: Colors.orangeAccent,
         title: Text(
           "Hey ${user!.displayName}, ",
-          style: GoogleFonts.fredoka(
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w600,
-              color: Colors.white),
+          style: GoogleFonts.fredoka(fontSize: 15.sp, fontWeight: FontWeight.w600, color: Colors.white),
         ),
         leading: IconButton(
           icon: Icon(Icons.menu, color: Colors.white),
@@ -75,12 +72,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 builder: (context) => AlertDialog(
                   title: Text(
                     "Profile Options",
-                    style:
-                        TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
+                    style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
                   ),
                   content: SizedBox(
                     height: 100.h,
                     child: Column(
+                      spacing: 10.h,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -95,20 +92,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             },
                             child: Row(
                               children: [
-                                Icon(Icons.logout_outlined,
-                                    color: Colors.red, size: 20.sp),
+                                Icon(Icons.logout_outlined, color: Colors.red, size: 20.sp),
                                 SizedBox(width: 20.w),
                                 Text(
                                   "Sign out",
-                                  style: TextStyle(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w800),
+                                  style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
                                 ),
                               ],
                             ),
                           ),
                         ),
-                        SizedBox(height: 10.h),
                         Container(
                           color: const Color.fromARGB(255, 219, 245, 128),
                           padding: const EdgeInsets.all(3),
@@ -118,14 +111,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             },
                             child: Row(
                               children: [
-                                Icon(Icons.lock_reset_outlined,
-                                    color: Colors.yellow, size: 20.sp),
+                                Icon(Icons.lock_reset_outlined, color: Colors.yellow, size: 20.sp),
                                 SizedBox(width: 20.w),
                                 Text(
                                   "Forgot Password",
-                                  style: TextStyle(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w800),
+                                  style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
                                 ),
                               ],
                             ),
@@ -154,13 +144,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeader(
-              decoration: BoxDecoration(color: Colors.orangeAccent),
+              decoration: const BoxDecoration(color: Colors.orangeAccent),
               child: Text(
                 "Menu",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.bold),
               ),
             ),
             ListTile(

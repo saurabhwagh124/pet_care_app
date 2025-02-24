@@ -152,7 +152,7 @@ class _BoardingDetailsScreen extends State<BoardingDetailsScreen> {
               const SizedBox(height: 15),
               GestureDetector(
                 onTap: () {
-                  Get.to(() => const BookAppoinmentScreen());
+                  Get.to(() =>  BookAppoinmentScreen(boarding: widget.data, boardingAppointment: true,));
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
