@@ -148,7 +148,7 @@ class _PetServiceDetailsScreen extends State<PetServiceDetailsScreen> {
               const SizedBox(height: 15),
               GestureDetector(
                 onTap: () {
-                  Get.to(() =>  BookAppoinmentScreen(services: widget.data,));
+                  Get.to(() =>  BookAppoinmentScreen(services: widget.data, servicesAppointment: true,));
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),

@@ -15,7 +15,10 @@ class BookAppoinmentScreen extends StatefulWidget {
   final VetDocModel? doctor;
   final PetServicesModel? services;
   final BoardingModel? boarding;
-  const BookAppoinmentScreen({super.key, this.doctor, this.services, this.boarding});
+  final bool doctorAppointment;
+  final bool servicesAppointment;
+  final bool boardingAppointment;
+  const BookAppoinmentScreen({super.key, this.doctor, this.services, this.boarding, this.doctorAppointment = false, this.servicesAppointment = false, this.boardingAppointment = false});
 
   @override
   State<BookAppoinmentScreen> createState() => _BookAppoinmentScreenState();
@@ -32,8 +35,7 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
   @override
   void initState() {
     super.initState();
-    appointmentController.fetchBookedDoctorTimeSlots(widget.doctor!.id ?? 0, "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}");
-    log(appointmentController.bookedTimeSlots.toString());
+    fetchTimeSlots();
     userPetController.fetchUserPets();
     if (userPetController.userPetList.isNotEmpty) {
       selectedPet = userPetController.userPetList.first.name!;
@@ -87,8 +89,8 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
                 firstDate: firstDate,
                 lastDate: lastDate,
                 onDateChanged: (date) {
-                  appointmentController.fetchBookedDoctorTimeSlots(widget.doctor!.id ?? 0, "${date.year}-${date.month}-${date.day}");
-                  log(selectedDate.toString());
+                  selectedDate = date;
+                  fetchTimeSlots();
                 },
               ),
             ),
@@ -175,11 +177,11 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
                   try {
                     log("selected pet = $selectedPet");
                     UserPetModel pet = userPetController.userPetList.firstWhere((element) => element.name == selectedPet);
-                    if (widget.doctor == null && widget.services == null) {
-                      appointmentController.bookBoardingAppointment(widget.boarding?.id ?? 0, pet.id ?? 0, "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}", selectedTime);
+                    if (widget.boardingAppointment) {
+                      appointmentController.bookBoardingAppointment(widget.boarding!, pet.id ?? 0, selectedDate, selectedTime);
                       log("working if");
-                    } else if (widget.boarding == null && widget.doctor == null) {
-                      appointmentController.bookServiceAppointment(widget.services?.id ?? 0, pet.id ?? 0, "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}", selectedTime);
+                    } else if (widget.servicesAppointment) {
+                      appointmentController.bookServiceAppointment(widget.services!, pet.id ?? 0, selectedDate, selectedTime);
                       log("working else if");
                     } else {
                       appointmentController.bookDoctorAppointment(widget.doctor!, pet.id ?? 0, selectedDate, selectedTime);
@@ -192,6 +194,7 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
                 } else {
                   Get.snackbar("Error", "Please select a pet.", backgroundColor: Colors.redAccent);
                 }
+                Get.back();
               },
               child: Container(
                 margin: const EdgeInsets.only(top: 20),
@@ -249,5 +252,18 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
               ),
       ),
     );
+  }
+
+  void fetchTimeSlots() {
+    if (widget.doctorAppointment) {
+      appointmentController.fetchBookedDoctorTimeSlots(widget.doctor!.id ?? 0, "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}");
+      log(appointmentController.bookedTimeSlots.toString());
+    } else if (widget.servicesAppointment) {
+      appointmentController.fetchBookedServiceTimeSlots(widget.services!.id ?? 0, "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}");
+      log(appointmentController.bookedTimeSlots.toString());
+    } else {
+      appointmentController.fetchBookedBoardingTimeSlots(widget.boarding!.id ?? 0, "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}");
+      log(appointmentController.bookedTimeSlots.toString());
+    }
   }
 }
