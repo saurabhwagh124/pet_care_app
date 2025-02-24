@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/controller/shop_controller.dart';
 import 'package:pet_care_app/controller/user_pet_controller.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
@@ -25,136 +26,154 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  final shopController = ShopController();
   final userPetController = UserPetController();
   final auth = AuthService();
   final User? user = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 0;
-  List<Widget> screens = [const DashboardScreen(), const ExploreScreen(), const ShopFood(), const ProfileScreen()];
+  List<Widget> screens = [
+    const DashboardScreen(),
+    const ExploreScreen(),
+    const ShopFood(),
+    const ProfileScreen()
+  ];
 
   @override
   void initState() {
     userPetController.fetchUserPets();
+    shopController.fetchFoodProducts();
     super.initState();
   }
 
-final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
- Widget build(BuildContext context) {
-  return Scaffold(
-    key: _scaffoldKey, 
-    backgroundColor: Colors.white,
-    appBar: AppBar(
-      backgroundColor: Colors.orangeAccent,
-      title: Text(
-        "Hey ${user!.displayName}, ",
-        style: GoogleFonts.fredoka(fontSize: 15.sp, fontWeight: FontWeight.w600, color: Colors.white),
-      ),
-      leading: IconButton(
-        icon: Icon(Icons.menu, color: Colors.white),
-        onPressed: () {
-  _scaffoldKey.currentState?.openDrawer();  // Open drawer using key
-},
-
-      ),
-      actions: [
-        GestureDetector(
-          onTap: () async {
-            await showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: Text(
-                  "Profile Options",
-                  style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
-                ),
-                content: SizedBox(
-                  height: 100.h,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        color: const Color.fromARGB(255, 242, 188, 184),
-                        padding: const EdgeInsets.all(3),
-                        child: GestureDetector(
-                          onTap: () async {
-                            await auth.signOut();
-                            Get.back();
-                            Get.to(() => const Wrapper());
-                          },
-                          child: Row(
-                            children: [
-                              Icon(Icons.logout_outlined, color: Colors.red, size: 20.sp),
-                              SizedBox(width: 20.w),
-                              Text(
-                                "Sign out",
-                                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
-                              ),
-                            ],
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.orangeAccent,
+        title: Text(
+          "Hey ${user!.displayName}, ",
+          style: GoogleFonts.fredoka(
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.white),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.menu, color: Colors.white),
+          onPressed: () {
+            _scaffoldKey.currentState?.openDrawer(); // Open drawer using key
+          },
+        ),
+        actions: [
+          GestureDetector(
+            onTap: () async {
+              await showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text(
+                    "Profile Options",
+                    style:
+                        TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
+                  ),
+                  content: SizedBox(
+                    height: 100.h,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          color: const Color.fromARGB(255, 242, 188, 184),
+                          padding: const EdgeInsets.all(3),
+                          child: GestureDetector(
+                            onTap: () async {
+                              await auth.signOut();
+                              Get.back();
+                              Get.to(() => const Wrapper());
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.logout_outlined,
+                                    color: Colors.red, size: 20.sp),
+                                SizedBox(width: 20.w),
+                                Text(
+                                  "Sign out",
+                                  style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 10.h),
-                      Container(
-                        color: const Color.fromARGB(255, 219, 245, 128),
-                        padding: const EdgeInsets.all(3),
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.to(() => const ForgotPasswordScreen());
-                          },
-                          child: Row(
-                            children: [
-                              Icon(Icons.lock_reset_outlined, color: Colors.yellow, size: 20.sp),
-                              SizedBox(width: 20.w),
-                              Text(
-                                "Forgot Password",
-                                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
-                              ),
-                            ],
+                        SizedBox(height: 10.h),
+                        Container(
+                          color: const Color.fromARGB(255, 219, 245, 128),
+                          padding: const EdgeInsets.all(3),
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.to(() => const ForgotPasswordScreen());
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.lock_reset_outlined,
+                                    color: Colors.yellow, size: 20.sp),
+                                SizedBox(width: 20.w),
+                                Text(
+                                  "Forgot Password",
+                                  style: TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w800),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
-            padding: EdgeInsets.all(2.r),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.r),
-              color: Colors.white,
-            ),
-            child: Image.asset(AppImages.logoImg),
-          ),
-        ),
-      ],
-    ),
-    drawer: Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(color: Colors.orangeAccent),
-            child: Text(
-              "Menu",
-              style: TextStyle(color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.bold),
-            ),
-          ),
-          ListTile(
-            leading: Icon(Icons.info_outline, color: Colors.black),
-            title: Text("General Breeds Info"),
-            onTap: () {
-              Navigator.pop(context); // Close drawer
-              Get.to(() => CategoryScreen()); // Navigate to your page
+              );
             },
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
+              padding: EdgeInsets.all(2.r),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.r),
+                color: Colors.white,
+              ),
+              child: Image.asset(AppImages.logoImg),
+            ),
           ),
         ],
       ),
-    ),
-   
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.orangeAccent),
+              child: Text(
+                "Menu",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.info_outline, color: Colors.black),
+              title: Text("General Breeds Info"),
+              onTap: () {
+                Navigator.pop(context); // Close drawer
+                Get.to(() => CategoryScreen()); // Navigate to your page
+              },
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(top: 45.h, right: 17.w, left: 17.w),
@@ -163,11 +182,19 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.r),
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(0, 1),
+                          blurRadius: 3.5,
+                          color: Color.fromRGBO(0, 0, 0, 0.20))
+                    ]),
                 child: Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 15.h, left: 20.w, right: 20.w),
+                      padding:
+                          EdgeInsets.only(top: 15.h, left: 20.w, right: 20.w),
                       child: Row(
                         children: [
                           SizedBox(
@@ -179,7 +206,8 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
                           ),
                           Text(
                             "My Pets",
-                            style: GoogleFonts.fredoka(fontWeight: FontWeight.w700, fontSize: 20.sp),
+                            style: GoogleFonts.fredoka(
+                                fontWeight: FontWeight.w700, fontSize: 20.sp),
                           ),
                           const Spacer()
                         ],
@@ -189,21 +217,26 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
                       height: 20.h,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 21.w, right: 11.w, bottom: 15.h),
+                      padding: EdgeInsets.only(
+                          left: 21.w, right: 11.w, bottom: 15.h),
                       child: SizedBox(
                         height: 180.h,
                         child: Obx(() => (userPetController.userPetList.isEmpty)
                             ? Column(
                                 spacing: 10.h,
                                 children: [
-                                  Text("No Pets Found", style: GoogleFonts.fredoka(fontWeight: FontWeight.w700, fontSize: 16.sp)),
+                                  Text("No Pets Found",
+                                      style: GoogleFonts.fredoka(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 16.sp)),
                                   IconButton(
                                     onPressed: () {
                                       Get.to(() => const AddPetsPage());
                                     },
                                     icon: CircleAvatar(
                                       radius: 35.r,
-                                      backgroundColor: const Color.fromARGB(255, 159, 221, 250),
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 159, 221, 250),
                                       child: Icon(
                                         Icons.add_outlined,
                                         color: Colors.white,
@@ -213,24 +246,31 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
                                   )
                                 ],
                               )
-                            : (userPetController.userPetListStatus == ApiStatus.LOADING)
+                            : (userPetController.userPetListStatus ==
+                                    ApiStatus.LOADING)
                                 ? Center(
                                     child: CircularProgressIndicator(
                                       color: Colors.greenAccent,
                                       strokeWidth: 4.sp,
                                     ),
                                   )
-                                : (userPetController.userPetListStatus == ApiStatus.SUCCESS)
+                                : (userPetController.userPetListStatus ==
+                                        ApiStatus.SUCCESS)
                                     ? ListView.separated(
                                         scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) => UserPetWidgetIcon(
-                                              data: userPetController.userPetList[index],
+                                        itemBuilder: (context, index) =>
+                                            UserPetWidgetIcon(
+                                              data: userPetController
+                                                  .userPetList[index],
                                             ),
-                                        separatorBuilder: (context, index) => SizedBox(
+                                        separatorBuilder: (context, index) =>
+                                            SizedBox(
                                               width: 10.h,
                                             ),
-                                        itemCount: userPetController.userPetList.length)
-                                    : const SnackBar(content: Text("Something went wrong"))),
+                                        itemCount: userPetController
+                                            .userPetList.length)
+                                    : const SnackBar(
+                                        content: Text("Something went wrong"))),
                       ),
                     )
                   ],
@@ -239,7 +279,14 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
               const SizedBox(height: 20),
               Container(
                   decoration: BoxDecoration(
-                      color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8.r),
+                      boxShadow: const [
+                        BoxShadow(
+                            offset: Offset(0, 1),
+                            blurRadius: 3.5,
+                            color: Color.fromRGBO(0, 0, 0, 0.20))
+                      ]),
                   padding: EdgeInsets.all(20.r),
                   child: Column(children: [
                     Row(
@@ -268,7 +315,14 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
               Container(
                 padding: EdgeInsets.all(20.sp),
                 decoration: BoxDecoration(
-                    color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8.r),
+                    boxShadow: const [
+                      BoxShadow(
+                          offset: Offset(0, 1),
+                          blurRadius: 3.5,
+                          color: Color.fromRGBO(0, 0, 0, 0.20))
+                    ]),
                 child: Column(
                   children: [
                     Row(
@@ -282,80 +336,115 @@ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
                         ),
                         Text(
                           "Pet Food",
-                          style: GoogleFonts.fredoka(fontSize: 20.sp, fontWeight: FontWeight.w700),
+                          style: GoogleFonts.fredoka(
+                              fontSize: 20.sp, fontWeight: FontWeight.w700),
                         )
                       ],
                     ),
                     SizedBox(
                       height: 20.h,
                     ),
-                    Container(
-                      padding: EdgeInsets.all(10.sp),
-                      decoration: BoxDecoration(
-                          color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            height: 67.h,
-                            child: Image.asset(AppImages.josiDogFoodImg),
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Text(
-                            "Josi Dog Master Mix\n 900g",
-                            style: GoogleFonts.fredoka(fontSize: 12.sp, fontWeight: FontWeight.w600),
-                          ),
-                          const Spacer(),
-                          Container(
-                            margin: EdgeInsets.all(5.sp),
-                            decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
-                            padding: EdgeInsets.all(5.sp),
-                            child: Icon(
-                              Icons.shopping_bag_outlined,
-                              color: Colors.white,
-                              size: 30.sp,
+                    Obx(() {
+                      if (shopController.foodList.isEmpty) {
+                        return Center(
+                          child: Text(
+                            "No food items available",
+                            style: GoogleFonts.fredoka(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w600,
                             ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10.sp),
-                      decoration: BoxDecoration(
-                          color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            height: 67.h,
-                            child: Image.asset('assets/images/HappyDogFood.png'),
                           ),
-                          SizedBox(
-                            width: 10.h,
-                          ),
-                          Text(
-                            "Happy Dog Profi Mix\n 500g",
-                            style: GoogleFonts.fredoka(fontSize: 12.sp, fontWeight: FontWeight.w600),
-                          ),
-                          const Spacer(),
-                          Container(
-                            margin: EdgeInsets.all(5.sp),
-                            decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle),
-                            padding: EdgeInsets.all(5.sp),
-                            child: Icon(
-                              Icons.shopping_bag_outlined,
-                              color: Colors.white,
-                              size: 30.sp,
-                            ),
-                          )
-                        ],
-                      ),
-                    )
+                        );
+                      }
+                      return SizedBox(
+                          height: 150.h, // Adjust height as needed
+                          child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              itemCount: shopController.foodList.length,
+                              itemBuilder: (context, index) {
+                                final product = shopController.foodList[index];
+                                return Container(
+                                  width: 130.w,
+                                  margin: EdgeInsets.only(
+                                      right: 10.w, bottom: 10.w),
+                                  padding: EdgeInsets.all(10.sp),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        offset: Offset(0, 1),
+                                        blurRadius: 3.5,
+                                        color: Color.fromRGBO(0, 0, 0, 0.20),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 60.h,
+                                        child: Image.network(
+                                            product.photoUrl ?? "",
+                                            fit: BoxFit.cover),
+                                      ),
+                                      SizedBox(
+                                        width: 15.w,
+                                      ),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: 120.w,
+                                            child: Text(
+                                              overflow: TextOverflow.clip,
+                                              product.itemName ?? "",
+                                              textAlign: TextAlign.center,
+                                              style: GoogleFonts.fredoka(
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(height: 5.h),
+                                          Text(
+                                            "\₹${product.price?.toStringAsFixed(2)}",
+                                            style: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.green,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Spacer(),
+                                      GestureDetector(
+                                        onTap: () {},
+                                        child: Container(
+                                          padding: EdgeInsets.all(5.sp),
+                                          decoration: const BoxDecoration(
+                                            color: Colors.black,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Icon(
+                                            Icons.shopping_bag_outlined,
+                                            color: Colors.white,
+                                            size: 20.sp,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }));
+                    }),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 50.h,
               )
             ],
           ),
