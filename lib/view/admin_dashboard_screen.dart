@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pet_care_app/utils/auth_service.dart';
+import 'package:pet_care_app/utils/user_data.dart';
+import 'package:pet_care_app/view/login_screen.dart';
 
 class AdminDashboardScreen extends StatefulWidget {
   const AdminDashboardScreen({super.key});
@@ -10,6 +13,14 @@ class AdminDashboardScreen extends StatefulWidget {
 }
 
 class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
+  final UserData userData = UserData();
+
+  @override
+  void initState() {
+    userData.write("adminEnabled", true);
+    super.initState();
+  }
+
   final List<Map<String, dynamic>> dashboardItems = [
     {'icon': Icons.pets, 'title': 'Pet Management', 'route': '/pet'},
     {'icon': Icons.pets_rounded, 'title': 'Grooming', 'route': '/grooming'},
@@ -82,6 +93,19 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.red,
+        onPressed: () {
+          AuthService().signOut();
+          Get.offAll(() => const Loginscreen());
+          userData.clear();
+        },
+        label: const Text(
+          "Signout",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

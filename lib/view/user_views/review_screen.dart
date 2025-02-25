@@ -1,66 +1,50 @@
+import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/controller/review_controller.dart';
+import 'package:pet_care_app/model/general_review_model.dart';
+import 'package:pet_care_app/utils/enums.dart';
 import 'package:pet_care_app/view/user_views/add_review_page.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class ReviewsScreen extends StatefulWidget {
-  const ReviewsScreen({super.key});
+  final bool isDoctor;
+  final bool isBoarding;
+  final bool isService;
+  final int id;
+  const ReviewsScreen({super.key, this.isDoctor = false, this.isBoarding = false, this.isService = false, required this.id});
 
   @override
   State<ReviewsScreen> createState() => _ReviewsScreenState();
 }
 
 class _ReviewsScreenState extends State<ReviewsScreen> {
-  List<Map<String, dynamic>> reviews = [
-    {
-      'name': 'Saurabh Wagh',
-      'timeAgo': 'Just now',
-      'rating': 4.5,
-      'review': 'The thing I like best about COCO is the amount of time it has saved while trying to manage my three pets.',
-      'avatarUrl': 'assets/images/rehan_shah.png',
-    },
-    {
-      'name': 'Om Kalokhe',
-      'timeAgo': '1 day ago',
-      'rating': 4.5,
-      'review': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      'avatarUrl': 'assets/images/irfan_akram.png',
-    },
-    {
-      'name': 'Shruti',
-      'timeAgo': '2 days ago',
-      'rating': 4.5,
-      'review': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-      'avatarUrl': 'assets/images/arfa.png',
-    },
-  ];
+  final ReviewController reviewController = ReviewController();
 
-  void _navigateToAddReviewPage() async {
-    final newReview = await Get.to(() => const AddReviewPage());
-
-    if (newReview != null) {
-      setState(() {
-        reviews.add(newReview);
-      });
+  @override
+  void initState() {
+    super.initState();
+    if (widget.isDoctor) {
+      reviewController.fetchDoctorReviews(widget.id);
+    } else if (widget.isBoarding) {
+      reviewController.fetchBoardingReviews(widget.id);
+    } else if (widget.isService) {
+      reviewController.fetchServiceReviews(widget.id);
     }
-  }
-
-  double _calculateAverageRating() {
-    if (reviews.isEmpty) return 0.0;
-    double totalRating = reviews.fold(0.0, (sum, review) => sum + review['rating']);
-    return totalRating / reviews.length;
   }
 
   @override
   Widget build(BuildContext context) {
-    double averageRating = _calculateAverageRating();
-    int reviewCount = reviews.length;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFF8AE1F),
-        leading: const Icon(
-          Icons.arrow_back_ios_new_rounded,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded),
+          onPressed: () {
+            Get.back();
+          },
           color: Colors.white,
         ),
         title: Text(
@@ -71,116 +55,88 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Overall Rating Section
-            Center(
-              child: Column(
-                children: [
-                  Text(
-                    averageRating.toStringAsFixed(1),
-                    style: const TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: List.generate(5, (index) {
-                      return Icon(
-                        index < averageRating.floor() ? Icons.star : Icons.star_border,
-                        color: Colors.orange,
-                        size: 24,
-                      );
-                    }),
-                  ),
-                  Text(
-                    'Based on $reviewCount reviews',
-                    style: GoogleFonts.fredoka(
-                      textStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            // Rating Breakdown
-            Column(
-              children: [
-                ratingBar('Excellent', Colors.green, 0.9),
-                ratingBar('Good', Colors.lightGreen, 0.7),
-                ratingBar('Average', Colors.yellow, 0.5),
-                ratingBar('Below Average', Colors.orange, 0.3),
-                ratingBar('Poor', Colors.red, 0.1),
-              ],
-            ),
-            const SizedBox(height: 16),
-            // Individual Reviews
-            ...reviews.map((review) {
-              return ReviewCard(
-                name: review['name'],
-                timeAgo: review['timeAgo'],
-                rating: review['rating'],
-                review: review['review'],
-                avatarUrl: review['avatarUrl'],
-              );
-            }),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _navigateToAddReviewPage,
-        backgroundColor: Colors.orange,
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
-
-  Widget ratingBar(String label, Color color, double value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Text(
-              label,
-              style: GoogleFonts.fredoka(
-                textStyle: const TextStyle(color: Colors.grey, fontSize: 14),
-              ),
-            ),
+          // Overall Rating Section
+          Center(
+            child: Obx(() => Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      reviewController.averageRating.value.toStringAsFixed(1),
+                      style: const TextStyle(
+                        fontSize: 48,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    RatingBar.readOnly(
+                      alignment: Alignment.center,
+                      halfFilledIcon: Icons.star_half,
+                      halfFilledColor: Colors.amberAccent,
+                      isHalfAllowed: true,
+                      filledIcon: Icons.star,
+                      emptyIcon: Icons.star_border,
+                      initialRating: reviewController.averageRating.value,
+                      maxRating: 5,
+                      filledColor: Colors.amberAccent,
+                      emptyColor: Colors.grey,
+                      size: 40.sp,
+                    ),
+                    Text(
+                      'Based on ${reviewController.noOfReviews.value} reviews',
+                      style: GoogleFonts.fredoka(
+                        textStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+                      ),
+                    ),
+                  ],
+                )),
           ),
-          Expanded(
-            flex: 4,
-            child: LinearProgressIndicator(
-              value: value,
-              color: color,
-              backgroundColor: Colors.grey.shade300,
-            ),
-          ),
+          SizedBox(height: 16.h),
+          // Individual Reviews
+          Obx(() => Expanded(
+                child: (reviewController.reviewApiStatus.value == ApiStatus.SUCCESS)
+                    ? ListView.builder(itemBuilder: (context, index) => ReviewCard(data: reviewController.reviewsList[index]), itemCount: reviewController.reviewsList.length)
+                    : (reviewController.reviewApiStatus.value == ApiStatus.LOADING)
+                        ? const Center(child: CircularProgressIndicator())
+                        : const Center(child: Text('No Reviews Found!')),
+              ))
         ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          if (widget.isDoctor) {
+            Get.to(() => AddReviewPage(
+                  id: widget.id,
+                  isDoctor: true,
+                ));
+          } else if (widget.isBoarding) {
+            Get.to(() => AddReviewPage(
+                  id: widget.id,
+                  isBoarding: true,
+                ));
+          } else if (widget.isService) {
+            Get.to(() => AddReviewPage(
+                  id: widget.id,
+                  isService: true,
+                ));
+          }
+        },
+        backgroundColor: Colors.orange,
+        label: Text(
+          "Add Review",
+          style: TextStyle(color: Colors.white, fontSize: 14.sp),
+        ),
       ),
     );
   }
 }
 
 class ReviewCard extends StatelessWidget {
-  final String name;
-  final String timeAgo;
-  final double rating;
-  final String review;
-  final String avatarUrl;
+  final GeneralReviewModel data;
 
-  const ReviewCard({
-    super.key,
-    required this.name,
-    required this.timeAgo,
-    required this.rating,
-    required this.review,
-    required this.avatarUrl,
-  });
+  const ReviewCard({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +150,8 @@ class ReviewCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
-              backgroundImage: avatarUrl.isNotEmpty ? AssetImage(avatarUrl) : const NetworkImage('https://via.placeholder.com/150'),
+              backgroundImage:
+                  data.users!.photoUrl!.isNotEmpty ? NetworkImage(data.users!.photoUrl!) : const NetworkImage('https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'),
               radius: 24,
             ),
             const SizedBox(width: 16),
@@ -203,7 +160,7 @@ class ReviewCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    data.users!.displayName!,
                     style: GoogleFonts.fredoka(
                       textStyle: const TextStyle(
                         fontWeight: FontWeight.w500,
@@ -213,25 +170,35 @@ class ReviewCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    timeAgo,
+                    timeago.format(data.createdAt!),
                     style: GoogleFonts.fredoka(
                       textStyle: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                   ),
                   Row(
-                    children: List.generate(5, (index) {
-                      return Icon(
-                        index < rating.floor() ? Icons.star : Icons.star_border,
-                        color: Colors.orange,
-                        size: 16,
-                      );
-                    }),
+                    children: [
+                      RatingBar.readOnly(
+                        halfFilledIcon: Icons.star_half,
+                        halfFilledColor: Colors.amberAccent,
+                        isHalfAllowed: true,
+                        filledIcon: Icons.star,
+                        emptyIcon: Icons.star_border,
+                        initialRating: data.reviewScore!.toDouble(),
+                        maxRating: 5,
+                        filledColor: Colors.amberAccent,
+                        emptyColor: Colors.grey,
+                      ),
+                      Text(
+                        "${data.reviewScore}",
+                        style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   Text(
-                    review,
+                    data.reviewDescription ?? "",
                     style: GoogleFonts.fredoka(
-                      textStyle: const TextStyle(fontSize: 14, color: Colors.black),
+                      textStyle: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500, color: Colors.black),
                     ),
                   ),
                 ],
