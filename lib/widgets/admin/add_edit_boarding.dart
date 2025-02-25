@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pet_care_app/controller/boarding_controller.dart';
 import 'package:pet_care_app/model/boarding_model.dart';
 import 'package:pet_care_app/service/upload_service.dart';
+import 'package:pet_care_app/utils/add_pet_vaildator.dart';
 
 class BoardingFormView extends StatefulWidget {
   final BoardingModel? boarding;
@@ -57,53 +58,100 @@ class _BoardingFormViewState extends State<BoardingFormView> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: Text(widget.boarding == null ? "Add Boarding Service" : "Edit Boarding Service")),
+      appBar: AppBar(
+          title: Text(widget.boarding == null
+              ? "Add Boarding Service"
+              : "Edit Boarding Service")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: formKey,
-          child: Column(
-            children: [
-              (imagesList.isEmpty)
-                  ? SizedBox(
-                      height: 50.h,
-                      width: 50.w,
-                      child: IconButton(
-                          onPressed: _pickImages,
-                          icon: const Icon(
-                            Icons.image_outlined,
-                            color: Colors.lightBlueAccent,
-                          )),
-                    )
-                  : SizedBox(
-                      height: 100.h,
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: imagesList.length,
-                          itemBuilder: (context, index) => Container(
-                                width: 100.w,
-                                padding: EdgeInsets.all(5.sp),
-                                child: Image.file(File(imagesList[index].path)),
-                              )),
-                    ),
-              TextFormField(controller: nameController, decoration: const InputDecoration(labelText: "Name")),
-              TextFormField(controller: emailController, decoration: const InputDecoration(labelText: "Email")),
-              TextFormField(controller: contactController, decoration: const InputDecoration(labelText: "Contact")),
-              TextFormField(controller: addressController, decoration: const InputDecoration(labelText: "Address")),
-              TextFormField(controller: feesController, decoration: const InputDecoration(labelText: "Fees"), keyboardType: TextInputType.number),
-              TextFormField(controller: startDayController, decoration: const InputDecoration(labelText: "Start Day")),
-              TextFormField(controller: endDayController, decoration: const InputDecoration(labelText: "End Day")),
-              TextFormField(controller: startTimeController, decoration: const InputDecoration(labelText: "Open Time")),
-              TextFormField(controller: closeTimeController, decoration: const InputDecoration(labelText: "Close Time")),
-              SizedBox(height: 20.h),
-              ElevatedButton(
-                onPressed: () async {
-                  photoUrls = await uploadService.uploadMultipleFiles(imagesList);
-                  addBoarding();
-                },
-                child: Text(widget.boarding == null ? "Add Service" : "Update Service"),
-              )
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                (imagesList.isEmpty)
+                    ? SizedBox(
+                        height: 50.h,
+                        width: 50.w,
+                        child: IconButton(
+                            onPressed: _pickImages,
+                            icon: const Icon(
+                              Icons.image_outlined,
+                              color: Colors.lightBlueAccent,
+                            )),
+                      )
+                    : SizedBox(
+                        height: 100.h,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: imagesList.length,
+                            itemBuilder: (context, index) => Container(
+                                  width: 100.w,
+                                  padding: EdgeInsets.all(5.sp),
+                                  child:
+                                      Image.file(File(imagesList[index].path)),
+                                )),
+                      ),
+                TextFormField(
+                    validator: (value) =>
+                        Validation.validateText(value, "Name"),
+                    controller: nameController,
+                    decoration: const InputDecoration(labelText: "Name")),
+                TextFormField(
+                    validator: (value) => Validation.validateEmail(
+                          value,
+                        ),
+                    controller: emailController,
+                    decoration: const InputDecoration(labelText: "Email")),
+                TextFormField(
+                    validator: (value) =>
+                        Validation.validateNumber(value, "Contact"),
+                    controller: contactController,
+                    decoration: const InputDecoration(labelText: "Contact")),
+                TextFormField(
+                    controller: addressController,
+                    decoration: const InputDecoration(labelText: "Address")),
+                TextFormField(
+                    validator: (value) =>
+                        Validation.validateNumber(value, "Fee"),
+                    controller: feesController,
+                    decoration: const InputDecoration(labelText: "Fees"),
+                    keyboardType: TextInputType.number),
+                TextFormField(
+                    validator: (value) =>
+                        Validation.validateText(value, "Start Day"),
+                    controller: startDayController,
+                    decoration: const InputDecoration(labelText: "Start Day")),
+                TextFormField(
+                    validator: (value) =>
+                        Validation.validateText(value, "End Day"),
+                    controller: endDayController,
+                    decoration: const InputDecoration(labelText: "End Day")),
+                TextFormField(
+                    validator: (value) =>
+                        Validation.validateNumber(value, "Open Time"),
+                    controller: startTimeController,
+                    decoration: const InputDecoration(labelText: "Open Time")),
+                TextFormField(
+                    validator: (value) =>
+                        Validation.validateNumber(value, "Close Time"),
+                    controller: closeTimeController,
+                    decoration: const InputDecoration(labelText: "Close Time")),
+                SizedBox(height: 20.h),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      photoUrls =
+                          await uploadService.uploadMultipleFiles(imagesList);
+                      addBoarding();
+                    }
+                  },
+                  child: Text(widget.boarding == null
+                      ? "Add Service"
+                      : "Update Service"),
+                ),
+              ],
+            ),
           ),
         ),
       ),

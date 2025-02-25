@@ -87,7 +87,9 @@ class _LoginscreenState extends State<Loginscreen> {
                       prefixIconColor: const Color.fromRGBO(166, 166, 166, 1),
                       filled: true,
                       fillColor: const Color.fromRGBO(212, 212, 212, 1),
-                      border: const OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(10)))),
+                      border: const OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.all(Radius.circular(10)))),
                 ),
               ),
               SizedBox(
@@ -114,13 +116,18 @@ class _LoginscreenState extends State<Loginscreen> {
                         filled: true,
                         fillColor: const Color.fromRGBO(212, 212, 212, 1),
                         suffixIcon: IconButton(
-                          icon: Icon((value) ? Icons.visibility_outlined : Icons.visibility_off_outlined),
+                          icon: Icon((value)
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined),
                           onPressed: () {
                             isVisible.value = !isVisible.value;
                           },
                         ),
                         suffixIconColor: const Color.fromRGBO(166, 166, 166, 1),
-                        border: const OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(10)))),
+                        border: const OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10)))),
                   ),
                 ),
               ),
@@ -137,7 +144,10 @@ class _LoginscreenState extends State<Loginscreen> {
                     },
                     child: Text("Forgot Password?",
                         style: GoogleFonts.fredoka(
-                          textStyle: const TextStyle(color: Color.fromRGBO(0, 0, 0, 1), fontSize: 20, fontWeight: FontWeight.w400),
+                          textStyle: const TextStyle(
+                              color: Color.fromRGBO(0, 0, 0, 1),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400),
                         )),
                   ),
                 ),
@@ -150,14 +160,19 @@ class _LoginscreenState extends State<Loginscreen> {
                 child: Container(
                   height: 40.h,
                   width: 300.w,
-                  decoration: BoxDecoration(color: AppColors.orangeButton, borderRadius: BorderRadius.circular(10.r)),
+                  decoration: BoxDecoration(
+                      color: AppColors.orangeButton,
+                      borderRadius: BorderRadius.circular(10.r)),
                   margin: EdgeInsets.only(left: 25.w, right: 25.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Login",
-                        style: TextStyle(color: AppColors.white, fontSize: 20.sp, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w400),
                       )
                     ],
                   ),
@@ -168,7 +183,10 @@ class _LoginscreenState extends State<Loginscreen> {
               ),
               Text("Or connect with",
                   style: GoogleFonts.fredoka(
-                    textStyle: const TextStyle(color: Color.fromRGBO(116, 112, 112, 1), fontSize: 25, fontWeight: FontWeight.w400),
+                    textStyle: const TextStyle(
+                        color: Color.fromRGBO(116, 112, 112, 1),
+                        fontSize: 25,
+                        fontWeight: FontWeight.w400),
                   )),
               SizedBox(
                 height: 20.h,
@@ -178,8 +196,11 @@ class _LoginscreenState extends State<Loginscreen> {
                 child: Container(
                   height: 40.h,
                   width: 300.w,
-                  decoration: BoxDecoration(color: AppColors.orangeButton, borderRadius: BorderRadius.circular(10.r)),
-                  margin: EdgeInsets.only(left: 25.w, right: 25.w, bottom: 20.h),
+                  decoration: BoxDecoration(
+                      color: AppColors.orangeButton,
+                      borderRadius: BorderRadius.circular(10.r)),
+                  margin:
+                      EdgeInsets.only(left: 25.w, right: 25.w, bottom: 20.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -193,7 +214,10 @@ class _LoginscreenState extends State<Loginscreen> {
                       ),
                       Text(
                         "Login with Google",
-                        style: TextStyle(color: AppColors.white, fontSize: 16.sp, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w400),
                       )
                     ],
                   ),
@@ -201,11 +225,15 @@ class _LoginscreenState extends State<Loginscreen> {
               ),
               GestureDetector(
                 onTap: _signInWithGoogleAdmin,
+                // onTap: () => Get.to(const AdminDashboardScreen()),
                 child: Container(
                   height: 40.h,
                   width: 300.w,
-                  decoration: BoxDecoration(color: AppColors.orangeButton, borderRadius: BorderRadius.circular(10.r)),
-                  margin: EdgeInsets.only(left: 25.w, right: 25.w, bottom: 20.h),
+                  decoration: BoxDecoration(
+                      color: AppColors.orangeButton,
+                      borderRadius: BorderRadius.circular(10.r)),
+                  margin:
+                      EdgeInsets.only(left: 25.w, right: 25.w, bottom: 20.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -219,7 +247,10 @@ class _LoginscreenState extends State<Loginscreen> {
                       ),
                       Text(
                         "Admin Login with Google",
-                        style: TextStyle(color: AppColors.white, fontSize: 16.sp, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w400),
                       )
                     ],
                   ),
@@ -241,7 +272,10 @@ class _LoginscreenState extends State<Loginscreen> {
                     ),
                     Text(" All Rights Reserved",
                         style: GoogleFonts.fredoka(
-                          textStyle: const TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontSize: 9, fontWeight: FontWeight.w400),
+                          textStyle: const TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1),
+                              fontSize: 9,
+                              fontWeight: FontWeight.w400),
                         )),
                   ],
                 ),
@@ -254,7 +288,8 @@ class _LoginscreenState extends State<Loginscreen> {
   }
 
   _loginWithEmail() async {
-    final user = await _auth.loginUserWithMailAndPassword(_emailController.text, _passwordController.text);
+    final user = await _auth.loginUserWithMailAndPassword(
+        _emailController.text, _passwordController.text);
     if (user != null) {
       userController.fetchUserData(user.email ?? "");
       log("user logged in with email");
