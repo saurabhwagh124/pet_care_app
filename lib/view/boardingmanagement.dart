@@ -1,40 +1,63 @@
+import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/boarding_controller.dart';
-import 'package:pet_care_app/widgets/admin/add_edit_boarding.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
+import 'package:pet_care_app/widgets/boarding_card.dart';
 
-class BoardingManagementScreen extends StatelessWidget {
-  BoardingManagementScreen({super.key});
-  final BoardingController controller = BoardingController();
+class BoardingManagementScreen extends StatefulWidget {
+  const BoardingManagementScreen({super.key});
+
+  @override
+  State<BoardingManagementScreen> createState() => _VeterinaryScreenState();
+}
+
+class _VeterinaryScreenState extends State<BoardingManagementScreen> {
+  final BoardingController _boardingController = BoardingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _boardingController.fetchBoardings();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Boarding Services")),
-      body: Obx(() {
-        if (controller.boardingList.isEmpty) {
-          return const Center(child: Text("No boarding services added yet."));
-        }
-        return ListView.builder(
-          itemCount: controller.boardingList.length,
-          itemBuilder: (context, index) {
-            final boarding = controller.boardingList[index];
-            return ListTile(
-              title: Text(boarding.name ?? "No Name"),
-              subtitle: Text("Fees: \$${boarding.fees}, Open: ${boarding.startTime}, Close: ${boarding.closeTime}"),
-              trailing: IconButton(
-                icon: const Icon(Icons.delete, color: Colors.red),
-                onPressed: () => controller.deleteBoarding(index),
+      backgroundColor: AppColors.white,
+      appBar: AppBar(
+        title: Text("Boarding Management"),
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 15.h),
+            Expanded(
+              child: Obx(
+                () => _boardingController.boardingList.isEmpty
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.separated(
+                        separatorBuilder: (context, index) => SizedBox(height: 10.h),
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) =>
+                            BoardingCard(data: _boardingController.boardingList[index]),
+                        itemCount: _boardingController.boardingList.length,
+                      ),
               ),
-              onTap: () => Get.to(() => BoardingFormView(boarding: boarding, index: index)),
-            );
-          },
-        );
-      }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(() => BoardingFormView()),
-        child: const Icon(Icons.add),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  void getId() async {
+    final user = FirebaseAuth.instance.currentUser!;
+    final id = await user.getIdToken();
+    log(id ?? "");
   }
 }
