@@ -66,158 +66,165 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(25.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Choose a Date',
-              style: GoogleFonts.fredoka(fontSize: 24, fontWeight: FontWeight.w500),
-            ),
-            const SizedBox(height: 10),
-            Container(
-              height: 300,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: const [
-                  BoxShadow(color: Color.fromRGBO(19, 10, 46, 0.03), offset: Offset(0, 3), blurRadius: 14),
-                  BoxShadow(color: Color.fromRGBO(19, 10, 46, 0.13), offset: Offset(0, 1), blurRadius: 3),
-                ],
-                borderRadius: BorderRadius.circular(12),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Choose a Date',
+                style: GoogleFonts.fredoka(fontSize: 24, fontWeight: FontWeight.w500),
               ),
-              child: CalendarDatePicker(
-                initialDate: selectedDate,
-                firstDate: firstDate,
-                lastDate: lastDate,
-                onDateChanged: (date) {
-                  selectedDate = date;
-                  fetchTimeSlots();
-                },
-              ),
-            ),
-            SizedBox(height: 20.h),
-            Text(
-              'Pick a Time',
-              style: GoogleFonts.fredoka(fontSize: 24, fontWeight: FontWeight.w500),
-            ),
-            const SizedBox(height: 10),
-            Wrap(
-              // spacing: 50,
-              runSpacing: 15,
-              children: [
-                _buildTimeButton('09:30'),
-                _buildTimeButton('10:30'),
-                _buildTimeButton('11:30'),
-                _buildTimeButton('15:30'),
-                _buildTimeButton('16:30'),
-                _buildTimeButton('17:30'),
-              ],
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Text(
-              'Select Pet',
-              style: GoogleFonts.fredoka(fontSize: 24, fontWeight: FontWeight.w500),
-            ),
-            Obx(() {
-              return DropdownButtonFormField<String>(
-                menuMaxHeight: 200.h,
-                autovalidateMode: AutovalidateMode.always,
-                validator: (value) {
-                  if (value == "Select Pet") {
-                    return "Please select a pet";
-                  }
-                  return null;
-                },
-                itemHeight: 40.h,
-                value: selectedPet.isEmpty ? null : selectedPet,
-                elevation: 8,
-                icon: Icon(
-                  Icons.arrow_drop_down_circle,
-                  size: 30.sp,
+              const SizedBox(height: 10),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(color: Color.fromRGBO(19, 10, 46, 0.03), offset: Offset(0, 3), blurRadius: 14),
+                    BoxShadow(color: Color.fromRGBO(19, 10, 46, 0.13), offset: Offset(0, 1), blurRadius: 3),
+                  ],
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                iconSize: 50.sp,
-                items: [
-                  DropdownMenuItem<String>(
-                    value: "Select Pet",
-                    child: SizedBox(
-                      height: 40.h,
-                      width: 200.w,
-                      child: const ListTile(title: Text("Select Pet", style: TextStyle(color: Colors.grey, fontSize: 30))),
-                    ),
+                child: CalendarDatePicker(
+                  initialDate: selectedDate,
+                  firstDate: firstDate,
+                  lastDate: lastDate,
+                  onDateChanged: (date) {
+                    selectedDate = date;
+                    fetchTimeSlots();
+                  },
+                ),
+              ),
+              SizedBox(height: 20.h),
+              Text(
+                'Pick a Time',
+                style: GoogleFonts.fredoka(fontSize: 24, fontWeight: FontWeight.w500),
+              ),
+              const SizedBox(height: 10),
+              Wrap(
+                // spacing: 50,
+                runSpacing: 15,
+                children: [
+                  _buildTimeButton('09:30'),
+                  _buildTimeButton('10:30'),
+                  _buildTimeButton('11:30'),
+                  _buildTimeButton('15:30'),
+                  _buildTimeButton('16:30'),
+                  _buildTimeButton('17:30'),
+                ],
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Text(
+                'Select Pet',
+                style: GoogleFonts.fredoka(fontSize: 24, fontWeight: FontWeight.w500),
+              ),
+              Obx(() {
+                return DropdownButtonFormField<String>(
+                  alignment: Alignment.center,
+                  menuMaxHeight: 200.h,
+                  autovalidateMode: AutovalidateMode.always,
+                  validator: (value) {
+                    if (value == "Select Pet") {
+                      return "Please select a pet";
+                    }
+                    return null;
+                  },
+                  itemHeight: 50.h,
+                  value: selectedPet.isEmpty ? null : selectedPet,
+                  elevation: 8,
+                  icon: Icon(
+                    Icons.arrow_drop_down_circle,
+                    size: 30.sp,
                   ),
-                  ...userPetController.userPetList.map((pet) {
-                    return DropdownMenuItem<String>(
-                      value: pet.name,
+                  iconSize: 50.sp,
+                  items: [
+                    DropdownMenuItem<String>(
+                      value: "Select Pet",
                       child: SizedBox(
                         height: 40.h,
                         width: 200.w,
-                        child: ListTile(
-                          title: Text(pet.name!),
-                          subtitle: Text(pet.breed!),
-                          leading: CircleAvatar(
-                            backgroundImage: NetworkImage(pet.photoUrl!),
+                        child: const ListTile(title: Text("Select Pet", style: TextStyle(color: Colors.grey, fontSize: 30))),
+                      ),
+                    ),
+                    ...userPetController.userPetList.map((pet) {
+                      return DropdownMenuItem<String>(
+                        value: pet.name,
+                        child: Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(border: Border.all(color: Colors.grey), borderRadius: BorderRadius.circular(5.r)),
+                          height: 40.h,
+                          width: 200.w,
+                          child: ListTile(
+                            title: Text(pet.name!),
+                            leading: CircleAvatar(
+                              backgroundImage: NetworkImage(pet.photoUrl!),
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  }),
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    selectedPet = value!;
-                  });
-                },
-              );
-            }),
-            GestureDetector(
-              onTap: () {
-                // Check if userPetController.userPetList is not empty and selectedPet is valid
-                if (userPetController.userPetList.isNotEmpty && selectedPet != "Select Pet") {
-                  try {
-                    log("selected pet = $selectedPet");
-                    UserPetModel pet = userPetController.userPetList.firstWhere((element) => element.name == selectedPet);
-                    if (widget.boardingAppointment) {
-                      appointmentController.bookBoardingAppointment(widget.boarding!, pet.id ?? 0, selectedDate, selectedTime);
-                      log("working if");
-                    } else if (widget.servicesAppointment) {
-                      appointmentController.bookServiceAppointment(widget.services!, pet.id ?? 0, selectedDate, selectedTime);
-                      log("working else if");
-                    } else {
-                      appointmentController.bookDoctorAppointment(widget.doctor!, pet.id ?? 0, selectedDate, selectedTime);
-                      log("working else");
-                    }
-                  } catch (e) {
-                    log("Error booking appointment: ${e.toString()}");
-                    Get.snackbar("Error", "Please select a valid pet.", backgroundColor: Colors.redAccent);
-                  }
-                } else {
-                  Get.snackbar("Error", "Please select a pet.", backgroundColor: Colors.redAccent);
-                }
-                Get.back();
-              },
-              child: Container(
-                margin: const EdgeInsets.only(top: 20),
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(color: const Color.fromRGBO(245, 146, 69, 1), borderRadius: BorderRadius.circular(5)),
-                child: Row(
-                  children: [
-                    const SizedBox(width: 75),
-                    Text(
-                      "Book an Appointment",
-                      style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.white),
-                    ),
-                    const SizedBox(width: 35),
-                    const ImageIcon(
-                      AssetImage("assets/images/deadlineIcon.png"),
-                      color: Colors.white,
-                      size: 18,
-                    )
+                      );
+                    }),
                   ],
+                  onChanged: (value) {
+                    setState(() {
+                      selectedPet = value!;
+                    });
+                  },
+                );
+              }),
+              GestureDetector(
+                onTap: () {
+                  // Check if userPetController.userPetList is not empty and selectedPet is valid
+                  if (userPetController.userPetList.isNotEmpty && selectedPet != "Select Pet") {
+                    try {
+                      log("selected pet = $selectedPet");
+                      UserPetModel pet = userPetController.userPetList.firstWhere((element) => element.name == selectedPet);
+                      if (widget.boardingAppointment) {
+                        appointmentController.bookBoardingAppointment(widget.boarding!, pet.id ?? 0, selectedDate, selectedTime);
+                        log("working if");
+                      } else if (widget.servicesAppointment) {
+                        appointmentController.bookServiceAppointment(widget.services!, pet.id ?? 0, selectedDate, selectedTime);
+                        log("working else if");
+                      } else {
+                        appointmentController.bookDoctorAppointment(widget.doctor!, pet.id ?? 0, selectedDate, selectedTime);
+                        log("working else");
+                      }
+                    } catch (e) {
+                      log("Error booking appointment: ${e.toString()}");
+                      Get.snackbar("Error", "Please select a valid pet.", backgroundColor: Colors.redAccent);
+                    }
+                  } else {
+                    Get.snackbar("Error", "Please select a pet.", backgroundColor: Colors.redAccent);
+                  }
+                  Get.back();
+                },
+                child: Container(
+                  margin: EdgeInsets.only(top: 20.h),
+                  padding: EdgeInsets.all(10.sp),
+                  decoration: BoxDecoration(color: const Color.fromRGBO(245, 146, 69, 1), borderRadius: BorderRadius.circular(5.r)),
+                  child: Row(
+                    children: [
+                      SizedBox(width: 75.w),
+                      Text(
+                        "Book an Appointment",
+                        style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.white),
+                      ),
+                      SizedBox(width: 35.w),
+                      const ImageIcon(
+                        AssetImage("assets/images/deadlineIcon.png"),
+                        color: Colors.white,
+                        size: 18,
+                      )
+                    ],
+                  ),
                 ),
               ),
-            )
-          ],
+              SizedBox(
+                height: 200.h,
+              )
+            ],
+          ),
         ),
       ),
     );

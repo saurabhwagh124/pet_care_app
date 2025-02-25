@@ -5,6 +5,7 @@ import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/model/boarding_model.dart';
 import 'package:pet_care_app/view/user_views/book_appointment_screen.dart';
+import 'package:pet_care_app/view/user_views/review_screen.dart';
 
 class BoardingDetailsScreen extends StatefulWidget {
   final BoardingModel data;
@@ -35,13 +36,11 @@ class _BoardingDetailsScreen extends State<BoardingDetailsScreen> {
             backgroundColor: const Color.fromRGBO(248, 174, 31, 1)),
         body: SingleChildScrollView(
           child: Column(
+            spacing: 10.h,
             children: [
               Image.network(
                 widget.data.photoUrls.isNotEmpty ? widget.data.photoUrls.first : "https://via.placeholder.com/150",
                 fit: BoxFit.cover,
-              ),
-              const SizedBox(
-                height: 15,
               ),
               Container(
                 width: double.infinity,
@@ -149,10 +148,13 @@ class _BoardingDetailsScreen extends State<BoardingDetailsScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 15),
+              SizedBox(height: 15.h),
               GestureDetector(
                 onTap: () {
-                  Get.to(() =>  BookAppoinmentScreen(boarding: widget.data, boardingAppointment: true,));
+                  Get.to(() => BookAppoinmentScreen(
+                        boarding: widget.data,
+                        boardingAppointment: true,
+                      ));
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -180,6 +182,39 @@ class _BoardingDetailsScreen extends State<BoardingDetailsScreen> {
                     ],
                   ),
                 ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => ReviewsScreen(
+                        id: widget.data.id ?? 0,
+                        isBoarding: true,
+                      ));
+                },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(color: const Color.fromRGBO(245, 146, 69, 1), borderRadius: BorderRadius.circular(5)),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "Review Screen",
+                        style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.white),
+                      ),
+                      const SizedBox(
+                        width: 35,
+                      ),
+                      Icon(
+                        Icons.reviews,
+                        color: Colors.white,
+                        size: 20.sp,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 50.h,
               )
             ],
           ),

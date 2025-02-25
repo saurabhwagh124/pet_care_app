@@ -8,6 +8,7 @@ import 'package:pet_care_app/controller/user_controller.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
+import 'package:pet_care_app/utils/user_data.dart';
 import 'package:pet_care_app/view/admin_dashboard_screen.dart';
 import 'package:pet_care_app/view/user_views/dashboard_screen.dart';
 import 'package:pet_care_app/view/user_views/forgot_password_screen.dart';
@@ -20,6 +21,7 @@ class Loginscreen extends StatefulWidget {
 }
 
 class _LoginscreenState extends State<Loginscreen> {
+  final UserData _userData = UserData();
   final _auth = AuthService();
   final userController = UserController();
   ValueNotifier<bool> isVisible = ValueNotifier(false);
@@ -198,7 +200,7 @@ class _LoginscreenState extends State<Loginscreen> {
                 ),
               ),
               GestureDetector(
-                onTap: _signInWithGoogle,
+                onTap: _signInWithGoogleAdmin,
                 child: Container(
                   height: 40.h,
                   width: 300.w,
@@ -269,7 +271,26 @@ class _LoginscreenState extends State<Loginscreen> {
     final userCred = await _auth.loginWithGoogle();
     if (userCred != null) {
       userController.fetchUserData(userCred.user?.email ?? "");
-      Get.off(() => const AdminDashboardScreen());
+      Get.off(() => const DashboardScreen());
+      log("Gooogle login success");
+    } else {
+      log("Google login failed");
+    }
+  }
+
+  _signInWithGoogleAdmin() async {
+    final userCred = await _auth.loginWithGoogle();
+    if (userCred != null) {
+      userController.fetchUserData(userCred.user?.email ?? "");
+      await Future.delayed(const Duration(seconds: 1));
+      log(_userData.read("admin").toString());
+      if (_userData.read("admin")) {
+        Get.off(() => const AdminDashboardScreen());
+      } else {
+        _auth.signOut();
+        Get.offAll(() => const Loginscreen());
+        Get.snackbar("Error", "Not an admin", backgroundColor: Colors.red);
+      }
       log("Gooogle login success");
     } else {
       log("Google login failed");
