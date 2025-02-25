@@ -1,8 +1,13 @@
 // import 'package:custom_rating_bar/custom_rating_bar.dart';
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:pet_care_app/model/user.dart';
+import 'package:pet_care_app/utils/user_data.dart';
 
 class AddReviewPage extends StatefulWidget {
   const AddReviewPage({super.key});
@@ -14,6 +19,16 @@ class AddReviewPage extends StatefulWidget {
 class _AddReviewPageState extends State<AddReviewPage> {
   double _rating = 0.0;
   final TextEditingController _reviewController = TextEditingController();
+  final UserData _userData = UserData();
+
+  User? user =  null;
+
+  @override
+  void initState() {
+    final response = jsonDecode(_userData.read<String>("user")!);
+    user = User.fromJson(response);
+    log("user data fetched: ${user.toString()}");
+  }
 
   void _submitReview() {
     if (_rating > 0 && _reviewController.text.isNotEmpty) {
@@ -33,6 +48,7 @@ class _AddReviewPageState extends State<AddReviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: const Color(0xFFF8AE1F),
         title: Text(
@@ -57,20 +73,23 @@ class _AddReviewPageState extends State<AddReviewPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
+             Row(
               children: [
                 CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage(
-                    'assets/images/haylie.png',
+                  backgroundColor: Colors.grey,
+                  backgroundImage: NetworkImage(
+                  user!.photoUrl!
                   ),
+
+
                 ),
                 SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Haylie Aminoff',
+                      user!.displayName!,
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
