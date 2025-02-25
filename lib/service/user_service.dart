@@ -20,4 +20,19 @@ class UserService extends GetxService {
       throw Exception("catch error in fetch User Data $e");
     }
   }
+
+  Future<bool> checkAdmin(String email) async {
+    final url = ApiEndpoints.checkAdminUrl.replaceAll("{MAIL}", email);
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = jsonDecode(response.body);
+        return data;
+      } else {
+        throw Exception("else error in check admin${response.body}");
+      }
+    } catch (e) {
+      throw Exception("catch error in check admin $e");
+    }
+  }
 }

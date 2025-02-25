@@ -21,7 +21,7 @@ class ReviewsScreen extends StatefulWidget {
 }
 
 class _ReviewsScreenState extends State<ReviewsScreen> {
-  final ReviewController reviewController = Get.put(ReviewController());
+  final ReviewController reviewController = ReviewController();
 
   @override
   void initState() {
@@ -106,7 +106,22 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Get.to(() => const AddReviewPage());
+          if (widget.isDoctor) {
+            Get.to(() => AddReviewPage(
+                  id: widget.id,
+                  isDoctor: true,
+                ));
+          } else if (widget.isBoarding) {
+            Get.to(() => AddReviewPage(
+                  id: widget.id,
+                  isBoarding: true,
+                ));
+          } else if (widget.isService) {
+            Get.to(() => AddReviewPage(
+                  id: widget.id,
+                  isService: true,
+                ));
+          }
         },
         backgroundColor: Colors.orange,
         label: Text(
@@ -160,7 +175,7 @@ class ReviewCard extends StatelessWidget {
                       textStyle: const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                   ),
-                  Wrap(
+                  Row(
                     children: [
                       RatingBar.readOnly(
                         halfFilledIcon: Icons.star_half,
@@ -183,7 +198,7 @@ class ReviewCard extends StatelessWidget {
                   Text(
                     data.reviewDescription ?? "",
                     style: GoogleFonts.fredoka(
-                      textStyle: const TextStyle(fontSize: 14, color: Colors.black),
+                      textStyle: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500, color: Colors.black),
                     ),
                   ),
                 ],

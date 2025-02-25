@@ -9,13 +9,19 @@ import 'package:pet_care_app/utils/user_data.dart';
 class UserController extends GetxController {
   final userService = UserService();
   final UserData _userData = UserData();
+  final Rx<bool> admin = false.obs;
 
   void fetchUserData(String email) async {
     try {
       User temp = await userService.fetchUserData(email);
+      bool isAdmin = temp.role == "ADMIN";
+      _userData.write(
+        "admin", isAdmin
+      );
+      admin.value = isAdmin;
       _userData.write("userId", temp.id);
       _userData.write("user", jsonEncode(temp.toJson()));
-      log("Fetched user success ${_userData.read("user")}");
+      log("Fetched user success ${_userData.read("user")} , ${_userData.read("admin")}");
     } catch (e) {
       log("Error fetching user Data: $e");
     }
