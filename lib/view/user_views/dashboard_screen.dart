@@ -358,7 +358,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         );
                       }
                       return SizedBox(
-                          height: 150.h, // Adjust height as needed
+                          height: 150.h,
                           child: ListView.builder(
                               scrollDirection: Axis.vertical,
                               itemCount: shopController.foodList.length,
@@ -422,7 +422,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       ),
                                       Spacer(),
                                       GestureDetector(
-                                        onTap: () {},
+                                        onTap: () {
+                                          Get.to(const ShopFood());
+                                        },
                                         child: Container(
                                           padding: EdgeInsets.all(5.sp),
                                           decoration: const BoxDecoration(
