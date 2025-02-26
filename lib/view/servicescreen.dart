@@ -11,10 +11,10 @@ class ServicesScreen extends StatefulWidget {
   const ServicesScreen({super.key});
 
   @override
-  State<ServicesScreen> createState() => _VeterinaryScreenState();
+  State<ServicesScreen> createState() => _ServicesScreenState();
 }
 
-class _VeterinaryScreenState extends State<ServicesScreen> {
+class _ServicesScreenState extends State<ServicesScreen> {
   final PetServicesController _controller = PetServicesController();
 
   @override
