@@ -24,12 +24,24 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
   final List<Map<String, dynamic>> dashboardItems = [
     {'icon': Icons.pets, 'title': 'Pet Management', 'route': '/pet'},
     {'icon': Icons.pets_rounded, 'title': 'Grooming', 'route': '/grooming'},
-    {'icon': Icons.calendar_today, 'title': 'Appointments', 'route': '/appointments'},
+    {
+      'icon': Icons.calendar_today,
+      'title': 'Appointments',
+      'route': '/appointments'
+    },
     {'icon': Icons.person, 'title': 'User Management', 'route': '/parks'},
     {'icon': Icons.video_collection, 'title': 'Services', 'route': '/services'},
     {'icon': Icons.people, 'title': 'Boarding', 'route': '/boarding'},
-    {'icon': Icons.local_hospital, 'title': 'Veterinary', 'route': '/veterinary'},
-    {'icon': Icons.shopping_cart, 'title': 'Store management', 'route': '/shopitem'},
+    {
+      'icon': Icons.local_hospital,
+      'title': 'Veterinary',
+      'route': '/veterinary'
+    },
+    {
+      'icon': Icons.shopping_cart,
+      'title': 'Store management',
+      'route': '/shopitem'
+    },
   ];
 
   @override
@@ -41,7 +53,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             height: MediaQuery.sizeOf(context).height / 2,
             width: MediaQuery.sizeOf(context).width,
             child: Image.asset(
-              "assets/bg.png",
+              "assets/images/admin/bg.png",
               fit: BoxFit.fill,
             ),
           ),

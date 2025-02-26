@@ -42,6 +42,7 @@ flutter:
     - assets/images/dogs/
     - assets/images/fish/
     - assets/images/others/
+    - assets/images/admin/
   # fonts:
   #   - family: Fredoka
   #     fonts:
