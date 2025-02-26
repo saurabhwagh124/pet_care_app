@@ -16,7 +16,7 @@ class ApiEndpoints {
   static String getBoardingAppointmentsSlotsUrl = "$baseUrl/appointments/boarding/{id}/timeslots/{date}";
   static String getServiceAppointmentsSlotsUrl = "$baseUrl/appointments/service/{id}/timeslots/{date}";
   static String getDoctorReviewsUrl = "$baseUrl/reviews/doctor/{id}";
-  static String getBoardingReviewsUrl = "$baseUrl/reviews/boarding/{id}"; 
+  static String getBoardingReviewsUrl = "$baseUrl/reviews/boarding/{id}";
   static String getServiceReviewsUrl = "$baseUrl/reviews/service/{id}";
 
   // ALL Post
@@ -30,4 +30,5 @@ class ApiEndpoints {
   static String postBoardingReviewUrl = "$baseUrl/reviews/boarding";
   static String postServiceReviewUrl = "$baseUrl/reviews/service";
   static String postShopItemReviewUrl = "$baseUrl/reviews/items";
+  static String postFcmTokenUrl = "$baseUrl/users/{EMAIL}/fcm-token?fcm={TOKEN}";
 }
