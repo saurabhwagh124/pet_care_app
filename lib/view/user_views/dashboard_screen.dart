@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -12,7 +9,6 @@ import 'package:pet_care_app/service/notification_service.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
 import 'package:pet_care_app/utils/enums.dart';
-import 'package:pet_care_app/utils/user_data.dart';
 import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
 import 'package:pet_care_app/view/user_views/explore_screen.dart';
 import 'package:pet_care_app/view/user_views/forgot_password_screen.dart';
