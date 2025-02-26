@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pet_care_app/controller/appointment_controller.dart';
 import 'package:pet_care_app/controller/cart_controller.dart';
+import 'package:pet_care_app/service/notification_service.dart';
 import 'package:pet_care_app/view/admin_dashboard_screen.dart';
 import 'package:pet_care_app/view/appointmentscreen.dart';
 import 'package:pet_care_app/view/boardingmanagement.dart';
@@ -26,6 +27,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  final notificationService = Get.put(NotificationService());
+  notificationService.getFcmtoken();
+  notificationService.initializeNotifications();
   runApp(const MainApp());
 }
 

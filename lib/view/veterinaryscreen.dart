@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/vet_doc_controller.dart';
-import 'package:pet_care_app/widgets/admin/add_editvet.dart';
-import 'package:pet_care_app/widgets/admin/assignvet.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
+import 'package:pet_care_app/widgets/vet_card_widget.dart';
 
 class Veterinaryscreen extends StatefulWidget {
   const Veterinaryscreen({super.key});
@@ -12,104 +13,48 @@ class Veterinaryscreen extends StatefulWidget {
 }
 
 class _VeterinaryscreenState extends State<Veterinaryscreen> {
-  final vetController = VetDocController();
+  final VetDocController _vetDocController = VetDocController();
+
+  @override
+  void initState() {
+    super.initState();
+    _vetDocController.fetchVetDocs();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white,
       appBar: AppBar(
-        title: const Text('Veterinarian List'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Get.back(), // Navigate back to the previous screen
-        ),
+        //backgroundColor: AppColors.yellowCircle,
+        title: const Text("Veterinary"),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Obx(() {
-              final vets = vetController.vets;
-
-              if (vets.isEmpty) {
-                return const Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('No veterinarians available.'),
-                      SizedBox(height: 16),
-                      // ElevatedButton(
-                      //   onPressed: () => Get.to(() => AddVetScreen()),
-                      //   child: Text('Add Veterinarian'),
-                      // ),
-                    ],
-                  ),
-                );
-              } else {
-                return ListView.builder(
-                  itemCount: vets.length,
-                  itemBuilder: (context, index) {
-                    final vet = vets[index];
-                    return Card(
-                      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                      child: ListTile(
-                        title: Text("Name: ${vet.name}"),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Email: ${vet.email}'),
-                            Text('Specialization: ${vet.specialization}'),
-                            Text('Experience: ${vet.experienceYears} years'),
-                            Text('Clinic: ${vet.clinicName}'),
-                            Text('Start Day: ${vet.startDay}'),
-                            Text('End Day: ${vet.endDay}'),
-                            Text('Start Time: ${vet.startTime}'),
-                            Text('Close Time: ${vet.closeTime}'),
-                          ],
-                        ),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                // Pass vet details to AssignVetScreen
-                                Get.to(() => AssignVetScreen(), arguments: vet);
-                              },
-                              child: const Text('Assign Appointment'),
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.delete, color: Colors.red),
-                              onPressed: () {
-                                vetController.deleteVet(vet); // Delete vet
-                              },
-                            ),
-                          ],
-                        ),
-                        onTap: () {
-                          Get.to(() => AddVetScreen(vet: vet)); // Edit vet
-                        },
-                      ),
-                    );
-                  },
-                );
-              }
-            }),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: () => Get.to(() => const AddVetScreen()),
-              child: const Text('Add Veterinarian'),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 15.h),
+            Padding(
+              padding: EdgeInsets.only(left: 20.w, right: 20.w),
             ),
-          ),
-          // Padding(
-          //   padding: const EdgeInsets.all(16.0),
-          //   child: ElevatedButton(
-          //     onPressed: () => Get.to(() => AssignVetScreen(),),
-          //     child: Text('Assign Veterinarian'),
-          //   ),
-          // ),
-        ],
+            SizedBox(height: 15.h),
+            Expanded(
+              child: Obx(
+                () => _vetDocController.vetDoctorsList.isEmpty
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.separated(
+                        separatorBuilder: (context, index) => SizedBox(height: 10.h),
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) => VetCardWidget(data: _vetDocController.vetDoctorsList[index]),
+                        itemCount: _vetDocController.vetDoctorsList.length,
+                      ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+
 }
