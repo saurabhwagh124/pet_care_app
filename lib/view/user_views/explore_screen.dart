@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/view/user_views/explore_tabs/boarding_tab_view.dart';
@@ -40,6 +41,10 @@ class _ExploreScreenState extends State<ExploreScreen> with SingleTickerProvider
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+          onPressed: () => Get.back(),
+        ),
         backgroundColor: AppColors.yellowCircle,
       ),
       body: Padding(
