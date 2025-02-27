@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:get/get.dart';
+import 'package:pet_care_app/model/all_appointments_model.dart';
 import 'package:pet_care_app/model/boarding_appointment_model.dart';
 import 'package:pet_care_app/model/boarding_model.dart';
 import 'package:pet_care_app/model/doctor_appointment_model.dart';
@@ -14,6 +16,10 @@ class AppointmentController extends GetxController {
   final AppointmentsService appointmentsService = AppointmentsService();
   RxList<String> bookedTimeSlots = <String>[].obs;
   UserData userData = UserData();
+  RxList<DoctorAppointmentModel> docAppointmentList = <DoctorAppointmentModel>[].obs;
+  RxList<BoardingAppointmentModel> boardingAppointmentList = <BoardingAppointmentModel>[].obs;
+  RxList<ServiceAppointmentModel> serviceAppointmentList = <ServiceAppointmentModel>[].obs;
+  AllAppointmentsModel? allAppointments;
 
   // Time Slot Methods
 
@@ -25,7 +31,7 @@ class AppointmentController extends GetxController {
     }
   }
 
-  void fetchBookedServiceTimeSlots(int serviceId, String date) async{
+  void fetchBookedServiceTimeSlots(int serviceId, String date) async {
     try {
       bookedTimeSlots.value = await appointmentsService.fetchBookedServiceTimeSlots(serviceId, date);
     } catch (e) {
@@ -33,7 +39,7 @@ class AppointmentController extends GetxController {
     }
   }
 
-  void fetchBookedBoardingTimeSlots(int boardingId, String date) async{
+  void fetchBookedBoardingTimeSlots(int boardingId, String date) async {
     try {
       bookedTimeSlots.value = await appointmentsService.fetchBookedBoardingTimeSlots(boardingId, date);
     } catch (e) {
@@ -43,7 +49,7 @@ class AppointmentController extends GetxController {
 
   void bookDoctorAppointment(VetDocModel doctor, int petId, DateTime date, String selectedTime) async {
     int userId = userData.read<int>("userId") ?? 0;
-    final payload = DoctorAppointment(appointmentId: 0, usersId: userId, petsId: petId, date: date, time: selectedTime, status: 'PENDING', doctor: doctor);
+    final payload = DoctorAppointmentModel(appointmentId: 0, usersId: userId, petsId: petId, date: date, time: selectedTime, status: 'PENDING', doctor: doctor);
     log(jsonEncode(payload.toJson()));
     await appointmentsService.bookDoctorAppointment(payload);
   }
@@ -62,5 +68,12 @@ class AppointmentController extends GetxController {
     appointmentsService.bookBoardingAppointment(payload);
   }
 
-  
+  void fetchAllAppointments() async {
+    int userId = userData.read<int>("userId") ?? 0;
+    allAppointments = await appointmentsService.fetchAllAppointments(userId);
+    docAppointmentList.value = allAppointments!.doctor.reversed.toList();
+    boardingAppointmentList.value = allAppointments!.boarding.reversed.toList();
+    serviceAppointmentList.value = allAppointments!.service.reversed.toList();
+    log("All Appointments is null ${allAppointments.toString()}");
+  }
 }
