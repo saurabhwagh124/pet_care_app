@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -6,6 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:pet_care_app/model/notification_dto_model.dart';
 import 'package:pet_care_app/network/api_endpoints.dart';
 import 'package:pet_care_app/utils/user_data.dart';
 
@@ -96,6 +98,20 @@ class NotificationService extends GetxService {
     });
 
     // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  }
+
+  Future<void> addNotificationToAll(NotificationDtoModel payload) async {
+    try {
+      final headers = {"Content-Type": "application/json"};
+      final response = await http.post(Uri.parse(ApiEndpoints.postNotificationToAll), headers: headers, body: jsonEncode(payload.toJson()));
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        Get.snackbar("Notification Sent", "Notification sent to all users", backgroundColor: Colors.lightGreenAccent);
+      } else {
+        throw Exception("Add notification to all else error ");
+      }
+    } catch (e) {
+      throw Exception("Add notification to all errror: $e");
+    }
   }
 
   // @pragma('vm:entry-point')

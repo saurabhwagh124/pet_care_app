@@ -1,7 +1,7 @@
 class ApiEndpoints {
-  static String baseUrl =
-      "http://petcarebackend1-env.eba-pkcec8a7.ap-south-1.elasticbeanstalk.com:5000/public";
-  // static String baseUrl = "http://192.168.0.107:5000/public";
+  // static String baseUrl =
+  // "http://petcarebackend1-env.eba-pkcec8a7.ap-south-1.elasticbeanstalk.com:5000/public";
+  static String baseUrl = "http://192.168.0.107:5000/public";
   static String loginUrl = "$baseUrl/login";
   static String registerUrl = "$baseUrl/register";
 
@@ -13,12 +13,9 @@ class ApiEndpoints {
   static String getAllShopItemUrl = "$baseUrl/shopItem/";
   static String checkAdminUrl = "$baseUrl/admin-access?email={MAIL}";
   static String getUserDataUrl = "$baseUrl/users?email={MAIL}";
-  static String getDoctorAppointmentsSlotsUrl =
-      "$baseUrl/appointments/doctor/{id}/timeslots/{date}";
-  static String getBoardingAppointmentsSlotsUrl =
-      "$baseUrl/appointments/boarding/{id}/timeslots/{date}";
-  static String getServiceAppointmentsSlotsUrl =
-      "$baseUrl/appointments/service/{id}/timeslots/{date}";
+  static String getDoctorAppointmentsSlotsUrl = "$baseUrl/appointments/doctor/{id}/timeslots/{date}";
+  static String getBoardingAppointmentsSlotsUrl = "$baseUrl/appointments/boarding/{id}/timeslots/{date}";
+  static String getServiceAppointmentsSlotsUrl = "$baseUrl/appointments/service/{id}/timeslots/{date}";
   static String getDoctorReviewsUrl = "$baseUrl/reviews/doctor/{id}";
   static String getBoardingReviewsUrl = "$baseUrl/reviews/boarding/{id}";
   static String getServiceReviewsUrl = "$baseUrl/reviews/service/{id}";
@@ -35,4 +32,5 @@ class ApiEndpoints {
   static String postServiceReviewUrl = "$baseUrl/reviews/service";
   static String postShopItemReviewUrl = "$baseUrl/reviews/items";
   static String postFcmTokenUrl = "$baseUrl/users/{EMAIL}/fcm-token?fcm={TOKEN}";
+  static String postNotificationToAll = "$baseUrl/notification/all";
 }

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/controller/cart_controller.dart';
@@ -17,7 +18,39 @@ class _CartScreenState extends State<CartScreen> {
   late Razorpay _razorPay;
   final CartController cartController = Get.find<CartController>();
 
-  void _handlePaymentSuccess(PaymentSuccessResponse success) {}
+  void _handlePaymentSuccess(PaymentSuccessResponse success) {
+    Get.off(() => SimpleDialog(alignment: Alignment.center, backgroundColor: Colors.white, children: [
+          CircleAvatar(
+            radius: 30.r,
+            backgroundColor: Colors.lightGreen,
+            child: Icon(
+              Icons.done,
+              size: 20.sp,
+              color: Colors.white,
+            ),
+          ),
+          Text(
+            "Order Placed Successfully",
+            style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700, color: Colors.black),
+          ),
+          GestureDetector(
+            onTap: () {
+              cartController.cartItems.clear();
+              Get.offAllNamed('/DashboardScreen');
+            },
+            child: Container(
+              color: Colors.lightGreenAccent,
+              alignment: Alignment.center,
+              height: 30.h,
+              width: 40.w,
+              child: Text(
+                "Ok",
+                style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500, color: Colors.white),
+              ),
+            ),
+          )
+        ]));
+  }
 
   void _handlePaymentFailed(PaymentFailureResponse failed) {}
 
@@ -65,7 +98,7 @@ class _CartScreenState extends State<CartScreen> {
         title: Text(
           'Cart',
           style: GoogleFonts.fredoka(
-            textStyle: const TextStyle(fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
+            textStyle: TextStyle(fontSize: 23.sp, fontWeight: FontWeight.w600, color: Colors.white),
           ),
         ),
         leading: IconButton(
@@ -80,7 +113,11 @@ class _CartScreenState extends State<CartScreen> {
       ),
       body: Obx(() {
         if (cartController.cartItems.isEmpty) {
-          return const Center(child: Text("Your cart is empty"));
+          return Center(
+              child: Text(
+            "Your cart is empty",
+            style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600, color: Colors.black),
+          ));
         }
         return Column(
           children: [
