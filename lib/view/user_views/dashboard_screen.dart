@@ -5,18 +5,17 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/controller/shop_controller.dart';
 import 'package:pet_care_app/controller/user_pet_controller.dart';
+import 'package:pet_care_app/service/notification_service.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
 import 'package:pet_care_app/utils/enums.dart';
+import 'package:pet_care_app/view/category_screen.dart';
 import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
 import 'package:pet_care_app/view/user_views/explore_screen.dart';
-import 'package:pet_care_app/view/user_views/forgot_password_screen.dart';
 import 'package:pet_care_app/view/user_views/profile_screen.dart';
+import 'package:pet_care_app/view/user_views/scheduled_appointments_screen.dart';
 import 'package:pet_care_app/view/user_views/shop_food_screen.dart';
-import 'package:pet_care_app/view/wrapper.dart';
 import 'package:pet_care_app/widgets/user_pet_widget_icon.dart';
-
-import 'package:pet_care_app/view/category_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -27,21 +26,18 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   bool nightMode = false;
+  final notificationService = NotificationService();
   final userPetController = UserPetController();
   final shopController = ShopController();
   final auth = AuthService();
   final User? user = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 0;
-  List<Widget> screens = [
-    const DashboardScreen(),
-    const ExploreScreen(),
-    const ShopFood(),
-    const ProfileScreen()
-  ];
+  List<Widget> screens = [const DashboardScreen(), const ExploreScreen(), const ShopFood(), const ProfileScreen()];
 
   @override
   void initState() {
     userPetController.fetchUserPets();
+    notificationService.getFcmtoken();
     shopController.fetchFoodProducts();
     super.initState();
   }
@@ -57,87 +53,78 @@ class _DashboardScreenState extends State<DashboardScreen> {
         backgroundColor: Colors.orangeAccent,
         title: Text(
           "Hey ${user!.displayName}, ",
-          style: GoogleFonts.fredoka(
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w600,
-              color: Colors.white),
+          style: GoogleFonts.fredoka(fontSize: 15.sp, fontWeight: FontWeight.w600, color: Colors.white),
         ),
         leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.white),
+          icon: const Icon(Icons.menu, color: Colors.white),
           onPressed: () {
             _scaffoldKey.currentState?.openDrawer(); // Open drawer using key
           },
         ),
         actions: [
           GestureDetector(
-            onTap: () async {
-              await showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: Text(
-                    "Profile Options",
-                    style:
-                        TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
-                  ),
-                  content: SizedBox(
-                    height: 100.h,
-                    child: Column(
-                      spacing: 10.h,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          color: const Color.fromARGB(255, 242, 188, 184),
-                          padding: const EdgeInsets.all(3),
-                          child: GestureDetector(
-                            onTap: () async {
-                              await auth.signOut();
-                              Get.back();
-                              Get.to(() => const Wrapper());
-                            },
-                            child: Row(
-                              children: [
-                                Icon(Icons.logout_outlined,
-                                    color: Colors.red, size: 20.sp),
-                                SizedBox(width: 20.w),
-                                Text(
-                                  "Sign out",
-                                  style: TextStyle(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          color: const Color.fromARGB(255, 219, 245, 128),
-                          padding: const EdgeInsets.all(3),
-                          child: GestureDetector(
-                            onTap: () {
-                              Get.to(() => const ForgotPasswordScreen());
-                            },
-                            child: Row(
-                              children: [
-                                Icon(Icons.lock_reset_outlined,
-                                    color: Colors.yellow, size: 20.sp),
-                                SizedBox(width: 20.w),
-                                Text(
-                                  "Forgot Password",
-                                  style: TextStyle(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
+            // onTap: () async {
+            //   await showDialog(
+            //     context: context,
+            //     builder: (context) => AlertDialog(
+            //       title: Text(
+            //         "Profile Options",
+            //         style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
+            //       ),
+            //       content: SizedBox(
+            //         height: 100.h,
+            //         child: Column(
+            //           spacing: 10.h,
+            //           crossAxisAlignment: CrossAxisAlignment.center,
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children: [
+            //             Container(
+            //               color: const Color.fromARGB(255, 242, 188, 184),
+            //               padding: const EdgeInsets.all(3),
+            //               child: GestureDetector(
+            //                 onTap: () async {
+            //                   await auth.signOut();
+            //                   Get.back();
+            //                   Get.to(() => const Wrapper());
+            //                 },
+            //                 child: Row(
+            //                   children: [
+            //                     Icon(Icons.logout_outlined, color: Colors.red, size: 20.sp),
+            //                     SizedBox(width: 20.w),
+            //                     Text(
+            //                       "Sign out",
+            //                       style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //             ),
+            //             Container(
+            //               color: const Color.fromARGB(255, 219, 245, 128),
+            //               padding: const EdgeInsets.all(3),
+            //               child: GestureDetector(
+            //                 onTap: () {
+            //                   Get.to(() => const ForgotPasswordScreen());
+            //                 },
+            //                 child: Row(
+            //                   children: [
+            //                     Icon(Icons.lock_reset_outlined, color: Colors.yellow, size: 20.sp),
+            //                     SizedBox(width: 20.w),
+            //                     Text(
+            //                       "Forgot Password",
+            //                       style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //             )
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   );
+            // },
+
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
               padding: EdgeInsets.all(2.r),
@@ -158,20 +145,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
               decoration: const BoxDecoration(color: Colors.orangeAccent),
               child: Text(
                 "Menu",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.bold),
               ),
             ),
             ListTile(
-              leading: Icon(Icons.info_outline, color: Colors.black),
-              title: Text("General Breeds Info"),
+              leading: const Icon(Icons.info_outline, color: Colors.black),
+              title: const Text("General Breeds Info"),
               onTap: () {
-                Navigator.pop(context); // Close drawer
+                Get.back(); // Close drawer
                 Get.to(() => CategoryScreen()); // Navigate to your page
               },
             ),
+            ListTile(
+              leading: const Icon(
+                Icons.access_time,
+                color: Colors.black,
+              ),
+              title: const Text("Scheduled Appointments"),
+              onTap: () {
+                Get.back();
+                Get.to(() => ScheduledAppointmentsScreen());
+              },
+            )
           ],
         ),
       ),
@@ -183,19 +178,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8.r),
-                    boxShadow: const [
-                      BoxShadow(
-                          offset: Offset(0, 1),
-                          blurRadius: 3.5,
-                          color: Color.fromRGBO(0, 0, 0, 0.20))
-                    ]),
+                    color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
                 child: Column(
                   children: [
                     Padding(
-                      padding:
-                          EdgeInsets.only(top: 15.h, left: 20.w, right: 20.w),
+                      padding: EdgeInsets.only(top: 15.h, left: 20.w, right: 20.w),
                       child: Row(
                         children: [
                           SizedBox(
@@ -207,8 +194,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                           Text(
                             "My Pets",
-                            style: GoogleFonts.fredoka(
-                                fontWeight: FontWeight.w700, fontSize: 20.sp),
+                            style: GoogleFonts.fredoka(fontWeight: FontWeight.w700, fontSize: 20.sp),
                           ),
                           const Spacer()
                         ],
@@ -218,26 +204,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       height: 20.h,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(
-                          left: 21.w, right: 11.w, bottom: 15.h),
+                      padding: EdgeInsets.only(left: 21.w, right: 11.w, bottom: 15.h),
                       child: SizedBox(
                         height: 180.h,
                         child: Obx(() => (userPetController.userPetList.isEmpty)
                             ? Column(
                                 spacing: 10.h,
                                 children: [
-                                  Text("No Pets Found",
-                                      style: GoogleFonts.fredoka(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 16.sp)),
+                                  Text("No Pets Found", style: GoogleFonts.fredoka(fontWeight: FontWeight.w700, fontSize: 16.sp)),
                                   IconButton(
                                     onPressed: () {
                                       Get.to(() => const AddPetsPage());
                                     },
                                     icon: CircleAvatar(
                                       radius: 35.r,
-                                      backgroundColor: const Color.fromARGB(
-                                          255, 159, 221, 250),
+                                      backgroundColor: const Color.fromARGB(255, 159, 221, 250),
                                       child: Icon(
                                         Icons.add_outlined,
                                         color: Colors.white,
@@ -247,31 +228,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   )
                                 ],
                               )
-                            : (userPetController.userPetListStatus ==
-                                    ApiStatus.LOADING)
+                            : (userPetController.userPetListStatus == ApiStatus.LOADING)
                                 ? Center(
                                     child: CircularProgressIndicator(
                                       color: Colors.greenAccent,
                                       strokeWidth: 4.sp,
                                     ),
                                   )
-                                : (userPetController.userPetListStatus ==
-                                        ApiStatus.SUCCESS)
+                                : (userPetController.userPetListStatus == ApiStatus.SUCCESS)
                                     ? ListView.separated(
                                         scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) =>
-                                            UserPetWidgetIcon(
-                                              data: userPetController
-                                                  .userPetList[index],
+                                        itemBuilder: (context, index) => UserPetWidgetIcon(
+                                              data: userPetController.userPetList[index],
                                             ),
-                                        separatorBuilder: (context, index) =>
-                                            SizedBox(
+                                        separatorBuilder: (context, index) => SizedBox(
                                               width: 10.h,
                                             ),
-                                        itemCount: userPetController
-                                            .userPetList.length)
-                                    : const SnackBar(
-                                        content: Text("Something went wrong"))),
+                                        itemCount: userPetController.userPetList.length)
+                                    : const SnackBar(content: Text("Something went wrong"))),
                       ),
                     )
                   ],
@@ -280,14 +254,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               const SizedBox(height: 20),
               Container(
                   decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8.r),
-                      boxShadow: const [
-                        BoxShadow(
-                            offset: Offset(0, 1),
-                            blurRadius: 3.5,
-                            color: Color.fromRGBO(0, 0, 0, 0.20))
-                      ]),
+                      color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
                   padding: EdgeInsets.all(20.r),
                   child: Column(children: [
                     Row(
@@ -316,14 +283,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               Container(
                 padding: EdgeInsets.all(20.sp),
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8.r),
-                    boxShadow: const [
-                      BoxShadow(
-                          offset: Offset(0, 1),
-                          blurRadius: 3.5,
-                          color: Color.fromRGBO(0, 0, 0, 0.20))
-                    ]),
+                    color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),
                 child: Column(
                   children: [
                     Row(
@@ -337,8 +297,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         ),
                         Text(
                           "Pet Food",
-                          style: GoogleFonts.fredoka(
-                              fontSize: 20.sp, fontWeight: FontWeight.w700),
+                          style: GoogleFonts.fredoka(fontSize: 20.sp, fontWeight: FontWeight.w700),
                         )
                       ],
                     ),
@@ -366,8 +325,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 final product = shopController.foodList[index];
                                 return Container(
                                   width: 130.w,
-                                  margin: EdgeInsets.only(
-                                      right: 10.w, bottom: 10.w),
+                                  margin: EdgeInsets.only(right: 10.w, bottom: 10.w),
                                   padding: EdgeInsets.all(10.sp),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
@@ -381,21 +339,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     ],
                                   ),
                                   child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       SizedBox(
                                         height: 60.h,
-                                        child: Image.network(
-                                            product.photoUrl ?? "",
-                                            fit: BoxFit.cover),
+                                        child: Image.network(product.photoUrl ?? "", fit: BoxFit.cover),
                                       ),
                                       SizedBox(
                                         width: 15.w,
                                       ),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         children: [
                                           SizedBox(
                                             width: 120.w,
@@ -411,7 +365,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                           ),
                                           SizedBox(height: 5.h),
                                           Text(
-                                            "\₹${product.price?.toStringAsFixed(2)}",
+                                            "₹${product.price?.toStringAsFixed(2)}",
                                             style: TextStyle(
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.bold,
@@ -420,7 +374,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                           ),
                                         ],
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       GestureDetector(
                                         onTap: () {
                                           Get.to(const ShopFood());

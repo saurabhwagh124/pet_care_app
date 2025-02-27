@@ -18,16 +18,10 @@ class ShopFood extends StatefulWidget {
   State<ShopFood> createState() => _ShopFoodState();
 }
 
-class _ShopFoodState extends State<ShopFood>
-    with SingleTickerProviderStateMixin {
+class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final ShopController shopController = ShopController();
-  List<Widget> screenList = const [
-    FoodTabView(),
-    VetItemsTabView(),
-    AccessoriesTabView(),
-    IotTabView()
-  ];
+  List<Widget> screenList = const [FoodTabView(), VetItemsTabView(), AccessoriesTabView(), IotTabView()];
 
   @override
   void initState() {
@@ -56,8 +50,7 @@ class _ShopFoodState extends State<ShopFood>
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          icon:
-              const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
           onPressed: () => Get.back(),
         ),
         title: Text(
@@ -70,7 +63,7 @@ class _ShopFoodState extends State<ShopFood>
             ),
           ),
         ),
-        backgroundColor: Colors.orange,
+        backgroundColor: AppColors.yellowCircle,
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart, color: Colors.white),
@@ -108,8 +101,7 @@ class _ShopFoodState extends State<ShopFood>
                   ),
                   unselectedLabelColor: Colors.black,
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-                  unselectedLabelStyle:
-                      const TextStyle(fontWeight: FontWeight.normal),
+                  unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
                   tabs: shopController.category.map((category) {
                     String icon;
                     switch (category) {
@@ -135,22 +127,12 @@ class _ShopFoodState extends State<ShopFood>
                         width: 40,
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: _tabController.index ==
-                                  shopController.category
-                                      .toList()
-                                      .indexOf(category)
-                              ? const Color.fromARGB(255, 134, 208, 243)
-                              : AppColors.greyIconBox,
+                          color: _tabController.index == shopController.category.toList().indexOf(category) ? const Color.fromARGB(255, 134, 208, 243) : AppColors.greyIconBox,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Image.asset(
                           icon,
-                          color: _tabController.index ==
-                                  shopController.category
-                                      .toList()
-                                      .indexOf(category)
-                              ? Colors.white
-                              : Colors.black,
+                          color: _tabController.index == shopController.category.toList().indexOf(category) ? Colors.white : Colors.black,
                         ),
                       ),
                       child: Text(
@@ -171,8 +153,8 @@ class _ShopFoodState extends State<ShopFood>
       ),
       body: TabBarView(
         controller: _tabController,
+        physics: const NeverScrollableScrollPhysics(),
         children: screenList,
-        physics: NeverScrollableScrollPhysics(),
       ),
     );
   }

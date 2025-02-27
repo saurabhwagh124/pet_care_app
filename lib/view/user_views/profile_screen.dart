@@ -166,30 +166,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     context,
                     icon: Icons.person,
                     title: "About me",
-                    screen: const AddPetsPage(),
+                    screen: '/AddPetsPage',
                   ),
                   buildMenuTile(
                     context,
                     icon: Icons.shopping_bag_outlined,
                     title: "My Orders",
-                    screen: const AddPetsPage(),
+                    screen: '/AddPetsPage',
                   ),
                   buildMenuTile(
                     context,
                     icon: Icons.location_on_outlined,
                     title: "My Address",
-                    screen: const AddPetsPage(),
+                    screen: '/AddPetsPage',
                   ),
+                  buildMenuTile(context, icon: Icons.pets, title: "Add Pet", screen: '/AddPetsPage'),
                   GestureDetector(
                     onTap: () {
-                      Get.to(() => AddPetsPage());
+                      Get.to(() => const AddPetsPage());
                     },
                     child: Container(
                       height: 50,
                       alignment: Alignment.center,
                       width: double.maxFinite,
                       color: Colors.white,
-                      child: Text("Add Pet"),
+                      child: const Text("Add Pet"),
                     ),
                   )
                   // buildMenuTile(
@@ -221,7 +222,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-Widget buildMenuTile(BuildContext context, {required IconData icon, required String title, required Widget screen}) {
+Widget buildMenuTile(BuildContext context, {required IconData icon, required String title, required String screen}) {
   return Container(
     margin: const EdgeInsets.only(bottom: 12),
     padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
@@ -238,7 +239,7 @@ Widget buildMenuTile(BuildContext context, {required IconData icon, required Str
     ),
     child: InkWell(
       onTap: () {
-        Get.to(() => screen);
+        Get.toNamed(screen);
       },
       child: Row(
         children: [
