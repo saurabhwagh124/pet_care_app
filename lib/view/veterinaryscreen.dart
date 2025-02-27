@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -11,10 +9,10 @@ class Veterinaryscreen extends StatefulWidget {
   const Veterinaryscreen({super.key});
 
   @override
-  State<Veterinaryscreen> createState() => _ExploreScreenState();
+  State<Veterinaryscreen> createState() => _VeterinaryscreenState();
 }
 
-class _ExploreScreenState extends State<Veterinaryscreen> {
+class _VeterinaryscreenState extends State<Veterinaryscreen> {
   final VetDocController _vetDocController = VetDocController();
 
   @override
@@ -29,19 +27,16 @@ class _ExploreScreenState extends State<Veterinaryscreen> {
       backgroundColor: AppColors.white,
       appBar: AppBar(
         //backgroundColor: AppColors.yellowCircle,
-     title: Text("Veterinary"),
+        title: const Text("Veterinary"),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-          
-            
             SizedBox(height: 15.h),
             Padding(
               padding: EdgeInsets.only(left: 20.w, right: 20.w),
-           
             ),
             SizedBox(height: 15.h),
             Expanded(
@@ -62,30 +57,4 @@ class _ExploreScreenState extends State<Veterinaryscreen> {
     );
   }
 
-  Widget _buildTabIcon(String imagePath, String label) {
-    return Column(
-      children: [
-        Container(
-          height: 40.h,
-          width: 40.w,
-          padding: EdgeInsets.all(10.sp),
-          decoration: BoxDecoration(
-            color: AppColors.greyIconBox,
-            borderRadius: BorderRadius.circular(10.r),
-          ),
-          child: Image.asset(imagePath),
-        ),
-        Text(
-          label,
-          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: AppColors.greyTextColor),
-        ),
-      ],
-    );
-  }
-
-  void getId() async {
-    final user = FirebaseAuth.instance.currentUser!;
-    final id = await user.getIdToken();
-    log(id ?? "");
-  }
 }

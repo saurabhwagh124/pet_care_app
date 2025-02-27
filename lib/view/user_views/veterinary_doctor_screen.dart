@@ -146,7 +146,10 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
               const SizedBox(height: 10),
               GestureDetector(
                 onTap: () {
-                  Get.to(() => const BookAppoinmentScreen());
+                  Get.to(() => BookAppoinmentScreen(
+                        doctor: widget.data,
+                        doctorAppointment: true,
+                      ));
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -177,17 +180,18 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(() => const ReviewsScreen());
+                  Get.to(() => ReviewsScreen(
+                        id: widget.data.id ?? 0,
+                        isDoctor: true,
+                      ));
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(color: const Color.fromRGBO(245, 146, 69, 1), borderRadius: BorderRadius.circular(5)),
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      const SizedBox(
-                        width: 75,
-                      ),
                       Text(
                         "Review Screen",
                         style: GoogleFonts.fredoka(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.white),
@@ -195,12 +199,10 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
                       const SizedBox(
                         width: 35,
                       ),
-                      const ImageIcon(
-                        AssetImage(
-                          "assets/images/deadlineIcon.png",
-                        ),
+                      Icon(
+                        Icons.reviews,
                         color: Colors.white,
-                        size: 18,
+                        size: 20.sp,
                       )
                     ],
                   ),

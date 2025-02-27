@@ -1,15 +1,63 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/controller/cart_controller.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final CartController cartController = Get.find<CartController>();
+  State<CartScreen> createState() => _CartScreenState();
+}
 
+class _CartScreenState extends State<CartScreen> {
+  late Razorpay _razorPay;
+  final CartController cartController = Get.find<CartController>();
+
+  void _handlePaymentSuccess(PaymentSuccessResponse success) {}
+
+  void _handlePaymentFailed(PaymentFailureResponse failed) {}
+
+  void _handlePaymentExternal(ExternalWalletResponse response) {}
+
+  @override
+  void initState() {
+    super.initState();
+    _razorPay = Razorpay();
+    _razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+    _razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentFailed);
+    _razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handlePaymentExternal);
+  }
+
+  @override
+  void dispose() {
+    _razorPay.clear();
+    super.dispose();
+  }
+
+  void openCheckout() async {
+    log("${cartController.total.toInt()} TOtal amount to pay");
+    final amount = cartController.total.toInt();
+    // const amount = 500;
+    var options = {
+      'key': 'rzp_test_wqDdQzUfF7ZXt2',
+      'amount': amount,
+      'name': 'Pet Universe App',
+      'description': 'Pet Supplies',
+      'prefill': {'contact': '7498816400', 'email': 'petuniverseapp@gmail.com'}
+    };
+    try {
+      _razorPay.open(options);
+    } catch (e) {
+      throw Exception("Razor pay not working $e");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -17,8 +65,7 @@ class CartScreen extends StatelessWidget {
         title: Text(
           'Cart',
           style: GoogleFonts.fredoka(
-            textStyle: const TextStyle(
-                fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
+            textStyle: const TextStyle(fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
           ),
         ),
         leading: IconButton(
@@ -43,8 +90,7 @@ class CartScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final product = cartController.cartItems.keys.toList()[index];
                   final quantity = cartController.cartItems[product]!;
-                  final double discountedPrice =
-                      product.price! * (1 - (product.discount! / 100));
+                  final double discountedPrice = product.price! * (1 - (product.discount! / 100));
 
                   return Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -89,14 +135,12 @@ class CartScreen extends StatelessWidget {
                           children: [
                             IconButton(
                               icon: const Icon(Icons.remove),
-                              onPressed: () =>
-                                  cartController.removeFromCart(product),
+                              onPressed: () => cartController.removeFromCart(product),
                             ),
                             Text('$quantity'),
                             IconButton(
                               icon: const Icon(Icons.add),
-                              onPressed: () =>
-                                  cartController.addToCart(product),
+                              onPressed: () => cartController.addToCart(product),
                             ),
                           ],
                         ),
@@ -117,23 +161,13 @@ class CartScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SummaryRow(title: "Subtotal", value: cartController.subtotal),
-                  SummaryRow(
-                      title: "Discount Applied",
-                      value: cartController.totalDiscount,
-                      isDiscount: true),
-                  SummaryRow(
-                      title: "Shipping Charges",
-                      value: cartController.shippingCharges),
+                  SummaryRow(title: "Discount Applied", value: cartController.totalDiscount, isDiscount: true),
+                  SummaryRow(title: "Shipping Charges", value: cartController.shippingCharges),
                   const Divider(),
-                  SummaryRow(
-                      title: "Total",
-                      value: cartController.total,
-                      isBold: true),
+                  SummaryRow(title: "Total", value: cartController.total, isBold: true),
                   const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: () {
-                      // Handle checkout
-                    },
+                    onPressed: openCheckout,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange,
                       minimumSize: const Size(double.infinity, 50),
@@ -187,9 +221,7 @@ class SummaryRow extends StatelessWidget {
             ),
           ),
           Text(
-            isDiscount
-                ? "- RS.${value.toStringAsFixed(2)}"
-                : "RS.${value.toStringAsFixed(2)}",
+            isDiscount ? "- RS.${value.toStringAsFixed(2)}" : "RS.${value.toStringAsFixed(2)}",
             style: TextStyle(
               fontSize: 16,
               fontWeight: isBold ? FontWeight.bold : FontWeight.normal,

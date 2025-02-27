@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pet_care_app/utils/auth_service.dart';
+import 'package:pet_care_app/utils/user_data.dart';
+import 'package:pet_care_app/view/login_screen.dart';
 
 class AdminDashboardScreen extends StatefulWidget {
   const AdminDashboardScreen({super.key});
@@ -10,15 +13,35 @@ class AdminDashboardScreen extends StatefulWidget {
 }
 
 class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
+  final UserData userData = UserData();
+
+  @override
+  void initState() {
+    userData.write("adminEnabled", true);
+    super.initState();
+  }
+
   final List<Map<String, dynamic>> dashboardItems = [
     {'icon': Icons.pets, 'title': 'Pet Management', 'route': '/pet'},
     {'icon': Icons.pets_rounded, 'title': 'Grooming', 'route': '/grooming'},
-    {'icon': Icons.calendar_today, 'title': 'Appointments', 'route': '/appointments'},
+    {
+      'icon': Icons.calendar_today,
+      'title': 'Appointments',
+      'route': '/appointments'
+    },
     {'icon': Icons.person, 'title': 'User Management', 'route': '/parks'},
     {'icon': Icons.video_collection, 'title': 'Services', 'route': '/services'},
     {'icon': Icons.people, 'title': 'Boarding', 'route': '/boarding'},
-    {'icon': Icons.local_hospital, 'title': 'Veterinary', 'route': '/veterinary'},
-    {'icon': Icons.shopping_cart, 'title': 'Store management', 'route': '/shopitem'},
+    {
+      'icon': Icons.local_hospital,
+      'title': 'Veterinary',
+      'route': '/veterinary'
+    },
+    {
+      'icon': Icons.shopping_cart,
+      'title': 'Store management',
+      'route': '/shopitem'
+    },
   ];
 
   @override
@@ -30,7 +53,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
             height: MediaQuery.sizeOf(context).height / 2,
             width: MediaQuery.sizeOf(context).width,
             child: Image.asset(
-              "assets/bg.png",
+              "assets/images/admin/bg.png",
               fit: BoxFit.fill,
             ),
           ),
@@ -82,6 +105,19 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.red,
+        onPressed: () {
+          AuthService().signOut();
+          Get.offAll(() => const Loginscreen());
+          userData.clear();
+        },
+        label: const Text(
+          "Signout",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:pet_care_app/controller/appointment_controller.dart';
 import 'package:pet_care_app/controller/cart_controller.dart';
+import 'package:pet_care_app/service/notification_service.dart';
 import 'package:pet_care_app/view/admin_dashboard_screen.dart';
 import 'package:pet_care_app/view/appointmentscreen.dart';
 import 'package:pet_care_app/view/boardingmanagement.dart';
@@ -19,11 +21,15 @@ import 'firebase_options.dart';
 
 void main() async {
   Get.put(CartController());
+  Get.put(AppointmentController());
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  final notificationService = Get.put(NotificationService());
+  notificationService.getFcmtoken();
+  notificationService.initializeNotifications();
   runApp(const MainApp());
 }
 
@@ -38,6 +44,14 @@ class MainApp extends StatelessWidget {
       designSize: const Size(360, 690),
       builder: (_, child) {
         return GetMaterialApp(
+          // theme: ThemeData(
+          //   primarySwatch: Colors.orange,
+          //   textTheme: GoogleFonts.fredokaTextTheme()
+          // ),
+          // darkTheme: ThemeData(
+          //   primarySwatch: Colors.red,
+          //   textTheme: GoogleFonts.fredokaTextTheme()
+          // ),
           debugShowCheckedModeBanner: false,
           home: const Wrapper(),
           initialRoute: '/',

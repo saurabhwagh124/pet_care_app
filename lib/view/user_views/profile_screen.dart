@@ -1,13 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:pet_care_app/model/user.dart';
+import 'package:pet_care_app/utils/app_images.dart';
+import 'package:pet_care_app/utils/auth_service.dart';
+import 'package:pet_care_app/utils/user_data.dart';
 import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
-
-import '../../utils/app_images.dart';
-import '../../utils/auth_service.dart';
-import '../wrapper.dart';
+import 'package:pet_care_app/view/wrapper.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -18,7 +21,17 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final auth = AuthService();
-  final User? user = FirebaseAuth.instance.currentUser;
+  final UserData userData = UserData();
+  User? user;
+
+  @override
+  void initState() {
+    final response = jsonDecode(userData.read<String>("user")!);
+    user = User.fromJson(response);
+    log("user data fetched: ${user.toString()}");
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,16 +49,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         title: Text(
           user?.displayName ?? "No Name Available",
-          style: const TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
+          style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
         ),
         actions: [
-          if (user?.photoURL != null)
+          if (user?.photoUrl != null)
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
-                backgroundImage: NetworkImage(user!.photoURL ??
-                    "https://i.pinimg.com/736x/1a/a8/d7/1aa8d75f3498784bcd2617b3e3d1e0c4.jpg"),
+                backgroundImage: NetworkImage(user!.photoUrl ?? "https://i.pinimg.com/736x/1a/a8/d7/1aa8d75f3498784bcd2617b3e3d1e0c4.jpg"),
               ),
             )
           else
@@ -64,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               alignment: Alignment.center,
               children: [
                 Image.network(
-                  user!.photoURL ?? "",
+                  user!.photoUrl ?? "",
                   width: double.infinity,
                   height: 200.h,
                   fit: BoxFit.cover,
@@ -77,18 +88,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(
-                        top: 15, left: 15, right: 15, bottom: 15),
+                    padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),
                     // height: 180.h,
                     decoration: BoxDecoration(
-                        boxShadow: const [
-                          BoxShadow(
-                              color: Color.fromRGBO(0, 0, 0, 0.15),
-                              offset: Offset(0, 5.47),
-                              blurRadius: 43.48)
-                        ],
-                        borderRadius: BorderRadius.circular(27),
-                        color: Colors.white),
+                        boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.15), offset: Offset(0, 5.47), blurRadius: 43.48)], borderRadius: BorderRadius.circular(27), color: Colors.white),
                     child: Column(
                       children: [
                         Row(
@@ -104,15 +107,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             GestureDetector(
                               onTap: () async {
                                 await auth.signOut();
+                                userData.remove("user");
+                                userData.write("admin", false);
                                 Get.back();
                                 Get.to(() => const Wrapper());
                               },
                               child: const Text(
                                 "Sign Out",
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600),
+                                style: TextStyle(color: Colors.red, fontSize: 12, fontWeight: FontWeight.w600),
                               ),
                             ),
                             const SizedBox(
@@ -219,8 +221,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-Widget buildMenuTile(BuildContext context,
-    {required IconData icon, required String title, required Widget screen}) {
+Widget buildMenuTile(BuildContext context, {required IconData icon, required String title, required Widget screen}) {
   return Container(
     margin: const EdgeInsets.only(bottom: 12),
     padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
