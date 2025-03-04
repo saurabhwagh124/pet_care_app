@@ -5,18 +5,24 @@ import 'package:get/route_manager.dart';
 import 'package:pet_care_app/model/vet_doc_model.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/view/user_views/veterinary_doctor_screen.dart';
+import 'package:pet_care_app/view/veterinary_doctor_screen_e.dart';
 
 class VetCardWidget extends StatelessWidget {
   final VetDocModel data;
-  const VetCardWidget({super.key, required this.data});
-
+  final bool isadmin;
+  const VetCardWidget({super.key, required this.data, this.isadmin = false});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => VeterinaryDoctor(
+        if (isadmin) {
+          Get.to(() => VeterinaryDoctorAdmin(data: data));
+        } else {
+          Get.to(() => VeterinaryDoctor(
               data: data,
             ));
+        }
+        
       },
       child: Container(
         margin: EdgeInsets.all(10.r),
@@ -83,7 +89,8 @@ class VetCardWidget extends StatelessWidget {
                           ),
                           Text(
                             "${data.reviewScore} (${data.noOfReviews} reviews)",
-                            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                fontSize: 14.sp, fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),

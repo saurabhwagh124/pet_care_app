@@ -46,7 +46,7 @@ class _VeterinaryscreenState extends State<Veterinaryscreen> {
                     : ListView.separated(
                         separatorBuilder: (context, index) => SizedBox(height: 10.h),
                         scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) => VetCardWidget(data: _vetDocController.vetDoctorsList[index]),
+                        itemBuilder: (context, index) => VetCardWidget(data: _vetDocController.vetDoctorsList[index], isadmin: true,),
                         itemCount: _vetDocController.vetDoctorsList.length,
                       ),
               ),

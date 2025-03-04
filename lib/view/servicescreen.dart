@@ -43,7 +43,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                     : ListView.builder(
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) =>
-                            PetServicesCardWidget(data: _controller.petServiceList[index]),
+                            PetServicesCardWidget(data: _controller.petServiceList[index],isadmin:true),
                         itemCount: _controller.petServiceList.length,
                       ),
               ),

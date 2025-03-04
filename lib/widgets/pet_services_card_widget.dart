@@ -4,26 +4,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/model/pet_services_model.dart';
 import 'package:pet_care_app/view/user_views/pet_service_details_screen.dart';
+import 'package:pet_care_app/view/pet_service_details_screen_admin.dart';
 
-class PetServicesCardWidget extends StatefulWidget {
-  final PetServicesModel data;
-  const PetServicesCardWidget({
-    required this.data,
-    super.key,
-  });
 
-  @override
-  State<PetServicesCardWidget> createState() => _PetServicesCardWidgetState();
-}
+class PetServicesCardWidget extends StatelessWidget {
+   final PetServicesModel data;
+  final bool isadmin;
+   const PetServicesCardWidget(
+      {required this.data, super.key, this.isadmin = false});
 
-class _PetServicesCardWidgetState extends State<PetServicesCardWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => PetServiceDetailsScreen(
-              data: widget.data,
-            ));
+        if (isadmin) {
+          Get.to(() => PetServiceDetailsScreenAdmin(data: data));
+        } else {
+          Get.to(() => PetServiceDetailsScreen(
+                data: data,
+              ));
+        }
       },
       child: Container(
         height: 131.h,
@@ -48,7 +48,7 @@ class _PetServicesCardWidgetState extends State<PetServicesCardWidget> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image.network(
-                      widget.data.photoUrl.first,
+                      data.photoUrl.first,
                       width: 60.w,
                     ),
                   ),
@@ -58,7 +58,7 @@ class _PetServicesCardWidgetState extends State<PetServicesCardWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.data.name ?? "",
+                          data.name ?? "",
                           style: TextStyle(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.bold,
@@ -72,14 +72,14 @@ class _PetServicesCardWidgetState extends State<PetServicesCardWidget> {
                               isHalfAllowed: true,
                               filledIcon: Icons.star,
                               emptyIcon: Icons.star_border,
-                              initialRating: widget.data.reviewScore ?? 0.0,
+                              initialRating: data.reviewScore ?? 0.0,
                               maxRating: 5,
                               filledColor: Colors.amberAccent,
                               emptyColor: Colors.grey,
                             ),
                             SizedBox(width: 4.w),
                             Text(
-                              '${widget.data.reviewScore} (${widget.data.noOfReviews} reviews)',
+                              '${data.reviewScore} (${data.noOfReviews} reviews)',
                               style: TextStyle(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w500,
@@ -96,9 +96,9 @@ class _PetServicesCardWidgetState extends State<PetServicesCardWidget> {
               Row(
                 children: [
                   Text(
-                    widget.data.open! ? 'OPEN' : 'CLOSED',
+                    data.open! ? 'OPEN' : 'CLOSED',
                     style: TextStyle(
-                      color: widget.data.open! ? Colors.green : Colors.red,
+                      color: data.open! ? Colors.green : Colors.red,
                       fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
                     ),
@@ -116,7 +116,7 @@ class _PetServicesCardWidgetState extends State<PetServicesCardWidget> {
                     color: Colors.black,
                     size: 15.sp,
                   ),
-                  Text("${widget.data.fees}",
+                  Text("${data.fees}",
                       style: TextStyle(fontSize: 12.sp, color: Colors.black)),
                 ],
               ),
