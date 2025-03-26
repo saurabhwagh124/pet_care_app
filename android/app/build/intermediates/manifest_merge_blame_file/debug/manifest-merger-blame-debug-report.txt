@@ -1,0 +1,960 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.pet_care_app"
+4    android:versionCode="1"
+5    android:versionName="0.1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+9        android:targetSdkVersion="35" />
+10    <!--
+11         The INTERNET permission is required for development. Specifically,
+12         the Flutter tool needs it to communicate with the running application
+13         to allow setting breakpoints, to provide hot reload, etc.
+14    -->
+15    <uses-permission android:name="android.permission.INTERNET" />
+15-->S:\BE_project\AppFolder\pet_care_app\android\app\src\debug\AndroidManifest.xml:6:5-66
+15-->S:\BE_project\AppFolder\pet_care_app\android\app\src\debug\AndroidManifest.xml:6:22-64
+16    <!--
+17     Required to query activities that can process text, see:
+18         https://developer.android.com/training/package-visibility and
+19         https://developer.android.com/reference/android/content/Intent#ACTION_PROCESS_TEXT.
+20
+21         In particular, this is used by the Flutter engine in io.flutter.plugin.text.ProcessTextPlugin.
+22    -->
+23    <queries>
+23-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:47:5-52:15
+24        <intent>
+24-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:48:9-51:18
+25            <action android:name="android.intent.action.PROCESS_TEXT" />
+25-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:49:13-73
+25-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:49:21-70
+26
+27            <data android:mimeType="text/plain" />
+27-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:50:13-51
+27-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:50:19-48
+28        </intent>
+29        <intent>
+29-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:11:9-17:18
+30            <action android:name="android.intent.action.VIEW" />
+30-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:36:17-69
+30-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:36:25-66
+31
+32            <data
+32-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:50:13-51
+33                android:mimeType="*/*"
+33-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:50:19-48
+34                android:scheme="*" />
+35        </intent>
+36        <intent>
+36-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:18:9-27:18
+37            <action android:name="android.intent.action.VIEW" />
+37-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:36:17-69
+37-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:36:25-66
+38
+39            <category android:name="android.intent.category.BROWSABLE" />
+39-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:39:17-78
+39-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:39:27-75
+40
+41            <data
+41-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:50:13-51
+42                android:host="pay"
+43                android:mimeType="*/*"
+43-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:50:19-48
+44                android:scheme="upi" />
+45        </intent>
+46        <intent>
+46-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:28:9-30:18
+47            <action android:name="android.intent.action.MAIN" />
+47-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:29:13-65
+47-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:29:21-62
+48        </intent>
+49        <intent>
+49-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:31:9-35:18
+50            <action android:name="android.intent.action.SEND" />
+50-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:32:13-65
+50-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:32:21-62
+51
+52            <data android:mimeType="*/*" />
+52-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:50:13-51
+52-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:50:19-48
+53        </intent>
+54        <intent>
+54-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:36:9-38:18
+55            <action android:name="rzp.device_token.share" />
+55-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:37:13-61
+55-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:37:21-58
+56        </intent>
+57    </queries>
+58
+59    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+59-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:5-81
+59-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:22-78
+60    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+60-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-82
+60-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-79
+61    <uses-permission android:name="android.permission.WAKE_LOCK" />
+61-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:5-68
+61-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:22-65
+62    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permissions options for the `notification` group -->
+62-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-79
+62-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-76
+63    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+63-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:5-77
+63-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:22-74
+64    <uses-permission android:name="android.permission.BROADCAST_CLOSE_SYSTEM_DIALOGS" />
+64-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-89
+64-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:7:22-86
+65
+66    <uses-feature
+66-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\saura\.gradle\caches\transforms-3\73ab3a82d4b31d01d94bbe394be2db11\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+67        android:glEsVersion="0x00020000"
+67-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\saura\.gradle\caches\transforms-3\73ab3a82d4b31d01d94bbe394be2db11\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+68        android:required="true" />
+68-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\saura\.gradle\caches\transforms-3\73ab3a82d4b31d01d94bbe394be2db11\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+69
+70    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+70-->[com.google.android.recaptcha:recaptcha:18.6.1] C:\Users\saura\.gradle\caches\transforms-3\9a267409a564c3427f2cca9b1ae8ee42\transformed\jetified-recaptcha-18.6.1\AndroidManifest.xml:9:5-98
+70-->[com.google.android.recaptcha:recaptcha:18.6.1] C:\Users\saura\.gradle\caches\transforms-3\9a267409a564c3427f2cca9b1ae8ee42\transformed\jetified-recaptcha-18.6.1\AndroidManifest.xml:9:22-95
+71    <uses-permission
+71-->[me.carda:AndroidAwnCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\77b2cfbdce5d5d2aedf5564ec5414e2c\transformed\jetified-AndroidAwnCore-0.10.0\AndroidManifest.xml:9:5-12:47
+72        android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+72-->[me.carda:AndroidAwnCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\77b2cfbdce5d5d2aedf5564ec5414e2c\transformed\jetified-AndroidAwnCore-0.10.0\AndroidManifest.xml:10:9-77
+73        android:maxSdkVersion="22" />
+73-->[me.carda:AndroidAwnCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\77b2cfbdce5d5d2aedf5564ec5414e2c\transformed\jetified-AndroidAwnCore-0.10.0\AndroidManifest.xml:11:9-35
+74
+75    <permission
+75-->[androidx.core:core:1.13.1] C:\Users\saura\.gradle\caches\transforms-3\393f7db29acf07e0713747b4581cfe6d\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+76        android:name="com.example.pet_care_app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+76-->[androidx.core:core:1.13.1] C:\Users\saura\.gradle\caches\transforms-3\393f7db29acf07e0713747b4581cfe6d\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+77        android:protectionLevel="signature" />
+77-->[androidx.core:core:1.13.1] C:\Users\saura\.gradle\caches\transforms-3\393f7db29acf07e0713747b4581cfe6d\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+78
+79    <uses-permission android:name="com.example.pet_care_app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- for android -->
+79-->[androidx.core:core:1.13.1] C:\Users\saura\.gradle\caches\transforms-3\393f7db29acf07e0713747b4581cfe6d\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+79-->[androidx.core:core:1.13.1] C:\Users\saura\.gradle\caches\transforms-3\393f7db29acf07e0713747b4581cfe6d\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+80    <!-- <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/> -->
+81    <!-- <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS"/> -->
+82    <!-- <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" /> -->
+83    <!-- <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT" /> -->
+84    <!-- for Samsung -->
+85    <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+85-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:19:5-86
+85-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:19:22-83
+86    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" /> <!-- for htc -->
+86-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:20:5-87
+86-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:20:22-84
+87    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+87-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:23:5-81
+87-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:23:22-78
+88    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" /> <!-- for sony -->
+88-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:24:5-83
+88-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:24:22-80
+89    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+89-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:27:5-88
+89-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:27:22-85
+90    <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE" /> <!-- for apex -->
+90-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:28:5-92
+90-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:28:22-89
+91    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT" /> <!-- for solid -->
+91-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:31:5-84
+91-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:31:22-81
+92    <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE" /> <!-- for huawei -->
+92-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:34:5-83
+92-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:34:22-80
+93    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
+93-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:37:5-91
+93-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:37:22-88
+94    <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
+94-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:38:5-92
+94-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:38:22-89
+95    <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" /> <!-- for ZUK -->
+95-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:39:5-93
+95-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:39:22-90
+96    <uses-permission android:name="android.permission.READ_APP_BADGE" /> <!-- for OPPO -->
+96-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:42:5-73
+96-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:42:22-70
+97    <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS" />
+97-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:45:5-82
+97-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:45:22-79
+98    <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS" /> <!-- for EvMe -->
+98-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:46:5-83
+98-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:46:22-80
+99    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_READ" />
+99-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:49:5-88
+99-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:49:22-85
+100    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_WRITE" />
+100-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:50:5-89
+100-->[me.leolin:ShortcutBadger:1.1.22] C:\Users\saura\.gradle\caches\transforms-3\3d1ee321e16e29c3e7f086fe4b56df03\transformed\jetified-ShortcutBadger-1.1.22\AndroidManifest.xml:50:22-86
+101
+102    <application
+103        android:name="android.app.Application"
+104        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+104-->[androidx.core:core:1.13.1] C:\Users\saura\.gradle\caches\transforms-3\393f7db29acf07e0713747b4581cfe6d\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
+105        android:debuggable="true"
+106        android:extractNativeLibs="false"
+107        android:icon="@mipmap/ic_launcher"
+108        android:label="pet_care_app" >
+109        <meta-data
+110            android:name="com.google.firebase.messaging.default_notification_icon"
+111            android:resource="@drawable/ic_launcher" />
+112
+113        <activity
+114            android:name="com.example.pet_care_app.MainActivity"
+115            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+116            android:exported="true"
+117            android:hardwareAccelerated="true"
+118            android:launchMode="singleTop"
+119            android:taskAffinity=""
+120            android:theme="@style/LaunchTheme"
+121            android:windowSoftInputMode="adjustResize" >
+122
+123            <!--
+124                 Specifies an Android theme to apply to this Activity as soon as
+125                 the Android process has started. This theme is visible to the user
+126                 while the Flutter UI initializes. After that, this theme continues
+127                 to determine the Window background behind the Flutter UI.
+128            -->
+129            <meta-data
+130                android:name="io.flutter.embedding.android.NormalTheme"
+131                android:resource="@style/NormalTheme" />
+132
+133            <intent-filter>
+134                <action android:name="android.intent.action.MAIN" />
+134-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:29:13-65
+134-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:29:21-62
+135
+136                <category android:name="android.intent.category.LAUNCHER" />
+137            </intent-filter>
+138        </activity>
+139        <!--
+140             Don't delete the meta-data below.
+141             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+142        -->
+143        <meta-data
+144            android:name="flutterEmbedding"
+145            android:value="2" />
+146        <meta-data
+146-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:9-14:36
+147            android:name="firebase_messaging_auto_init_enabled"
+147-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-64
+148            android:value="true" />
+148-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-33
+149        <meta-data
+149-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:9-17:36
+150            android:name="delivery_metrics_exported_to_big_query_enabled"
+150-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-74
+151            android:value="true" />
+151-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-33
+152
+153        <receiver
+153-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:9-27:20
+154            android:name="me.carda.awesome_notifications_fcm.core.services.BootBroadcastReceiver"
+154-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-98
+155            android:exported="true" >
+155-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-36
+156            <intent-filter>
+156-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-26:29
+157                <action android:name="android.intent.action.BOOT_COMPLETED" />
+157-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:17-79
+157-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:25-76
+158
+159                <category android:name="android.intent.category.HOME" />
+159-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:17-73
+159-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:27-70
+160            </intent-filter>
+161        </receiver>
+162
+163        <service
+163-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:9-36:19
+164            android:name="me.carda.awesome_notifications_fcm.DartFcmService"
+164-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-77
+165            android:directBootAware="true"
+165-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-43
+166            android:exported="false" >
+166-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:32:13-37
+167            <intent-filter>
+167-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:33:13-35:29
+168                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+168-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:34:17-78
+168-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:34:25-75
+169            </intent-filter>
+170        </service>
+171        <service
+171-->[:firebase_auth] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_auth-5.5.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:9-12:19
+172            android:name="com.google.firebase.components.ComponentDiscoveryService"
+172-->[:firebase_auth] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_auth-5.5.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:8:18-89
+173            android:directBootAware="true"
+173-->[com.google.firebase:firebase-common:21.0.0] C:\Users\saura\.gradle\caches\transforms-3\54e648281eeaa3990eb9c5dd4cb9e762\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:32:13-43
+174            android:exported="false" >
+174-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:68:13-37
+175            <meta-data
+175-->[:firebase_auth] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_auth-5.5.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-11:85
+176                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
+176-->[:firebase_auth] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_auth-5.5.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:17-124
+177                android:value="com.google.firebase.components.ComponentRegistrar" />
+177-->[:firebase_auth] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_auth-5.5.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:17-82
+178            <meta-data
+178-->[:firebase_crashlytics] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_crashlytics-4.3.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-11:85
+179                android:name="com.google.firebase.components:io.flutter.plugins.firebase.crashlytics.FlutterFirebaseAppRegistrar"
+179-->[:firebase_crashlytics] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_crashlytics-4.3.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:17-130
+180                android:value="com.google.firebase.components.ComponentRegistrar" />
+180-->[:firebase_crashlytics] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_crashlytics-4.3.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:17-82
+181            <meta-data
+181-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:36:13-38:85
+182                android:name="com.google.firebase.components:io.flutter.plugins.firebase.messaging.FlutterFirebaseAppRegistrar"
+182-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:37:17-128
+183                android:value="com.google.firebase.components.ComponentRegistrar" />
+183-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:38:17-82
+184            <meta-data
+184-->[:firebase_core] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_core-3.12.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:13-11:85
+185                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+185-->[:firebase_core] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_core-3.12.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:17-124
+186                android:value="com.google.firebase.components.ComponentRegistrar" />
+186-->[:firebase_core] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_core-3.12.0\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:17-82
+187            <meta-data
+187-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:69:13-71:85
+188                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+188-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:70:17-109
+189                android:value="com.google.firebase.components.ComponentRegistrar" />
+189-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:71:17-82
+190            <meta-data
+190-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:57:13-59:85
+191                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar"
+191-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:58:17-122
+192                android:value="com.google.firebase.components.ComponentRegistrar" />
+192-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:59:17-82
+193            <meta-data
+193-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:60:13-62:85
+194                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+194-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:61:17-119
+195                android:value="com.google.firebase.components.ComponentRegistrar" />
+195-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:62:17-82
+196            <meta-data
+196-->[com.google.firebase:firebase-crashlytics:19.4.0] C:\Users\saura\.gradle\caches\transforms-3\cbbf176bd6053aa2f07574fe22d308f0\transformed\jetified-firebase-crashlytics-19.4.0\AndroidManifest.xml:15:13-17:85
+197                android:name="com.google.firebase.components:com.google.firebase.crashlytics.FirebaseCrashlyticsKtxRegistrar"
+197-->[com.google.firebase:firebase-crashlytics:19.4.0] C:\Users\saura\.gradle\caches\transforms-3\cbbf176bd6053aa2f07574fe22d308f0\transformed\jetified-firebase-crashlytics-19.4.0\AndroidManifest.xml:16:17-126
+198                android:value="com.google.firebase.components.ComponentRegistrar" />
+198-->[com.google.firebase:firebase-crashlytics:19.4.0] C:\Users\saura\.gradle\caches\transforms-3\cbbf176bd6053aa2f07574fe22d308f0\transformed\jetified-firebase-crashlytics-19.4.0\AndroidManifest.xml:17:17-82
+199            <meta-data
+199-->[com.google.firebase:firebase-crashlytics:19.4.0] C:\Users\saura\.gradle\caches\transforms-3\cbbf176bd6053aa2f07574fe22d308f0\transformed\jetified-firebase-crashlytics-19.4.0\AndroidManifest.xml:18:13-20:85
+200                android:name="com.google.firebase.components:com.google.firebase.crashlytics.CrashlyticsRegistrar"
+200-->[com.google.firebase:firebase-crashlytics:19.4.0] C:\Users\saura\.gradle\caches\transforms-3\cbbf176bd6053aa2f07574fe22d308f0\transformed\jetified-firebase-crashlytics-19.4.0\AndroidManifest.xml:19:17-115
+201                android:value="com.google.firebase.components.ComponentRegistrar" />
+201-->[com.google.firebase:firebase-crashlytics:19.4.0] C:\Users\saura\.gradle\caches\transforms-3\cbbf176bd6053aa2f07574fe22d308f0\transformed\jetified-firebase-crashlytics-19.4.0\AndroidManifest.xml:20:17-82
+202            <meta-data
+202-->[com.google.firebase:firebase-sessions:2.0.8] C:\Users\saura\.gradle\caches\transforms-3\8f873eb32bcd4a4bc1dbbd28827411b1\transformed\jetified-firebase-sessions-2.0.8\AndroidManifest.xml:29:13-31:85
+203                android:name="com.google.firebase.components:com.google.firebase.sessions.FirebaseSessionsRegistrar"
+203-->[com.google.firebase:firebase-sessions:2.0.8] C:\Users\saura\.gradle\caches\transforms-3\8f873eb32bcd4a4bc1dbbd28827411b1\transformed\jetified-firebase-sessions-2.0.8\AndroidManifest.xml:30:17-117
+204                android:value="com.google.firebase.components.ComponentRegistrar" />
+204-->[com.google.firebase:firebase-sessions:2.0.8] C:\Users\saura\.gradle\caches\transforms-3\8f873eb32bcd4a4bc1dbbd28827411b1\transformed\jetified-firebase-sessions-2.0.8\AndroidManifest.xml:31:17-82
+205            <meta-data
+205-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\saura\.gradle\caches\transforms-3\35519b6755c49c4d96d86207dfc4c93f\transformed\jetified-firebase-installations-18.0.0\AndroidManifest.xml:15:13-17:85
+206                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+206-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\saura\.gradle\caches\transforms-3\35519b6755c49c4d96d86207dfc4c93f\transformed\jetified-firebase-installations-18.0.0\AndroidManifest.xml:16:17-130
+207                android:value="com.google.firebase.components.ComponentRegistrar" />
+207-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\saura\.gradle\caches\transforms-3\35519b6755c49c4d96d86207dfc4c93f\transformed\jetified-firebase-installations-18.0.0\AndroidManifest.xml:17:17-82
+208            <meta-data
+208-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\saura\.gradle\caches\transforms-3\35519b6755c49c4d96d86207dfc4c93f\transformed\jetified-firebase-installations-18.0.0\AndroidManifest.xml:18:13-20:85
+209                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+209-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\saura\.gradle\caches\transforms-3\35519b6755c49c4d96d86207dfc4c93f\transformed\jetified-firebase-installations-18.0.0\AndroidManifest.xml:19:17-127
+210                android:value="com.google.firebase.components.ComponentRegistrar" />
+210-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\saura\.gradle\caches\transforms-3\35519b6755c49c4d96d86207dfc4c93f\transformed\jetified-firebase-installations-18.0.0\AndroidManifest.xml:20:17-82
+211            <meta-data
+211-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\saura\.gradle\caches\transforms-3\424f9d977962566f1e0cb2e59797db2b\transformed\jetified-firebase-common-ktx-21.0.0\AndroidManifest.xml:12:13-14:85
+212                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+212-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\saura\.gradle\caches\transforms-3\424f9d977962566f1e0cb2e59797db2b\transformed\jetified-firebase-common-ktx-21.0.0\AndroidManifest.xml:13:17-116
+213                android:value="com.google.firebase.components.ComponentRegistrar" />
+213-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\saura\.gradle\caches\transforms-3\424f9d977962566f1e0cb2e59797db2b\transformed\jetified-firebase-common-ktx-21.0.0\AndroidManifest.xml:14:17-82
+214            <meta-data
+214-->[com.google.firebase:firebase-common:21.0.0] C:\Users\saura\.gradle\caches\transforms-3\54e648281eeaa3990eb9c5dd4cb9e762\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:35:13-37:85
+215                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+215-->[com.google.firebase:firebase-common:21.0.0] C:\Users\saura\.gradle\caches\transforms-3\54e648281eeaa3990eb9c5dd4cb9e762\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:36:17-109
+216                android:value="com.google.firebase.components.ComponentRegistrar" />
+216-->[com.google.firebase:firebase-common:21.0.0] C:\Users\saura\.gradle\caches\transforms-3\54e648281eeaa3990eb9c5dd4cb9e762\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:37:17-82
+217            <meta-data
+217-->[com.google.firebase:firebase-datatransport:19.0.0] C:\Users\saura\.gradle\caches\transforms-3\4159528106b00abac8457ec6aecfb081\transformed\jetified-firebase-datatransport-19.0.0\AndroidManifest.xml:25:13-27:85
+218                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+218-->[com.google.firebase:firebase-datatransport:19.0.0] C:\Users\saura\.gradle\caches\transforms-3\4159528106b00abac8457ec6aecfb081\transformed\jetified-firebase-datatransport-19.0.0\AndroidManifest.xml:26:17-115
+219                android:value="com.google.firebase.components.ComponentRegistrar" />
+219-->[com.google.firebase:firebase-datatransport:19.0.0] C:\Users\saura\.gradle\caches\transforms-3\4159528106b00abac8457ec6aecfb081\transformed\jetified-firebase-datatransport-19.0.0\AndroidManifest.xml:27:17-82
+220        </service>
+221        <service
+221-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:9-17:72
+222            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService"
+222-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-107
+223            android:exported="false"
+223-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-37
+224            android:permission="android.permission.BIND_JOB_SERVICE" />
+224-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-69
+225        <service
+225-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:9-24:19
+226            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingService"
+226-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-97
+227            android:exported="false" >
+227-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-37
+228            <intent-filter>
+228-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:33:13-35:29
+229                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+229-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:34:17-78
+229-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:34:25-75
+230            </intent-filter>
+231        </service>
+232
+233        <receiver
+233-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:9-33:20
+234            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingReceiver"
+234-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-98
+235            android:exported="true"
+235-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-36
+236            android:permission="com.google.android.c2dm.permission.SEND" >
+236-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:13-73
+237            <intent-filter>
+237-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-32:29
+238                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+238-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:17-81
+238-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:25-78
+239            </intent-filter>
+240        </receiver>
+241
+242        <provider
+242-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:41:9-45:38
+243            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
+243-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:42:13-102
+244            android:authorities="com.example.pet_care_app.flutterfirebasemessaginginitprovider"
+244-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:43:13-88
+245            android:exported="false"
+245-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:44:13-37
+246            android:initOrder="99" />
+246-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:45:13-35
+247
+248        <service
+248-->[me.carda:AndroidAwnFcmCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\b77377a0d369ee4c8854db864fc6e5e2\transformed\jetified-AndroidAwnFcmCore-0.10.0\AndroidManifest.xml:8:9-11:72
+249            android:name="me.carda.awesome_notifications_fcm.core.services.FcmSilentService"
+249-->[me.carda:AndroidAwnFcmCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\b77377a0d369ee4c8854db864fc6e5e2\transformed\jetified-AndroidAwnFcmCore-0.10.0\AndroidManifest.xml:9:13-93
+250            android:exported="false"
+250-->[me.carda:AndroidAwnFcmCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\b77377a0d369ee4c8854db864fc6e5e2\transformed\jetified-AndroidAwnFcmCore-0.10.0\AndroidManifest.xml:10:13-37
+251            android:permission="android.permission.BIND_JOB_SERVICE" />
+251-->[me.carda:AndroidAwnFcmCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\b77377a0d369ee4c8854db864fc6e5e2\transformed\jetified-AndroidAwnFcmCore-0.10.0\AndroidManifest.xml:11:13-69
+252
+253        <activity
+253-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:29:9-46:20
+254            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+254-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:30:13-80
+255            android:excludeFromRecents="true"
+255-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:31:13-46
+256            android:exported="true"
+256-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:32:13-36
+257            android:launchMode="singleTask"
+257-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:33:13-44
+258            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+258-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:34:13-72
+259            <intent-filter>
+259-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:35:13-45:29
+260                <action android:name="android.intent.action.VIEW" />
+260-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:36:17-69
+260-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:36:25-66
+261
+262                <category android:name="android.intent.category.DEFAULT" />
+262-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:38:17-76
+262-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:38:27-73
+263                <category android:name="android.intent.category.BROWSABLE" />
+263-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:39:17-78
+263-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:39:27-75
+264
+265                <data
+265-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:50:13-51
+266                    android:host="firebase.auth"
+267                    android:path="/"
+268                    android:scheme="genericidp" />
+269            </intent-filter>
+270        </activity>
+271        <activity
+271-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:47:9-64:20
+272            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+272-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:48:13-79
+273            android:excludeFromRecents="true"
+273-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:49:13-46
+274            android:exported="true"
+274-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:50:13-36
+275            android:launchMode="singleTask"
+275-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:51:13-44
+276            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+276-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:52:13-72
+277            <intent-filter>
+277-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:53:13-63:29
+278                <action android:name="android.intent.action.VIEW" />
+278-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:36:17-69
+278-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:36:25-66
+279
+280                <category android:name="android.intent.category.DEFAULT" />
+280-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:38:17-76
+280-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:38:27-73
+281                <category android:name="android.intent.category.BROWSABLE" />
+281-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:39:17-78
+281-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:39:27-75
+282
+283                <data
+283-->S:\BE_project\AppFolder\pet_care_app\android\app\src\main\AndroidManifest.xml:50:13-51
+284                    android:host="firebase.auth"
+285                    android:path="/"
+286                    android:scheme="recaptcha" />
+287            </intent-filter>
+288        </activity>
+289
+290        <receiver
+290-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:29:9-40:20
+291            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+291-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:30:13-78
+292            android:exported="true"
+292-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:31:13-36
+293            android:permission="com.google.android.c2dm.permission.SEND" >
+293-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:32:13-73
+294            <intent-filter>
+294-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-32:29
+295                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+295-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:17-81
+295-->[:firebase_messaging] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\firebase_messaging-15.2.3\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:25-78
+296            </intent-filter>
+297
+298            <meta-data
+298-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:37:13-39:40
+299                android:name="com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED"
+299-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:38:17-92
+300                android:value="true" />
+300-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:39:17-37
+301        </receiver>
+302        <!--
+303             FirebaseMessagingService performs security checks at runtime,
+304             but set to not exported to explicitly avoid allowing another app to call it.
+305        -->
+306        <service
+306-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:46:9-53:19
+307            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+307-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:47:13-82
+308            android:directBootAware="true"
+308-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:48:13-43
+309            android:exported="false" >
+309-->[com.google.firebase:firebase-messaging:24.1.0] C:\Users\saura\.gradle\caches\transforms-3\939b7f82055c8d81d457839748e67018\transformed\jetified-firebase-messaging-24.1.0\AndroidManifest.xml:49:13-37
+310            <intent-filter android:priority="-500" >
+310-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:33:13-35:29
+311                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+311-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:34:17-78
+311-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:34:25-75
+312            </intent-filter>
+313        </service>
+314
+315        <provider
+315-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:9-17:20
+316            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+316-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:13-82
+317            android:authorities="com.example.pet_care_app.flutter.image_provider"
+317-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
+318            android:exported="false"
+318-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
+319            android:grantUriPermissions="true" >
+319-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-47
+320            <meta-data
+320-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-16:75
+321                android:name="android.support.FILE_PROVIDER_PATHS"
+321-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:17-67
+322                android:resource="@xml/flutter_image_picker_file_paths" />
+322-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-72
+323        </provider> <!-- Trigger Google Play services to install the backported photo picker module. -->
+324        <service
+324-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:9-31:19
+325            android:name="com.google.android.gms.metadata.ModuleDependencies"
+325-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-78
+326            android:enabled="false"
+326-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-36
+327            android:exported="false" >
+327-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-37
+328            <intent-filter>
+328-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-26:29
+329                <action android:name="com.google.android.gms.metadata.MODULE_DEPENDENCIES" />
+329-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:17-94
+329-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:25-91
+330            </intent-filter>
+331
+332            <meta-data
+332-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:13-30:36
+333                android:name="photopicker_activity:0:required"
+333-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:17-63
+334                android:value="" />
+334-->[:image_picker_android] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\image_picker_android-0.8.12+21\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:17-33
+335        </service>
+336
+337        <receiver
+337-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-12:39
+338            android:name="me.carda.awesome_notifications.DartNotificationActionReceiver"
+338-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-89
+339            android:exported="true" />
+339-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-36
+340        <receiver
+340-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:9-15:39
+341            android:name="me.carda.awesome_notifications.DartDismissedNotificationReceiver"
+341-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-92
+342            android:exported="true" />
+342-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-36
+343        <receiver
+343-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:9-18:39
+344            android:name="me.carda.awesome_notifications.DartScheduledNotificationReceiver"
+344-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:13-92
+345            android:exported="true" />
+345-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-36
+346        <receiver
+346-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:9-33:20
+347            android:name="me.carda.awesome_notifications.DartRefreshSchedulesReceiver"
+347-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:13-87
+348            android:enabled="true"
+348-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:13-35
+349            android:exported="true" >
+349-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:22:13-36
+350            <intent-filter>
+350-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:13-32:29
+351                <category android:name="android.intent.category.DEFAULT" />
+351-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:38:17-76
+351-->[com.google.firebase:firebase-auth:23.2.0] C:\Users\saura\.gradle\caches\transforms-3\3c98ae7bc242f1ad8e804202f32fdc84\transformed\jetified-firebase-auth-23.2.0\AndroidManifest.xml:38:27-73
+352
+353                <action android:name="android.intent.action.BOOT_COMPLETED" />
+353-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:17-79
+353-->[:awesome_notifications_fcm] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications_fcm-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:25-76
+354                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+354-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:17-86
+354-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:25-83
+355                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+355-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:17-84
+355-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:28:25-81
+356                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+356-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:17-82
+356-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:25-79
+357                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+357-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:17-82
+357-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:25-79
+358                <action android:name="android.app.action.SCHEDULE_EXACT_ALARM_PERMISSION_STATE_CHANGED" />
+358-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:17-107
+358-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:25-104
+359            </intent-filter>
+360        </receiver>
+361
+362        <service
+362-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:35:9-38:72
+363            android:name="me.carda.awesome_notifications.DartBackgroundService"
+363-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:36:13-80
+364            android:exported="false"
+364-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:37:13-37
+365            android:permission="android.permission.BIND_JOB_SERVICE" />
+365-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:38:13-69
+366        <service
+366-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:39:9-44:43
+367            android:name="me.carda.awesome_notifications.core.services.ForegroundService"
+367-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:40:13-90
+368            android:enabled="true"
+368-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:41:13-35
+369            android:exported="false"
+369-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:42:13-37
+370            android:foregroundServiceType="phoneCall"
+370-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:43:13-54
+371            android:stopWithTask="true" />
+371-->[:awesome_notifications] C:\Users\saura\AppData\Local\Pub\Cache\hosted\pub.dev\awesome_notifications-0.10.1\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:44:13-40
+372        <service
+372-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:24:9-32:19
+373            android:name="androidx.credentials.playservices.CredentialProviderMetadataHolder"
+373-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:25:13-94
+374            android:enabled="true"
+374-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:26:13-35
+375            android:exported="false" >
+375-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:27:13-37
+376            <meta-data
+376-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:29:13-31:104
+377                android:name="androidx.credentials.CREDENTIAL_PROVIDER_KEY"
+377-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:30:17-76
+378                android:value="androidx.credentials.playservices.CredentialProviderPlayServicesImpl" />
+378-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:31:17-101
+379        </service>
+380
+381        <activity
+381-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:34:9-41:20
+382            android:name="androidx.credentials.playservices.HiddenActivity"
+382-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:35:13-76
+383            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+383-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:36:13-87
+384            android:enabled="true"
+384-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:37:13-35
+385            android:exported="false"
+385-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:38:13-37
+386            android:fitsSystemWindows="true"
+386-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:39:13-45
+387            android:theme="@style/Theme.Hidden" >
+387-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\saura\.gradle\caches\transforms-3\d697aa50811b64b4ba574d68b86c7702\transformed\jetified-credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:40:13-48
+388        </activity>
+389
+390        <receiver
+390-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:42:9-49:20
+391            android:name="com.razorpay.RzpTokenReceiver"
+391-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:43:13-57
+392            android:exported="true" >
+392-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:44:13-36
+393            <intent-filter>
+393-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:46:13-48:29
+394                <action android:name="rzp.device_token.share" />
+394-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:37:13-61
+394-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:37:21-58
+395            </intent-filter>
+396        </receiver>
+397
+398        <activity
+398-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:51:9-59:20
+399            android:name="com.razorpay.CheckoutActivity"
+399-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:52:13-57
+400            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+400-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:53:13-83
+401            android:exported="false"
+401-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:54:13-37
+402            android:theme="@style/CheckoutTheme" >
+402-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:55:13-49
+403            <intent-filter>
+403-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:56:13-58:29
+404                <action android:name="android.intent.action.MAIN" />
+404-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:29:13-65
+404-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:29:21-62
+405            </intent-filter>
+406        </activity>
+407
+408        <provider
+408-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:61:9-69:20
+409            android:name="androidx.startup.InitializationProvider"
+409-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:62:13-67
+410            android:authorities="com.example.pet_care_app.androidx-startup"
+410-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:63:13-68
+411            android:exported="false" >
+411-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:64:13-37
+412            <meta-data
+412-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:66:13-68:52
+413                android:name="com.razorpay.RazorpayInitializer"
+413-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:67:17-64
+414                android:value="androidx.startup" />
+414-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:68:17-49
+415            <meta-data
+415-->[androidx.emoji2:emoji2:1.3.0] C:\Users\saura\.gradle\caches\transforms-3\ca559320b1f655d76fbeafc93b3c9517\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+416                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+416-->[androidx.emoji2:emoji2:1.3.0] C:\Users\saura\.gradle\caches\transforms-3\ca559320b1f655d76fbeafc93b3c9517\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:30:17-75
+417                android:value="androidx.startup" />
+417-->[androidx.emoji2:emoji2:1.3.0] C:\Users\saura\.gradle\caches\transforms-3\ca559320b1f655d76fbeafc93b3c9517\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:31:17-49
+418            <meta-data
+418-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\saura\.gradle\caches\transforms-3\7a73c9fca0e745c9c36f8590f8acc720\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+419                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+419-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\saura\.gradle\caches\transforms-3\7a73c9fca0e745c9c36f8590f8acc720\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+420                android:value="androidx.startup" />
+420-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\saura\.gradle\caches\transforms-3\7a73c9fca0e745c9c36f8590f8acc720\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+421            <meta-data
+421-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+422                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+422-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+423                android:value="androidx.startup" />
+423-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+424        </provider>
+425
+426        <activity
+426-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:71:9-74:75
+427            android:name="com.razorpay.MagicXActivity"
+427-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:72:13-55
+428            android:exported="false"
+428-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:73:13-37
+429            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+429-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:74:13-72
+430
+431        <meta-data
+431-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:76:9-78:58
+432            android:name="com.razorpay.plugin.googlepay_all"
+432-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:77:13-61
+433            android:value="com.razorpay.RzpGpayMerged" />
+433-->[com.razorpay:standard-core:1.6.46] C:\Users\saura\.gradle\caches\transforms-3\8351580d7ce39190428cf25c36cf058e\transformed\jetified-standard-core-1.6.46\AndroidManifest.xml:78:13-55
+434
+435        <activity
+435-->[com.google.android.gms:play-services-auth:21.1.0] C:\Users\saura\.gradle\caches\transforms-3\d470d47060e4c3c7d8dfa7ea7dd062a8\transformed\jetified-play-services-auth-21.1.0\AndroidManifest.xml:23:9-27:75
+436            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+436-->[com.google.android.gms:play-services-auth:21.1.0] C:\Users\saura\.gradle\caches\transforms-3\d470d47060e4c3c7d8dfa7ea7dd062a8\transformed\jetified-play-services-auth-21.1.0\AndroidManifest.xml:24:13-93
+437            android:excludeFromRecents="true"
+437-->[com.google.android.gms:play-services-auth:21.1.0] C:\Users\saura\.gradle\caches\transforms-3\d470d47060e4c3c7d8dfa7ea7dd062a8\transformed\jetified-play-services-auth-21.1.0\AndroidManifest.xml:25:13-46
+438            android:exported="false"
+438-->[com.google.android.gms:play-services-auth:21.1.0] C:\Users\saura\.gradle\caches\transforms-3\d470d47060e4c3c7d8dfa7ea7dd062a8\transformed\jetified-play-services-auth-21.1.0\AndroidManifest.xml:26:13-37
+439            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+439-->[com.google.android.gms:play-services-auth:21.1.0] C:\Users\saura\.gradle\caches\transforms-3\d470d47060e4c3c7d8dfa7ea7dd062a8\transformed\jetified-play-services-auth-21.1.0\AndroidManifest.xml:27:13-72
+440        <!--
+441            Service handling Google Sign-In user revocation. For apps that do not integrate with
+442            Google Sign-In, this service will never be started.
+443        -->
+444        <service
+444-->[com.google.android.gms:play-services-auth:21.1.0] C:\Users\saura\.gradle\caches\transforms-3\d470d47060e4c3c7d8dfa7ea7dd062a8\transformed\jetified-play-services-auth-21.1.0\AndroidManifest.xml:33:9-37:51
+445            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+445-->[com.google.android.gms:play-services-auth:21.1.0] C:\Users\saura\.gradle\caches\transforms-3\d470d47060e4c3c7d8dfa7ea7dd062a8\transformed\jetified-play-services-auth-21.1.0\AndroidManifest.xml:34:13-89
+446            android:exported="true"
+446-->[com.google.android.gms:play-services-auth:21.1.0] C:\Users\saura\.gradle\caches\transforms-3\d470d47060e4c3c7d8dfa7ea7dd062a8\transformed\jetified-play-services-auth-21.1.0\AndroidManifest.xml:35:13-36
+447            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+447-->[com.google.android.gms:play-services-auth:21.1.0] C:\Users\saura\.gradle\caches\transforms-3\d470d47060e4c3c7d8dfa7ea7dd062a8\transformed\jetified-play-services-auth-21.1.0\AndroidManifest.xml:36:13-107
+448            android:visibleToInstantApps="true" /> <!-- Needs to be explicitly declared on P+ -->
+448-->[com.google.android.gms:play-services-auth:21.1.0] C:\Users\saura\.gradle\caches\transforms-3\d470d47060e4c3c7d8dfa7ea7dd062a8\transformed\jetified-play-services-auth-21.1.0\AndroidManifest.xml:37:13-48
+449        <uses-library
+449-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\saura\.gradle\caches\transforms-3\73ab3a82d4b31d01d94bbe394be2db11\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+450            android:name="org.apache.http.legacy"
+450-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\saura\.gradle\caches\transforms-3\73ab3a82d4b31d01d94bbe394be2db11\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+451            android:required="false" />
+451-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\saura\.gradle\caches\transforms-3\73ab3a82d4b31d01d94bbe394be2db11\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+452
+453        <activity
+453-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\saura\.gradle\caches\transforms-3\be759be55dc61d324f899c2c2827e0f2\transformed\jetified-play-services-base-18.5.0\AndroidManifest.xml:5:9-173
+454            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+454-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\saura\.gradle\caches\transforms-3\be759be55dc61d324f899c2c2827e0f2\transformed\jetified-play-services-base-18.5.0\AndroidManifest.xml:5:19-85
+455            android:exported="false"
+455-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\saura\.gradle\caches\transforms-3\be759be55dc61d324f899c2c2827e0f2\transformed\jetified-play-services-base-18.5.0\AndroidManifest.xml:5:146-170
+456            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+456-->[com.google.android.gms:play-services-base:18.5.0] C:\Users\saura\.gradle\caches\transforms-3\be759be55dc61d324f899c2c2827e0f2\transformed\jetified-play-services-base-18.5.0\AndroidManifest.xml:5:86-145
+457
+458        <service
+458-->[com.google.firebase:firebase-sessions:2.0.8] C:\Users\saura\.gradle\caches\transforms-3\8f873eb32bcd4a4bc1dbbd28827411b1\transformed\jetified-firebase-sessions-2.0.8\AndroidManifest.xml:22:9-25:40
+459            android:name="com.google.firebase.sessions.SessionLifecycleService"
+459-->[com.google.firebase:firebase-sessions:2.0.8] C:\Users\saura\.gradle\caches\transforms-3\8f873eb32bcd4a4bc1dbbd28827411b1\transformed\jetified-firebase-sessions-2.0.8\AndroidManifest.xml:23:13-80
+460            android:enabled="true"
+460-->[com.google.firebase:firebase-sessions:2.0.8] C:\Users\saura\.gradle\caches\transforms-3\8f873eb32bcd4a4bc1dbbd28827411b1\transformed\jetified-firebase-sessions-2.0.8\AndroidManifest.xml:24:13-35
+461            android:exported="false" />
+461-->[com.google.firebase:firebase-sessions:2.0.8] C:\Users\saura\.gradle\caches\transforms-3\8f873eb32bcd4a4bc1dbbd28827411b1\transformed\jetified-firebase-sessions-2.0.8\AndroidManifest.xml:25:13-37
+462
+463        <provider
+463-->[com.google.firebase:firebase-common:21.0.0] C:\Users\saura\.gradle\caches\transforms-3\54e648281eeaa3990eb9c5dd4cb9e762\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:23:9-28:39
+464            android:name="com.google.firebase.provider.FirebaseInitProvider"
+464-->[com.google.firebase:firebase-common:21.0.0] C:\Users\saura\.gradle\caches\transforms-3\54e648281eeaa3990eb9c5dd4cb9e762\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:24:13-77
+465            android:authorities="com.example.pet_care_app.firebaseinitprovider"
+465-->[com.google.firebase:firebase-common:21.0.0] C:\Users\saura\.gradle\caches\transforms-3\54e648281eeaa3990eb9c5dd4cb9e762\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:25:13-72
+466            android:directBootAware="true"
+466-->[com.google.firebase:firebase-common:21.0.0] C:\Users\saura\.gradle\caches\transforms-3\54e648281eeaa3990eb9c5dd4cb9e762\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:26:13-43
+467            android:exported="false"
+467-->[com.google.firebase:firebase-common:21.0.0] C:\Users\saura\.gradle\caches\transforms-3\54e648281eeaa3990eb9c5dd4cb9e762\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:27:13-37
+468            android:initOrder="100" />
+468-->[com.google.firebase:firebase-common:21.0.0] C:\Users\saura\.gradle\caches\transforms-3\54e648281eeaa3990eb9c5dd4cb9e762\transformed\jetified-firebase-common-21.0.0\AndroidManifest.xml:28:13-36
+469
+470        <service
+470-->[me.carda:AndroidAwnCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\77b2cfbdce5d5d2aedf5564ec5414e2c\transformed\jetified-AndroidAwnCore-0.10.0\AndroidManifest.xml:21:9-28:19
+471            android:name="me.carda.awesome_notifications.core.managers.StatusBarManager"
+471-->[me.carda:AndroidAwnCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\77b2cfbdce5d5d2aedf5564ec5414e2c\transformed\jetified-AndroidAwnCore-0.10.0\AndroidManifest.xml:22:13-89
+472            android:exported="true"
+472-->[me.carda:AndroidAwnCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\77b2cfbdce5d5d2aedf5564ec5414e2c\transformed\jetified-AndroidAwnCore-0.10.0\AndroidManifest.xml:23:13-36
+473            android:label="My Notification Listener Service" >
+473-->[me.carda:AndroidAwnCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\77b2cfbdce5d5d2aedf5564ec5414e2c\transformed\jetified-AndroidAwnCore-0.10.0\AndroidManifest.xml:24:13-61
+474            <intent-filter>
+474-->[me.carda:AndroidAwnCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\77b2cfbdce5d5d2aedf5564ec5414e2c\transformed\jetified-AndroidAwnCore-0.10.0\AndroidManifest.xml:25:13-27:29
+475                <action android:name="android.service.notification.NotificationListenerService" />
+475-->[me.carda:AndroidAwnCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\77b2cfbdce5d5d2aedf5564ec5414e2c\transformed\jetified-AndroidAwnCore-0.10.0\AndroidManifest.xml:26:17-99
+475-->[me.carda:AndroidAwnCore:0.10.0] C:\Users\saura\.gradle\caches\transforms-3\77b2cfbdce5d5d2aedf5564ec5414e2c\transformed\jetified-AndroidAwnCore-0.10.0\AndroidManifest.xml:26:25-96
+476            </intent-filter>
+477        </service>
+478
+479        <uses-library
+479-->[androidx.window:window:1.2.0] C:\Users\saura\.gradle\caches\transforms-3\3783c31ec35e9ea5ad6e20e5d8fa8ebc\transformed\jetified-window-1.2.0\AndroidManifest.xml:23:9-25:40
+480            android:name="androidx.window.extensions"
+480-->[androidx.window:window:1.2.0] C:\Users\saura\.gradle\caches\transforms-3\3783c31ec35e9ea5ad6e20e5d8fa8ebc\transformed\jetified-window-1.2.0\AndroidManifest.xml:24:13-54
+481            android:required="false" />
+481-->[androidx.window:window:1.2.0] C:\Users\saura\.gradle\caches\transforms-3\3783c31ec35e9ea5ad6e20e5d8fa8ebc\transformed\jetified-window-1.2.0\AndroidManifest.xml:25:13-37
+482        <uses-library
+482-->[androidx.window:window:1.2.0] C:\Users\saura\.gradle\caches\transforms-3\3783c31ec35e9ea5ad6e20e5d8fa8ebc\transformed\jetified-window-1.2.0\AndroidManifest.xml:26:9-28:40
+483            android:name="androidx.window.sidecar"
+483-->[androidx.window:window:1.2.0] C:\Users\saura\.gradle\caches\transforms-3\3783c31ec35e9ea5ad6e20e5d8fa8ebc\transformed\jetified-window-1.2.0\AndroidManifest.xml:27:13-51
+484            android:required="false" />
+484-->[androidx.window:window:1.2.0] C:\Users\saura\.gradle\caches\transforms-3\3783c31ec35e9ea5ad6e20e5d8fa8ebc\transformed\jetified-window-1.2.0\AndroidManifest.xml:28:13-37
+485
+486        <meta-data
+486-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\saura\.gradle\caches\transforms-3\1f09657a2a1235efa594828cad64a94b\transformed\jetified-play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
+487            android:name="com.google.android.gms.version"
+487-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\saura\.gradle\caches\transforms-3\1f09657a2a1235efa594828cad64a94b\transformed\jetified-play-services-basement-18.4.0\AndroidManifest.xml:6:20-65
+488            android:value="@integer/google_play_services_version" />
+488-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\saura\.gradle\caches\transforms-3\1f09657a2a1235efa594828cad64a94b\transformed\jetified-play-services-basement-18.4.0\AndroidManifest.xml:6:66-119
+489
+490        <service
+490-->[androidx.room:room-runtime:2.6.1] C:\Users\saura\.gradle\caches\transforms-3\834baabc86387de99a5a2329efdf940d\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+491            android:name="androidx.room.MultiInstanceInvalidationService"
+491-->[androidx.room:room-runtime:2.6.1] C:\Users\saura\.gradle\caches\transforms-3\834baabc86387de99a5a2329efdf940d\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
+492            android:directBootAware="true"
+492-->[androidx.room:room-runtime:2.6.1] C:\Users\saura\.gradle\caches\transforms-3\834baabc86387de99a5a2329efdf940d\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+493            android:exported="false" />
+493-->[androidx.room:room-runtime:2.6.1] C:\Users\saura\.gradle\caches\transforms-3\834baabc86387de99a5a2329efdf940d\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+494
+495        <receiver
+495-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+496            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+496-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+497            android:directBootAware="false"
+497-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+498            android:enabled="true"
+498-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+499            android:exported="true"
+499-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+500            android:permission="android.permission.DUMP" >
+500-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+501            <intent-filter>
+501-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+502                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+502-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+502-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+503            </intent-filter>
+504            <intent-filter>
+504-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+505                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+505-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+505-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+506            </intent-filter>
+507            <intent-filter>
+507-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+508                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+508-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+508-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+509            </intent-filter>
+510            <intent-filter>
+510-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+511                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+511-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+511-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\saura\.gradle\caches\transforms-3\65401de8ab59314635bcdd03c6f16977\transformed\jetified-profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+512            </intent-filter>
+513        </receiver>
+514
+515        <service
+515-->[com.google.android.datatransport:transport-backend-cct:3.3.0] C:\Users\saura\.gradle\caches\transforms-3\dc995fb645ff5faaca8ef56a68fffaa5\transformed\jetified-transport-backend-cct-3.3.0\AndroidManifest.xml:26:9-32:19
+516            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+516-->[com.google.android.datatransport:transport-backend-cct:3.3.0] C:\Users\saura\.gradle\caches\transforms-3\dc995fb645ff5faaca8ef56a68fffaa5\transformed\jetified-transport-backend-cct-3.3.0\AndroidManifest.xml:27:13-103
+517            android:exported="false" >
+517-->[com.google.android.datatransport:transport-backend-cct:3.3.0] C:\Users\saura\.gradle\caches\transforms-3\dc995fb645ff5faaca8ef56a68fffaa5\transformed\jetified-transport-backend-cct-3.3.0\AndroidManifest.xml:28:13-37
+518            <meta-data
+518-->[com.google.android.datatransport:transport-backend-cct:3.3.0] C:\Users\saura\.gradle\caches\transforms-3\dc995fb645ff5faaca8ef56a68fffaa5\transformed\jetified-transport-backend-cct-3.3.0\AndroidManifest.xml:29:13-31:39
+519                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+519-->[com.google.android.datatransport:transport-backend-cct:3.3.0] C:\Users\saura\.gradle\caches\transforms-3\dc995fb645ff5faaca8ef56a68fffaa5\transformed\jetified-transport-backend-cct-3.3.0\AndroidManifest.xml:30:17-94
+520                android:value="cct" />
+520-->[com.google.android.datatransport:transport-backend-cct:3.3.0] C:\Users\saura\.gradle\caches\transforms-3\dc995fb645ff5faaca8ef56a68fffaa5\transformed\jetified-transport-backend-cct-3.3.0\AndroidManifest.xml:31:17-36
+521        </service>
+522        <service
+522-->[com.google.android.datatransport:transport-runtime:3.3.0] C:\Users\saura\.gradle\caches\transforms-3\a16a137bb388ee78a3266f102a49157d\transformed\jetified-transport-runtime-3.3.0\AndroidManifest.xml:24:9-28:19
+523            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+523-->[com.google.android.datatransport:transport-runtime:3.3.0] C:\Users\saura\.gradle\caches\transforms-3\a16a137bb388ee78a3266f102a49157d\transformed\jetified-transport-runtime-3.3.0\AndroidManifest.xml:25:13-117
+524            android:exported="false"
+524-->[com.google.android.datatransport:transport-runtime:3.3.0] C:\Users\saura\.gradle\caches\transforms-3\a16a137bb388ee78a3266f102a49157d\transformed\jetified-transport-runtime-3.3.0\AndroidManifest.xml:26:13-37
+525            android:permission="android.permission.BIND_JOB_SERVICE" >
+525-->[com.google.android.datatransport:transport-runtime:3.3.0] C:\Users\saura\.gradle\caches\transforms-3\a16a137bb388ee78a3266f102a49157d\transformed\jetified-transport-runtime-3.3.0\AndroidManifest.xml:27:13-69
+526        </service>
+527
+528        <receiver
+528-->[com.google.android.datatransport:transport-runtime:3.3.0] C:\Users\saura\.gradle\caches\transforms-3\a16a137bb388ee78a3266f102a49157d\transformed\jetified-transport-runtime-3.3.0\AndroidManifest.xml:30:9-32:40
+529            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+529-->[com.google.android.datatransport:transport-runtime:3.3.0] C:\Users\saura\.gradle\caches\transforms-3\a16a137bb388ee78a3266f102a49157d\transformed\jetified-transport-runtime-3.3.0\AndroidManifest.xml:31:13-132
+530            android:exported="false" /> <!-- The activities will be merged into the manifest of the hosting app. -->
+530-->[com.google.android.datatransport:transport-runtime:3.3.0] C:\Users\saura\.gradle\caches\transforms-3\a16a137bb388ee78a3266f102a49157d\transformed\jetified-transport-runtime-3.3.0\AndroidManifest.xml:32:13-37
+531        <activity
+531-->[com.google.android.play:core-common:2.0.3] C:\Users\saura\.gradle\caches\transforms-3\5fc897dfe5017cc1e48966cf24217581\transformed\jetified-core-common-2.0.3\AndroidManifest.xml:14:9-18:65
+532            android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity"
+532-->[com.google.android.play:core-common:2.0.3] C:\Users\saura\.gradle\caches\transforms-3\5fc897dfe5017cc1e48966cf24217581\transformed\jetified-core-common-2.0.3\AndroidManifest.xml:15:13-93
+533            android:exported="false"
+533-->[com.google.android.play:core-common:2.0.3] C:\Users\saura\.gradle\caches\transforms-3\5fc897dfe5017cc1e48966cf24217581\transformed\jetified-core-common-2.0.3\AndroidManifest.xml:16:13-37
+534            android:stateNotNeeded="true"
+534-->[com.google.android.play:core-common:2.0.3] C:\Users\saura\.gradle\caches\transforms-3\5fc897dfe5017cc1e48966cf24217581\transformed\jetified-core-common-2.0.3\AndroidManifest.xml:17:13-42
+535            android:theme="@style/Theme.PlayCore.Transparent" />
+535-->[com.google.android.play:core-common:2.0.3] C:\Users\saura\.gradle\caches\transforms-3\5fc897dfe5017cc1e48966cf24217581\transformed\jetified-core-common-2.0.3\AndroidManifest.xml:18:13-62
+536    </application>
+537
+538</manifest>

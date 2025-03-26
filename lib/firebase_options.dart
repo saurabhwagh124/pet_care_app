@@ -47,6 +47,7 @@ class DefaultFirebaseOptions {
     projectId: 'project-petcare-app',
     authDomain: 'project-petcare-app.firebaseapp.com',
     storageBucket: 'project-petcare-app.firebasestorage.app',
+    measurementId: 'G-P19G525XC1',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -86,6 +87,7 @@ class DefaultFirebaseOptions {
     projectId: 'project-petcare-app',
     authDomain: 'project-petcare-app.firebaseapp.com',
     storageBucket: 'project-petcare-app.firebasestorage.app',
+    measurementId: 'G-2KNJHF5MGW',
   );
 
 }

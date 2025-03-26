@@ -63,7 +63,7 @@ class MainApp extends StatelessWidget {
             GetPage(name: '/AddPetsPage', page: () => const AddPetsPage()),
             GetPage(name: '/AddNotificationsScreen', page: () => const AddNotificationsScreen()),
             GetPage(name: '/GroomingManagementScreen', page: () => GroomingManagementScreen()),
-            GetPage(name: '/AppointmentsScreen', page: () => AppointmentsScreen()),
+            GetPage(name: '/AppointmentsScreen', page: () => const AppointmentsScreen()),
             GetPage(name: '/UserManagementScreen', page: () => UserManagementScreen()),
             GetPage(name: '/ServicesScreen', page: () => const ServicesScreen()),
             GetPage(name: '/BoardingManagementScreen', page: () => const BoardingManagementScreen()),
