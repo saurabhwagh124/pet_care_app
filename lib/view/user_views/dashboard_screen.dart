@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/controller/shop_controller.dart';
 import 'package:pet_care_app/controller/user_pet_controller.dart';
 import 'package:pet_care_app/service/notification_service.dart';
+import 'package:pet_care_app/utils/ads_center/banner_ads.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
 import 'package:pet_care_app/utils/enums.dart';
@@ -173,10 +174,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: 45.h, right: 17.w, left: 17.w),
+          padding: EdgeInsets.only(top: 10.h, right: 17.w, left: 17.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              const BannerAds(),
               Container(
                 decoration: BoxDecoration(
                     color: Colors.white, borderRadius: BorderRadius.circular(8.r), boxShadow: const [BoxShadow(offset: Offset(0, 1), blurRadius: 3.5, color: Color.fromRGBO(0, 0, 0, 0.20))]),

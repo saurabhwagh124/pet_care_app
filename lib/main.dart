@@ -18,13 +18,14 @@ import 'package:pet_care_app/view/user_views/dashboard_screen.dart';
 import 'package:pet_care_app/view/usermanagement.dart';
 import 'package:pet_care_app/view/veterinaryscreen.dart';
 import 'package:pet_care_app/view/wrapper.dart';
-
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'firebase_options.dart';
 
 void main() async {
   Get.put(CartController());
   Get.put(AppointmentController());
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   await GetStorage.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
