@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,15 +11,13 @@ import 'package:pet_care_app/service/notification_service.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
 import 'package:pet_care_app/utils/enums.dart';
+import 'package:pet_care_app/view/category_screen.dart';
 import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
 import 'package:pet_care_app/view/user_views/explore_screen.dart';
-import 'package:pet_care_app/view/user_views/forgot_password_screen.dart';
 import 'package:pet_care_app/view/user_views/profile_screen.dart';
+import 'package:pet_care_app/view/user_views/scheduled_appointments_screen.dart';
 import 'package:pet_care_app/view/user_views/shop_food_screen.dart';
-import 'package:pet_care_app/view/wrapper.dart';
 import 'package:pet_care_app/widgets/user_pet_widget_icon.dart';
-
-import 'package:pet_care_app/view/category_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -66,81 +66,75 @@ class _DashboardScreenState extends State<DashboardScreen> {
               color: Colors.white),
         ),
         leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.white),
+          icon: const Icon(Icons.menu, color: Colors.white),
           onPressed: () {
             _scaffoldKey.currentState?.openDrawer(); // Open drawer using key
           },
         ),
         actions: [
           GestureDetector(
-            onTap: () async {
-              await showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: Text(
-                    "Profile Options",
-                    style:
-                        TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
-                  ),
-                  content: SizedBox(
-                    height: 100.h,
-                    child: Column(
-                      spacing: 10.h,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          color: const Color.fromARGB(255, 242, 188, 184),
-                          padding: const EdgeInsets.all(3),
-                          child: GestureDetector(
-                            onTap: () async {
-                              await auth.signOut();
-                              Get.back();
-                              Get.to(() => const Wrapper());
-                            },
-                            child: Row(
-                              children: [
-                                Icon(Icons.logout_outlined,
-                                    color: Colors.red, size: 20.sp),
-                                SizedBox(width: 20.w),
-                                Text(
-                                  "Sign out",
-                                  style: TextStyle(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          color: const Color.fromARGB(255, 219, 245, 128),
-                          padding: const EdgeInsets.all(3),
-                          child: GestureDetector(
-                            onTap: () {
-                              Get.to(() => const ForgotPasswordScreen());
-                            },
-                            child: Row(
-                              children: [
-                                Icon(Icons.lock_reset_outlined,
-                                    color: Colors.yellow, size: 20.sp),
-                                SizedBox(width: 20.w),
-                                Text(
-                                  "Forgot Password",
-                                  style: TextStyle(
-                                      fontSize: 12.sp,
-                                      fontWeight: FontWeight.w800),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
+            // onTap: () async {
+            //   await showDialog(
+            //     context: context,
+            //     builder: (context) => AlertDialog(
+            //       title: Text(
+            //         "Profile Options",
+            //         style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w800),
+            //       ),
+            //       content: SizedBox(
+            //         height: 100.h,
+            //         child: Column(
+            //           spacing: 10.h,
+            //           crossAxisAlignment: CrossAxisAlignment.center,
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           children: [
+            //             Container(
+            //               color: const Color.fromARGB(255, 242, 188, 184),
+            //               padding: const EdgeInsets.all(3),
+            //               child: GestureDetector(
+            //                 onTap: () async {
+            //                   await auth.signOut();
+            //                   Get.back();
+            //                   Get.to(() => const Wrapper());
+            //                 },
+            //                 child: Row(
+            //                   children: [
+            //                     Icon(Icons.logout_outlined, color: Colors.red, size: 20.sp),
+            //                     SizedBox(width: 20.w),
+            //                     Text(
+            //                       "Sign out",
+            //                       style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //             ),
+            //             Container(
+            //               color: const Color.fromARGB(255, 219, 245, 128),
+            //               padding: const EdgeInsets.all(3),
+            //               child: GestureDetector(
+            //                 onTap: () {
+            //                   Get.to(() => const ForgotPasswordScreen());
+            //                 },
+            //                 child: Row(
+            //                   children: [
+            //                     Icon(Icons.lock_reset_outlined, color: Colors.yellow, size: 20.sp),
+            //                     SizedBox(width: 20.w),
+            //                     Text(
+            //                       "Forgot Password",
+            //                       style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w800),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //             )
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   );
+            // },
+
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
               padding: EdgeInsets.all(2.r),
@@ -168,13 +162,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.info_outline, color: Colors.black),
-              title: Text("General Breeds Info"),
+              leading: const Icon(Icons.info_outline, color: Colors.black),
+              title: const Text("General Breeds Info"),
               onTap: () {
-                Navigator.pop(context); // Close drawer
+                Get.back(); // Close drawer
                 Get.to(() => CategoryScreen()); // Navigate to your page
               },
             ),
+            ListTile(
+              leading: const Icon(
+                Icons.access_time,
+                color: Colors.black,
+              ),
+              title: const Text("Scheduled Appointments"),
+              onTap: () {
+                Get.back();
+                Get.to(() => ScheduledAppointmentsScreen());
+              },
+            )
           ],
         ),
       ),
@@ -414,7 +419,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                           ),
                                           SizedBox(height: 5.h),
                                           Text(
-                                            "\₹${product.price?.toStringAsFixed(2)}",
+                                            "₹${product.price?.toStringAsFixed(2)}",
                                             style: TextStyle(
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.bold,
@@ -423,7 +428,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                           ),
                                         ],
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       GestureDetector(
                                         onTap: () {
                                           Get.to(const ShopFood());
@@ -456,48 +461,52 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: NavigationBar(
-        backgroundColor: Colors.orangeAccent,
-        selectedIndex: _selectedIndex,
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(
-              Icons.house_outlined,
-              color: Colors.white,
-            ),
-            label: 'Home',
+      bottomNavigationBar: ClipRRect(
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: NavigationBar(
+            backgroundColor: Colors.orange.withOpacity(0.8),
+            elevation: 0,
+            height: 70,
+            selectedIndex: _selectedIndex,
+            onDestinationSelected: (value) {
+              if (_selectedIndex != value) {
+                setState(() {
+                  _selectedIndex = value;
+                });
+                Get.to(() => screens[value]);
+              }
+              _selectedIndex = 0;
+            },
+            indicatorColor: Colors.orangeAccent.withOpacity(0.2),
+            labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+            destinations: [
+              NavigationDestination(
+                selectedIcon: Icon(Icons.home, color: Colors.white, size: 30),
+                icon: Icon(Icons.home_outlined, color: Colors.grey),
+                label: 'Home',
+              ),
+              NavigationDestination(
+                selectedIcon:
+                    Icon(Icons.explore, color: Colors.white, size: 30),
+                icon: Icon(Icons.explore_outlined, color: Colors.grey),
+                label: 'Explore',
+              ),
+              NavigationDestination(
+                selectedIcon: Icon(Icons.shopping_bag,
+                    color: Colors.orangeAccent, size: 30),
+                icon: Icon(Icons.shopping_bag_outlined, color: Colors.grey),
+                label: 'Shop',
+              ),
+              NavigationDestination(
+                selectedIcon:
+                    Icon(Icons.pets, color: Colors.orangeAccent, size: 30),
+                icon: Icon(Icons.pets_outlined, color: Colors.grey),
+                label: 'Profile',
+              ),
+            ],
           ),
-          NavigationDestination(
-            icon: Icon(
-              Icons.navigation,
-              color: Colors.white,
-            ),
-            label: 'Explore',
-          ),
-          NavigationDestination(
-            icon: Icon(
-              Icons.shopping_bag_outlined,
-              color: Colors.white,
-            ),
-            label: 'Shop',
-          ),
-          NavigationDestination(
-            icon: Icon(
-              Icons.pets,
-              color: Colors.white,
-            ),
-            label: 'Profile',
-          )
-        ],
-        onDestinationSelected: (value) {
-          setState(() {
-            _selectedIndex = value;
-            Get.to(() => screens[value]);
-            _selectedIndex = 0;
-          });
-        },
-        indicatorColor: Colors.orange,
-        // indicatorShape: Border.all(color: Colors.red),
+        ),
       ),
     );
   }

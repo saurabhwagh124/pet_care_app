@@ -1,7 +1,7 @@
 import 'package:pet_care_app/model/vet_doc_model.dart';
 
-class DoctorAppointment {
-    DoctorAppointment({
+class DoctorAppointmentModel {
+    DoctorAppointmentModel({
         required this.appointmentId,
         required this.usersId,
         required this.petsId,
@@ -19,8 +19,8 @@ class DoctorAppointment {
     final String? status;
     final VetDocModel? doctor;
 
-    factory DoctorAppointment.fromJson(Map<String, dynamic> json){ 
-        return DoctorAppointment(
+    factory DoctorAppointmentModel.fromJson(Map<String, dynamic> json){ 
+        return DoctorAppointmentModel(
             appointmentId: json["appointmentId"],
             usersId: json["usersId"],
             petsId: json["petsId"],

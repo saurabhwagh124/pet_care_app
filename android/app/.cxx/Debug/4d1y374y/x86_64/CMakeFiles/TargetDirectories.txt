@@ -1,0 +1,2 @@
+S:/BE_project/AppFolder/pet_care_app/android/app/.cxx/Debug/4d1y374y/x86_64/CMakeFiles/edit_cache.dir
+S:/BE_project/AppFolder/pet_care_app/android/app/.cxx/Debug/4d1y374y/x86_64/CMakeFiles/rebuild_cache.dir
