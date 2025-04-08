@@ -1,2 +1,0 @@
-F:/pet_care_app/android/app/.cxx/Debug/5q2n5y50/x86/CMakeFiles/edit_cache.dir
-F:/pet_care_app/android/app/.cxx/Debug/5q2n5y50/x86/CMakeFiles/rebuild_cache.dir
