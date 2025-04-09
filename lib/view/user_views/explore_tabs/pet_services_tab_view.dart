@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/pet_services_controller.dart';
+import 'package:pet_care_app/controller/vet_doc_controller.dart';
 import 'package:pet_care_app/widgets/pet_services_card_widget.dart';
 
 class PetServicesTabView extends StatefulWidget {
@@ -13,6 +14,7 @@ class PetServicesTabView extends StatefulWidget {
 
 class _PetServicesTabViewState extends State<PetServicesTabView> {
   final PetServicesController _controller = PetServicesController();
+  final vetController = Get.find<VetDocController>();
 
   @override
   void initState() {
@@ -49,13 +51,19 @@ class _PetServicesTabViewState extends State<PetServicesTabView> {
         ),
         Expanded(
           // height: 300.h,
-          child: Obx(
-            () => ListView.builder(
+          child: Obx(() {
+            final list = _controller.petServiceList
+                .where((element) => element.name!
+                    .toLowerCase()
+                    .contains(vetController.search.value.toLowerCase()))
+                .toList();
+            return ListView.builder(
               scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) => PetServicesCardWidget(data: _controller.petServiceList[index]),
-              itemCount: _controller.petServiceList.length,
-            ),
-          ),
+              itemBuilder: (context, index) =>
+                  PetServicesCardWidget(data: list[index]),
+              itemCount: list.length,
+            );
+          }),
         ),
         // const Divider(
         //   color: Colors.black,

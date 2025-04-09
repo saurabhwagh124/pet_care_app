@@ -4,7 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pet_care_app/controller/appointment_controller.dart';
+import 'package:pet_care_app/controller/base_breed_controller.dart';
 import 'package:pet_care_app/controller/cart_controller.dart';
+import 'package:pet_care_app/controller/orders_controller.dart';
+import 'package:pet_care_app/controller/pet_services_controller.dart';
+import 'package:pet_care_app/controller/review_controller.dart';
+import 'package:pet_care_app/controller/shop_controller.dart';
+import 'package:pet_care_app/controller/shopitem_controller.dart';
+import 'package:pet_care_app/controller/user_controller.dart';
+import 'package:pet_care_app/controller/user_pet_controller.dart';
+import 'package:pet_care_app/controller/vet_doc_controller.dart';
 import 'package:pet_care_app/service/notification_service.dart';
 import 'package:pet_care_app/view/add_notifications_screen.dart';
 import 'package:pet_care_app/view/admin_dashboard_screen.dart';
@@ -14,6 +23,7 @@ import 'package:pet_care_app/view/groomingmanagementscreen.dart';
 import 'package:pet_care_app/view/servicescreen.dart';
 import 'package:pet_care_app/view/shopitem.dart';
 import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
+import 'package:pet_care_app/view/user_views/address_page.dart';
 import 'package:pet_care_app/view/user_views/dashboard_screen.dart';
 import 'package:pet_care_app/view/usermanagement.dart';
 import 'package:pet_care_app/view/veterinaryscreen.dart';
@@ -22,8 +32,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  Get.put(CartController());
-  Get.put(AppointmentController());
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
   await GetStorage.init();
@@ -47,6 +55,19 @@ class MainApp extends StatelessWidget {
       designSize: const Size(360, 690),
       builder: (_, child) {
         return GetMaterialApp(
+          initialBinding: BindingsBuilder(() {
+            Get.put(AppointmentController());
+            Get.put(BaseBreedController());
+            Get.put(CartController());
+            Get.put(OrdersController());
+            Get.put(PetServicesController());
+            Get.put(ReviewController());
+            Get.put(ShopController());
+            Get.put(ShopItemController());
+            Get.put(UserController());
+            Get.put(UserPetController());
+            Get.put(VetDocController());
+          }),
           debugShowCheckedModeBanner: false,
           home: const Wrapper(),
           initialRoute: '/',
@@ -78,6 +99,8 @@ class MainApp extends StatelessWidget {
                 name: '/VeterinaryScreen',
                 page: () => const Veterinaryscreen()),
             GetPage(name: '/ShopItemScreen', page: () => ShopItemScreen()),
+            GetPage(name: '/AddPetsPage', page: () => const AddPetsPage()),
+            GetPage(name: '/AddressPage', page: () => const AddressPage())
           ],
         );
       },
