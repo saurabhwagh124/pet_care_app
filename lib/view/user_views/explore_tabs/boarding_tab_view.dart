@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/boarding_controller.dart';
+import 'package:pet_care_app/controller/vet_doc_controller.dart';
 import 'package:pet_care_app/widgets/boarding_card.dart';
 
 class BoardingTabView extends StatefulWidget {
@@ -12,6 +13,7 @@ class BoardingTabView extends StatefulWidget {
 
 class _BoardingTabViewState extends State<BoardingTabView> {
   final BoardingController _boardingController = BoardingController();
+  final controller = Get.find<VetDocController>();
 
   @override
   void initState() {
@@ -41,14 +43,19 @@ class _BoardingTabViewState extends State<BoardingTabView> {
         //   ],
         // ),
         Expanded(
-          child: Obx(
-            () => ListView.separated(
+          child: Obx(() {
+            final list = _boardingController.boardingList
+                .where((element) => element.name!
+                    .toLowerCase()
+                    .contains(controller.search.value.toLowerCase()))
+                .toList();
+            return ListView.separated(
               separatorBuilder: (context, index) => const Divider(),
               scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) => BoardingCard(data: _boardingController.boardingList[index]),
-              itemCount: _boardingController.boardingList.length,
-            ),
-          ),
+              itemBuilder: (context, index) => BoardingCard(data: list[index]),
+              itemCount: list.length,
+            );
+          }),
         ),
       ],
     );

@@ -6,6 +6,7 @@ import 'package:pet_care_app/service/vet_doc_service.dart';
 
 class VetDocController extends GetxController {
   final VetDocService _vetDocService = VetDocService();
+  RxString search = RxString('');
   RxList<VetDocModel> vetDoctorsList = <VetDocModel>[].obs;
 
   void fetchVetDocs() async {
@@ -19,7 +20,8 @@ class VetDocController extends GetxController {
   RxList<VetDocModel> vets = <VetDocModel>[].obs;
 
   // Map to track assigned appointments
-  RxMap<String, String> appointments = <String, String>{}.obs; // {TimeSlot: VetName}
+  RxMap<String, String> appointments =
+      <String, String>{}.obs; // {TimeSlot: VetName}
 
   // Add or Edit Veterinarian
   void add(VetDocModel vet) async {
@@ -31,10 +33,12 @@ class VetDocController extends GetxController {
   bool assignVetToAppointment(String vetName, String timeSlot) {
     if (appointments.containsKey(timeSlot)) {
       if (appointments[timeSlot] == vetName) {
-        Get.snackbar('Error', '$vetName is already assigned to this time slot.');
+        Get.snackbar(
+            'Error', '$vetName is already assigned to this time slot.');
         return false;
       }
-      Get.snackbar('Error', 'This time slot is already assigned to another vet.');
+      Get.snackbar(
+          'Error', 'This time slot is already assigned to another vet.');
       return false;
     }
 

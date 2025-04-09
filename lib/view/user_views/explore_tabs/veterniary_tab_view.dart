@@ -47,17 +47,21 @@ class _VeterniaryTabViewState extends State<VeterniaryTabView> {
           height: 15.h,
         ),
         Expanded(
-          child: Obx(
-            () => ListView.separated(
+          child: Obx(() {
+            final list = _vetDocController.vetDoctorsList
+                .where((element) => element.name!
+                    .toLowerCase()
+                    .contains(_vetDocController.search.value.toLowerCase()))
+                .toList();
+            return ListView.separated(
               separatorBuilder: (context, index) => SizedBox(
                 height: 10.h,
               ),
               scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) =>
-                  VetCardWidget(data: _vetDocController.vetDoctorsList[index]),
-              itemCount: _vetDocController.vetDoctorsList.length,
-            ),
-          ),
+              itemBuilder: (context, index) => VetCardWidget(data: list[index]),
+              itemCount: list.length,
+            );
+          }),
         ),
         // const Divider(
         //   color: Colors.black,

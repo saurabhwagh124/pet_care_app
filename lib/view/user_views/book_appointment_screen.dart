@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -85,31 +84,18 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
                     fontSize: 24, fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 10),
-              Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Color.fromRGBO(19, 10, 46, 0.03),
-                          offset: Offset(0, 3),
-                          blurRadius: 14),
-                      BoxShadow(
-                          color: Color.fromRGBO(19, 10, 46, 0.13),
-                          offset: Offset(0, 1),
-                          blurRadius: 3),
-                    ],
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: CalendarDatePicker(
-                    initialDate: selectedDate,
-                    currentDate: selectedDate,
-                    firstDate: firstDate,
-                    lastDate: lastDate,
-                    onDateChanged: (date) {
-                      selectedDate = date;
-                      fetchTimeSlots();
-                    },
-                  )),
+              CalendarDatePicker(
+                initialDate: selectedDate,
+                currentDate: selectedDate,
+                firstDate: firstDate,
+                lastDate: lastDate,
+                onDateChanged: (date) {
+                  setState(() {
+                    selectedDate = date;
+                    fetchTimeSlots();
+                  });
+                },
+              ),
               SizedBox(height: 20.h),
               Text(
                 'Pick a Time',

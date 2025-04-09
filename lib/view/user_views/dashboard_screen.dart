@@ -480,7 +480,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             },
             indicatorColor: Colors.orangeAccent.withOpacity(0.2),
             labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-            destinations: [
+            destinations: const [
               NavigationDestination(
                 selectedIcon: Icon(Icons.home, color: Colors.white, size: 30),
                 icon: Icon(Icons.home_outlined, color: Colors.grey),

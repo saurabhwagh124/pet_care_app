@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../controller/pet_service_controller.dart';
-import '../../model/pet_services_model.dart';
+import 'package:pet_care_app/controller/pet_services_controller.dart';
+import 'package:pet_care_app/model/pet_services_model.dart';
 
 class AddEditPetServicePage extends StatefulWidget {
   final int? index;
@@ -83,7 +83,8 @@ class _AddEditPetServicePageState extends State<AddEditPetServicePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.service != null ? "Edit Service" : "Add Service")),
+      appBar: AppBar(
+          title: Text(widget.service != null ? "Edit Service" : "Add Service")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -94,12 +95,14 @@ class _AddEditPetServicePageState extends State<AddEditPetServicePage> {
                 TextFormField(
                   controller: nameController,
                   decoration: const InputDecoration(labelText: "Service Name"),
-                  validator: (value) => value!.isEmpty ? "Enter service name" : null,
+                  validator: (value) =>
+                      value!.isEmpty ? "Enter service name" : null,
                 ),
                 TextFormField(
                   controller: categoryController,
                   decoration: const InputDecoration(labelText: "Category"),
-                  validator: (value) => value!.isEmpty ? "Enter category" : null,
+                  validator: (value) =>
+                      value!.isEmpty ? "Enter category" : null,
                 ),
                 TextFormField(
                   controller: feesController,
@@ -130,9 +133,11 @@ class _AddEditPetServicePageState extends State<AddEditPetServicePage> {
                           return Stack(
                             alignment: Alignment.topRight,
                             children: [
-                              Image.file(File(selectedImages[index]), width: 80, height: 80, fit: BoxFit.cover),
+                              Image.file(File(selectedImages[index]),
+                                  width: 80, height: 80, fit: BoxFit.cover),
                               IconButton(
-                                icon: const Icon(Icons.cancel, color: Colors.red),
+                                icon:
+                                    const Icon(Icons.cancel, color: Colors.red),
                                 onPressed: () => removeImage(index),
                               ),
                             ],
