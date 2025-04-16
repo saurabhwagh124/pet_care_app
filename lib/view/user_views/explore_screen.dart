@@ -59,7 +59,7 @@ class _ExploreScreenState extends State<ExploreScreen>
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: Column(
-          spacing: 20.h,
+          spacing: 5.h,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(

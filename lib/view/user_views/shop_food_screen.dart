@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/controller/cart_controller.dart';
 import 'package:pet_care_app/controller/shop_controller.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
@@ -18,10 +19,18 @@ class ShopFood extends StatefulWidget {
   State<ShopFood> createState() => _ShopFoodState();
 }
 
-class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin {
+class _ShopFoodState extends State<ShopFood>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final ShopController shopController = ShopController();
-  List<Widget> screenList = const [FoodTabView(), VetItemsTabView(), AccessoriesTabView(), IotTabView()];
+  final searchController = TextEditingController();
+  final cartController = Get.find<CartController>();
+  final ShopController shopController = Get.find();
+  List<Widget> screenList = const [
+    FoodTabView(),
+    VetItemsTabView(),
+    AccessoriesTabView(),
+    IotTabView()
+  ];
 
   @override
   void initState() {
@@ -50,7 +59,8 @@ class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin
       appBar: AppBar(
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+          icon:
+              const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
           onPressed: () => Get.back(),
         ),
         title: Text(
@@ -65,10 +75,21 @@ class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin
         ),
         backgroundColor: AppColors.yellowCircle,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.shopping_cart, color: Colors.white),
-            onPressed: () => Get.to(() => const CartScreen()),
-          ),
+          Obx(() {
+            int totalQuantity = cartController.cartItems.isNotEmpty
+                ? cartController.cartItems.values.reduce((a, b) => a + b)
+                : 0;
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Badge(
+                label: Text(totalQuantity.toString()),
+                child: IconButton(
+                  icon: const Icon(Icons.shopping_cart, color: Colors.white),
+                  onPressed: () => Get.to(() => const CartScreen()),
+                ),
+              ),
+            );
+          })
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(180),
@@ -77,6 +98,7 @@ class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: TextField(
+                  controller: searchController,
                   decoration: InputDecoration(
                     hintText: 'Search products...',
                     prefixIcon: const Icon(Icons.search),
@@ -87,6 +109,9 @@ class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin
                     filled: true,
                     fillColor: Colors.white,
                   ),
+                  onChanged: (value) {
+                    shopController.search.value = value;
+                  },
                 ),
               ),
               Container(
@@ -101,7 +126,8 @@ class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin
                   ),
                   unselectedLabelColor: Colors.black,
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-                  unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+                  unselectedLabelStyle:
+                      const TextStyle(fontWeight: FontWeight.normal),
                   tabs: shopController.category.map((category) {
                     String icon;
                     switch (category) {
@@ -127,12 +153,22 @@ class _ShopFoodState extends State<ShopFood> with SingleTickerProviderStateMixin
                         width: 40,
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: _tabController.index == shopController.category.toList().indexOf(category) ? const Color.fromARGB(255, 134, 208, 243) : AppColors.greyIconBox,
+                          color: _tabController.index ==
+                                  shopController.category
+                                      .toList()
+                                      .indexOf(category)
+                              ? const Color.fromARGB(255, 134, 208, 243)
+                              : AppColors.greyIconBox,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Image.asset(
                           icon,
-                          color: _tabController.index == shopController.category.toList().indexOf(category) ? Colors.white : Colors.black,
+                          color: _tabController.index ==
+                                  shopController.category
+                                      .toList()
+                                      .indexOf(category)
+                              ? Colors.white
+                              : Colors.black,
                         ),
                       ),
                       child: Text(

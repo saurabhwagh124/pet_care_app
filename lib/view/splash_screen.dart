@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:pet_care_app/view/start_screen.dart';
+import 'package:pet_care_app/view/wrapper.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -94,7 +94,7 @@ class _SplashScreenState extends State<SplashScreen>
           pageBuilder: (context, animation, secondaryAnimation) {
             return FadeTransition(
               opacity: animation,
-              child: const StartScreen(),
+              child: const Wrapper(),
             );
           },
         ),

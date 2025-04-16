@@ -87,7 +87,7 @@ class UserService extends GetxService {
       final response = await http.post(
           Uri.parse(ApiEndpoints.postAddAddressUrl),
           headers: headers,
-          body: payload);
+          body: jsonEncode(payload));
       log(response.toString());
       if (response.statusCode == 200 || response.statusCode == 201) {
         return AddressModel.fromJson(jsonDecode(response.body));

@@ -25,9 +25,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    final response = jsonDecode(userData.read<String>("user")!);
-    user = User.fromJson(response);
-    log("user data fetched: ${user.toString()}");
+    String data = userData.read<String>("user") ?? "";
+    if (data.isNotEmpty) {
+      final response = jsonDecode(data);
+      user = User.fromJson(response);
+      log("user data fetched: ${user.toString()}");
+    }
     super.initState();
   }
 
@@ -56,7 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
-                backgroundImage: NetworkImage(user!.photoUrl ??
+                backgroundImage: NetworkImage(user?.photoUrl ??
                     "https://i.pinimg.com/736x/1a/a8/d7/1aa8d75f3498784bcd2617b3e3d1e0c4.jpg"),
               ),
             )
@@ -76,10 +79,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
               alignment: Alignment.center,
               children: [
                 Image.network(
-                  user!.photoUrl ?? "",
+                  user?.photoUrl ?? "",
                   width: double.infinity,
                   height: 200.h,
                   fit: BoxFit.cover,
+                  errorBuilder: (BuildContext context, Object error,
+                      StackTrace? stackTrace) {
+                    return Image.asset(
+                      'assets/images/personImg.png',
+                      width: double.infinity,
+                      height: 200.h,
+                      fit: BoxFit.cover,
+                    );
+                  },
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                            : null,
+                      ),
+                    );
+                  },
                 )
               ],
             ),

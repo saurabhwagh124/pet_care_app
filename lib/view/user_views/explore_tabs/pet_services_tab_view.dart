@@ -24,91 +24,18 @@ class _PetServicesTabViewState extends State<PetServicesTabView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Padding(
-        //   padding: EdgeInsets.only(top: 10.h, left: 20.w, right: 20.w),
-        //   child: Row(
-        //     children: [
-        //       Text(
-        //         "Nearby Grooming room",
-        //         style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: Colors.black),
-        //       ),
-        //       const Spacer(),
-        //       Text(
-        //         "See all",
-        //         style: TextStyle(
-        //           color: AppColors.greyTextColor,
-        //           fontSize: 12.sp,
-        //           fontWeight: FontWeight.w400,
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        SizedBox(
-          height: 10.h,
-        ),
-        Expanded(
-          // height: 300.h,
-          child: Obx(() {
-            final list = _controller.petServiceList
-                .where((element) => element.name!
-                    .toLowerCase()
-                    .contains(vetController.search.value.toLowerCase()))
-                .toList();
-            return ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) =>
-                  PetServicesCardWidget(data: list[index]),
-              itemCount: list.length,
-            );
-          }),
-        ),
-        // const Divider(
-        //   color: Colors.black,
-        // ),
-        // SizedBox(
-        //   height: 15.h,
-        // ),
-        // Padding(
-        //   padding: EdgeInsets.only(top: 10.h, left: 20.w, right: 20.w),
-        //   child: Row(
-        //     children: [
-        //       Text(
-        //         "Recomended Grooming room",
-        //         style: TextStyle(
-        //             fontSize: 16.sp,
-        //             fontWeight: FontWeight.w500,
-        //             color: Colors.black),
-        //       ),
-        //       const Spacer(),
-        //       Text(
-        //         "See all",
-        //         style: TextStyle(
-        //           color: AppColors.greyTextColor,
-        //           fontSize: 12.sp,
-        //           fontWeight: FontWeight.w400,
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        // SizedBox(
-        //   height: 10.h,
-        // ),
-        // Center(
-        //   child: SizedBox(
-        //     height: 300.h,
-        //     child: ListView.builder(
-        //       scrollDirection: Axis.vertical,
-        //       itemBuilder: (context, index) =>
-        //           GrommingCard(data: grooming[index]),
-        //       itemCount: grooming.length,
-        //     ),
-        //   ),
-        // ),
-      ],
-    );
+    return Obx(() {
+      final list = _controller.petServiceList
+          .where((element) => element.name!
+              .toLowerCase()
+              .contains(vetController.search.value.toLowerCase()))
+          .toList();
+      return ListView.builder(
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) =>
+            PetServicesCardWidget(data: list[index]),
+        itemCount: list.length,
+      );
+    });
   }
 }

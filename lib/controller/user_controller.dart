@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart' as FB;
 import 'package:get/get.dart';
 import 'package:pet_care_app/model/address_model.dart';
 import 'package:pet_care_app/model/user.dart';
@@ -28,8 +29,9 @@ class UserController extends GetxController {
     }
   }
 
-  void fetchUserAddress(String email) async {
+  void fetchUserAddress() async {
     try {
+      String email = FB.FirebaseAuth.instance.currentUser?.email ?? "";
       isLoading.value = true;
       addressList.value = await userService.fetchUserAddress(email);
       isLoading.value = false;

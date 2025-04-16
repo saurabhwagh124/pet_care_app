@@ -21,23 +21,25 @@ class _AccessoriesTabViewState extends State<AccessoriesTabView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-            child: Obx(() => GridView.builder(
-                  padding: const EdgeInsets.all(16),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.75,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                  ),
-                  itemCount: shopController.accList.length,
-                  itemBuilder: (context, index) {
-                    return ProductCard(product: shopController.accList[index]);
-                  },
-                )))
-      ],
-    );
+    return Obx(() {
+      final search = shopController.search.value;
+      final list = shopController.accList
+          .where((element) =>
+              element.itemName!.toLowerCase().contains(search.toLowerCase()))
+          .toList();
+      return GridView.builder(
+        padding: const EdgeInsets.all(16),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.75,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+        ),
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          return ProductCard(product: list[index]);
+        },
+      );
+    });
   }
 }

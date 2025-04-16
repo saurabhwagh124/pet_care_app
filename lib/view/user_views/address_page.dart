@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart' as FB;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/user_controller.dart';
 import 'package:pet_care_app/model/address_model.dart';
-import 'package:pet_care_app/model/user.dart';
-import 'package:pet_care_app/utils/user_data.dart';
 import 'package:pet_care_app/widgets/address_card.dart';
 
 class AddressPage extends StatefulWidget {
@@ -18,14 +14,12 @@ class AddressPage extends StatefulWidget {
 }
 
 class _AddressPageState extends State<AddressPage> {
-  final UserData _userData = UserData();
   final controller = Get.find<UserController>();
 
   @override
   void initState() {
     super.initState();
-    User user = User.fromJson(jsonDecode(_userData.read<String>("user") ?? ""));
-    controller.fetchUserAddress(user.email ?? "");
+    controller.fetchUserAddress();
   }
 
   @override
