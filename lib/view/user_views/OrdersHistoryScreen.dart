@@ -26,7 +26,7 @@ class _OrdershistoryscreenState extends State<Ordershistoryscreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Scheduled Appointments",
+          "Order History",
           style: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeight.w500,

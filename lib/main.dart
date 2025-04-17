@@ -18,7 +18,6 @@ import 'package:pet_care_app/controller/vet_doc_controller.dart';
 import 'package:pet_care_app/service/notification_service.dart';
 import 'package:pet_care_app/view/add_notifications_screen.dart';
 import 'package:pet_care_app/view/admin_dashboard_screen.dart';
-import 'package:pet_care_app/view/appointmentscreen.dart';
 import 'package:pet_care_app/view/boardingmanagement.dart';
 import 'package:pet_care_app/view/groomingmanagementscreen.dart';
 import 'package:pet_care_app/view/servicescreen.dart';
@@ -85,9 +84,9 @@ class MainApp extends StatelessWidget {
             GetPage(
                 name: '/GroomingManagementScreen',
                 page: () => GroomingManagementScreen()),
-            GetPage(
-                name: '/AppointmentsScreen',
-                page: () => const AppointmentsScreen()),
+            // GetPage(
+            //     name: '/AppointmentsScreen',
+            //     page: () => const AppointmentsScreen()),
             GetPage(
                 name: '/UserManagementScreen',
                 page: () => UserManagementScreen()),
