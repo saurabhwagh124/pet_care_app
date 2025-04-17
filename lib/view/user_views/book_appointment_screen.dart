@@ -192,24 +192,15 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
                           .firstWhere((element) => element.name == selectedPet);
                       if (widget.boardingAppointment) {
                         appointmentController.bookBoardingAppointment(
-                            widget.boarding!,
-                            pet.id ?? 0,
-                            selectedDate,
-                            selectedTime);
+                            widget.boarding!, pet, selectedDate, selectedTime);
                         log("working if");
                       } else if (widget.servicesAppointment) {
                         appointmentController.bookServiceAppointment(
-                            widget.services!,
-                            pet.id ?? 0,
-                            selectedDate,
-                            selectedTime);
+                            widget.services!, pet, selectedDate, selectedTime);
                         log("working else if");
                       } else {
                         appointmentController.bookDoctorAppointment(
-                            widget.doctor!,
-                            pet.id ?? 0,
-                            selectedDate,
-                            selectedTime);
+                            widget.doctor!, pet, selectedDate, selectedTime);
                         log("working else");
                       }
                     } catch (e) {

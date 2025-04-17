@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:pet_care_app/controller/appointment_controller.dart';
 import 'package:pet_care_app/controller/base_breed_controller.dart';
 import 'package:pet_care_app/controller/cart_controller.dart';
@@ -17,18 +18,17 @@ import 'package:pet_care_app/controller/vet_doc_controller.dart';
 import 'package:pet_care_app/service/notification_service.dart';
 import 'package:pet_care_app/view/add_notifications_screen.dart';
 import 'package:pet_care_app/view/admin_dashboard_screen.dart';
-import 'package:pet_care_app/view/appointmentscreen.dart';
 import 'package:pet_care_app/view/boardingmanagement.dart';
 import 'package:pet_care_app/view/groomingmanagementscreen.dart';
 import 'package:pet_care_app/view/servicescreen.dart';
 import 'package:pet_care_app/view/shopitem.dart';
+import 'package:pet_care_app/view/splash_screen.dart';
 import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
 import 'package:pet_care_app/view/user_views/address_page.dart';
 import 'package:pet_care_app/view/user_views/dashboard_screen.dart';
 import 'package:pet_care_app/view/usermanagement.dart';
 import 'package:pet_care_app/view/veterinaryscreen.dart';
-import 'package:pet_care_app/view/wrapper.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 import 'firebase_options.dart';
 
 void main() async {
@@ -69,7 +69,7 @@ class MainApp extends StatelessWidget {
             Get.put(VetDocController());
           }),
           debugShowCheckedModeBanner: false,
-          home: const Wrapper(),
+          home: const SplashScreen(),
           initialRoute: '/',
           getPages: [
             GetPage(
@@ -84,9 +84,9 @@ class MainApp extends StatelessWidget {
             GetPage(
                 name: '/GroomingManagementScreen',
                 page: () => GroomingManagementScreen()),
-            GetPage(
-                name: '/AppointmentsScreen',
-                page: () => const AppointmentsScreen()),
+            // GetPage(
+            //     name: '/AppointmentsScreen',
+            //     page: () => const AppointmentsScreen()),
             GetPage(
                 name: '/UserManagementScreen',
                 page: () => UserManagementScreen()),

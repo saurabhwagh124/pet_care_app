@@ -22,14 +22,42 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
   }
 
   final List<Map<String, dynamic>> dashboardItems = [
-    {'icon': Icons.notification_add, 'title': 'Add Notification', 'route': '/AddNotificationsScreen'},
-    {'icon': Icons.pets_rounded, 'title': 'Grooming', 'route': '/GroomingManagementScreen'},
-    {'icon': Icons.calendar_today, 'title': 'Appointments', 'route': '/AppointmentsScreen'},
-    {'icon': Icons.person, 'title': 'User Management', 'route': '/UserManagementScreen'},
-    {'icon': Icons.video_collection, 'title': 'Services', 'route': '/ServicesScreen'},
-    {'icon': Icons.people, 'title': 'Boarding', 'route': '/BoardingManagementScreen'},
-    {'icon': Icons.local_hospital, 'title': 'Veterinary', 'route': '/VeterinaryScreen'},
-    {'icon': Icons.shopping_cart, 'title': 'Store management', 'route': '/ShopItemScreen'},
+    {
+      'icon': Icons.notification_add,
+      'title': 'Add Notification',
+      'route': '/AddNotificationsScreen'
+    },
+    {
+      'icon': Icons.pets_rounded,
+      'title': 'Grooming',
+      'route': '/GroomingManagementScreen'
+    },
+    {'icon': Icons.calendar_today, 'title': 'Appointments', 'route': ''},
+    {
+      'icon': Icons.person,
+      'title': 'User Management',
+      'route': '/UserManagementScreen'
+    },
+    {
+      'icon': Icons.video_collection,
+      'title': 'Services',
+      'route': '/ServicesScreen'
+    },
+    {
+      'icon': Icons.people,
+      'title': 'Boarding',
+      'route': '/BoardingManagementScreen'
+    },
+    {
+      'icon': Icons.local_hospital,
+      'title': 'Veterinary',
+      'route': '/VeterinaryScreen'
+    },
+    {
+      'icon': Icons.shopping_cart,
+      'title': 'Store management',
+      'route': '/ShopItemScreen'
+    },
   ];
 
   @override

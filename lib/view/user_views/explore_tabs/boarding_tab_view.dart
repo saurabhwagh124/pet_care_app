@@ -23,41 +23,17 @@ class _BoardingTabViewState extends State<BoardingTabView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Row(
-        //   children: [
-        //     Text(
-        //       "Nearby Boarding",
-        //       style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: Colors.black),
-        //     ),
-        //     const Spacer(),
-        //     Text(
-        //       "See all",
-        //       style: TextStyle(
-        //         color: AppColors.greyTextColor,
-        //         fontSize: 12.sp,
-        //         fontWeight: FontWeight.w400,
-        //       ),
-        //     ),
-        //   ],
-        // ),
-        Expanded(
-          child: Obx(() {
-            final list = _boardingController.boardingList
-                .where((element) => element.name!
-                    .toLowerCase()
-                    .contains(controller.search.value.toLowerCase()))
-                .toList();
-            return ListView.separated(
-              separatorBuilder: (context, index) => const Divider(),
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) => BoardingCard(data: list[index]),
-              itemCount: list.length,
-            );
-          }),
-        ),
-      ],
-    );
+    return Obx(() {
+      final search = controller.search.value;
+      final list = _boardingController.boardingList
+          .where((element) =>
+              element.name!.toLowerCase().contains(search.toLowerCase()))
+          .toList();
+      return ListView.builder(
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) => BoardingCard(data: list[index]),
+        itemCount: list.length,
+      );
+    });
   }
 }
