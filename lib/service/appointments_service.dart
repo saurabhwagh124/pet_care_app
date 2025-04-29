@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -152,7 +154,7 @@ class AppointmentsService extends GetxService {
       token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
       final headers = {"Authorization": "Bearer $token"};
       final url = ApiEndpoints.getAllAppointmentsUrl
-          .replaceAll("{ID}", userId.toString());
+          .replaceAll("{id}", userId.toString());
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200 || response.statusCode == 201) {
         // log("body${response.body}");
@@ -164,6 +166,121 @@ class AppointmentsService extends GetxService {
       }
     } catch (e) {
       throw Exception("Error Fetching all appointments: $e");
+    }
+  }
+
+  Future<String> confirmAppointments(int appointmentId,
+      {bool boarding = false,
+      bool doctor = false,
+      bool service = false}) async {
+    try {
+      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final headers = {"Authorization": "Bearer $token"};
+      String url = ApiEndpoints.postBoardingConfirmUrl
+          .replaceAll("{id}", appointmentId.toString());
+      if (doctor) {
+        url = ApiEndpoints.postDoctorConfirmUrl
+            .replaceAll("{id}", appointmentId.toString());
+      }
+      if (service) {
+        url = ApiEndpoints.postServicesConfirmUrl
+            .replaceAll("{id}", appointmentId.toString());
+      }
+      final response = await http.post(Uri.parse(url), headers: headers);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return response.body;
+      } else {
+        throw Exception("Failed to load data: ${response.statusCode} ");
+      }
+    } catch (e) {
+      throw Exception("Error Fetching all appointments: $e");
+    }
+  }
+
+  Future<void> cancelAppointments(int appointmentId,
+      {bool boarding = false,
+      bool doctor = false,
+      bool service = false}) async {
+    try {
+      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final headers = {"Authorization": "Bearer $token"};
+      String url = ApiEndpoints.postBoardingCancelUrl
+          .replaceAll("{id}", appointmentId.toString());
+      if (doctor) {
+        url = ApiEndpoints.postDoctorCancelUrl
+            .replaceAll("{id}", appointmentId.toString());
+      }
+      if (service) {
+        url = ApiEndpoints.postServicesCancelUrl
+            .replaceAll("{id}", appointmentId.toString());
+      }
+      final response = await http.post(Uri.parse(url), headers: headers);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+      } else {
+        throw Exception("Failed to load data: ${response.statusCode} ");
+      }
+    } catch (e) {
+      throw Exception("Error Fetching all appointments: $e");
+    }
+  }
+
+  Future<List<BoardingAppointmentModel>> fetchBoardingAppointment(
+      int id) async {
+    try {
+      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final headers = {"Authorization": "Bearer $token"};
+      String url = ApiEndpoints.getBoardingAppointmentsUrl
+          .replaceAll("{id}", id.toString());
+      final response = await http.get(Uri.parse(url), headers: headers);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        List<dynamic> data = jsonDecode(response.body);
+        return data
+            .map((ele) => BoardingAppointmentModel.fromJson(ele))
+            .toList();
+      } else {
+        throw Exception("Failed to load data: ${response.statusCode} ");
+      }
+    } catch (e) {
+      throw Exception("Error fetching boarding appointments catch: $e");
+    }
+  }
+
+  Future<List<DoctorAppointmentModel>> fetchDoctorAppointment(int id) async {
+    try {
+      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final headers = {"Authorization": "Bearer $token"};
+      String url = ApiEndpoints.getDoctorAppointmentsUrl
+          .replaceAll("{id}", id.toString());
+      log(url);
+      final response = await http.get(Uri.parse(url), headers: headers);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        List<dynamic> data = jsonDecode(response.body);
+        return data.map((ele) => DoctorAppointmentModel.fromJson(ele)).toList();
+      } else {
+        throw Exception("Failed to load data: ${response.statusCode} ");
+      }
+    } catch (e) {
+      throw Exception("Error fetching doctor appointments catch: $e");
+    }
+  }
+
+  Future<List<ServiceAppointmentModel>> fetchServiceAppointment(int id) async {
+    try {
+      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final headers = {"Authorization": "Bearer $token"};
+      String url = ApiEndpoints.getServiceAppointmentsUrl
+          .replaceAll("{id}", id.toString());
+      final response = await http.get(Uri.parse(url), headers: headers);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        List<dynamic> data = jsonDecode(response.body);
+        return data
+            .map((ele) => ServiceAppointmentModel.fromJson(ele))
+            .toList();
+      } else {
+        throw Exception("Failed to load data: ${response.statusCode} ");
+      }
+    } catch (e) {
+      throw Exception("Error fetching service appointments catch: $e");
     }
   }
 }

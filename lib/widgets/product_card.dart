@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/cart_controller.dart';
+
 import '../model/product.dart';
 
 class ProductCard extends StatefulWidget {
@@ -94,7 +95,7 @@ class _ProductCardState extends State<ProductCard> {
                 if (widget.product.photoUrl != null)
                   Image.network(
                     widget.product.photoUrl!,
-                    height: 64,
+                    height: 120,
                     fit: BoxFit.cover,
                   ),
 

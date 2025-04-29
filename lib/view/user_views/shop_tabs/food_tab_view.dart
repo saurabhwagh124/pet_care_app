@@ -21,23 +21,25 @@ class _FoodTabViewState extends State<FoodTabView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-            child: Obx(() => GridView.builder(
-                  padding: const EdgeInsets.all(16),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.75,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                  ),
-                  itemCount: shopController.foodList.length,
-                  itemBuilder: (context, index) {
-                    return ProductCard(product: shopController.foodList[index]);
-                  },
-                )))
-      ],
-    );
+    return Obx(() {
+      final list = shopController.foodList
+          .where((element) => element.itemName!
+              .toLowerCase()
+              .contains(shopController.search.toLowerCase()))
+          .toList();
+      return GridView.builder(
+        padding: const EdgeInsets.all(16),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.75,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+        ),
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          return ProductCard(product: list[index]);
+        },
+      );
+    });
   }
 }

@@ -9,7 +9,6 @@ import 'package:pet_care_app/model/user.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
 import 'package:pet_care_app/utils/user_data.dart';
-import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
 import 'package:pet_care_app/view/wrapper.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -26,9 +25,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    final response = jsonDecode(userData.read<String>("user")!);
-    user = User.fromJson(response);
-    log("user data fetched: ${user.toString()}");
+    String data = userData.read<String>("user") ?? "";
+    if (data.isNotEmpty) {
+      final response = jsonDecode(data);
+      user = User.fromJson(response);
+      log("user data fetched: ${user.toString()}");
+    }
     super.initState();
   }
 
@@ -49,14 +51,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         title: Text(
           user?.displayName ?? "No Name Available",
-          style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
+          style: const TextStyle(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
         ),
         actions: [
           if (user?.photoUrl != null)
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CircleAvatar(
-                backgroundImage: NetworkImage(user!.photoUrl ?? "https://i.pinimg.com/736x/1a/a8/d7/1aa8d75f3498784bcd2617b3e3d1e0c4.jpg"),
+                backgroundImage: NetworkImage(user?.photoUrl ??
+                    "https://i.pinimg.com/736x/1a/a8/d7/1aa8d75f3498784bcd2617b3e3d1e0c4.jpg"),
               ),
             )
           else
@@ -75,10 +79,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
               alignment: Alignment.center,
               children: [
                 Image.network(
-                  user!.photoUrl ?? "",
+                  user?.photoUrl ?? "",
                   width: double.infinity,
                   height: 200.h,
                   fit: BoxFit.cover,
+                  errorBuilder: (BuildContext context, Object error,
+                      StackTrace? stackTrace) {
+                    return Image.asset(
+                      'assets/images/personImg.png',
+                      width: double.infinity,
+                      height: 200.h,
+                      fit: BoxFit.cover,
+                    );
+                  },
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                                loadingProgress.expectedTotalBytes!
+                            : null,
+                      ),
+                    );
+                  },
                 )
               ],
             ),
@@ -88,10 +115,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 15),
+                    padding: const EdgeInsets.only(
+                        top: 15, left: 15, right: 15, bottom: 15),
                     // height: 180.h,
                     decoration: BoxDecoration(
-                        boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.15), offset: Offset(0, 5.47), blurRadius: 43.48)], borderRadius: BorderRadius.circular(27), color: Colors.white),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Color.fromRGBO(0, 0, 0, 0.15),
+                              offset: Offset(0, 5.47),
+                              blurRadius: 43.48)
+                        ],
+                        borderRadius: BorderRadius.circular(27),
+                        color: Colors.white),
                     child: Column(
                       children: [
                         Row(
@@ -114,7 +149,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               },
                               child: const Text(
                                 "Sign Out",
-                                style: TextStyle(color: Colors.red, fontSize: 12, fontWeight: FontWeight.w600),
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
                             const SizedBox(
@@ -162,12 +200,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  buildMenuTile(
-                    context,
-                    icon: Icons.person,
-                    title: "About me",
-                    screen: '/AddPetsPage',
-                  ),
+                  // buildMenuTile(
+                  //   context,
+                  //   icon: Icons.person,
+                  //   title: "About me",
+                  //   screen: '/AddPetsPage',
+                  // ),
                   buildMenuTile(
                     context,
                     icon: Icons.shopping_bag_outlined,
@@ -178,40 +216,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     context,
                     icon: Icons.location_on_outlined,
                     title: "My Address",
-                    screen: '/AddPetsPage',
+                    screen: '/AddressPage',
                   ),
-                  buildMenuTile(context, icon: Icons.pets, title: "Add Pet", screen: '/AddPetsPage'),
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(() => const AddPetsPage());
-                    },
-                    child: Container(
-                      height: 50,
-                      alignment: Alignment.center,
-                      width: double.maxFinite,
-                      color: Colors.white,
-                      child: const Text("Add Pet"),
-                    ),
-                  )
-                  // buildMenuTile(
-                  //   context,
-                  //   icon: Icons.pets_outlined,
-                  //   title: "Add Pet",
-                  //   screen: const AddPetsPage(),
-                  // ),
-
-                  // buildMenuTile(
-                  //   context,
-                  //   icon: Icons.devices_outlined,
-                  //   title: "Add Device",
-                  //   screen: const AddPetsPage(),
-                  // ),
-                  // buildMenuTile(
-                  //   context,
-                  //   icon: Icons.search,
-                  //   title: "Find Lost Pets",
-                  //   screen: const AddPetsPage(),
-                  // ),
+                  buildMenuTile(context,
+                      icon: Icons.pets,
+                      title: "Add Pet",
+                      screen: '/AddPetsPage'),
                 ],
               ),
             ),
@@ -222,7 +232,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-Widget buildMenuTile(BuildContext context, {required IconData icon, required String title, required String screen}) {
+Widget buildMenuTile(BuildContext context,
+    {required IconData icon, required String title, required String screen}) {
   return Container(
     margin: const EdgeInsets.only(bottom: 12),
     padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),

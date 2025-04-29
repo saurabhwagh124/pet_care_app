@@ -10,6 +10,7 @@ import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
 import 'package:pet_care_app/utils/user_data.dart';
 import 'package:pet_care_app/view/admin_dashboard_screen.dart';
+import 'package:pet_care_app/view/signup_screen.dart';
 import 'package:pet_care_app/view/user_views/dashboard_screen.dart';
 import 'package:pet_care_app/view/user_views/forgot_password_screen.dart';
 
@@ -93,9 +94,6 @@ class _LoginscreenState extends State<Loginscreen> {
                 ),
               ),
               SizedBox(
-                height: 20.h,
-              ),
-              SizedBox(
                 height: 45.h,
                 width: 300.w,
                 child: ValueListenableBuilder(
@@ -131,9 +129,6 @@ class _LoginscreenState extends State<Loginscreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20.h,
-              ),
               Padding(
                 padding: EdgeInsets.only(right: 20.w),
                 child: Align(
@@ -152,8 +147,31 @@ class _LoginscreenState extends State<Loginscreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20.h,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "New here?   ",
+                    style: GoogleFonts.fredoka(
+                        textStyle: const TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400)),
+                  ),
+                  InkWell(
+                      onTap: () {
+                        Get.to(() => const SignupScreen());
+                      },
+                      child: Text(
+                        "Register",
+                        style: GoogleFonts.fredoka(
+                          textStyle: const TextStyle(
+                              color: Color.fromRGBO(0, 0, 0, 1),
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ))
+                ],
               ),
               GestureDetector(
                 onTap: _loginWithEmail,
@@ -178,9 +196,6 @@ class _LoginscreenState extends State<Loginscreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20.h,
-              ),
               Text("Or connect with",
                   style: GoogleFonts.fredoka(
                     textStyle: const TextStyle(
@@ -188,9 +203,6 @@ class _LoginscreenState extends State<Loginscreen> {
                         fontSize: 25,
                         fontWeight: FontWeight.w400),
                   )),
-              SizedBox(
-                height: 20.h,
-              ),
               GestureDetector(
                 onTap: _signInWithGoogle,
                 child: Container(

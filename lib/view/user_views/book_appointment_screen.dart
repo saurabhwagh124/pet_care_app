@@ -84,31 +84,18 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
                     fontSize: 24, fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: 10),
-              Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Color.fromRGBO(19, 10, 46, 0.03),
-                          offset: Offset(0, 3),
-                          blurRadius: 14),
-                      BoxShadow(
-                          color: Color.fromRGBO(19, 10, 46, 0.13),
-                          offset: Offset(0, 1),
-                          blurRadius: 3),
-                    ],
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: CalendarDatePicker(
-                    initialDate: selectedDate,
-                    currentDate: selectedDate,
-                    firstDate: firstDate,
-                    lastDate: lastDate,
-                    onDateChanged: (date) {
-                      selectedDate = date;
-                      fetchTimeSlots();
-                    },
-                  )),
+              CalendarDatePicker(
+                initialDate: selectedDate,
+                currentDate: selectedDate,
+                firstDate: firstDate,
+                lastDate: lastDate,
+                onDateChanged: (date) {
+                  setState(() {
+                    selectedDate = date;
+                    fetchTimeSlots();
+                  });
+                },
+              ),
               SizedBox(height: 20.h),
               Text(
                 'Pick a Time',
@@ -205,24 +192,15 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
                           .firstWhere((element) => element.name == selectedPet);
                       if (widget.boardingAppointment) {
                         appointmentController.bookBoardingAppointment(
-                            widget.boarding!,
-                            pet.id ?? 0,
-                            selectedDate,
-                            selectedTime);
+                            widget.boarding!, pet, selectedDate, selectedTime);
                         log("working if");
                       } else if (widget.servicesAppointment) {
                         appointmentController.bookServiceAppointment(
-                            widget.services!,
-                            pet.id ?? 0,
-                            selectedDate,
-                            selectedTime);
+                            widget.services!, pet, selectedDate, selectedTime);
                         log("working else if");
                       } else {
                         appointmentController.bookDoctorAppointment(
-                            widget.doctor!,
-                            pet.id ?? 0,
-                            selectedDate,
-                            selectedTime);
+                            widget.doctor!, pet, selectedDate, selectedTime);
                         log("working else");
                       }
                     } catch (e) {

@@ -5,6 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/controller/cart_controller.dart';
+import 'package:pet_care_app/controller/shop_controller.dart';
+import 'package:pet_care_app/model/address_model.dart';
+import 'package:pet_care_app/model/orders_model.dart';
+import 'package:pet_care_app/widgets/select_address_dialog.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class CartScreen extends StatefulWidget {
@@ -16,45 +20,10 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   late Razorpay _razorPay;
+  AddressModel? selectedAddress;
+  bool selectAddress = false;
+  final ShopController shopController = Get.find();
   final CartController cartController = Get.find<CartController>();
-
-  void _handlePaymentSuccess(PaymentSuccessResponse success) {
-    Get.off(() => SimpleDialog(alignment: Alignment.center, backgroundColor: Colors.white, children: [
-          CircleAvatar(
-            radius: 30.r,
-            backgroundColor: Colors.lightGreen,
-            child: Icon(
-              Icons.done,
-              size: 20.sp,
-              color: Colors.white,
-            ),
-          ),
-          Text(
-            "Order Placed Successfully",
-            style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w700, color: Colors.black),
-          ),
-          GestureDetector(
-            onTap: () {
-              cartController.cartItems.clear();
-              Get.offAllNamed('/DashboardScreen');
-            },
-            child: Container(
-              color: Colors.lightGreenAccent,
-              alignment: Alignment.center,
-              height: 30.h,
-              width: 40.w,
-              child: Text(
-                "Ok",
-                style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500, color: Colors.white),
-              ),
-            ),
-          )
-        ]));
-  }
-
-  void _handlePaymentFailed(PaymentFailureResponse failed) {}
-
-  void _handlePaymentExternal(ExternalWalletResponse response) {}
 
   @override
   void initState() {
@@ -71,7 +40,81 @@ class _CartScreenState extends State<CartScreen> {
     super.dispose();
   }
 
+  void _handlePaymentSuccess(PaymentSuccessResponse success) {
+    List<OrderItemsList> orderList = [];
+    for (var ele in cartController.cartItems.keys) {
+      orderList.add(OrderItemsList(
+          id: null,
+          itemId: ele.id,
+          quantity: cartController.cartItems[ele],
+          pricePerItem: ele.discountedPrice));
+    }
+    OrdersModel order = OrdersModel(
+        id: null,
+        usersId: null,
+        orderItemsList: orderList,
+        totalPrice: cartController.total.toInt(),
+        address: AddressModel(
+            id: selectedAddress?.id ?? 0,
+            street: null,
+            city: null,
+            state: null,
+            postalCode: null,
+            country: null,
+            userEmail: null),
+        status: "PENDING",
+        createdAt: null);
+    shopController.addOrders(order);
+    Get.off(() => SimpleDialog(
+            alignment: Alignment.center,
+            backgroundColor: Colors.white,
+            children: [
+              CircleAvatar(
+                radius: 30.r,
+                backgroundColor: Colors.lightGreen,
+                child: Icon(
+                  Icons.done,
+                  size: 20.sp,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                "Order Placed Successfully",
+                style: TextStyle(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black),
+              ),
+              GestureDetector(
+                onTap: () {
+                  cartController.cartItems.clear();
+                  Get.offAllNamed('/DashboardScreen');
+                },
+                child: Container(
+                  color: Colors.lightGreenAccent,
+                  alignment: Alignment.center,
+                  height: 30.h,
+                  width: 40.w,
+                  child: Text(
+                    "Ok",
+                    style: TextStyle(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
+                  ),
+                ),
+              )
+            ]));
+  }
+
+  void _handlePaymentFailed(PaymentFailureResponse failed) {}
+
+  void _handlePaymentExternal(ExternalWalletResponse response) {}
+
   void openCheckout() async {
+    if (!selectAddress) {
+      return;
+    }
     log("${cartController.total.toInt()} TOtal amount to pay");
     final amount = cartController.total.toInt();
     // const amount = 500;
@@ -89,6 +132,17 @@ class _CartScreenState extends State<CartScreen> {
     }
   }
 
+  Future<void> _openAddressDialog(BuildContext context) async {
+    final selected = await showDialog<AddressModel>(
+      context: context,
+      builder: (context) => const SelectAddressDialog(),
+    );
+    if (selected != null) {
+      selectedAddress = selected;
+      selectAddress = true;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +152,10 @@ class _CartScreenState extends State<CartScreen> {
         title: Text(
           'Cart',
           style: GoogleFonts.fredoka(
-            textStyle: TextStyle(fontSize: 23.sp, fontWeight: FontWeight.w600, color: Colors.white),
+            textStyle: TextStyle(
+                fontSize: 23.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.white),
           ),
         ),
         leading: IconButton(
@@ -116,7 +173,10 @@ class _CartScreenState extends State<CartScreen> {
           return Center(
               child: Text(
             "Your cart is empty",
-            style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w600, color: Colors.black),
+            style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.black),
           ));
         }
         return Column(
@@ -127,7 +187,8 @@ class _CartScreenState extends State<CartScreen> {
                 itemBuilder: (context, index) {
                   final product = cartController.cartItems.keys.toList()[index];
                   final quantity = cartController.cartItems[product]!;
-                  final double discountedPrice = product.price! * (1 - (product.discount! / 100));
+                  final double discountedPrice =
+                      product.price! * (1 - (product.discount! / 100));
 
                   return Padding(
                     padding: const EdgeInsets.all(15.0),
@@ -172,12 +233,14 @@ class _CartScreenState extends State<CartScreen> {
                           children: [
                             IconButton(
                               icon: const Icon(Icons.remove),
-                              onPressed: () => cartController.removeFromCart(product),
+                              onPressed: () =>
+                                  cartController.removeFromCart(product),
                             ),
                             Text('$quantity'),
                             IconButton(
                               icon: const Icon(Icons.add),
-                              onPressed: () => cartController.addToCart(product),
+                              onPressed: () =>
+                                  cartController.addToCart(product),
                             ),
                           ],
                         ),
@@ -198,13 +261,24 @@ class _CartScreenState extends State<CartScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SummaryRow(title: "Subtotal", value: cartController.subtotal),
-                  SummaryRow(title: "Discount Applied", value: cartController.totalDiscount, isDiscount: true),
-                  SummaryRow(title: "Shipping Charges", value: cartController.shippingCharges),
+                  SummaryRow(
+                      title: "Discount Applied",
+                      value: cartController.totalDiscount,
+                      isDiscount: true),
+                  SummaryRow(
+                      title: "Shipping Charges",
+                      value: cartController.shippingCharges),
                   const Divider(),
-                  SummaryRow(title: "Total", value: cartController.total, isBold: true),
+                  SummaryRow(
+                      title: "Total",
+                      value: cartController.total,
+                      isBold: true),
                   const SizedBox(height: 16),
                   ElevatedButton(
-                    onPressed: openCheckout,
+                    onPressed: () async {
+                      await _openAddressDialog(context);
+                      openCheckout();
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange,
                       minimumSize: const Size(double.infinity, 50),
@@ -258,7 +332,9 @@ class SummaryRow extends StatelessWidget {
             ),
           ),
           Text(
-            isDiscount ? "- RS.${value.toStringAsFixed(2)}" : "RS.${value.toStringAsFixed(2)}",
+            isDiscount
+                ? "- RS.${value.toStringAsFixed(2)}"
+                : "RS.${value.toStringAsFixed(2)}",
             style: TextStyle(
               fontSize: 16,
               fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
