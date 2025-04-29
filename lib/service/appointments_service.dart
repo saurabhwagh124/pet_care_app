@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,11 +17,14 @@ class AppointmentsService extends GetxService {
   }
 
   // FETCH TimeSlots Methods
-  Future<List<String>> fetchBookedDoctorTimeSlots(int doctorId, String date) async {
+  Future<List<String>> fetchBookedDoctorTimeSlots(
+      int doctorId, String date) async {
     try {
       token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
       final headers = {"Authorization": "Bearer $token"};
-      final url = ApiEndpoints.getDoctorAppointmentsSlotsUrl.replaceAll("{id}", doctorId.toString()).replaceAll("{date}", date);
+      final url = ApiEndpoints.getDoctorAppointmentsSlotsUrl
+          .replaceAll("{id}", doctorId.toString())
+          .replaceAll("{date}", date);
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = jsonDecode(response.body);
@@ -35,11 +37,14 @@ class AppointmentsService extends GetxService {
     }
   }
 
-  Future<List<String>> fetchBookedServiceTimeSlots(int serviceId, String date) async {
+  Future<List<String>> fetchBookedServiceTimeSlots(
+      int serviceId, String date) async {
     try {
       token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
       final headers = {"Authorization": "Bearer $token"};
-      final url = ApiEndpoints.getServiceAppointmentsSlotsUrl.replaceAll("{id}", serviceId.toString()).replaceAll("{date}", date);
+      final url = ApiEndpoints.getServiceAppointmentsSlotsUrl
+          .replaceAll("{id}", serviceId.toString())
+          .replaceAll("{date}", date);
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = jsonDecode(response.body);
@@ -52,11 +57,14 @@ class AppointmentsService extends GetxService {
     }
   }
 
-  Future<List<String>> fetchBookedBoardingTimeSlots(int boardingId, String date) async {
+  Future<List<String>> fetchBookedBoardingTimeSlots(
+      int boardingId, String date) async {
     try {
       token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
       final headers = {"Authorization": "Bearer $token"};
-      final url = ApiEndpoints.getBoardingAppointmentsSlotsUrl.replaceAll("{id}", boardingId.toString()).replaceAll("{date}", date);
+      final url = ApiEndpoints.getBoardingAppointmentsSlotsUrl
+          .replaceAll("{id}", boardingId.toString())
+          .replaceAll("{date}", date);
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = jsonDecode(response.body);
@@ -73,11 +81,18 @@ class AppointmentsService extends GetxService {
   Future<void> bookDoctorAppointment(DoctorAppointmentModel payload) async {
     try {
       token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
-      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+      };
       final newPayload = jsonEncode(payload.toJson());
-      final response = await http.post(Uri.parse(ApiEndpoints.postDoctorAppointmentUrl), headers: headers, body: newPayload);
+      final response = await http.post(
+          Uri.parse(ApiEndpoints.postDoctorAppointmentUrl),
+          headers: headers,
+          body: newPayload);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        Get.snackbar("Success", "Appointment booked successfully", backgroundColor: Colors.lightGreenAccent);
+        Get.snackbar("Success", "Appointment booked successfully",
+            backgroundColor: Colors.lightGreenAccent);
       } else {
         throw Exception("Failed to load data: ${response.statusCode} ");
       }
@@ -89,11 +104,18 @@ class AppointmentsService extends GetxService {
   Future<void> bookServiceAppointment(ServiceAppointmentModel payload) async {
     try {
       token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
-      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+      };
       final newPayload = jsonEncode(payload.toJson());
-      final response = await http.post(Uri.parse(ApiEndpoints.postServiceAppointmentUrl), headers: headers, body: newPayload);
+      final response = await http.post(
+          Uri.parse(ApiEndpoints.postServiceAppointmentUrl),
+          headers: headers,
+          body: newPayload);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        Get.snackbar("Success", "Appointment booked successfully", backgroundColor: Colors.lightGreenAccent);
+        Get.snackbar("Success", "Appointment booked successfully",
+            backgroundColor: Colors.lightGreenAccent);
       } else {
         throw Exception("Failed to load data: ${response.statusCode} ");
       }
@@ -105,11 +127,18 @@ class AppointmentsService extends GetxService {
   Future<void> bookBoardingAppointment(BoardingAppointmentModel payload) async {
     try {
       token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
-      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+      };
       final newPayload = jsonEncode(payload.toJson());
-      final response = await http.post(Uri.parse(ApiEndpoints.postBoardingAppointmentUrl), headers: headers, body: newPayload);
+      final response = await http.post(
+          Uri.parse(ApiEndpoints.postBoardingAppointmentUrl),
+          headers: headers,
+          body: newPayload);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        Get.snackbar("Success", "Appointment booked successfully", backgroundColor: Colors.lightGreenAccent);
+        Get.snackbar("Success", "Appointment booked successfully",
+            backgroundColor: Colors.lightGreenAccent);
       } else {
         throw Exception("Failed to load data: ${response.statusCode} ");
       }
@@ -122,7 +151,8 @@ class AppointmentsService extends GetxService {
     try {
       token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
       final headers = {"Authorization": "Bearer $token"};
-      final url = ApiEndpoints.getAllAppointmentsUrl.replaceAll("{ID}", userId.toString());
+      final url = ApiEndpoints.getAllAppointmentsUrl
+          .replaceAll("{ID}", userId.toString());
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200 || response.statusCode == 201) {
         // log("body${response.body}");

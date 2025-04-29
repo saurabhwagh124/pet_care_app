@@ -65,7 +65,7 @@ class MainApp extends StatelessWidget {
                 page: () => GroomingManagementScreen()),
             GetPage(
                 name: '/AppointmentsScreen',
-                page: () => const AppointmentsScreen()),
+                page: () => AdminDoctorAppointmentsScreen()),
             GetPage(
                 name: '/UserManagementScreen',
                 page: () => UserManagementScreen()),

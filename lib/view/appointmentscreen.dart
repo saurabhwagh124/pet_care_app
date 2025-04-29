@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
-class AppointmentsScreen extends StatelessWidget {
-  const AppointmentsScreen({super.key});
+class AdminDoctorAppointmentsScreen extends StatelessWidget {
+  AdminDoctorAppointmentsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Appointments')),
-      body: const Center(child: Text('Appointments Screen')),
-    );
+    return Scaffold();
   }
 }
