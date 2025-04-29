@@ -33,6 +33,13 @@ class ShopController extends GetxController {
     iotList.value = await shopService.fetchProductsByCategory("IOT_DEVICES");
   }
 
+  void fetchAllProducts() {
+    fetchAccessoriesProducts();
+    fetchIotProducts();
+    fetchVetItemsProducts();
+    fetchFoodProducts();
+  }
+
   void addOrders(OrdersModel payload) async {
     int id = userData.read<int>("userId") ?? 0;
     log("user id $id");

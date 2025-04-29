@@ -5,9 +5,11 @@ import 'package:pet_care_app/controller/cart_controller.dart';
 import '../model/product.dart';
 
 class ProductCard extends StatefulWidget {
+  final bool addToCart;
   final Product product;
 
-  const ProductCard({super.key, required this.product});
+  const ProductCard(
+      {super.key, required this.product, required this.addToCart});
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -123,51 +125,54 @@ class _ProductCardState extends State<ProductCard> {
                 ),
               ],
             ),
-            Obx(() {
-              return _quantity == 0
-                  ? InkWell(
-                      onTap: _addToCart,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        alignment: Alignment.center,
-                        decoration: const BoxDecoration(
-                          border: Border(
-                            top: BorderSide(),
-                          ),
-                        ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.shopping_bag_outlined,
-                                color: Colors.black),
-                            SizedBox(width: 8),
-                            Text(
-                              'Add to cart',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
+            (widget.addToCart)
+                ? Obx(() {
+                    return _quantity == 0
+                        ? InkWell(
+                            onTap: _addToCart,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              alignment: Alignment.center,
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  top: BorderSide(),
+                                ),
+                              ),
+                              child: const Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(Icons.shopping_bag_outlined,
+                                      color: Colors.black),
+                                  SizedBox(width: 8),
+                                  Text(
+                                    'Add to cart',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    )
-                  : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                            icon: const Icon(Icons.remove),
-                            onPressed: _decrement),
-                        Text(
-                          '$_quantity',
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        IconButton(
-                            icon: const Icon(Icons.add), onPressed: _increment),
-                      ],
-                    );
-            }),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                  icon: const Icon(Icons.remove),
+                                  onPressed: _decrement),
+                              Text(
+                                '$_quantity',
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
+                              IconButton(
+                                  icon: const Icon(Icons.add),
+                                  onPressed: _increment),
+                            ],
+                          );
+                  })
+                : const SizedBox.shrink(),
           ],
         ),
       ),

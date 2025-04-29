@@ -40,7 +40,10 @@ class _IotTabViewState extends State<IotTabView> {
         ),
         itemCount: list.length,
         itemBuilder: (context, index) {
-          return ProductCard(product: list[index]);
+          return ProductCard(
+            product: list[index],
+            addToCart: true,
+          );
         },
       );
     });

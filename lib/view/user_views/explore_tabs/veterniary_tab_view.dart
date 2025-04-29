@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,6 +17,7 @@ class VeterniaryTabView extends StatefulWidget {
 
 class _VeterniaryTabViewState extends State<VeterniaryTabView> {
   final VetDocController _vetDocController = VetDocController();
+  Timer? vetDocTimer;
 
   @override
   void initState() {
@@ -23,6 +25,21 @@ class _VeterniaryTabViewState extends State<VeterniaryTabView> {
     _vetDocController.fetchVetDocs();
     // getId();
   }
+
+  // void startTimer() {
+  //   vetDocTimer =
+  //       Timer.periodic(Duration(seconds: 10),(timer){ _vetDocController.fetchVetDocs();});
+  // }
+  //
+  // void stopTimer() {
+  //   vetDocTimer?.cancel();
+  // }
+  //
+  // @override
+  // void dispose(){
+  //   super.dispose();
+  //   stopTimer();
+  // }
 
   @override
   Widget build(BuildContext context) {
