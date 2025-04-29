@@ -37,7 +37,10 @@ class _AccessoriesTabViewState extends State<AccessoriesTabView> {
         ),
         itemCount: list.length,
         itemBuilder: (context, index) {
-          return ProductCard(product: list[index]);
+          return ProductCard(
+            product: list[index],
+            addToCart: true,
+          );
         },
       );
     });

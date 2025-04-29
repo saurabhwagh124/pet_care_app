@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pet_care_app/controller/shop_controller.dart';
+import 'package:pet_care_app/model/shopitem_model.dart';
 import 'package:pet_care_app/utils/add_pet_vaildator.dart';
-
-import '../../controller/shopitem_controller.dart';
-import '../../model/shopitem_model.dart';
 
 class AddUpdateItemView extends StatelessWidget {
   final ShopItem? item;
   final int? index;
-  final ShopItemController shopController = Get.find();
+  final ShopController shopController = Get.find();
   final formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -81,11 +80,11 @@ class AddUpdateItemView extends StatelessWidget {
                       discountedPrice: discountedPrice,
                     );
 
-                    if (item == null) {
-                      shopController.addItem(newItem);
-                    } else {
-                      shopController.updateItem(index!, newItem);
-                    }
+                    // if (item == null) {
+                    //   shopController.addItem(newItem);
+                    // } else {
+                    //   shopController.updateItem(index!, newItem);
+                    // }
 
                     Get.back();
                   }
