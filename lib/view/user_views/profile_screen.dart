@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/model/user.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
@@ -51,8 +52,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         title: Text(
           user?.displayName ?? "No Name Available",
-          style: const TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
+          style: GoogleFonts.fredoka(
+            textStyle: const TextStyle(
+              fontSize: 23,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            ),
+          ),
         ),
         actions: [
           if (user?.photoUrl != null)

@@ -91,12 +91,14 @@ class _ProductCardState extends State<ProductCard> {
                       ),
                   ],
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 4),
                 if (widget.product.photoUrl != null)
-                  Image.network(
-                    widget.product.photoUrl!,
-                    height: 120,
-                    fit: BoxFit.cover,
+                  SizedBox(
+                    height: 78,
+                    child: Image.network(
+                      widget.product.photoUrl!,
+                      fit: BoxFit.cover,
+                    ),
                   ),
 
                 // Category & Recommended Labels
