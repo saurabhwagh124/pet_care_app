@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ import 'package:pet_care_app/model/boarding_model.dart';
 import 'package:pet_care_app/model/pet_services_model.dart';
 import 'package:pet_care_app/model/user_pet_model.dart';
 import 'package:pet_care_app/model/vet_doc_model.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 
 class BookAppoinmentScreen extends StatefulWidget {
   final VetDocModel? doctor;
@@ -60,16 +62,14 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: const Icon(Icons.arrow_back_ios, size: 20, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
         ),
+        backgroundColor: AppColors.yellowCircle,
         title: const Text('Book Appointment'),
         centerTitle: true,
         titleTextStyle: GoogleFonts.fredoka(
             fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
-        backgroundColor: const Color.fromRGBO(248, 174, 31, 1),
       ),
       body: Padding(
         padding: const EdgeInsets.all(25.0),

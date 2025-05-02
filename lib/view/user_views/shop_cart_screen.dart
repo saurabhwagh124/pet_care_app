@@ -8,6 +8,7 @@ import 'package:pet_care_app/controller/cart_controller.dart';
 import 'package:pet_care_app/controller/shop_controller.dart';
 import 'package:pet_care_app/model/address_model.dart';
 import 'package:pet_care_app/model/orders_model.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/widgets/select_address_dialog.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
@@ -63,6 +64,7 @@ class _CartScreenState extends State<CartScreen> {
             country: null,
             userEmail: null),
         status: "PENDING",
+        remarks: null,
         createdAt: null);
     shopController.addOrders(order);
     Get.off(() => SimpleDialog(
@@ -147,8 +149,12 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: AppColors.yellowCircle,
         centerTitle: true,
-        backgroundColor: const Color(0XFFF8AE1F),
         title: Text(
           'Cart',
           style: GoogleFonts.fredoka(
@@ -157,15 +163,6 @@ class _CartScreenState extends State<CartScreen> {
                 fontWeight: FontWeight.w600,
                 color: Colors.white),
           ),
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Get.back();
-          },
         ),
       ),
       body: Obx(() {

@@ -26,7 +26,11 @@ class _VeterinaryscreenState extends State<Veterinaryscreen> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        //backgroundColor: AppColors.yellowCircle,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: AppColors.yellowCircle,
         title: const Text("Veterinary"),
       ),
       body: Padding(
@@ -44,9 +48,11 @@ class _VeterinaryscreenState extends State<Veterinaryscreen> {
                 () => _vetDocController.vetDoctorsList.isEmpty
                     ? const Center(child: CircularProgressIndicator())
                     : ListView.separated(
-                        separatorBuilder: (context, index) => SizedBox(height: 10.h),
+                        separatorBuilder: (context, index) =>
+                            SizedBox(height: 10.h),
                         scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) => VetCardWidget(data: _vetDocController.vetDoctorsList[index]),
+                        itemBuilder: (context, index) => VetCardWidget(
+                            data: _vetDocController.vetDoctorsList[index]),
                         itemCount: _vetDocController.vetDoctorsList.length,
                       ),
               ),
@@ -56,5 +62,4 @@ class _VeterinaryscreenState extends State<Veterinaryscreen> {
       ),
     );
   }
-
 }

@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/model/pet_services_model.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/user_data.dart';
 import 'package:pet_care_app/view/appointmentscreen.dart';
 import 'package:pet_care_app/view/user_views/book_appointment_screen.dart';
@@ -34,54 +35,16 @@ class _PetServiceDetailsScreen extends State<PetServiceDetailsScreen> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-            leading: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const Icon(
-                  Icons.arrow_back_ios,
-                  size: 20,
-                  color: Colors.white,
-                )),
-            actions: isAdmin
-                ? [
-                    IconButton(
-                      icon: const Icon(Icons.edit, color: Colors.white),
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          isScrollControlled: true,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(25.0)),
-                          ),
-                          builder: (_) => EditServiceBottomSheet(
-                            service: widget.data,
-                            onSave: (updatedService) {
-                              setState(() {
-                                widget.data.name = updatedService.name;
-                                widget.data.description =
-                                    updatedService.description;
-                                widget.data.fees = updatedService.fees;
-                              });
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.white),
-                      onPressed: () {
-                        log("Delete service clicked");
-                      },
-                    ),
-                  ]
-                : [],
-            title: Text(widget.data.name!),
-            centerTitle: true,
-            titleTextStyle: GoogleFonts.fredoka(
-                fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
-            backgroundColor: const Color.fromRGBO(248, 174, 31, 1)),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+            onPressed: () => Get.back(),
+          ),
+          backgroundColor: AppColors.yellowCircle,
+          title: Text(widget.data.name!),
+          centerTitle: true,
+          titleTextStyle: GoogleFonts.fredoka(
+              fontSize: 20, fontWeight: FontWeight.w500, color: Colors.white),
+        ),
         body: SingleChildScrollView(
           child: Column(
             spacing: 10.h,

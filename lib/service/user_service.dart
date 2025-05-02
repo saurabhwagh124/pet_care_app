@@ -6,24 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet_care_app/model/address_model.dart';
-import 'package:pet_care_app/model/user.dart';
+import 'package:pet_care_app/model/users.dart';
 import 'package:pet_care_app/network/api_endpoints.dart';
 
 class UserService extends GetxService {
   String token = "";
 
-  Future<User> fetchUserData(String email) async {
+  Future<Users> fetchUserData(String email) async {
     final url = ApiEndpoints.getUserDataUrl.replaceAll("{MAIL}", email);
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200 || response.statusCode == 201) {
         Map<String, dynamic> responseData = jsonDecode(response.body);
-        return User.fromJson(responseData);
+        return Users.fromJson(responseData);
       } else {
         throw Exception("else error in fetch user data${response.body}");
       }
     } catch (e) {
-      throw Exception("catch error in fetch User Data $e");
+      throw Exception("catch error in fetch Users Data $e");
     }
   }
 
@@ -96,6 +96,27 @@ class UserService extends GetxService {
       }
     } catch (e) {
       throw Exception("catch error in add address service $e");
+    }
+  }
+
+  Future<Users> updateUserDetails(Users payload) async {
+    try {
+      log(payload.toString());
+      token = await FB.FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+      };
+      final response = await http.put(Uri.parse(ApiEndpoints.putUserEditUrl),
+          headers: headers, body: jsonEncode(payload));
+      log(response.toString());
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return Users.fromJson(jsonDecode(response.body));
+      } else {
+        throw Exception("else error in update user service: ${response.body}");
+      }
+    } catch (e) {
+      throw Exception("catch error in update user service $e");
     }
   }
 }

@@ -13,9 +13,9 @@ import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
 import 'package:pet_care_app/utils/enums.dart';
 import 'package:pet_care_app/view/category_screen.dart';
-import 'package:pet_care_app/view/user_views/OrdersHistoryScreen.dart';
 import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
 import 'package:pet_care_app/view/user_views/explore_screen.dart';
+import 'package:pet_care_app/view/user_views/orders_history_screen.dart';
 import 'package:pet_care_app/view/user_views/profile_screen.dart';
 import 'package:pet_care_app/view/user_views/scheduled_appointments_screen.dart';
 import 'package:pet_care_app/view/user_views/shop_food_screen.dart';
@@ -128,7 +128,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               title: const Text("Order History"),
               onTap: () {
                 Get.back();
-                Get.to(() => const Ordershistoryscreen());
+                Get.to(() => const OrdersHistoryScreen());
               },
             )
           ],
@@ -164,11 +164,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           SizedBox(
                             width: 5.w,
                           ),
-                          Text(
-                            "My Pets",
-                            style: GoogleFonts.fredoka(
-                                fontWeight: FontWeight.w700, fontSize: 20.sp),
-                          ),
+                          Text("My Pets",
+                              style: Theme.of(context).textTheme.titleMedium),
                           const Spacer()
                         ],
                       ),

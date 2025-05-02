@@ -10,6 +10,7 @@ import 'package:pet_care_app/controller/user_pet_controller.dart';
 import 'package:pet_care_app/model/user_pet_model.dart';
 import 'package:pet_care_app/service/upload_service.dart';
 import 'package:pet_care_app/utils/add_pet_vaildator.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/widgets/user_pet_widget_icon.dart';
 
 class AddPetsPage extends StatefulWidget {
@@ -334,23 +335,18 @@ class _AddPetsPageState extends State<AddPetsPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: AppColors.yellowCircle,
         centerTitle: true,
-        backgroundColor: const Color(0XFFF8AE1F),
         title: Text(
           'Add Pets',
           style: GoogleFonts.fredoka(
             textStyle: const TextStyle(
                 fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
           ),
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Get.back();
-          },
         ),
       ),
       body: Column(

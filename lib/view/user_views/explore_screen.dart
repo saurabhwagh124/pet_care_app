@@ -62,8 +62,7 @@ class _ExploreScreenState extends State<ExploreScreen>
           ),
         ),
         leading: IconButton(
-          icon:
-              const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
           onPressed: () => Get.back(),
         ),
         backgroundColor: AppColors.yellowCircle,

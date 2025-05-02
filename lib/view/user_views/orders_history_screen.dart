@@ -5,14 +5,14 @@ import 'package:pet_care_app/controller/shop_controller.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/widgets/OrderDisplayWidget.dart';
 
-class Ordershistoryscreen extends StatefulWidget {
-  const Ordershistoryscreen({super.key});
+class OrdersHistoryScreen extends StatefulWidget {
+  const OrdersHistoryScreen({super.key});
 
   @override
-  State<Ordershistoryscreen> createState() => _OrdershistoryscreenState();
+  State<OrdersHistoryScreen> createState() => _OrdersHistoryScreenState();
 }
 
-class _OrdershistoryscreenState extends State<Ordershistoryscreen> {
+class _OrdersHistoryScreenState extends State<OrdersHistoryScreen> {
   final controller = Get.find<ShopController>();
 
   @override
@@ -25,6 +25,11 @@ class _OrdershistoryscreenState extends State<Ordershistoryscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: AppColors.yellowCircle,
         title: Text(
           "Order History",
           style: TextStyle(
@@ -32,12 +37,6 @@ class _OrdershistoryscreenState extends State<Ordershistoryscreen> {
               fontWeight: FontWeight.w500,
               color: Colors.white),
         ),
-        leading: IconButton(
-          icon:
-              const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
-          onPressed: () => Get.back(),
-        ),
-        backgroundColor: AppColors.yellowCircle,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),

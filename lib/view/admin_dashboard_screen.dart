@@ -28,14 +28,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
       'route': '/AddNotificationsScreen'
     },
     {
-      'icon': Icons.pets_rounded,
-      'title': 'Grooming',
-      'route': '/GroomingManagementScreen'
-    },
-    {'icon': Icons.calendar_today, 'title': 'Appointments', 'route': ''},
-    {
-      'icon': Icons.person,
-      'title': 'User Management',
+      'icon': Icons.delivery_dining,
+      'title': 'Orders',
       'route': '/UserManagementScreen'
     },
     {

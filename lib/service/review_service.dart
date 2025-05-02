@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart' as FB;
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet_care_app/model/general_review_model.dart';
-import 'package:pet_care_app/model/user.dart';
+import 'package:pet_care_app/model/users.dart';
 import 'package:pet_care_app/network/api_endpoints.dart';
 
 class ReviewService extends GetxService {
@@ -17,14 +17,16 @@ class ReviewService extends GetxService {
     try {
       final token = await getToken();
       final headers = {"Authorization": "Bearer $token"};
-      final url = ApiEndpoints.getDoctorReviewsUrl.replaceAll("{id}", doctorId.toString());
+      final url = ApiEndpoints.getDoctorReviewsUrl
+          .replaceAll("{id}", doctorId.toString());
       log(url);
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final List<dynamic> data = jsonDecode(response.body) as List<dynamic>;
         return data.map((json) => GeneralReviewModel.fromJson(json)).toList();
       } else {
-        throw Exception("Failed to load doctor reviews: ${response.statusCode}");
+        throw Exception(
+            "Failed to load doctor reviews: ${response.statusCode}");
       }
     } catch (e) {
       throw Exception("Error fetching doctor reviews: $e");
@@ -35,13 +37,15 @@ class ReviewService extends GetxService {
     try {
       final token = await getToken();
       final headers = {"Authorization": "Bearer $token"};
-      final url = ApiEndpoints.getBoardingReviewsUrl.replaceAll("{id}", boardingId.toString());
+      final url = ApiEndpoints.getBoardingReviewsUrl
+          .replaceAll("{id}", boardingId.toString());
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final List<dynamic> data = jsonDecode(response.body) as List<dynamic>;
         return data.map((json) => GeneralReviewModel.fromJson(json)).toList();
       } else {
-        throw Exception("Failed to load boarding reviews: ${response.statusCode}");
+        throw Exception(
+            "Failed to load boarding reviews: ${response.statusCode}");
       }
     } catch (e) {
       throw Exception("Error fetching boarding reviews: $e");
@@ -52,32 +56,39 @@ class ReviewService extends GetxService {
     try {
       final token = await getToken();
       final headers = {"Authorization": "Bearer $token"};
-      final url = ApiEndpoints.getServiceReviewsUrl.replaceAll("{id}", serviceId.toString());
+      final url = ApiEndpoints.getServiceReviewsUrl
+          .replaceAll("{id}", serviceId.toString());
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final List<dynamic> data = jsonDecode(response.body) as List<dynamic>;
         return data.map((json) => GeneralReviewModel.fromJson(json)).toList();
       } else {
-        throw Exception("Failed to load service reviews: ${response.statusCode}");
+        throw Exception(
+            "Failed to load service reviews: ${response.statusCode}");
       }
     } catch (e) {
       throw Exception("Error fetching service reviews: $e");
     }
   }
 
-  Future<GeneralReviewModel> addDoctorReview(int doctorId, User user, String review, double reviewScore) async {
+  Future<GeneralReviewModel> addDoctorReview(
+      int doctorId, Users user, String review, double reviewScore) async {
     try {
       final token = await getToken();
-      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
-      final response = await http.post(Uri.parse(ApiEndpoints.postDoctorReviewUrl),
-          headers: headers,
-          body: jsonEncode({
-            "id": "0",
-            "doctor": {"id": doctorId},
-            "users": user.toJson(),
-            "reviewDescription": review,
-            "reviewScore": reviewScore
-          }));
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+      };
+      final response =
+          await http.post(Uri.parse(ApiEndpoints.postDoctorReviewUrl),
+              headers: headers,
+              body: jsonEncode({
+                "id": "0",
+                "doctor": {"id": doctorId},
+                "users": user.toJson(),
+                "reviewDescription": review,
+                "reviewScore": reviewScore
+              }));
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = jsonDecode(response.body);
         log(data.toString());
@@ -92,45 +103,56 @@ class ReviewService extends GetxService {
     }
   }
 
-  Future<GeneralReviewModel> addBoardingReview(int id, User user, String text, double rating) async {
+  Future<GeneralReviewModel> addBoardingReview(
+      int id, Users user, String text, double rating) async {
     try {
       final token = await getToken();
-      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
-      final response = await http.post(Uri.parse(ApiEndpoints.postBoardingReviewUrl),
-          headers: headers,
-          body: jsonEncode({
-            "id": "0",
-            "boarding": {"id": id},
-            "users": user.toJson(),
-            "reviewDescription": text,
-            "reviewScore": rating
-          }));
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+      };
+      final response =
+          await http.post(Uri.parse(ApiEndpoints.postBoardingReviewUrl),
+              headers: headers,
+              body: jsonEncode({
+                "id": "0",
+                "boarding": {"id": id},
+                "users": user.toJson(),
+                "reviewDescription": text,
+                "reviewScore": rating
+              }));
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = jsonDecode(response.body);
         final review = GeneralReviewModel.fromJson(data);
         log(review.toString());
         return review;
       } else {
-        throw Exception("Failed to add boarding review: ${response.statusCode}");
+        throw Exception(
+            "Failed to add boarding review: ${response.statusCode}");
       }
     } catch (e) {
       throw Exception("Error adding boarding review: $e");
     }
   }
 
-  Future<GeneralReviewModel> addServiceReview(int id, User user, String text, double rating) async {
+  Future<GeneralReviewModel> addServiceReview(
+      int id, Users user, String text, double rating) async {
     try {
       final token = await getToken();
-      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
-      final response = await http.post(Uri.parse(ApiEndpoints.postServiceReviewUrl),
-          headers: headers,
-          body: jsonEncode({
-            "id": "0",
-            "petServices": {"id": id},
-            "users": user.toJson(),
-            "reviewDescription": text,
-            "reviewScore": rating
-          }));
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+      };
+      final response =
+          await http.post(Uri.parse(ApiEndpoints.postServiceReviewUrl),
+              headers: headers,
+              body: jsonEncode({
+                "id": "0",
+                "petServices": {"id": id},
+                "users": user.toJson(),
+                "reviewDescription": text,
+                "reviewScore": rating
+              }));
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = jsonDecode(response.body);
         log(data);
@@ -145,19 +167,24 @@ class ReviewService extends GetxService {
     }
   }
 
-  Future<GeneralReviewModel> addItemReview(int id, User user, String text, double rating) async {
+  Future<GeneralReviewModel> addItemReview(
+      int id, Users user, String text, double rating) async {
     try {
       final token = await getToken();
-      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
-      final response = await http.post(Uri.parse(ApiEndpoints.postShopItemReviewUrl),
-          headers: headers,
-          body: jsonEncode({
-            "id": "0",
-            "shopItems": {"id": id},
-            "users": user.toJson(),
-            "reviewDescription": text,
-            "reviewScore": rating
-          }));
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+      };
+      final response =
+          await http.post(Uri.parse(ApiEndpoints.postShopItemReviewUrl),
+              headers: headers,
+              body: jsonEncode({
+                "id": "0",
+                "shopItems": {"id": id},
+                "users": user.toJson(),
+                "reviewDescription": text,
+                "reviewScore": rating
+              }));
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = jsonDecode(response.body);
         final review = GeneralReviewModel.fromJson(data);

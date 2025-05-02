@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/user_controller.dart';
 import 'package:pet_care_app/model/address_model.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/widgets/address_card.dart';
 
 class AddressPage extends StatefulWidget {
@@ -26,19 +27,14 @@ class _AddressPageState extends State<AddressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: const Color(0XFFF8AE1F),
         leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Get.back();
-          },
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
         ),
+        backgroundColor: AppColors.yellowCircle,
+        centerTitle: true,
         title: const Text(
-          "My Address",
+          "My Addresses",
           style: TextStyle(
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
         ),

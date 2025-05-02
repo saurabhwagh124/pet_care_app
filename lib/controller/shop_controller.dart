@@ -9,6 +9,7 @@ import 'package:pet_care_app/utils/user_data.dart';
 class ShopController extends GetxController {
   final ShopService shopService = ShopService();
   RxString search = RxString('');
+  RxBool isLoading = false.obs;
   RxList<Product> foodList = <Product>[].obs;
   RxList<Product> vetItemsList = <Product>[].obs;
   RxList<Product> accList = <Product>[].obs;
@@ -18,26 +19,36 @@ class ShopController extends GetxController {
   List<String> category = ["FOOD", "VET_ITEMS", "ACCESSORIES", "IOT_DEVICES"];
 
   void fetchFoodProducts() async {
+    isLoading.value = true;
     foodList.value = await shopService.fetchProductsByCategory("FOOD");
+    isLoading.value = false;
   }
 
   void fetchVetItemsProducts() async {
+    isLoading.value = true;
     vetItemsList.value = await shopService.fetchProductsByCategory("VET_ITEMS");
+    isLoading.value = false;
   }
 
   void fetchAccessoriesProducts() async {
+    isLoading.value = true;
     accList.value = await shopService.fetchProductsByCategory("ACCESSORIES");
+    isLoading.value = false;
   }
 
   void fetchIotProducts() async {
+    isLoading.value = true;
     iotList.value = await shopService.fetchProductsByCategory("IOT_DEVICES");
+    isLoading.value = false;
   }
 
   void fetchAllProducts() {
+    isLoading.value = true;
     fetchAccessoriesProducts();
     fetchIotProducts();
     fetchVetItemsProducts();
     fetchFoodProducts();
+    isLoading.value = false;
   }
 
   void addOrders(OrdersModel payload) async {

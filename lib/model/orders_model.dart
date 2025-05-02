@@ -7,6 +7,7 @@ class OrdersModel {
     required this.orderItemsList,
     required this.totalPrice,
     required this.address,
+    required this.remarks,
     required this.status,
     required this.createdAt,
   });
@@ -16,6 +17,7 @@ class OrdersModel {
   final List<OrderItemsList> orderItemsList;
   final int? totalPrice;
   final AddressModel? address;
+  final String? remarks;
   final String? status;
   final DateTime? createdAt;
 
@@ -31,6 +33,7 @@ class OrdersModel {
       address: json["address"] == null
           ? null
           : AddressModel.fromJson(json["address"]),
+      remarks: json["remarks"],
       status: json["status"],
       createdAt: DateTime.tryParse(json["createdAt"] ?? ""),
     );
@@ -42,13 +45,14 @@ class OrdersModel {
         "orderItemsList": orderItemsList.map((x) => x.toJson()).toList(),
         "totalPrice": totalPrice,
         "address": address?.toJson(),
+        "remarks": remarks,
         "status": status,
         "createdAt": createdAt?.toIso8601String(),
       };
 
   @override
   String toString() {
-    return "$id, $usersId, $orderItemsList, $totalPrice, $address, $status, $createdAt, ";
+    return "$id, $usersId, $orderItemsList, $totalPrice, $address, $remarks, $status, $createdAt, ";
   }
 }
 

@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/view/user_views/explore_screen.dart';
 
 class PetHealth extends StatefulWidget {
@@ -20,14 +22,10 @@ class _PetHealthState extends State<PetHealth> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-              )),
-          backgroundColor: const Color.fromRGBO(248, 174, 31, 1),
+            icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+            onPressed: () => Get.back(),
+          ),
+          backgroundColor: AppColors.yellowCircle,
           title: const Text(
             'Pet Health',
             style: TextStyle(

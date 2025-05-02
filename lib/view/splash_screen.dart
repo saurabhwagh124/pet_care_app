@@ -248,7 +248,7 @@ class _SplashScreenState extends State<SplashScreen>
                             colors: [Colors.white, Color(0xFFE0E0E0)],
                           ).createShader(bounds),
                           child: const Text(
-                            "PET-CARE SYSTEM",
+                            "PET Universe",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 32,

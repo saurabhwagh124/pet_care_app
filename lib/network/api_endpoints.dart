@@ -31,6 +31,7 @@ class ApiEndpoints {
   static String getDoctorAppointmentsUrl = "$baseUrl/appointments/doctors/{id}";
   static String getServiceAppointmentsUrl =
       "$baseUrl/appointments/service/{id}";
+  static String getOrderItemsUrl = "$baseUrl/shopItemsList";
 
   // ALL Post
   static String postUserPetUrl = "$baseUrl/pet";
@@ -63,6 +64,7 @@ class ApiEndpoints {
 
   //Put
   static String putOrderEditUrl = "$baseUrl/orders/edit";
+  static String putUserEditUrl = "$baseUrl/users/edit";
 
   static String deleteAddressUrl = "$baseUrl/users/address/{id}";
 }

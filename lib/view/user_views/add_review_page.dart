@@ -8,7 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/controller/review_controller.dart';
-import 'package:pet_care_app/model/user.dart';
+import 'package:pet_care_app/model/users.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/user_data.dart';
 
 class AddReviewPage extends StatefulWidget {
@@ -17,7 +18,13 @@ class AddReviewPage extends StatefulWidget {
   final bool isBoarding;
   final bool isService;
   final bool isItem;
-  const AddReviewPage({super.key, required this.id, this.isDoctor = false, this.isBoarding = false, this.isService = false, this.isItem = false});
+  const AddReviewPage(
+      {super.key,
+      required this.id,
+      this.isDoctor = false,
+      this.isBoarding = false,
+      this.isService = false,
+      this.isItem = false});
 
   @override
   State<AddReviewPage> createState() => _AddReviewPageState();
@@ -27,12 +34,12 @@ class _AddReviewPageState extends State<AddReviewPage> {
   double _rating = 0.0;
   final TextEditingController _reviewController = TextEditingController();
   final UserData _userData = UserData();
-  User? user;
+  Users? user;
 
   @override
   void initState() {
     final response = jsonDecode(_userData.read<String>("user")!);
-    user = User.fromJson(response);
+    user = Users.fromJson(response);
     log("user data fetched: ${user.toString()}");
     super.initState();
   }
@@ -42,21 +49,17 @@ class _AddReviewPageState extends State<AddReviewPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: const Color(0xFFF8AE1F),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: AppColors.yellowCircle,
         title: Text(
           'Add Review',
           style: GoogleFonts.fredoka(
-            textStyle: const TextStyle(fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
+            textStyle: const TextStyle(
+                fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
           ),
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_rounded,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Get.back(); // Custom back button behavior
-          },
         ),
       ),
       body: Padding(
@@ -77,7 +80,8 @@ class _AddReviewPageState extends State<AddReviewPage> {
                   children: [
                     Text(
                       user!.displayName!,
-                      style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 18.sp, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -86,7 +90,8 @@ class _AddReviewPageState extends State<AddReviewPage> {
             SizedBox(height: 24.h),
             Text('Rate your experience',
                 style: GoogleFonts.fredoka(
-                  textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  textStyle: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.w500),
                 )),
             SizedBox(height: 8.h),
             RatingBar.builder(
@@ -112,7 +117,8 @@ class _AddReviewPageState extends State<AddReviewPage> {
             Text(
               'Share more about your experience',
               style: GoogleFonts.fredoka(
-                textStyle: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
+                textStyle:
+                    TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
               ),
             ),
             const SizedBox(height: 8),
@@ -131,13 +137,17 @@ class _AddReviewPageState extends State<AddReviewPage> {
                 child: ElevatedButton(
                   onPressed: _submitReview,
                   style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.r)),
                     backgroundColor: Colors.orange,
                     padding: EdgeInsets.symmetric(vertical: 16.h),
                   ),
                   child: Text('Post Review',
                       style: GoogleFonts.fredoka(
-                        textStyle: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500, color: Colors.white),
+                        textStyle: TextStyle(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
                       )),
                 ),
               ),
@@ -152,13 +162,17 @@ class _AddReviewPageState extends State<AddReviewPage> {
     if (_reviewController.text.isNotEmpty) {
       final reviewController = ReviewController();
       if (widget.isDoctor) {
-        reviewController.addDoctorReview(widget.id,user!, _reviewController.text, _rating);
+        reviewController.addDoctorReview(
+            widget.id, user!, _reviewController.text, _rating);
       } else if (widget.isBoarding) {
-        reviewController.addBoardingReview(widget.id,user!,  _reviewController.text,_rating);
+        reviewController.addBoardingReview(
+            widget.id, user!, _reviewController.text, _rating);
       } else if (widget.isService) {
-        reviewController.addServiceReview(widget.id, user!, _reviewController.text,_rating);
+        reviewController.addServiceReview(
+            widget.id, user!, _reviewController.text, _rating);
       } else if (widget.isItem) {
-        reviewController.addItemReview(widget.id,user!, _reviewController.text, _rating);
+        reviewController.addItemReview(
+            widget.id, user!, _reviewController.text, _rating);
       }
       Get.back();
     } else {
@@ -169,7 +183,6 @@ class _AddReviewPageState extends State<AddReviewPage> {
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-      
     }
   }
 }

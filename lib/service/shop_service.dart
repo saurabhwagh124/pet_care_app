@@ -14,7 +14,13 @@ class ShopService extends GetxService {
     String url = "${ApiEndpoints.getAllShopItemUrl}$category";
 
     try {
-      final response = await http.get(Uri.parse(url));
+      String token =
+          await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token"
+      };
+      final response = await http.get(Uri.parse(url), headers: headers);
 
       log("🔹 Response status for $category: ${response.statusCode}");
 

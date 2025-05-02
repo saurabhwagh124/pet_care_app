@@ -8,7 +8,7 @@ import 'package:pet_care_app/model/boarding_model.dart';
 import 'package:pet_care_app/model/doctor_appointment_model.dart';
 import 'package:pet_care_app/model/pet_services_model.dart';
 import 'package:pet_care_app/model/service_appointment_model.dart';
-import 'package:pet_care_app/model/user.dart';
+import 'package:pet_care_app/model/users.dart';
 import 'package:pet_care_app/model/user_pet_model.dart';
 import 'package:pet_care_app/model/vet_doc_model.dart';
 import 'package:pet_care_app/service/appointments_service.dart';
@@ -65,7 +65,8 @@ class AppointmentController extends GetxController {
   void bookDoctorAppointment(VetDocModel doctor, UserPetModel pet,
       DateTime date, String selectedTime) async {
     isLoading.value = true;
-    User user = User.fromJson(jsonDecode(userData.read<String>("user") ?? ""));
+    Users user =
+        Users.fromJson(jsonDecode(userData.read<String>("user") ?? ""));
     final payload = DoctorAppointmentModel(
         appointmentId: 0,
         users: user,
@@ -82,7 +83,8 @@ class AppointmentController extends GetxController {
   void bookServiceAppointment(PetServicesModel service, UserPetModel pet,
       DateTime date, String selectedTime) {
     isLoading.value = true;
-    User user = User.fromJson(jsonDecode(userData.read<String>("user") ?? ""));
+    Users user =
+        Users.fromJson(jsonDecode(userData.read<String>("user") ?? ""));
     final payload = ServiceAppointmentModel(
         appointmentId: 0,
         users: user,
@@ -99,7 +101,8 @@ class AppointmentController extends GetxController {
   void bookBoardingAppointment(BoardingModel boarding, UserPetModel pet,
       DateTime date, String selectedTime) {
     isLoading.value = true;
-    User user = User.fromJson(jsonDecode(userData.read<String>("user") ?? ""));
+    Users user =
+        Users.fromJson(jsonDecode(userData.read<String>("user") ?? ""));
     final payload = BoardingAppointmentModel(
         appointmentId: 0,
         users: user,

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/view/login_screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -45,7 +46,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orangeAccent,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: AppColors.yellowCircle,
         title: const Text('Forgot Password'),
       ),
       body: Padding(
@@ -91,7 +96,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ElevatedButton(
                 onPressed: sendPasswordResetEmail,
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
                 ),
                 child: const Text('Send Reset Email'),
               ),
@@ -103,7 +109,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   Get.offAll(() => const Loginscreen());
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
                 ),
                 child: const Text('Go to login'),
               ),
