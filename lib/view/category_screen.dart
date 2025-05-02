@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 
 import 'breed_list_screen.dart';
 
@@ -19,15 +21,15 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: AppColors.yellowCircle,
         title: Text(
           "Pet Categories",
-          style: GoogleFonts.fredoka(fontWeight: FontWeight.w700, fontSize: 22, color: Colors.white),
-        ),
-        backgroundColor: const Color(0xFFFFA726),
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_rounded, color: Colors.white), // Set arrow color to white
-          onPressed: () => Navigator.pop(context),
+          style: GoogleFonts.fredoka(
+              fontWeight: FontWeight.w700, fontSize: 22, color: Colors.white),
         ),
       ),
       body: Container(
@@ -65,7 +67,8 @@ class CategoryScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ClipRRect(
-                        borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
+                        borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(15)),
                         child: Image.asset(
                           categories[index]['image']!,
                           fit: BoxFit.cover,

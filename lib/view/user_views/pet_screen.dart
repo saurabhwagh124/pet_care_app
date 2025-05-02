@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pet_care_app/controller/user_pet_controller.dart';
 import 'package:pet_care_app/model/user_pet_model.dart';
 import 'package:pet_care_app/service/upload_service.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/view/user_views/pethealthscreen.dart';
 import 'package:pet_care_app/view/user_views/shop_food_screen.dart';
 
@@ -37,8 +38,10 @@ class _PetscreenState extends State<Petscreen> {
     _nameController = TextEditingController(text: widget.data.name);
     _breedController = TextEditingController(text: widget.data.breed);
     _ageController = TextEditingController(text: widget.data.age?.toString());
-    _weightController = TextEditingController(text: widget.data.weight?.toString());
-    _heightController = TextEditingController(text: widget.data.height?.toString());
+    _weightController =
+        TextEditingController(text: widget.data.weight?.toString());
+    _heightController =
+        TextEditingController(text: widget.data.height?.toString());
   }
 
   @override
@@ -52,7 +55,8 @@ class _PetscreenState extends State<Petscreen> {
   }
 
   Future<void> _pickImages() async {
-    final XFile? pickedFiles = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFiles =
+        await _picker.pickImage(source: ImageSource.gallery);
     setState(() {
       imageFile = pickedFiles;
     });
@@ -62,21 +66,19 @@ class _PetscreenState extends State<Petscreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          centerTitle: true,
           leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                size: 20,
-                color: Colors.white,
-              )),
+            icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+            onPressed: () => Get.back(),
+          ),
+          backgroundColor: AppColors.yellowCircle,
+          centerTitle: true,
           title: Text(
             widget.data.name ?? "",
-            style: TextStyle(color: Colors.white, fontSize: 20.sp, fontWeight: FontWeight.w600),
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w600),
           ),
-          backgroundColor: Colors.orangeAccent,
         ),
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
@@ -86,7 +88,11 @@ class _PetscreenState extends State<Petscreen> {
               height: 300.h,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                image: DecorationImage(image: (imageFile != null) ? FileImage(File(imageFile!.path)) : NetworkImage(widget.data.photoUrl ?? ""), fit: BoxFit.contain),
+                image: DecorationImage(
+                    image: (imageFile != null)
+                        ? FileImage(File(imageFile!.path))
+                        : NetworkImage(widget.data.photoUrl ?? ""),
+                    fit: BoxFit.contain),
               ),
             ),
             (_isEditing)
@@ -97,12 +103,18 @@ class _PetscreenState extends State<Petscreen> {
                       onTap: _pickImages,
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 10.w),
-                        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15.r), border: Border.all(color: Colors.lightBlueAccent)),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15.r),
+                            border: Border.all(color: Colors.lightBlueAccent)),
                         child: Row(
                           spacing: 10.w,
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           mainAxisSize: MainAxisSize.min,
-                          children: const [Text("edit Image"), Icon(Icons.edit_outlined)],
+                          children: const [
+                            Text("edit Image"),
+                            Icon(Icons.edit_outlined)
+                          ],
                         ),
                       ),
                     ),
@@ -118,7 +130,12 @@ class _PetscreenState extends State<Petscreen> {
               vertical: 16.h,
             ),
             decoration: BoxDecoration(
-              boxShadow: const [BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.15), offset: Offset(1, 5.47), blurRadius: 43.78)],
+              boxShadow: const [
+                BoxShadow(
+                    color: Color.fromRGBO(0, 0, 0, 0.15),
+                    offset: Offset(1, 5.47),
+                    blurRadius: 43.78)
+              ],
               color: const Color.fromRGBO(255, 255, 255, 0.4),
               borderRadius: BorderRadius.circular(27.r),
             ),
@@ -181,24 +198,27 @@ class _PetscreenState extends State<Petscreen> {
           // Pet Info Card
           Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Row(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const ImageIcon(AssetImage("assets/images/pawIcon.png")),
-                    SizedBox(width: 8.w),
-                    Text(
-                      'About ${widget.data.name}',
-                      style: GoogleFonts.fredoka(
-                        textStyle: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black,
+                    Row(
+                      children: [
+                        const ImageIcon(
+                            AssetImage("assets/images/pawIcon.png")),
+                        SizedBox(width: 8.w),
+                        Text(
+                          'About ${widget.data.name}',
+                          style: GoogleFonts.fredoka(
+                            textStyle: TextStyle(
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ])),
+                  ])),
           PetInfoCard(
             age: "${widget.data.age} yrs",
             weight: '${widget.data.weight}kg',
@@ -288,8 +308,10 @@ class _PetscreenState extends State<Petscreen> {
                           breed: _breedController.text.trim(),
                           description: widget.data.description,
                           age: double.tryParse(_ageController.text.trim()),
-                          height: double.tryParse(_heightController.text.trim()),
-                          weight: double.tryParse(_weightController.text.trim()),
+                          height:
+                              double.tryParse(_heightController.text.trim()),
+                          weight:
+                              double.tryParse(_weightController.text.trim()),
                           photoUrl: photoUrl ?? widget.data.photoUrl,
                           ownerEmail: widget.data.ownerEmail));
                     }
@@ -378,7 +400,14 @@ class PetInfoCard extends StatelessWidget {
                     ? Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: const [BoxShadow(color: Color.fromRGBO(79, 144, 166, 1), offset: Offset(0, 2), blurRadius: 1)]),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromRGBO(79, 144, 166, 1),
+                                  offset: Offset(0, 2),
+                                  blurRadius: 1)
+                            ]),
                         child: Column(
                           children: [
                             const Text(
@@ -406,7 +435,14 @@ class PetInfoCard extends StatelessWidget {
                     ? Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: const [BoxShadow(color: Color.fromRGBO(79, 144, 166, 1), offset: Offset(0, 2), blurRadius: 1)]),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromRGBO(79, 144, 166, 1),
+                                  offset: Offset(0, 2),
+                                  blurRadius: 1)
+                            ]),
                         child: Column(
                           children: [
                             const Text(
@@ -434,7 +470,14 @@ class PetInfoCard extends StatelessWidget {
                     ? Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                            color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: const [BoxShadow(color: Color.fromRGBO(79, 144, 166, 1), offset: Offset(0, 2), blurRadius: 1)]),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromRGBO(79, 144, 166, 1),
+                                  offset: Offset(0, 2),
+                                  blurRadius: 1)
+                            ]),
                         child: Column(
                           children: [
                             const Text(
@@ -484,8 +527,15 @@ class PetInfoCard extends StatelessWidget {
   Widget _buildInfoChip(String label, String value) {
     return Container(
       padding: const EdgeInsets.all(10),
-      decoration:
-          BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: const [BoxShadow(color: Color.fromRGBO(79, 144, 166, 1), offset: Offset(0, 2), blurRadius: 1)]),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: const [
+            BoxShadow(
+                color: Color.fromRGBO(79, 144, 166, 1),
+                offset: Offset(0, 2),
+                blurRadius: 1)
+          ]),
       child: Column(
         children: [
           Text(
@@ -496,7 +546,8 @@ class PetInfoCard extends StatelessWidget {
           ),
           Text(
             label,
-            style: const TextStyle(fontSize: 14, color: Color.fromRGBO(6, 78, 87, 1)),
+            style: const TextStyle(
+                fontSize: 14, color: Color.fromRGBO(6, 78, 87, 1)),
           ),
         ],
       ),
@@ -514,7 +565,14 @@ class PetStatusCard extends StatelessWidget {
   final VoidCallback onPressed;
 
   const PetStatusCard(
-      {super.key, required this.title, required this.subtitle, required this.description, required this.buttonText, required this.buttonColor, required this.icon, required this.onPressed});
+      {super.key,
+      required this.title,
+      required this.subtitle,
+      required this.description,
+      required this.buttonText,
+      required this.buttonColor,
+      required this.icon,
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

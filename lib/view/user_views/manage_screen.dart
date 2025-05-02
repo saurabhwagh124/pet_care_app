@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 
 class ManageScreen extends StatelessWidget {
   const ManageScreen({super.key});
@@ -9,22 +11,18 @@ class ManageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: AppColors.yellowCircle,
         centerTitle: true,
-        backgroundColor: const Color(0XFFF8AE1F),
         title: Text(
           'Manage',
           style: GoogleFonts.fredoka(
-            textStyle: const TextStyle(fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
+            textStyle: const TextStyle(
+                fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
           ),
-        ),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Get.back();
-          },
         ),
       ),
       body: const Center(

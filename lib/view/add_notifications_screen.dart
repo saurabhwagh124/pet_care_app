@@ -8,6 +8,7 @@ import 'package:pet_care_app/model/notification_dto_model.dart';
 import 'package:pet_care_app/service/notification_service.dart';
 import 'package:pet_care_app/service/upload_service.dart';
 import 'package:pet_care_app/utils/add_pet_vaildator.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 
 class AddNotificationsScreen extends StatefulWidget {
   const AddNotificationsScreen({super.key});
@@ -26,7 +27,8 @@ class _AddNotificationsScreenState extends State<AddNotificationsScreen> {
   final _picker = ImagePicker();
 
   Future<void> _pickImages() async {
-    final XFile? pickedFiles = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFiles =
+        await _picker.pickImage(source: ImageSource.gallery);
     setState(() {
       image = pickedFiles;
     });
@@ -36,7 +38,14 @@ class _AddNotificationsScreenState extends State<AddNotificationsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: const Text('Add Notifications')),
+      appBar: AppBar(
+        title: const Text("Add Notifications"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: AppColors.yellowCircle,
+      ),
       body: Padding(
         padding: EdgeInsets.all(10.sp),
         child: Center(
@@ -57,7 +66,10 @@ class _AddNotificationsScreenState extends State<AddNotificationsScreen> {
                               )),
                           Text(
                             "Add an image",
-                            style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500, color: Colors.black),
+                            style: TextStyle(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
                           )
                         ],
                       ),
@@ -78,8 +90,10 @@ class _AddNotificationsScreenState extends State<AddNotificationsScreen> {
                 padding: EdgeInsets.all(10.sp),
                 child: TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => Validation.validateNotNull(value, "Add Title"),
-                  decoration: const InputDecoration(border: InputBorder.none, labelText: "Add Title"),
+                  validator: (value) =>
+                      Validation.validateNotNull(value, "Add Title"),
+                  decoration: const InputDecoration(
+                      border: InputBorder.none, labelText: "Add Title"),
                   controller: titleController,
                   maxLines: 1,
                 ),
@@ -99,8 +113,10 @@ class _AddNotificationsScreenState extends State<AddNotificationsScreen> {
                 padding: EdgeInsets.all(10.sp),
                 child: TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  validator: (value) => Validation.validateNotNull(value, "Add Body"),
-                  decoration: const InputDecoration(border: InputBorder.none, labelText: "Add Body"),
+                  validator: (value) =>
+                      Validation.validateNotNull(value, "Add Body"),
+                  decoration: const InputDecoration(
+                      border: InputBorder.none, labelText: "Add Body"),
                   controller: bodyController,
                   maxLines: 4,
                 ),
@@ -110,7 +126,10 @@ class _AddNotificationsScreenState extends State<AddNotificationsScreen> {
                   if (image != null) {
                     photoUrl = await uploadService.uploadImage(image!);
                   }
-                  await notifiService.addNotificationToAll(NotificationDtoModel(title: titleController.text, body: bodyController.text, image: photoUrl));
+                  await notifiService.addNotificationToAll(NotificationDtoModel(
+                      title: titleController.text,
+                      body: bodyController.text,
+                      image: photoUrl));
                   image = null;
                   titleController.clear();
                   bodyController.clear();
@@ -118,11 +137,17 @@ class _AddNotificationsScreenState extends State<AddNotificationsScreen> {
                 },
                 child: Container(
                   margin: EdgeInsets.all(20.sp),
-                  padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
-                  decoration: BoxDecoration(color: const Color.fromARGB(255, 255, 187, 98), borderRadius: BorderRadius.circular(30.r)),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 255, 187, 98),
+                      borderRadius: BorderRadius.circular(30.r)),
                   child: Text(
                     "Send Notification",
-                    style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500, color: const Color.fromARGB(255, 230, 89, 46)),
+                    style: TextStyle(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w500,
+                        color: const Color.fromARGB(255, 230, 89, 46)),
                   ),
                 ),
               )

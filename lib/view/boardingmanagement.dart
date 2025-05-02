@@ -27,6 +27,11 @@ class _BoardingManagementState extends State<BoardingManagementScreen> {
       backgroundColor: AppColors.white,
       appBar: AppBar(
         title: Text("Boarding Management"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: AppColors.yellowCircle,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -39,10 +44,11 @@ class _BoardingManagementState extends State<BoardingManagementScreen> {
                 () => _boardingController.boardingList.isEmpty
                     ? const Center(child: CircularProgressIndicator())
                     : ListView.separated(
-                        separatorBuilder: (context, index) => SizedBox(height: 10.h),
+                        separatorBuilder: (context, index) =>
+                            SizedBox(height: 10.h),
                         scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) =>
-                            BoardingCard(data: _boardingController.boardingList[index]),
+                        itemBuilder: (context, index) => BoardingCard(
+                            data: _boardingController.boardingList[index]),
                         itemCount: _boardingController.boardingList.length,
                       ),
               ),
