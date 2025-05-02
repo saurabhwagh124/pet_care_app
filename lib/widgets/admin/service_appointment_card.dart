@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 
 // Ensure these paths are correct for your project
 import 'package:pet_care_app/model/service_appointment_model.dart';
-import 'package:pet_care_app/model/pet_services_model.dart';
 
 class ServiceAppointmentCard extends StatelessWidget {
   final ServiceAppointmentModel appointment;
