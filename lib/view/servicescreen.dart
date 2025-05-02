@@ -29,6 +29,11 @@ class _ServicesScreenState extends State<ServicesScreen> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: AppColors.yellowCircle,
         title: Text("Services"),
       ),
       body: Padding(

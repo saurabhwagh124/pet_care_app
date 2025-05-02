@@ -42,16 +42,9 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Scheduled Appointments",
-          style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.white),
-        ),
+        title: const Text("Scheduled Appointments"),
         leading: IconButton(
-          icon:
-              const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
           onPressed: () => Get.back(),
         ),
         backgroundColor: AppColors.yellowCircle,

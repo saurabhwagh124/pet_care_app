@@ -1,5 +1,5 @@
-class User {
-  User({
+class Users {
+  Users({
     required this.id,
     required this.uid,
     required this.email,
@@ -13,14 +13,14 @@ class User {
   final int? id;
   final String? uid;
   final String? email;
-  final String? displayName;
+  String? displayName;
   final String? photoUrl;
-  final dynamic phoneNumber;
+  String? phoneNumber;
   final String? role;
   final bool? emailVerified;
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory Users.fromJson(Map<String, dynamic> json) {
+    return Users(
       id: json["id"],
       uid: json["uid"],
       email: json["email"],

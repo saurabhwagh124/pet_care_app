@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/controller/cart_controller.dart';
@@ -57,12 +58,12 @@ class _ShopFoodState extends State<ShopFood>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         leading: IconButton(
-          icon:
-              const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
           onPressed: () => Get.back(),
         ),
+        backgroundColor: AppColors.yellowCircle,
+        centerTitle: true,
         title: Text(
           'Shop',
           style: GoogleFonts.fredoka(
@@ -73,7 +74,6 @@ class _ShopFoodState extends State<ShopFood>
             ),
           ),
         ),
-        backgroundColor: AppColors.yellowCircle,
         actions: [
           Obx(() {
             int totalQuantity = cartController.cartItems.isNotEmpty

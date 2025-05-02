@@ -1,6 +1,6 @@
 import 'package:pet_care_app/model/pet_services_model.dart';
-import 'package:pet_care_app/model/user.dart';
 import 'package:pet_care_app/model/user_pet_model.dart';
+import 'package:pet_care_app/model/users.dart';
 
 class ServiceAppointmentModel {
   ServiceAppointmentModel({
@@ -14,7 +14,7 @@ class ServiceAppointmentModel {
   });
 
   final int? appointmentId;
-  final User? users;
+  final Users? users;
   final UserPetModel? pet;
   final DateTime? date;
   final String? time;
@@ -24,7 +24,7 @@ class ServiceAppointmentModel {
   factory ServiceAppointmentModel.fromJson(Map<String, dynamic> json) {
     return ServiceAppointmentModel(
       appointmentId: json["appointmentId"],
-      users: json["users"] == null ? null : User.fromJson(json["users"]),
+      users: json["users"] == null ? null : Users.fromJson(json["users"]),
       pet: json["pet"] == null ? null : UserPetModel.fromJson(json["pet"]),
       date: DateTime.tryParse(json["date"] ?? ""),
       time: json["time"],

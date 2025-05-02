@@ -1,8 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/model/base_breed_model.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 
 class BreedDetailsScreen extends StatelessWidget {
   final BaseBreed breed;
@@ -13,18 +16,17 @@ class BreedDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFFFFA726),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
+        ),
+        backgroundColor: AppColors.yellowCircle,
         title: Text(
           breed.name,
           style: GoogleFonts.fredoka(
               fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
         ),
         centerTitle: true,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_rounded,
-              color: Colors.white), // Set arrow color to white
-          onPressed: () => Navigator.pop(context),
-        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),

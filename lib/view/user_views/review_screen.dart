@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/controller/review_controller.dart';
 import 'package:pet_care_app/model/general_review_model.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/enums.dart';
 import 'package:pet_care_app/view/user_views/add_review_page.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -14,7 +15,12 @@ class ReviewsScreen extends StatefulWidget {
   final bool isBoarding;
   final bool isService;
   final int id;
-  const ReviewsScreen({super.key, this.isDoctor = false, this.isBoarding = false, this.isService = false, required this.id});
+  const ReviewsScreen(
+      {super.key,
+      this.isDoctor = false,
+      this.isBoarding = false,
+      this.isService = false,
+      required this.id});
 
   @override
   State<ReviewsScreen> createState() => _ReviewsScreenState();
@@ -39,18 +45,16 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFFF8AE1F),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded),
-          onPressed: () {
-            Get.back();
-          },
-          color: Colors.white,
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
         ),
+        backgroundColor: AppColors.yellowCircle,
         title: Text(
           'Reviews',
           style: GoogleFonts.fredoka(
-            textStyle: const TextStyle(fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
+            textStyle: const TextStyle(
+                fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
           ),
         ),
         centerTitle: true,
@@ -87,7 +91,8 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                     Text(
                       'Based on ${reviewController.noOfReviews.value} reviews',
                       style: GoogleFonts.fredoka(
-                        textStyle: const TextStyle(color: Colors.grey, fontSize: 14),
+                        textStyle:
+                            const TextStyle(color: Colors.grey, fontSize: 14),
                       ),
                     ),
                   ],
@@ -96,9 +101,14 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
           SizedBox(height: 16.h),
           // Individual Reviews
           Obx(() => Expanded(
-                child: (reviewController.reviewApiStatus.value == ApiStatus.SUCCESS)
-                    ? ListView.builder(itemBuilder: (context, index) => ReviewCard(data: reviewController.reviewsList[index]), itemCount: reviewController.reviewsList.length)
-                    : (reviewController.reviewApiStatus.value == ApiStatus.LOADING)
+                child: (reviewController.reviewApiStatus.value ==
+                        ApiStatus.SUCCESS)
+                    ? ListView.builder(
+                        itemBuilder: (context, index) => ReviewCard(
+                            data: reviewController.reviewsList[index]),
+                        itemCount: reviewController.reviewsList.length)
+                    : (reviewController.reviewApiStatus.value ==
+                            ApiStatus.LOADING)
                         ? const Center(child: CircularProgressIndicator())
                         : const Center(child: Text('No Reviews Found!')),
               ))
@@ -150,8 +160,10 @@ class ReviewCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CircleAvatar(
-              backgroundImage:
-                  data.users!.photoUrl!.isNotEmpty ? NetworkImage(data.users!.photoUrl!) : const NetworkImage('https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'),
+              backgroundImage: data.users!.photoUrl!.isNotEmpty
+                  ? NetworkImage(data.users!.photoUrl!)
+                  : const NetworkImage(
+                      'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'),
               radius: 24,
             ),
             const SizedBox(width: 16),
@@ -172,7 +184,8 @@ class ReviewCard extends StatelessWidget {
                   Text(
                     timeago.format(data.createdAt!),
                     style: GoogleFonts.fredoka(
-                      textStyle: const TextStyle(color: Colors.grey, fontSize: 12),
+                      textStyle:
+                          const TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                   ),
                   Row(
@@ -190,7 +203,8 @@ class ReviewCard extends StatelessWidget {
                       ),
                       Text(
                         "${data.reviewScore}",
-                        style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            fontSize: 14.sp, fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
@@ -198,7 +212,10 @@ class ReviewCard extends StatelessWidget {
                   Text(
                     data.reviewDescription ?? "",
                     style: GoogleFonts.fredoka(
-                      textStyle: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500, color: Colors.black),
+                      textStyle: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
                     ),
                   ),
                 ],
