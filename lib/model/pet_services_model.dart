@@ -15,13 +15,13 @@ class PetServicesModel {
 
   final int? id;
   final String? email;
-  final String? name;
+  late String? name;
   final String? category;
-  final int? fees;
+  late int? fees;
   final List<String> photoUrl;
   final double? reviewScore;
   final int? noOfReviews;
-  final String? description;
+  late String? description;
   final DateTime? createdAt;
   final bool? open;
 
@@ -32,7 +32,9 @@ class PetServicesModel {
       name: json["name"],
       category: json["category"],
       fees: json["fees"],
-      photoUrl: json["photoUrl"] == null ? [] : List<String>.from(json["photoUrl"]!.map((x) => x)),
+      photoUrl: json["photoUrl"] == null
+          ? []
+          : List<String>.from(json["photoUrl"]!.map((x) => x)),
       reviewScore: json["reviewScore"],
       noOfReviews: json["noOfReviews"],
       description: json["description"],
@@ -58,5 +60,33 @@ class PetServicesModel {
   @override
   String toString() {
     return "$id, $email, $name, $category, $fees, $photoUrl, $reviewScore, $noOfReviews, $description, $createdAt, $open, ";
+  }
+
+  PetServicesModel copyWith({
+    int? id,
+    String? email,
+    String? name,
+    String? category,
+    int? fees,
+    List<String>? photoUrl,
+    double? reviewScore,
+    int? noOfReviews,
+    String? description,
+    DateTime? createdAt,
+    bool? open,
+  }) {
+    return PetServicesModel(
+      id: id ?? this.id,
+      email: email ?? this.email,
+      name: name ?? this.name,
+      category: category ?? this.category,
+      fees: fees ?? this.fees,
+      photoUrl: photoUrl ?? this.photoUrl,
+      reviewScore: reviewScore ?? this.reviewScore,
+      noOfReviews: noOfReviews ?? this.noOfReviews,
+      description: description ?? this.description,
+      createdAt: createdAt ?? this.createdAt,
+      open: open ?? this.open,
+    );
   }
 }

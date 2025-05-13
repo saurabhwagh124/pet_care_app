@@ -292,4 +292,90 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
       ),
     );
   }
+
+// bottom sheet
+
+  void _showEditBottomSheet() {
+    final TextEditingController clinicNameController =
+        TextEditingController(text: widget.data.clinicName);
+    final TextEditingController addressController =
+        TextEditingController(text: widget.data.address);
+    final TextEditingController feesController =
+        TextEditingController(text: widget.data.fees.toString());
+    final TextEditingController startDayController =
+        TextEditingController(text: widget.data.startDay);
+    final TextEditingController endDayController =
+        TextEditingController(text: widget.data.endDay);
+    final TextEditingController startTimeController =
+        TextEditingController(text: widget.data.startTime);
+    final TextEditingController closeTimeController =
+        TextEditingController(text: widget.data.closeTime);
+    final TextEditingController descriptionController =
+        TextEditingController(text: widget.data.description);
+
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            left: 16,
+            right: 16,
+            top: 20,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text("Edit Doctor Details",
+                    style: GoogleFonts.fredoka(
+                        fontSize: 18, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
+                TextField(
+                    controller: clinicNameController,
+                    decoration:
+                        const InputDecoration(labelText: 'Clinic Name')),
+                TextField(
+                    controller: addressController,
+                    decoration: const InputDecoration(labelText: 'Address')),
+                TextField(
+                    controller: feesController,
+                    decoration: const InputDecoration(labelText: 'Fees'),
+                    keyboardType: TextInputType.number),
+                TextField(
+                    controller: startDayController,
+                    decoration: const InputDecoration(labelText: 'Start Day')),
+                TextField(
+                    controller: endDayController,
+                    decoration: const InputDecoration(labelText: 'End Day')),
+                TextField(
+                    controller: startTimeController,
+                    decoration: const InputDecoration(labelText: 'Start Time')),
+                TextField(
+                    controller: closeTimeController,
+                    decoration: const InputDecoration(labelText: 'Close Time')),
+                TextField(
+                    controller: descriptionController,
+                    decoration:
+                        const InputDecoration(labelText: 'Description')),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    // TODO: Call your update API or logic here
+                    log("Updated Data:");
+                    log("Clinic: ${clinicNameController.text}");
+                    log("Fees: ${feesController.text}");
+                    // Update model or call controller to save
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Save Changes"),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }

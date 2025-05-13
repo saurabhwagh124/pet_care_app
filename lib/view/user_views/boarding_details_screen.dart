@@ -298,4 +298,91 @@ class _BoardingDetailsScreen extends State<BoardingDetailsScreen> {
       ),
     );
   }
+
+// bottom sheet
+
+  void _showEditBottomSheet(BoardingModel model) {
+    final nameController = TextEditingController(text: model.name);
+    final emailController = TextEditingController(text: model.email);
+    final contactController = TextEditingController(text: model.contact);
+    final addressController = TextEditingController(text: model.address);
+    final feesController = TextEditingController(text: model.fees.toString());
+    final startDayController = TextEditingController(text: model.startDay);
+    final endDayController = TextEditingController(text: model.endDay);
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            left: 20,
+            right: 20,
+            top: 20,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text("Edit Boarding Service",
+                    style: GoogleFonts.fredoka(
+                        fontSize: 18, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 10),
+                _buildTextField("Name", nameController),
+                _buildTextField("Email", emailController),
+                _buildTextField("Contact", contactController),
+                _buildTextField("Address", addressController),
+                _buildTextField("Fees", feesController,
+                    keyboardType: TextInputType.number),
+                _buildTextField("Start Day", startDayController),
+                _buildTextField("End Day", endDayController),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    // You can add form validation and API call here
+                    log("Updated data:");
+                    log("Name: ${nameController.text}");
+                    log("Email: ${emailController.text}");
+                    log("Contact: ${contactController.text}");
+                    log("Address: ${addressController.text}");
+                    log("Fees: ${feesController.text}");
+                    log("Start Day: ${startDayController.text}");
+                    log("End Day: ${endDayController.text}");
+
+                    Navigator.pop(context); // Close bottom sheet
+
+                    // Optionally update UI / call backend here
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(245, 146, 69, 1),
+                  ),
+                  child: const Text("Update",
+                      style: TextStyle(color: Colors.white)),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildTextField(String label, TextEditingController controller,
+      {TextInputType keyboardType = TextInputType.text}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: TextField(
+        controller: controller,
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+          labelText: label,
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      ),
+    );
+  }
 }

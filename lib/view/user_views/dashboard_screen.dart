@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/controller/appointment_controller.dart';
 import 'package:pet_care_app/controller/shop_controller.dart';
 import 'package:pet_care_app/controller/user_pet_controller.dart';
 import 'package:pet_care_app/service/notification_service.dart';
@@ -13,6 +14,7 @@ import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
 import 'package:pet_care_app/utils/enums.dart';
 import 'package:pet_care_app/view/category_screen.dart';
+import 'package:pet_care_app/view/user_views/ConfirmedAppointmentsWidget.dart';
 import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
 import 'package:pet_care_app/view/user_views/explore_screen.dart';
 import 'package:pet_care_app/view/user_views/orders_history_screen.dart';
@@ -30,6 +32,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   bool nightMode = false;
+  final controller = Get.find<AppointmentController>();
   final notificationService = NotificationService();
   final userPetController = UserPetController();
   final shopController = ShopController();
@@ -48,6 +51,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     userPetController.fetchUserPets();
     notificationService.getFcmtoken();
     shopController.fetchFoodProducts();
+    controller.fetchAllAppointments();
     super.initState();
   }
 
@@ -233,6 +237,43 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ],
                 ),
               ),
+              const SizedBox(height: 20),
+              Container(
+                  padding: EdgeInsets.all(5.sp),
+                  height: 200.h,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8.r),
+                      boxShadow: const [
+                        BoxShadow(
+                            offset: Offset(0, 1),
+                            blurRadius: 3.5,
+                            color: Color.fromRGBO(0, 0, 0, 0.20))
+                      ]),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              height: 25.h,
+                              child: Icon(Icons.schedule_outlined),
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            Text(
+                              "Schedule Appointements",
+                              style: GoogleFonts.fredoka(
+                                  fontSize: 20.sp, fontWeight: FontWeight.w700),
+                            )
+                          ],
+                        ),
+                      ),
+                      Expanded(child: ConfirmedAppointmentsDashboardWidget()),
+                    ],
+                  )),
               const SizedBox(height: 20),
               Container(
                 padding: EdgeInsets.all(20.sp),

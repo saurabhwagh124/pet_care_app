@@ -296,3 +296,94 @@ class _PetServiceDetailsScreen extends State<PetServiceDetailsScreen> {
     );
   }
 }
+
+//bottom sheet class
+
+class EditServiceBottomSheet extends StatefulWidget {
+  final PetServicesModel service;
+  final Function(PetServicesModel) onSave;
+
+  const EditServiceBottomSheet({
+    super.key,
+    required this.service,
+    required this.onSave,
+  });
+
+  @override
+  State<EditServiceBottomSheet> createState() => _EditServiceBottomSheetState();
+}
+
+class _EditServiceBottomSheetState extends State<EditServiceBottomSheet> {
+  late TextEditingController nameController;
+  late TextEditingController descController;
+  late TextEditingController feesController;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController(text: widget.service.name);
+    descController = TextEditingController(text: widget.service.description);
+    feesController =
+        TextEditingController(text: widget.service.fees.toString());
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    descController.dispose();
+    feesController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 20,
+        right: 20,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+        top: 20,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text("Edit Service",
+              style: GoogleFonts.fredoka(
+                  fontSize: 18, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 20),
+          TextField(
+            controller: nameController,
+            decoration: const InputDecoration(labelText: "Service Name"),
+          ),
+          const SizedBox(height: 10),
+          TextField(
+            controller: descController,
+            decoration: const InputDecoration(labelText: "Description"),
+          ),
+          const SizedBox(height: 10),
+          TextField(
+            controller: feesController,
+            decoration: const InputDecoration(labelText: "Fees"),
+            keyboardType: TextInputType.number,
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromRGBO(245, 146, 69, 1)),
+            onPressed: () {
+              widget.onSave(
+                widget.service.copyWith(
+                  name: nameController.text,
+                  description: descController.text,
+                  fees: int.tryParse(feesController.text) ?? 0,
+                ),
+              );
+              Navigator.pop(context);
+            },
+            child: const Text("Save", style: TextStyle(color: Colors.white)),
+          )
+        ],
+      ),
+    );
+  }
+}
