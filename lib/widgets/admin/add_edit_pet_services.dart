@@ -5,24 +5,24 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pet_care_app/controller/pet_services_controller.dart';
 import 'package:pet_care_app/model/pet_services_model.dart';
 
-class AddEditPetServicePage extends StatefulWidget {
+class AddEditPetServiceSheet extends StatefulWidget {
   final int? index;
   final PetServicesModel? service;
 
-  const AddEditPetServicePage({super.key, this.index, this.service});
+  const AddEditPetServiceSheet({super.key, this.index, this.service});
 
   @override
-  _AddEditPetServicePageState createState() => _AddEditPetServicePageState();
+  State<AddEditPetServiceSheet> createState() => _AddEditPetServiceSheetState();
 }
 
-class _AddEditPetServicePageState extends State<AddEditPetServicePage> {
+class _AddEditPetServiceSheetState extends State<AddEditPetServiceSheet> {
   final PetServicesController controller = Get.find();
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController categoryController = TextEditingController();
-  TextEditingController feesController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  final nameController = TextEditingController();
+  final categoryController = TextEditingController();
+  final feesController = TextEditingController();
+  final descriptionController = TextEditingController();
   bool isOpen = true;
   List<String> selectedImages = [];
 
@@ -42,7 +42,6 @@ class _AddEditPetServicePageState extends State<AddEditPetServicePage> {
   Future<void> pickImages() async {
     final ImagePicker picker = ImagePicker();
     final List<XFile> images = await picker.pickMultiImage();
-
     setState(() {
       selectedImages.addAll(images.map((img) => img.path));
     });
@@ -76,22 +75,30 @@ class _AddEditPetServicePageState extends State<AddEditPetServicePage> {
         controller.addPetService(newService);
       }
 
-      Get.back();
+      Get.back(); // closes the bottom sheet
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Text(widget.service != null ? "Edit Service" : "Add Service")),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
+    return DraggableScrollableSheet(
+      expand: false,
+      maxChildSize: 0.95,
+      minChildSize: 0.3,
+      initialChildSize: 0.85,
+      builder: (context, scrollController) {
+        return SingleChildScrollView(
+          controller: scrollController,
+          padding: const EdgeInsets.all(16),
+          child: Form(
+            key: _formKey,
             child: Column(
               children: [
+                Text(
+                  widget.service != null ? "Edit Service" : "Add Service",
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: nameController,
                   decoration: const InputDecoration(labelText: "Service Name"),
@@ -153,8 +160,8 @@ class _AddEditPetServicePageState extends State<AddEditPetServicePage> {
               ],
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

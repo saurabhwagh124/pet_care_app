@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/vet_doc_controller.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
+import 'package:pet_care_app/widgets/admin/add_editvet.dart';
 import 'package:pet_care_app/widgets/vet_card_widget.dart';
 
 class Veterinaryscreen extends StatefulWidget {
@@ -60,6 +61,10 @@ class _VeterinaryscreenState extends State<Veterinaryscreen> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        showAddVetBottomSheet(context);
+        // showAddVetBottomSheet(context, vet:pass the index); // For edit any doctor
+      }),
     );
   }
 }
