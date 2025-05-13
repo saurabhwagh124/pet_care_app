@@ -30,7 +30,7 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
     {
       'icon': Icons.delivery_dining,
       'title': 'Orders',
-      'route': '/UserManagementScreen'
+      'route': '/DeliveryScreen'
     },
     {
       'icon': Icons.video_collection,

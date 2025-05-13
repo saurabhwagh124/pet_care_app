@@ -100,18 +100,21 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
           ),
           SizedBox(height: 16.h),
           // Individual Reviews
-          Obx(() => Expanded(
-                child: (reviewController.reviewApiStatus.value ==
-                        ApiStatus.SUCCESS)
-                    ? ListView.builder(
-                        itemBuilder: (context, index) => ReviewCard(
-                            data: reviewController.reviewsList[index]),
-                        itemCount: reviewController.reviewsList.length)
-                    : (reviewController.reviewApiStatus.value ==
-                            ApiStatus.LOADING)
-                        ? const Center(child: CircularProgressIndicator())
-                        : const Center(child: Text('No Reviews Found!')),
-              ))
+          Obx(() {
+            final list = reviewController.reviewsList;
+            return Expanded(
+              child:
+                  (reviewController.reviewApiStatus.value == ApiStatus.SUCCESS)
+                      ? ListView.builder(
+                          itemBuilder: (context, index) =>
+                              ReviewCard(data: list[index]),
+                          itemCount: list.length)
+                      : (reviewController.reviewApiStatus.value ==
+                              ApiStatus.LOADING)
+                          ? const Center(child: CircularProgressIndicator())
+                          : const Center(child: Text('No Reviews Found!')),
+            );
+          })
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(

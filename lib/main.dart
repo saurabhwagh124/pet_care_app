@@ -16,10 +16,11 @@ import 'package:pet_care_app/controller/user_controller.dart';
 import 'package:pet_care_app/controller/user_pet_controller.dart';
 import 'package:pet_care_app/controller/vet_doc_controller.dart';
 import 'package:pet_care_app/service/notification_service.dart';
-import 'package:pet_care_app/view/DeliveryScreen.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/view/add_notifications_screen.dart';
 import 'package:pet_care_app/view/admin_dashboard_screen.dart';
 import 'package:pet_care_app/view/boardingmanagement.dart';
+import 'package:pet_care_app/view/delivery_screen.dart';
 import 'package:pet_care_app/view/servicescreen.dart';
 import 'package:pet_care_app/view/shop_item_screen.dart';
 import 'package:pet_care_app/view/splash_screen.dart';
@@ -57,26 +58,27 @@ class MainApp extends StatelessWidget {
         return GetMaterialApp(
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.orange, brightness: Brightness.light),
+                seedColor: AppColors.yellowCircle,
+                brightness: Brightness.light),
             textTheme: TextTheme(
               titleLarge: GoogleFonts.fredoka(
                 textStyle: TextStyle(
                   fontSize: 20.sp,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.normal,
                   color: Colors.white,
                 ),
               ),
               titleMedium: GoogleFonts.fredoka(
                 textStyle: TextStyle(
                   fontSize: 18.sp,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.normal,
                   color: Colors.black,
                 ),
               ),
               bodyMedium: GoogleFonts.fredoka(
                 textStyle: TextStyle(
                   fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.normal,
                   color: Colors.black,
                 ),
               ),
@@ -110,7 +112,8 @@ class MainApp extends StatelessWidget {
             // GetPage(
             //     name: '/AppointmentsScreen',
             //     page: () => const AppointmentsScreen()),
-            GetPage(name: '/DeliveryScreen', page: () => Deliveryscreen()),
+            GetPage(
+                name: '/DeliveryScreen', page: () => const DeliveryScreen()),
             GetPage(
                 name: '/ServicesScreen', page: () => const ServicesScreen()),
             GetPage(
@@ -125,7 +128,7 @@ class MainApp extends StatelessWidget {
             GetPage(name: '/AddressPage', page: () => const AddressPage()),
             GetPage(
                 name: '/OrdersHistoryScreen',
-                page: () => const OrdersHistoryScreen())
+                page: () => const OrdersHistoryScreen()),
           ],
         );
       },
