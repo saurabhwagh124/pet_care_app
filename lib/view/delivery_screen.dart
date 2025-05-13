@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/orders_controller.dart';
+import 'package:pet_care_app/model/orders_model.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/widgets/admin/order_management_card.dart';
 
@@ -15,6 +16,7 @@ class DeliveryScreen extends StatefulWidget {
 class _DeliveryScreenState extends State<DeliveryScreen> {
   final controller = Get.find<OrdersController>();
   RxString filter = "".obs;
+  RxList<OrdersModel> mainList = RxList<OrdersModel>();
 
   @override
   void initState() {
@@ -79,29 +81,28 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
               ),
               Expanded(
                 child: Obx(() {
-                  final list = controller.orders;
                   final value = filter.value;
                   switch (value) {
                     case "All":
-                      list.value = controller.orders;
+                      mainList.value = controller.orders.toList();
                       break;
                     case "PENDING":
-                      list.value = controller.orders
-                          .where((element) => element.status == "PENDING")
+                      mainList.value = controller.orders
+                          .where((element) => element.status == ("PENDING"))
                           .toList();
                       break;
                     case "SHIPPED":
-                      list.value = controller.orders
+                      mainList.value = controller.orders
                           .where((element) => element.status == "SHIPPED")
                           .toList();
                       break;
                     case "DELIVERED":
-                      list.value = controller.orders
+                      mainList.value = controller.orders
                           .where((element) => element.status == "DELIVERED")
                           .toList();
                       break;
                     case "CANCELLED":
-                      list.value = controller.orders
+                      mainList.value = controller.orders
                           .where((element) => element.status == "CANCELLED")
                           .toList();
                       break;
@@ -113,15 +114,17 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                       ),
                     );
                   }
-                  if (list.isEmpty) {
+                  if (mainList.isEmpty) {
                     return const Center(
                       child: Text("No Orders"),
                     );
                   } else {
                     return ListView.builder(
-                      itemBuilder: (context, index) =>
-                          OrderManagementCard(order: list[index]),
-                      itemCount: list.length,
+                      itemBuilder: (context, index) => OrderManagementCard(
+                        order: mainList[index],
+                        index: index,
+                      ),
+                      itemCount: mainList.length,
                     );
                   }
                 }),

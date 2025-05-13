@@ -28,7 +28,6 @@ class _OrdersDetailPageState extends State<OrdersDetailPage> {
   @override
   void dispose() {
     super.dispose();
-    controller.dispose();
   }
 
   @override
@@ -137,7 +136,7 @@ class _OrdersDetailPageState extends State<OrdersDetailPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text("Total Items: ${widget.order.orderItemsList.length}"),
-                  Text("Total Price: ${widget.order.totalPrice}")
+                  Text("Total Price: ₹${widget.order.totalPrice}")
                 ],
               )
             ],
@@ -148,15 +147,17 @@ class _OrdersDetailPageState extends State<OrdersDetailPage> {
   }
 
   Color _getStatusColor(String status) {
-    switch (status.toUpperCase()) {
-      case 'CONFIRMED':
-        return Colors.green;
-      case 'PENDING':
+    switch (status) {
+      case "PENDING":
         return Colors.orange;
-      case 'CANCELLED':
+      case "SHIPPED":
+        return Colors.blue;
+      case "DELIVERED":
+        return Colors.green;
+      case "CANCELLED":
         return Colors.red;
       default:
-        return Colors.grey; // Default color
+        return Colors.grey;
     }
   }
 
@@ -182,7 +183,7 @@ class _OrdersDetailPageState extends State<OrdersDetailPage> {
               style: TextStyle(overflow: TextOverflow.ellipsis),
             ),
           ),
-          Text(data.discountedPrice.toString(),
+          Text("₹${data.discountedPrice.toString()}",
               style: TextStyle(overflow: TextOverflow.ellipsis)),
         ],
       ),

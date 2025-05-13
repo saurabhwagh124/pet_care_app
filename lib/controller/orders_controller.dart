@@ -30,4 +30,15 @@ class OrdersController extends GetxController {
       log(e.toString());
     }
   }
+
+  void updateOrder(OrdersModel updatedOrder, int index) async {
+    try {
+      isLoading.value = true;
+      orders.add(await service.updateOrder(updatedOrder));
+      orders.removeAt(index);
+      isLoading.value = false;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }

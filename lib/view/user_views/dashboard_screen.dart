@@ -33,9 +33,9 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   bool nightMode = false;
   final controller = Get.find<AppointmentController>();
-  final notificationService = NotificationService();
-  final userPetController = UserPetController();
-  final shopController = ShopController();
+  final notificationService = Get.find<NotificationService>();
+  final userPetController = Get.find<UserPetController>();
+  final shopController = Get.find<ShopController>();
   final auth = AuthService();
   final User? user = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 0;
@@ -264,7 +264,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               width: 10.w,
                             ),
                             Text(
-                              "Schedule Appointements",
+                              "Schedule Appointments",
                               style: GoogleFonts.fredoka(
                                   fontSize: 20.sp, fontWeight: FontWeight.w700),
                             )
@@ -308,6 +308,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       height: 20.h,
                     ),
                     Obx(() {
+                      if (shopController.isLoading.value) {
+                        return Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.green,
+                          ),
+                        );
+                      }
                       if (shopController.foodList.isEmpty) {
                         return Center(
                           child: Text(

@@ -13,7 +13,10 @@ class ConfirmedAppointmentsDashboardWidget extends StatelessWidget {
 
     return Obx(() {
       if (_controller.isLoading.value) {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(
+            child: CircularProgressIndicator(
+          color: Colors.green,
+        ));
       }
 
       final confirmedDoctorAppointments = _controller.docAppointmentList

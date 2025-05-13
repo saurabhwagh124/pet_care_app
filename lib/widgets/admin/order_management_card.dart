@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:pet_care_app/controller/orders_controller.dart';
 import 'package:pet_care_app/model/orders_model.dart';
 
 class OrderManagementCard extends StatefulWidget {
   final OrdersModel order;
-  final Function(OrdersModel updatedOrder)?
-      onUpdate; // Callback for when update is pressed
+  final int index;
 
   const OrderManagementCard({
     super.key,
     required this.order,
-    this.onUpdate,
+    required this.index,
   });
 
   @override
@@ -20,6 +21,7 @@ class OrderManagementCard extends StatefulWidget {
 class _OrderManagementCardState extends State<OrderManagementCard> {
   late OrderStatus _selectedStatus;
   late TextEditingController _remarksController;
+  final controller = Get.find<OrdersController>();
   final _formKey = GlobalKey<FormState>();
 
   // Helper to convert OrderStatus enum to String
@@ -66,18 +68,13 @@ class _OrderManagementCardState extends State<OrderManagementCard> {
         status: _statusToString(_selectedStatus),
         createdAt: widget.order.createdAt,
       );
-
-      // You might want to update the original order object directly
-      // if that's how your state management is set up:
-      // widget.order.status = _statusToString(_selectedStatus);
-      // widget.order.remarks = _remarksController.text.trim();
-
-      if (widget.onUpdate != null) {
-        widget.onUpdate!(updatedOrder);
-      }
+      controller.updateOrder(updatedOrder, widget.index);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Order ID ${widget.order.id} updated locally')),
+        SnackBar(
+          content: Text('Order ID ${widget.order.id} updated'),
+          backgroundColor: Colors.orangeAccent,
+        ),
       );
     }
   }

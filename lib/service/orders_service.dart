@@ -51,4 +51,24 @@ class OrdersService extends GetxService {
       throw Exception(e.toString());
     }
   }
+
+  Future<OrdersModel> updateOrder(OrdersModel updatedOrder) async {
+    token = await FirebaseAuth.instance.currentUser!.getIdToken() ?? "";
+    final headers = {
+      "Authorization": "Bearer $token",
+      "Content-Type": "application/json"
+    };
+    try {
+      final response = await http.put(Uri.parse(ApiEndpoints.putOrderEditUrl),
+          headers: headers, body: jsonEncode(updatedOrder));
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final data = jsonDecode(response.body);
+        return OrdersModel.fromJson(data);
+      } else {
+        throw Exception("Failed to load data: ${response.statusCode} ");
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

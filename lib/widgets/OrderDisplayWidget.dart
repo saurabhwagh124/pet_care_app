@@ -11,16 +11,19 @@ class OrderDisplayWidget extends StatelessWidget {
   const OrderDisplayWidget({super.key, required this.order});
 
   // Helper function to determine status color (from user's code)
+
   Color _getStatusColor(String status) {
-    switch (status.toUpperCase()) {
-      case 'CONFIRMED':
-        return Colors.green;
-      case 'PENDING':
+    switch (status) {
+      case "PENDING":
         return Colors.orange;
-      case 'CANCELLED':
+      case "SHIPPED":
+        return Colors.blue;
+      case "DELIVERED":
+        return Colors.green;
+      case "CANCELLED":
         return Colors.red;
       default:
-        return Colors.grey; // Default color
+        return Colors.grey;
     }
   }
 
@@ -68,7 +71,7 @@ class OrderDisplayWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    backgroundColor: _getStatusColor(order.status!),
+                    backgroundColor: _getStatusColor(order.status ?? ""),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8, vertical: 2), // Adjust padding
                     labelPadding: EdgeInsets

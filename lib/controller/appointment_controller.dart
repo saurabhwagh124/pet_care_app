@@ -8,8 +8,8 @@ import 'package:pet_care_app/model/boarding_model.dart';
 import 'package:pet_care_app/model/doctor_appointment_model.dart';
 import 'package:pet_care_app/model/pet_services_model.dart';
 import 'package:pet_care_app/model/service_appointment_model.dart';
-import 'package:pet_care_app/model/users.dart';
 import 'package:pet_care_app/model/user_pet_model.dart';
+import 'package:pet_care_app/model/users.dart';
 import 'package:pet_care_app/model/vet_doc_model.dart';
 import 'package:pet_care_app/service/appointments_service.dart';
 import 'package:pet_care_app/utils/user_data.dart';
@@ -123,7 +123,7 @@ class AppointmentController extends GetxController {
     docAppointmentList.value = allAppointments!.doctor.reversed.toList();
     boardingAppointmentList.value = allAppointments!.boarding.reversed.toList();
     serviceAppointmentList.value = allAppointments!.service.reversed.toList();
-    log("All Appointments is null ${allAppointments.toString()}");
+    // log("All Appointments is null ${allAppointments.toString()}");
     isLoading.value = false;
   }
 
