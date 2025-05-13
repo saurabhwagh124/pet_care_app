@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'package:pet_care_app/model/doctor_appointment_model.dart';
-import 'package:pet_care_app/model/vet_doc_model.dart';
 
 class DoctorAppointmentCard extends StatelessWidget {
   final DoctorAppointmentModel appointment;
