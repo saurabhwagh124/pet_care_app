@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/pet_services_controller.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
+import 'package:pet_care_app/widgets/admin/add_edit_pet_services.dart';
 import 'package:pet_care_app/widgets/pet_services_card_widget.dart';
 
 class ServicesScreen extends StatefulWidget {
@@ -57,6 +58,16 @@ class _ServicesScreenState extends State<ServicesScreen> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          builder: (_) => const AddEditPetServiceSheet(),
+        );
+      }),
     );
   }
 

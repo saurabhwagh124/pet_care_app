@@ -10,6 +10,13 @@ class ConfirmedAppointmentsDashboardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _controller.fetchAllAppointments();
+    final confirmedDoctorAppointments = _controller.docAppointmentList
+        .where((appointment) => appointment.status == 'CONFIRMED')
+        .toList();
+
+    confirmedDoctorAppointments.sort((a, b) {
+      return (a.appointmentId ?? 0).compareTo(b.appointmentId ?? 0);
+    });
 
     return Obx(() {
       if (_controller.isLoading.value) {
@@ -18,10 +25,6 @@ class ConfirmedAppointmentsDashboardWidget extends StatelessWidget {
           color: Colors.green,
         ));
       }
-
-      final confirmedDoctorAppointments = _controller.docAppointmentList
-          .where((appointment) => appointment.status == 'CONFIRMED')
-          .toList();
 
       if (confirmedDoctorAppointments.isEmpty) {
         return const Center(
