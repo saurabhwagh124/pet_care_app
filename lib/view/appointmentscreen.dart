@@ -50,6 +50,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
         backgroundColor: AppColors.yellowCircle,
       ),
       body: getAppointments(),
+      
     );
   }
 
