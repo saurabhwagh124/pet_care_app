@@ -19,8 +19,10 @@ class _AddressPageState extends State<AddressPage> {
 
   @override
   void initState() {
-    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     controller.fetchUserAddress();
+    });
+    super.initState();
   }
 
   @override
@@ -39,20 +41,20 @@ class _AddressPageState extends State<AddressPage> {
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.h, vertical: 20.h),
-        child: Obx(() => ListView.builder(
-              itemBuilder: (context, index) => AddressCard(
-                address: controller.addressList[index],
-                onDelete: () {
-                  controller.deleteUserAddress(
-                      controller.addressList.elementAt(index).id ?? 0);
-                  controller.addressList.removeAt(index);
-                },
-              ),
-              itemCount: controller.addressList.length,
-            )),
-      ),
+      body: Obx((){
+        return ListView.builder(
+          itemBuilder: (context, index) => AddressCard(
+            address: controller.addressList[index],
+            onDelete: () {
+              controller.deleteUserAddress(
+                  controller.addressList.elementAt(index).id ?? 0);
+              controller.addressList.removeAt(index);
+            },
+          ),
+          itemCount: controller.addressList.length,
+        );
+
+      }),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.orangeAccent,
         onPressed: () {
@@ -147,12 +149,13 @@ class _AddressPageState extends State<AddressPage> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orangeAccent,
                     minimumSize: const Size(double.infinity, 48),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text("Save Address"),
+                  child: const Text("Save Address", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Colors.white),),
                 ),
                 const SizedBox(height: 16),
               ],

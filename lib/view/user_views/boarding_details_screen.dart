@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pet_care_app/model/boarding_model.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
@@ -11,9 +11,13 @@ import 'package:pet_care_app/utils/user_data.dart';
 import 'package:pet_care_app/view/appointmentscreen.dart';
 import 'package:pet_care_app/view/user_views/book_appointment_screen.dart';
 import 'package:pet_care_app/view/user_views/review_screen.dart';
+import 'package:pet_care_app/widgets/admin/add_edit_boarding.dart';
+
+import '../../controller/boarding_controller.dart';
 
 class BoardingDetailsScreen extends StatefulWidget {
   final BoardingModel data;
+
   const BoardingDetailsScreen({super.key, required this.data});
 
   @override
@@ -21,6 +25,7 @@ class BoardingDetailsScreen extends StatefulWidget {
 }
 
 class _BoardingDetailsScreen extends State<BoardingDetailsScreen> {
+  final controller = Get.find<BoardingController>();
   bool isAdmin = false;
 
   @override
@@ -213,7 +218,56 @@ class _BoardingDetailsScreen extends State<BoardingDetailsScreen> {
               ),
               SizedBox(
                 height: 50.h,
-              )
+              ),
+              isAdmin
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: 30,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Get.to(() => AddEditBoardingScreen(
+                                  boarding: widget.data,
+                                ));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 12,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: const Text(
+                            "Edit",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            controller.deleteBoarding(widget.data.id ?? 0);
+                            Get.back();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.redAccent,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 12,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: const Text(
+                            "Delete",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
         ));
@@ -296,78 +350,6 @@ class _BoardingDetailsScreen extends State<BoardingDetailsScreen> {
           ],
         ),
       ),
-    );
-  }
-
-// bottom sheet
-
-  void _showEditBottomSheet(BoardingModel model) {
-    final nameController = TextEditingController(text: model.name);
-    final emailController = TextEditingController(text: model.email);
-    final contactController = TextEditingController(text: model.contact);
-    final addressController = TextEditingController(text: model.address);
-    final feesController = TextEditingController(text: model.fees.toString());
-    final startDayController = TextEditingController(text: model.startDay);
-    final endDayController = TextEditingController(text: model.endDay);
-
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-            left: 20,
-            right: 20,
-            top: 20,
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Text("Edit Boarding Service",
-                    style: GoogleFonts.fredoka(
-                        fontSize: 18, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 10),
-                _buildTextField("Name", nameController),
-                _buildTextField("Email", emailController),
-                _buildTextField("Contact", contactController),
-                _buildTextField("Address", addressController),
-                _buildTextField("Fees", feesController,
-                    keyboardType: TextInputType.number),
-                _buildTextField("Start Day", startDayController),
-                _buildTextField("End Day", endDayController),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    // You can add form validation and API call here
-                    log("Updated data:");
-                    log("Name: ${nameController.text}");
-                    log("Email: ${emailController.text}");
-                    log("Contact: ${contactController.text}");
-                    log("Address: ${addressController.text}");
-                    log("Fees: ${feesController.text}");
-                    log("Start Day: ${startDayController.text}");
-                    log("End Day: ${endDayController.text}");
-
-                    Navigator.pop(context); // Close bottom sheet
-
-                    // Optionally update UI / call backend here
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(245, 146, 69, 1),
-                  ),
-                  child: const Text("Update",
-                      style: TextStyle(color: Colors.white)),
-                ),
-                const SizedBox(height: 20),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 

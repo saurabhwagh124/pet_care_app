@@ -16,13 +16,15 @@ class VeterniaryTabView extends StatefulWidget {
 }
 
 class _VeterniaryTabViewState extends State<VeterniaryTabView> {
-  final VetDocController _vetDocController = VetDocController();
+  final _vetDocController = Get.find<VetDocController>();
   Timer? vetDocTimer;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     _vetDocController.fetchVetDocs();
+    });
     // getId();
   }
 
@@ -47,9 +49,9 @@ class _VeterniaryTabViewState extends State<VeterniaryTabView> {
       final search = _vetDocController.search.value;
       final list = _vetDocController.vetDoctorsList
           .where((element) =>
-              (element.name ?? "").toLowerCase().contains(search.toLowerCase()))
+              element.name!.toLowerCase().contains(search.toLowerCase()))
           .toList();
-      return ListView.separated(
+      return (list.isEmpty) ?const Center(child: Text("No Vets Found", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),) : ListView.separated(
         separatorBuilder: (context, index) => SizedBox(
           height: 10.h,
         ),
@@ -58,11 +60,5 @@ class _VeterniaryTabViewState extends State<VeterniaryTabView> {
         itemCount: list.length,
       );
     });
-  }
-
-  void getId() async {
-    final user = FirebaseAuth.instance.currentUser!;
-    final id = await user.getIdToken();
-    log(id ?? "");
   }
 }

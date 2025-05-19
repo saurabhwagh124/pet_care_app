@@ -43,11 +43,13 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     fetchTimeSlots();
     userPetController.fetchUserPets();
     if (userPetController.userPetList.isNotEmpty) {
       selectedPet = userPetController.userPetList.first.name!;
     }
+    });
   }
 
   @override

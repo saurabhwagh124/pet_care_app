@@ -12,6 +12,7 @@ class AppointmentsScreen extends StatefulWidget {
   final bool isBoarding;
   final bool isDoctor;
   final bool isService;
+
   const AppointmentsScreen(
       {super.key,
       required this.id,
@@ -29,20 +30,26 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
   @override
   void initState() {
     super.initState();
-    if (widget.isBoarding) {
-      controller.fetchBoardingAppointments(widget.id);
-    } else if (widget.isDoctor) {
-      controller.fetchDoctorAppointments(widget.id);
-    } else {
-      controller.fetchServiceAppointments(widget.id);
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.isBoarding) {
+        controller.fetchBoardingAppointments(widget.id);
+      } else if (widget.isDoctor) {
+        controller.fetchDoctorAppointments(widget.id);
+      } else {
+        controller.fetchServiceAppointments(widget.id);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Scheduled Appointments"),
+        title: const Text(
+          "Scheduled Appointments",
+          style: TextStyle(
+              fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
+        ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
           onPressed: () => Get.back(),
@@ -50,7 +57,6 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
         backgroundColor: AppColors.yellowCircle,
       ),
       body: getAppointments(),
-      
     );
   }
 
@@ -65,19 +71,29 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             ),
           );
         } else {
-          return ListView.builder(
-            itemBuilder: (context, index) => BoardingAppointmentCard(
-                appointment: list[index],
-                onApprove: () {
-                  controller.confirmBoarding(
-                      list[index].appointmentId ?? 0, index);
-                },
-                onCancel: () {
-                  controller.cancelBoarding(
-                      list[index].appointmentId ?? 0, index);
-                }),
-            itemCount: list.length,
-          );
+          return (list.isEmpty)
+              ? const Center(
+                  child: Text(
+                    "No Appointments",
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black),
+                  ),
+                )
+              : ListView.builder(
+                  itemBuilder: (context, index) => BoardingAppointmentCard(
+                      appointment: list[index],
+                      onApprove: () {
+                        controller.confirmBoarding(
+                            list[index].appointmentId ?? 0, index);
+                      },
+                      onCancel: () {
+                        controller.cancelBoarding(
+                            list[index].appointmentId ?? 0, index);
+                      }),
+                  itemCount: list.length,
+                );
         }
       } else if (widget.isDoctor) {
         final list = controller.docAppointmentList;
@@ -88,19 +104,29 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             ),
           );
         } else {
-          return ListView.builder(
-            itemBuilder: (context, index) => DoctorAppointmentCard(
-                appointment: list[index],
-                onApprove: () {
-                  controller.confirmDoctor(
-                      list[index].appointmentId ?? 0, index);
-                },
-                onCancel: () {
-                  controller.cancelDoctor(
-                      list[index].appointmentId ?? 0, index);
-                }),
-            itemCount: list.length,
-          );
+          return (list.isEmpty)
+              ? const Center(
+                  child: Text(
+                    "No Appointments",
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black),
+                  ),
+                )
+              : ListView.builder(
+                  itemBuilder: (context, index) => DoctorAppointmentCard(
+                      appointment: list[index],
+                      onApprove: () {
+                        controller.confirmDoctor(
+                            list[index].appointmentId ?? 0, index);
+                      },
+                      onCancel: () {
+                        controller.cancelDoctor(
+                            list[index].appointmentId ?? 0, index);
+                      }),
+                  itemCount: list.length,
+                );
         }
       } else {
         final list = controller.serviceAppointmentList;
@@ -111,19 +137,29 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             ),
           );
         } else {
-          return ListView.builder(
-            itemBuilder: (context, index) => ServiceAppointmentCard(
-                appointment: list[index],
-                onApprove: () {
-                  controller.confirmService(
-                      list[index].appointmentId ?? 0, index);
-                },
-                onCancel: () {
-                  controller.cancelService(
-                      list[index].appointmentId ?? 0, index);
-                }),
-            itemCount: list.length,
-          );
+          return (list.isEmpty)
+              ? const Center(
+                  child: Text(
+                    "No Appointments",
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black),
+                  ),
+                )
+              : ListView.builder(
+                  itemBuilder: (context, index) => ServiceAppointmentCard(
+                      appointment: list[index],
+                      onApprove: () {
+                        controller.confirmService(
+                            list[index].appointmentId ?? 0, index);
+                      },
+                      onCancel: () {
+                        controller.cancelService(
+                            list[index].appointmentId ?? 0, index);
+                      }),
+                  itemCount: list.length,
+                );
         }
       }
     });

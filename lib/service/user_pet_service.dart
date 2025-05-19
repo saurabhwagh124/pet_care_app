@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:pet_care_app/model/user_pet_model.dart';
@@ -63,6 +64,23 @@ class UserPetService extends GetxService {
       }
     } catch (e) {
       throw Exception("Edit Pet Api: $e");
+    }
+  }
+
+  void deletePet(int id) async{
+    try{
+      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
+      final url = ApiEndpoints.deleteUserPetUrl.replaceAll("{id}", id.toString());
+      final response = await http.delete(Uri.parse(url));
+      if(response.statusCode == 200){
+        Get.snackbar("Deleted", "pet deleted successfully",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red.withOpacity(0.5),
+          colorText: Colors.white,
+        );
+      }
+    }catch(e){
+      throw Exception("Error deleting pet: $e");
     }
   }
 }

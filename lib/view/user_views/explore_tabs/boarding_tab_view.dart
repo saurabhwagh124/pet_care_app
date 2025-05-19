@@ -17,7 +17,9 @@ class _BoardingTabViewState extends State<BoardingTabView> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     _boardingController.fetchBoardings();
+    });
     super.initState();
   }
 
@@ -29,7 +31,7 @@ class _BoardingTabViewState extends State<BoardingTabView> {
           .where((element) =>
               element.name!.toLowerCase().contains(search.toLowerCase()))
           .toList();
-      return ListView.builder(
+      return (list.isEmpty) ?const Center(child: Text("No Boardings Found", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),) : ListView.builder(
         scrollDirection: Axis.vertical,
         itemBuilder: (context, index) => BoardingCard(data: list[index]),
         itemCount: list.length,

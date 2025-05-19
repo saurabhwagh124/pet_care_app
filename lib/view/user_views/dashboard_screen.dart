@@ -48,10 +48,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     userPetController.fetchUserPets();
     notificationService.getFcmtoken();
     shopController.fetchFoodProducts();
-    controller.fetchAllAppointments();
+    });
     super.initState();
   }
 
@@ -207,17 +208,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   )
                                 ],
                               )
-                            : (userPetController.userPetListStatus ==
-                                    ApiStatus.LOADING)
+                            : (userPetController.isLoading.value)
                                 ? Center(
                                     child: CircularProgressIndicator(
                                       color: Colors.greenAccent,
                                       strokeWidth: 4.sp,
                                     ),
                                   )
-                                : (userPetController.userPetListStatus ==
-                                        ApiStatus.SUCCESS)
-                                    ? ListView.separated(
+                                : ListView.separated(
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder: (context, index) =>
                                             UserPetWidgetIcon(
@@ -229,9 +227,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                               width: 10.h,
                                             ),
                                         itemCount: userPetController
-                                            .userPetList.length)
-                                    : const SnackBar(
-                                        content: Text("Something went wrong"))),
+                                            .userPetList.length)),
                       ),
                     )
                   ],
@@ -258,7 +254,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           children: [
                             SizedBox(
                               height: 25.h,
-                              child: Icon(Icons.schedule_outlined),
+                              child: const Icon(Icons.schedule_outlined),
                             ),
                             SizedBox(
                               width: 10.w,
@@ -271,7 +267,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ],
                         ),
                       ),
-                      Expanded(child: ConfirmedAppointmentsDashboardWidget()),
+                      Expanded(child: ConfirmedAppointmentsWidget()),
                     ],
                   )),
               const SizedBox(height: 20),
@@ -309,7 +305,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     Obx(() {
                       if (shopController.isLoading.value) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(
                             color: Colors.green,
                           ),

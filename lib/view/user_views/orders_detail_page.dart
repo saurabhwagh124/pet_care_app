@@ -20,9 +20,11 @@ class _OrdersDetailPageState extends State<OrdersDetailPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     List<int> list =
         widget.order.orderItemsList.map((e) => e.itemId ?? 0).toList();
     controller.fetchOrderItems(list);
+    });
   }
 
   @override

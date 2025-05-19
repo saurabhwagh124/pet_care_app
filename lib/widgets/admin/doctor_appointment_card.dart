@@ -93,11 +93,17 @@ class DoctorAppointmentCard extends StatelessWidget {
               'Time:',
               appointment.time ?? 'N/A',
             ),
-            if (appointment.doctor != null)
+            // if (appointment.doctor != null)
+            //   _buildInfoRow(
+            //     Icons.medical_services_outlined,
+            //     'Doctor:',
+            //     '${appointment.doctor?.name ?? 'Details N/A'}',
+            //   ),
+            if (appointment.pet != null)
               _buildInfoRow(
-                Icons.medical_services_outlined,
-                'Doctor:',
-                '${appointment.doctor?.name ?? 'Details N/A'}',
+                Icons.pets_outlined,
+                'Pet Breed:',
+                '${appointment.pet?.breed ?? 'Details N/A'}',
               ),
             if (isPending) ...[
               const SizedBox(height: 16.0),

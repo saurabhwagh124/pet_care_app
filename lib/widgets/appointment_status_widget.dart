@@ -20,7 +20,7 @@ class AppointmentStatusWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(5.sp),
       height: 40.h,
-      padding: const EdgeInsets.symmetric(horizontal: 12),
+      padding:  EdgeInsets.symmetric(horizontal: 10.w),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
@@ -34,23 +34,27 @@ class AppointmentStatusWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
-          Text(
-            getName(),
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
-          Text(
-            DateFormat('dd MMM, yyyy').format(getDate()), // Formats date
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
-          ),
-          Text(
-            getTime(),
-            style: const TextStyle(fontSize: 12, color: Colors.black),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                getName(),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+              Text(
+                DateFormat('dd MMM, yyyy').format(getDate()), // Formats date
+                style: const TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+              Text(
+                getTime(),
+                style: const TextStyle(fontSize: 12, color: Colors.black),
+              ),
+            ],
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -92,7 +96,8 @@ class AppointmentStatusWidget extends StatelessWidget {
     }
   }
 
-  String getTime() {
+  String
+  getTime() {
     if (isDoc) {
       return doctor!.time!;
     } else if (isService) {

@@ -39,7 +39,13 @@ class _AddNotificationsScreenState extends State<AddNotificationsScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text("Add Notifications"),
+        title: Text(
+          "Add Notifications",
+          style: TextStyle(
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w600,
+              color: Colors.white),
+        ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
           onPressed: () => Get.back(),
@@ -52,29 +58,31 @@ class _AddNotificationsScreenState extends State<AddNotificationsScreen> {
           child: Column(
             spacing: 10.h,
             children: [
-              (image == null)
-                  ? SizedBox(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                              onPressed: _pickImages,
-                              icon: Icon(
-                                Icons.add_photo_alternate,
-                                color: Colors.blue,
-                                size: 40.sp,
-                              )),
-                          Text(
-                            "Add an image",
-                            style: TextStyle(
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                          )
-                        ],
-                      ),
+              SizedBox(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                        onPressed: _pickImages,
+                        icon: Icon(
+                          Icons.add_photo_alternate,
+                          color: Colors.blue,
+                          size: 40.sp,
+                        )),
+                    Text(
+                      "Add an image",
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
                     )
-                  : SizedBox(width: 50.w, child: Image.file(File(image!.path))),
+                  ],
+                ),
+              ),
+              (image == null)
+                  ? const SizedBox.shrink()
+                  : SizedBox(
+                      width: 100.w, child: Image.file(File(image!.path))),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.grey[200], // Light grey background
@@ -130,7 +138,9 @@ class _AddNotificationsScreenState extends State<AddNotificationsScreen> {
                       title: titleController.text,
                       body: bodyController.text,
                       image: photoUrl));
-                  image = null;
+                  setState(() {
+                    image = null;
+                  });
                   titleController.clear();
                   bodyController.clear();
                   Get.back();

@@ -28,9 +28,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     controller.fetchUserData(FirebaseAuth.instance.currentUser?.email ?? "");
     nameController.text = controller.finalUser.value?.displayName ?? "";
     numberController.text = controller.finalUser.value?.phoneNumber ?? "";
+    });
     super.initState();
   }
 

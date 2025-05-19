@@ -18,7 +18,9 @@ class _OrdersHistoryScreenState extends State<OrdersHistoryScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     controller.getAllOrders();
+    });
   }
 
   @override
@@ -42,6 +44,18 @@ class _OrdersHistoryScreenState extends State<OrdersHistoryScreen> {
         padding: const EdgeInsets.all(20),
         child: Obx(() {
           final list = controller.orders;
+          if (controller.isLoading.value) {
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.green,
+              ),
+            );
+          }
+          if (list.isEmpty) {
+            return const Center(
+              child: Text("No Orders Placed yet"),
+            );
+          }
           return ListView.builder(
               itemCount: list.length,
               itemBuilder: (context, index) =>

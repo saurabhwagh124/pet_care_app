@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pet_care_app/controller/user_pet_controller.dart';
@@ -25,20 +26,20 @@ class _AddPetsPageState extends State<AddPetsPage> {
   final _formKey = GlobalKey<FormState>();
   final uploadService = UploadService();
   String? photoUrl;
-  XFile? image;
+  ValueNotifier<XFile?> image = ValueNotifier<XFile?>(null);
   final _picker = ImagePicker();
 
   Future<void> _pickImages() async {
     final XFile? pickedFiles =
         await _picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      image = pickedFiles;
-    });
+      image.value = pickedFiles;
   }
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     userPetController.fetchUserPets();
+    });
     super.initState();
   }
 
@@ -86,10 +87,17 @@ class _AddPetsPageState extends State<AddPetsPage> {
                     onPressed: _pickImages,
                     icon: const Icon(Icons.add_photo_alternate_outlined),
                   ),
-                  (image == null)
-                      ? const SizedBox.shrink()
-                      : SizedBox(
-                          width: 50.w, child: Image.file(File(image!.path))),
+                  ValueListenableBuilder(
+                    valueListenable: image,
+                    builder: (context, value, child) {
+                      return (image.value == null)
+                          ? const SizedBox.shrink()
+                          : SizedBox(
+                              width: 100.w,
+                              child: Image.file(File(image.value!.path)),
+                            );
+                    },
+                  ),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.grey[200], // Light grey background
@@ -289,8 +297,8 @@ class _AddPetsPageState extends State<AddPetsPage> {
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        if (image != null) {
-                          photoUrl = await uploadService.uploadImage(image!);
+                        if (image.value != null) {
+                          photoUrl = await uploadService.uploadImage(image.value!);
                           addPet();
                           Navigator.pop(context);
                         } else {
@@ -349,38 +357,49 @@ class _AddPetsPageState extends State<AddPetsPage> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Obx(() => Align(
-                alignment: Alignment.centerLeft, // Ensures left alignment
-                child: (userPetController.userPetList.isEmpty)
-                    ? Text('No Pets Added',
-                        style: GoogleFonts.fredoka(
-                          textStyle: TextStyle(
-                              fontSize: 18.sp, fontWeight: FontWeight.w600),
-                        ))
-                    : Text('Added Pets',
-                        style: GoogleFonts.fredoka(
-                          textStyle: TextStyle(
-                              fontSize: 18.sp, fontWeight: FontWeight.w600),
-                        )))),
-          ),
-          Expanded(
-              child: Obx(() => GridView.builder(
-                  padding: EdgeInsets.all(10.sp),
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200.w,
-                      mainAxisSpacing: 20.h,
-                      crossAxisSpacing: 20.w,
-                      mainAxisExtent: 200.h),
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) => UserPetWidgetIcon(
-                        data: userPetController.userPetList[index],
-                      ),
-                  itemCount: userPetController.userPetList.length))),
-        ],
+      body: RefreshIndicator(
+        color: Colors.green,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Obx(() => Align(
+                  alignment: Alignment.centerLeft, // Ensures left alignment
+                  child: (userPetController.userPetList.isEmpty)
+                      ? Text('No Pets Added',
+                          style: GoogleFonts.fredoka(
+                            textStyle: TextStyle(
+                                fontSize: 18.sp, fontWeight: FontWeight.w600),
+                          ))
+                      : Text('Added Pets',
+                          style: GoogleFonts.fredoka(
+                            textStyle: TextStyle(
+                                fontSize: 18.sp, fontWeight: FontWeight.w600),
+                          )))),
+            ),
+            Expanded(
+                child: Obx(() {
+                  final length = userPetController.userPetList.length;
+                  final list = userPetController.userPetList;
+                  return GridView.builder(
+                      padding: EdgeInsets.all(10.sp),
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 200.w,
+                          mainAxisSpacing: 20.h,
+                          crossAxisSpacing: 20.w,
+                          mainAxisExtent: 200.h),
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: (context, index) =>
+                          UserPetWidgetIcon(
+                            data: list[index],
+                          ),
+                      itemCount: length);
+                }
+    )
+    ),
+          ],
+        ),
+        onRefresh: ()async{userPetController.fetchUserPets();},
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.grey[300],

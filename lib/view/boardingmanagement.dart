@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/boarding_controller.dart';
-import 'package:pet_care_app/model/boarding_model.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/widgets/admin/add_edit_boarding.dart';
 import 'package:pet_care_app/widgets/boarding_card.dart';
@@ -15,29 +14,14 @@ class BoardingManagementScreen extends StatefulWidget {
 }
 
 class _BoardingManagementState extends State<BoardingManagementScreen> {
-  final BoardingController _boardingController = BoardingController();
-
-  void showBoardingBottomSheet(BuildContext context,
-      {BoardingModel? boarding, int? index}) {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      context: context,
-      builder: (_) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        child: BoardingFormBottomSheet(boarding: boarding, index: index),
-      ),
-    );
-  }
+  final _boardingController = Get.find<BoardingController>();
 
   @override
   void initState() {
     super.initState();
-    _boardingController.fetchBoardings();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _boardingController.fetchBoardings();
+    });
   }
 
   @override
@@ -45,7 +29,11 @@ class _BoardingManagementState extends State<BoardingManagementScreen> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
-        title: Text("Boarding Management"),
+        title: const Text(
+          "Boarding Management",
+          style: TextStyle(
+              fontSize: 23, fontWeight: FontWeight.w600, color: Colors.white),
+        ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
           onPressed: () => Get.back(),
@@ -59,25 +47,37 @@ class _BoardingManagementState extends State<BoardingManagementScreen> {
           children: [
             SizedBox(height: 15.h),
             Expanded(
-              child: Obx(
-                () => _boardingController.boardingList.isEmpty
-                    ? const Center(child: CircularProgressIndicator())
-                    : ListView.separated(
-                        separatorBuilder: (context, index) =>
-                            SizedBox(height: 10.h),
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) => BoardingCard(
-                            data: _boardingController.boardingList[index]),
-                        itemCount: _boardingController.boardingList.length,
-                      ),
-              ),
+              child: Obx(() {
+                final list = _boardingController.boardingList;
+                return (_boardingController.isLoading.value)
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.green,
+                        ),
+                      )
+                    : list.isEmpty
+                        ? const Center(child: CircularProgressIndicator())
+                        : ListView.separated(
+                            separatorBuilder: (context, index) =>
+                                SizedBox(height: 10.h),
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) =>
+                                BoardingCard(data: list[index]),
+                            itemCount: list.length,
+                          );
+              }),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        showBoardingBottomSheet(context);
-      }),
+      floatingActionButton: FloatingActionButton(
+          child: const Icon(
+            Icons.add,
+            size: 30,
+          ),
+          onPressed: () {
+            Get.to(() => const AddEditBoardingScreen());
+          }),
     );
   }
 }

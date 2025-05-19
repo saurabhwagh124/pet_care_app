@@ -22,7 +22,9 @@ class _ServicesScreenState extends State<ServicesScreen> {
   @override
   void initState() {
     super.initState();
-    _controller.fetchAllPetServices();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _controller.fetchAllPetServices();
+    });
   }
 
   @override
@@ -35,7 +37,13 @@ class _ServicesScreenState extends State<ServicesScreen> {
           onPressed: () => Get.back(),
         ),
         backgroundColor: AppColors.yellowCircle,
-        title: Text("Services"),
+        title: Text(
+          "Services",
+          style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w500,
+              color: Colors.white),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -44,30 +52,43 @@ class _ServicesScreenState extends State<ServicesScreen> {
           children: [
             SizedBox(height: 15.h),
             Expanded(
-              child: Obx(
-                () => _controller.petServiceList.isEmpty
-                    ? const Center(child: CircularProgressIndicator())
-                    : ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) => PetServicesCardWidget(
-                            data: _controller.petServiceList[index]),
-                        itemCount: _controller.petServiceList.length,
-                      ),
-              ),
+              child: Obx(() {
+                final list = _controller.petServiceList;
+                return (_controller.isLoading.value)
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.green,
+                        ),
+                      )
+                    : _controller.petServiceList.isEmpty
+                        ? const Center(
+                            child: Text(
+                            "No services available",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black),
+                          ))
+                        : ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) =>
+                                PetServicesCardWidget(data: list[index]),
+                            itemCount: list.length,
+                          );
+              }),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-          ),
-          builder: (_) => const AddEditPetServiceSheet(),
-        );
-      }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(() => const AddEditPetServiceScreen());
+        },
+        child: const Icon(
+          Icons.add,
+          size: 30,
+        ),
+      ),
     );
   }
 

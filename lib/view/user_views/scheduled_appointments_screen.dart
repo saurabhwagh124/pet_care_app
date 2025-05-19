@@ -24,8 +24,10 @@ class _ScheduledAppointmentsScreenState
 
   @override
   void initState() {
-    controller.fetchAllAppointments();
-    log(controller.allAppointments.toString());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.fetchAllAppointments();
+      log(controller.allAppointments.toString());
+    });
     super.initState();
   }
 
