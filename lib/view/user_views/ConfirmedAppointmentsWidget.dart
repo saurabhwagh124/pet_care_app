@@ -1,24 +1,39 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/appointment_controller.dart';
 
-class ConfirmedAppointmentsDashboardWidget extends StatelessWidget {
-  ConfirmedAppointmentsDashboardWidget({Key? key}) : super(key: key);
+class ConfirmedAppointmentsWidget extends StatefulWidget {
+  const ConfirmedAppointmentsWidget({super.key});
 
-  final AppointmentController _controller = Get.find<AppointmentController>();
+  @override
+  State<ConfirmedAppointmentsWidget> createState() =>
+      _ConfirmedAppointmentsWidgetState();
+}
+
+class _ConfirmedAppointmentsWidgetState
+    extends State<ConfirmedAppointmentsWidget> {
+  final _controller = Get.find<AppointmentController>();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.fetchAllAppointments();
+    log(_controller.allAppointments.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
-    _controller.fetchAllAppointments();
-    final confirmedDoctorAppointments = _controller.docAppointmentList
-        .where((appointment) => appointment.status == 'CONFIRMED')
-        .toList();
-
-    confirmedDoctorAppointments.sort((a, b) {
-      return (a.appointmentId ?? 0).compareTo(b.appointmentId ?? 0);
-    });
-
     return Obx(() {
+      final confirmedDoctorAppointments = _controller.docAppointmentList
+          .where((appointment) => appointment.status == 'CONFIRMED')
+          .toList();
+
+      confirmedDoctorAppointments.sort((a, b) {
+        return (a.appointmentId ?? 0).compareTo(b.appointmentId ?? 0);
+      });
+
       if (_controller.isLoading.value) {
         return const Center(
             child: CircularProgressIndicator(

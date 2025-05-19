@@ -15,7 +15,7 @@ class DeliveryScreen extends StatefulWidget {
 
 class _DeliveryScreenState extends State<DeliveryScreen> {
   final controller = Get.find<OrdersController>();
-  RxString filter = "".obs;
+  RxString filter = "ALL".obs;
   RxList<OrdersModel> mainList = RxList<OrdersModel>();
 
   @override
@@ -63,11 +63,11 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                 borderSide: BorderSide(color: Colors.orange)),
                             border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.orange))),
-                        value: "All",
+                        value: "ALL",
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         menuMaxHeight: 200.h,
                         items: [
-                          dropDownItems("All"),
+                          dropDownItems("ALL"),
                           dropDownItems("PENDING"),
                           dropDownItems("CANCELLED"),
                           dropDownItems("DELIVERED"),
@@ -81,10 +81,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
               ),
               Expanded(
                 child: Obx(() {
-                  final value = filter.value;
-                  switch (value) {
-                    case "All":
-                      mainList.value = controller.orders.toList();
+                  switch (filter.value) {
+                    case "ALL":
+                      mainList.value = controller.orders;
                       break;
                     case "PENDING":
                       mainList.value = controller.orders
@@ -146,5 +145,3 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
     );
   }
 }
-
-enum OrderStatus { PENDING, SHIPPED, DELIVERED, CANCELLED }

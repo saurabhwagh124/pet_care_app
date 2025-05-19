@@ -51,7 +51,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     userPetController.fetchUserPets();
     notificationService.getFcmtoken();
     shopController.fetchFoodProducts();
-    controller.fetchAllAppointments();
     super.initState();
   }
 
@@ -258,7 +257,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           children: [
                             SizedBox(
                               height: 25.h,
-                              child: Icon(Icons.schedule_outlined),
+                              child: const Icon(Icons.schedule_outlined),
                             ),
                             SizedBox(
                               width: 10.w,
@@ -271,7 +270,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ],
                         ),
                       ),
-                      Expanded(child: ConfirmedAppointmentsDashboardWidget()),
+                      Expanded(child: ConfirmedAppointmentsWidget()),
                     ],
                   )),
               const SizedBox(height: 20),
@@ -309,7 +308,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     Obx(() {
                       if (shopController.isLoading.value) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(
                             color: Colors.green,
                           ),

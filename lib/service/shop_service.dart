@@ -57,7 +57,7 @@ class ShopService extends GetxService {
     }
   }
 
-  Future<List<OrdersModel>> getAllOrders(int id) async {
+  Future<List<OrdersModel>> getAllOrdersByUser(int id) async {
     try {
       String token =
           await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
