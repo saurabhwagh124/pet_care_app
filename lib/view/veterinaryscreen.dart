@@ -19,7 +19,9 @@ class _VeterinaryscreenState extends State<Veterinaryscreen> {
   @override
   void initState() {
     super.initState();
-    _vetDocController.fetchVetDocs();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _vetDocController.fetchVetDocs();
+    });
   }
 
   @override
@@ -32,7 +34,13 @@ class _VeterinaryscreenState extends State<Veterinaryscreen> {
           onPressed: () => Get.back(),
         ),
         backgroundColor: AppColors.yellowCircle,
-        title: const Text("Veterinary"),
+        title: Text(
+          "Veterinary",
+          style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w500,
+              color: Colors.white),
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -45,26 +53,29 @@ class _VeterinaryscreenState extends State<Veterinaryscreen> {
             ),
             SizedBox(height: 15.h),
             Expanded(
-              child: Obx(
-                () => _vetDocController.vetDoctorsList.isEmpty
+              child: Obx(() {
+                final list = _vetDocController.vetDoctorsList;
+                return (list.isEmpty)
                     ? const Center(child: CircularProgressIndicator())
                     : ListView.separated(
                         separatorBuilder: (context, index) =>
                             SizedBox(height: 10.h),
                         scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) => VetCardWidget(
-                            data: _vetDocController.vetDoctorsList[index]),
-                        itemCount: _vetDocController.vetDoctorsList.length,
-                      ),
-              ),
+                        itemBuilder: (context, index) =>
+                            VetCardWidget(data: list[index]),
+                        itemCount: list.length,
+                      );
+              }),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        showAddVetBottomSheet(context);
-        // showAddVetBottomSheet(context, vet:pass the index); // For edit any doctor
-      }),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add, size: 30.sp),
+          onPressed: () {
+            Get.to(() => const AddEditVetScreen());
+            // showAddVetBottomSheet(context, vet:pass the index); // For edit any doctor
+          }),
     );
   }
 }

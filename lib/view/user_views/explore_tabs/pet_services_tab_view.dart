@@ -18,7 +18,9 @@ class _PetServicesTabViewState extends State<PetServicesTabView> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     _controller.fetchAllPetServices();
+    });
     super.initState();
   }
 
@@ -30,7 +32,7 @@ class _PetServicesTabViewState extends State<PetServicesTabView> {
               .toLowerCase()
               .contains(vetController.search.value.toLowerCase()))
           .toList();
-      return ListView.builder(
+      return (list.isEmpty) ?const Center(child: Text("No Services Found", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),) : ListView.builder(
         scrollDirection: Axis.vertical,
         itemBuilder: (context, index) =>
             PetServicesCardWidget(data: list[index]),

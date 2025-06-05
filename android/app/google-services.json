@@ -38,6 +38,14 @@
           }
         },
         {
+          "client_id": "726567938075-m9459vt293g6kcdbmes5pss3t9i0mpvs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pet_care_app",
+            "certificate_hash": "f988f0c43367bdef28b25cb63dce2589d4abc58f"
+          }
+        },
+        {
           "client_id": "726567938075-n8aeevfjkkfcee0igulngrguptgh3kfr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -71,7 +79,8 @@
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-8462707009151961~2567582887"
     }
   ],
   "configuration_version": "1"

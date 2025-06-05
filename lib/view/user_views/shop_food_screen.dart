@@ -36,11 +36,13 @@ class _ShopFoodState extends State<ShopFood>
   @override
   void initState() {
     super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
     _tabController = TabController(
       length: shopController.category.length,
       vsync: this,
     );
     _tabController.addListener(_onTabChange);
+    // });
   }
 
   void _onTabChange() {

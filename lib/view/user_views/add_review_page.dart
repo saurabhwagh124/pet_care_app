@@ -38,9 +38,11 @@ class _AddReviewPageState extends State<AddReviewPage> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     final response = jsonDecode(_userData.read<String>("user")!);
     user = Users.fromJson(response);
     log("user data fetched: ${user.toString()}");
+    });
     super.initState();
   }
 

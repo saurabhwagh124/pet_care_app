@@ -30,8 +30,10 @@ class _ExploreScreenState extends State<ExploreScreen>
   @override
   void initState() {
     super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
     _tabController = TabController(length: screenList.length, vsync: this);
     _tabController.addListener(_onTabChange);
+    // });
   }
 
   void _onTabChange() {

@@ -29,10 +29,12 @@ class _CartScreenState extends State<CartScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     _razorPay = Razorpay();
     _razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
     _razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentFailed);
     _razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handlePaymentExternal);
+    });
   }
 
   @override

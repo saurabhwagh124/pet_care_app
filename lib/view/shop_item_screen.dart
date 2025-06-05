@@ -22,7 +22,9 @@ class _ShopItemScreenState extends State<ShopItemScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     shopController.fetchAllProducts();
+    });
   }
 
   @override

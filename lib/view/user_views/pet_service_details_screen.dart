@@ -3,17 +3,20 @@ import 'dart:developer';
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/controller/pet_services_controller.dart';
 import 'package:pet_care_app/model/pet_services_model.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/user_data.dart';
 import 'package:pet_care_app/view/appointmentscreen.dart';
 import 'package:pet_care_app/view/user_views/book_appointment_screen.dart';
 import 'package:pet_care_app/view/user_views/review_screen.dart';
+import 'package:pet_care_app/widgets/admin/add_edit_pet_services.dart';
 
 class PetServiceDetailsScreen extends StatefulWidget {
   final PetServicesModel data;
+
   const PetServiceDetailsScreen({super.key, required this.data});
 
   @override
@@ -21,6 +24,7 @@ class PetServiceDetailsScreen extends StatefulWidget {
 }
 
 class _PetServiceDetailsScreen extends State<PetServiceDetailsScreen> {
+  final controller = Get.find<PetServicesController>();
   bool isAdmin = false;
 
   @override
@@ -209,8 +213,57 @@ class _PetServiceDetailsScreen extends State<PetServiceDetailsScreen> {
                 ),
               ),
               SizedBox(
-                height: 50.h,
-              )
+                height: 30.h,
+              ),
+              isAdmin
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: 30,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Get.to(() => AddEditPetServiceScreen(
+                                  service: widget.data,
+                                ));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 12,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: const Text(
+                            "Edit",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            controller.deletePetService(widget.data.id ?? 0);
+                            Get.back();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.redAccent,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 12,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: const Text(
+                            "Delete",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
         ));

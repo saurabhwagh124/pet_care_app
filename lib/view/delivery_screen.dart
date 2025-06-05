@@ -20,7 +20,9 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     controller.getAllOrders();
+    });
     super.initState();
   }
 

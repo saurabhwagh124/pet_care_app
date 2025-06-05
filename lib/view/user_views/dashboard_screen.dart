@@ -48,9 +48,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     userPetController.fetchUserPets();
     notificationService.getFcmtoken();
     shopController.fetchFoodProducts();
+    });
     super.initState();
   }
 
@@ -206,17 +208,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   )
                                 ],
                               )
-                            : (userPetController.userPetListStatus ==
-                                    ApiStatus.LOADING)
+                            : (userPetController.isLoading.value)
                                 ? Center(
                                     child: CircularProgressIndicator(
                                       color: Colors.greenAccent,
                                       strokeWidth: 4.sp,
                                     ),
                                   )
-                                : (userPetController.userPetListStatus ==
-                                        ApiStatus.SUCCESS)
-                                    ? ListView.separated(
+                                : ListView.separated(
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder: (context, index) =>
                                             UserPetWidgetIcon(
@@ -228,9 +227,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                               width: 10.h,
                                             ),
                                         itemCount: userPetController
-                                            .userPetList.length)
-                                    : const SnackBar(
-                                        content: Text("Something went wrong"))),
+                                            .userPetList.length)),
                       ),
                     )
                   ],

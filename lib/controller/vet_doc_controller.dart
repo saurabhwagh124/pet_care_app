@@ -17,8 +17,6 @@ class VetDocController extends GetxController {
     }
   }
 
-  RxList<VetDocModel> vets = <VetDocModel>[].obs;
-
   // Map to track assigned appointments
   RxMap<String, String> appointments =
       <String, String>{}.obs; // {TimeSlot: VetName}
@@ -26,7 +24,7 @@ class VetDocController extends GetxController {
   // Add or Edit Veterinarian
   void add(VetDocModel vet) async {
     final response = await _vetDocService.addVet(vet);
-    vets.add(response!);
+    vetDoctorsList.add(response);
   }
 
   // Assign a vet to a specific time slot
@@ -49,6 +47,15 @@ class VetDocController extends GetxController {
 
   // Delete Veterinarian
   void deleteVet(VetDocModel vet) {
-    vets.remove(vet);
+    _vetDocService.deleteVet(vet.id ?? 0);
+    vetDoctorsList.removeWhere((element) => element.id! == vet.id!);
+  }
+
+  void editVet(VetDocModel vet) async {
+    final response = await _vetDocService.editVet(vet);
+    int index = vetDoctorsList.indexWhere((element) => element.id == vet.id);
+    if (index != -1) {
+      vetDoctorsList[index] = response;
+    }
   }
 }

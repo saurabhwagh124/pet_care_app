@@ -59,7 +59,9 @@ class ShopController extends GetxController {
   }
 
   void getAllOrders() async {
+    isLoading.value = true;
     int id = userData.read<int>("userId") ?? 0;
     orders.value = await shopService.getAllOrdersByUser(id);
+    isLoading.value = false;
   }
 }

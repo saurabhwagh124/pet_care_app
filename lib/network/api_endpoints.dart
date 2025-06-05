@@ -1,8 +1,8 @@
 class ApiEndpoints {
   // static String baseUrl =baseUrl
   //     "http://petcarebackend1-env.eba-pkcec8a7.ap-south-1.elasticbeanstalk.com:5000/public";
-  // static String baseUrl = "https://pet-care-server-jar-v8.onrender.com/public";
-  static String baseUrl = "http://10.217.67.22:5000/public";
+  static String baseUrl = "https://pet-care-server-jar-v8.onrender.com/public";
+  // static String baseUrl = "http://10.217.67.22:5000/public
   static String loginUrl = "$baseUrl/login";
   static String registerUrl = "$baseUrl/register";
 
@@ -69,4 +69,8 @@ class ApiEndpoints {
   static String deleteAddressUrl = "$baseUrl/users/address/{id}";
 
   static String getAllOrdersUrl = "$baseUrl/orders";
+
+
+  // DELETE
+  static String deleteUserPetUrl = "$baseUrl/pet/{id}";
 }

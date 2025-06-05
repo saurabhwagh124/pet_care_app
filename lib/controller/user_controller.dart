@@ -35,12 +35,12 @@ class UserController extends GetxController {
 
   void fetchUserAddress() async {
     try {
-      String email = FB.FirebaseAuth.instance.currentUser?.email ?? "";
       isLoading.value = true;
+      String email = FB.FirebaseAuth.instance.currentUser?.email ?? "";
       addressList.value = await userService.fetchUserAddress(email);
       isLoading.value = false;
     } catch (e) {
-      log("Error fetching user address: $e");
+      log("Error fetching user address controller: $e");
     }
   }
 

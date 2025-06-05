@@ -13,8 +13,8 @@ import 'package:pet_care_app/view/user_views/pethealthscreen.dart';
 import 'package:pet_care_app/view/user_views/shop_food_screen.dart';
 
 class Petscreen extends StatefulWidget {
-  final UserPetModel data;
-  const Petscreen({super.key, required this.data});
+   UserPetModel data;
+   Petscreen({super.key, required this.data});
 
   @override
   State<Petscreen> createState() => _PetscreenState();
@@ -231,64 +231,64 @@ class _PetscreenState extends State<Petscreen> {
           ),
 
           // Pet Status Section
-          Padding(
-            padding: EdgeInsets.all(8.r),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const ImageIcon(AssetImage("assets/images/statusIcon.png")),
-                    const SizedBox(width: 8),
-                    Text(
-                      "${widget.data.name}'s Status",
-                      style: GoogleFonts.fredoka(
-                        textStyle: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                PetStatusCard(
-                    icon: Icons.favorite,
-                    title: 'Health',
-                    subtitle: 'Abnormal',
-                    description: 'Last Vaccinated (2mon Ago)',
-                    buttonText: 'Contact Vet',
-                    buttonColor: Colors.redAccent,
-                    onPressed: () {
-                      Get.to(() => const PetHealth());
-                    }),
-                const SizedBox(height: 12),
-                PetStatusCard(
-                  icon: Icons.restaurant,
-                  title: 'Food',
-                  subtitle: 'Hungry',
-                  description: 'Last Fed (4h Ago)',
-                  buttonText: 'Check food',
-                  buttonColor: Colors.purple,
-                  onPressed: () {
-                    Get.to(() => const ShopFood());
-                  },
-                ),
-                const SizedBox(height: 12),
-                PetStatusCard(
-                    icon: Icons.mood,
-                    title: 'Mood',
-                    subtitle: 'Abnormal',
-                    description: 'Seems restless',
-                    buttonText: 'Whistle',
-                    buttonColor: Colors.blue,
-                    onPressed: () {
-                      Get.to(() => const PetHealth());
-                    }),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: EdgeInsets.all(8.r),
+          //   child: Column(
+          //     crossAxisAlignment: CrossAxisAlignment.start,
+          //     children: [
+          //       Row(
+          //         children: [
+          //           const ImageIcon(AssetImage("assets/images/statusIcon.png")),
+          //           const SizedBox(width: 8),
+          //           Text(
+          //             "${widget.data.name}'s Status",
+          //             style: GoogleFonts.fredoka(
+          //               textStyle: const TextStyle(
+          //                 fontSize: 20,
+          //                 fontWeight: FontWeight.w700,
+          //                 color: Colors.black,
+          //               ),
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //       const SizedBox(height: 16),
+          //       PetStatusCard(
+          //           icon: Icons.favorite,
+          //           title: 'Health',
+          //           subtitle: 'Abnormal',
+          //           description: 'Last Vaccinated (2mon Ago)',
+          //           buttonText: 'Contact Vet',
+          //           buttonColor: Colors.redAccent,
+          //           onPressed: () {
+          //             Get.to(() => const PetHealth());
+          //           }),
+          //       const SizedBox(height: 12),
+          //       PetStatusCard(
+          //         icon: Icons.restaurant,
+          //         title: 'Food',
+          //         subtitle: 'Hungry',
+          //         description: 'Last Fed (4h Ago)',
+          //         buttonText: 'Check food',
+          //         buttonColor: Colors.purple,
+          //         onPressed: () {
+          //           Get.to(() => const ShopFood());
+          //         },
+          //       ),
+          //       const SizedBox(height: 12),
+          //       PetStatusCard(
+          //           icon: Icons.mood,
+          //           title: 'Mood',
+          //           subtitle: 'Abnormal',
+          //           description: 'Seems restless',
+          //           buttonText: 'Whistle',
+          //           buttonColor: Colors.blue,
+          //           onPressed: () {
+          //             Get.to(() => const PetHealth());
+          //           }),
+          //     ],
+          //   ),
+          // ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
             child: Row(
@@ -301,7 +301,7 @@ class _PetscreenState extends State<Petscreen> {
                         UploadService service = UploadService();
                         photoUrl = await service.uploadImage(imageFile!);
                       }
-                      updatePet(UserPetModel(
+                      await updatePet(UserPetModel(
                           id: widget.data.id,
                           name: _nameController.text.trim(),
                           species: widget.data.species,
@@ -331,7 +331,10 @@ class _PetscreenState extends State<Petscreen> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    userPetController.deletePet(widget.data.id!);
+                    Get.back();
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                     padding: const EdgeInsets.symmetric(
@@ -353,9 +356,11 @@ class _PetscreenState extends State<Petscreen> {
         ])));
   }
 
-  void updatePet(UserPetModel pet) async {
+  Future<void> updatePet(UserPetModel pet) async {
     UserPetModel temp = await userPetController.editUserPet(pet);
-    Get.off(() => Petscreen(data: temp));
+    setState(() {
+      widget.data = temp;
+    });
   }
 }
 

@@ -19,8 +19,9 @@ class _ConfirmedAppointmentsWidgetState
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     _controller.fetchAllAppointments();
-    log(_controller.allAppointments.toString());
+    });
   }
 
   @override

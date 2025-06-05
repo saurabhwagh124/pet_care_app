@@ -23,6 +23,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     _user = _auth.currentUser;
     if (_user != null && !_user!.emailVerified) {
       sendVerificationEmail();
@@ -32,6 +33,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
         isVerified = true;
       });
     }
+    });
   }
 
   void sendVerificationEmail() async {

@@ -32,6 +32,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     if (widget.isDoctor) {
       reviewController.fetchDoctorReviews(widget.id);
     } else if (widget.isBoarding) {
@@ -39,6 +40,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
     } else if (widget.isService) {
       reviewController.fetchServiceReviews(widget.id);
     }
+    });
   }
 
   @override

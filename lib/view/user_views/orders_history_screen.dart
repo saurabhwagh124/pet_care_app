@@ -18,7 +18,9 @@ class _OrdersHistoryScreenState extends State<OrdersHistoryScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     controller.getAllOrders();
+    });
   }
 
   @override

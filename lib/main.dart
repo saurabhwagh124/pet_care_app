@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:pet_care_app/controller/appointment_controller.dart';
 import 'package:pet_care_app/controller/base_breed_controller.dart';
+import 'package:pet_care_app/controller/boarding_controller.dart';
 import 'package:pet_care_app/controller/cart_controller.dart';
 import 'package:pet_care_app/controller/orders_controller.dart';
 import 'package:pet_care_app/controller/pet_services_controller.dart';
@@ -86,6 +87,7 @@ class MainApp extends StatelessWidget {
           ),
           initialBinding: BindingsBuilder(() {
             Get.put(AppointmentController());
+            Get.put(BoardingController());
             Get.put(BaseBreedController());
             Get.put(CartController());
             Get.put(OrdersController());

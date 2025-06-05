@@ -17,7 +17,9 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
     userData.write("adminEnabled", true);
+    });
     super.initState();
   }
 
