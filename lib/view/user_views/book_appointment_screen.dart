@@ -19,6 +19,7 @@ class BookAppoinmentScreen extends StatefulWidget {
   final bool doctorAppointment;
   final bool servicesAppointment;
   final bool boardingAppointment;
+
   const BookAppoinmentScreen(
       {super.key,
       this.doctor,
@@ -44,11 +45,11 @@ class _BookAppoinmentScreenState extends State<BookAppoinmentScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-    fetchTimeSlots();
-    userPetController.fetchUserPets();
-    if (userPetController.userPetList.isNotEmpty) {
-      selectedPet = userPetController.userPetList.first.name!;
-    }
+      fetchTimeSlots();
+      userPetController.fetchUserPets();
+      if (userPetController.userPetList.isNotEmpty) {
+        selectedPet = userPetController.userPetList.first.name!;
+      }
     });
   }
 

@@ -81,12 +81,12 @@ class AppointmentController extends GetxController {
   }
 
   void bookServiceAppointment(PetServicesModel service, UserPetModel pet,
-      DateTime date, String selectedTime) {
+      DateTime date, String selectedTime) async {
     isLoading.value = true;
     Users user =
         Users.fromJson(jsonDecode(userData.read<String>("user") ?? ""));
     final payload = ServiceAppointmentModel(
-        appointmentId: 0,
+        appointmentId: null,
         users: user,
         pet: pet,
         date: date,
@@ -94,25 +94,25 @@ class AppointmentController extends GetxController {
         status: 'PENDING',
         service: service);
     log(jsonEncode(payload.toJson()));
-    appointmentsService.bookServiceAppointment(payload);
+    await appointmentsService.bookServiceAppointment(payload);
     isLoading.value = false;
   }
 
   void bookBoardingAppointment(BoardingModel boarding, UserPetModel pet,
-      DateTime date, String selectedTime) {
+      DateTime date, String selectedTime) async {
     isLoading.value = true;
     Users user =
         Users.fromJson(jsonDecode(userData.read<String>("user") ?? ""));
     final payload = BoardingAppointmentModel(
-        appointmentId: 0,
+        appointmentId: null,
         users: user,
         pet: pet,
         date: date,
         time: selectedTime,
         status: 'PENDING',
         boarding: boarding);
-    log(jsonEncode(payload.toJson()));
-    appointmentsService.bookBoardingAppointment(payload);
+    log(jsonEncode(payload));
+    await appointmentsService.bookBoardingAppointment(payload);
     isLoading.value = false;
   }
 
@@ -132,14 +132,15 @@ class AppointmentController extends GetxController {
     BoardingAppointmentModel temp = BoardingAppointmentModel.fromJson(
         jsonDecode(await appointmentsService.confirmAppointments(appointmentId,
             boarding: true)));
-    boardingAppointmentList.insert(index, temp);
+    boardingAppointmentList.add(temp);
+    boardingAppointmentList.removeAt(index);
     isLoading.value = false;
   }
 
   void cancelBoarding(int appointmentId, int index) async {
     isLoading.value = true;
-    boardingAppointmentList.removeAt(index);
     await appointmentsService.cancelAppointments(appointmentId, boarding: true);
+    boardingAppointmentList.removeAt(index);
     isLoading.value = false;
   }
 
@@ -148,14 +149,15 @@ class AppointmentController extends GetxController {
     DoctorAppointmentModel temp = DoctorAppointmentModel.fromJson(jsonDecode(
         await appointmentsService.confirmAppointments(appointmentId,
             doctor: true)));
-    docAppointmentList.insert(index, temp);
+    docAppointmentList.removeAt(index);
+    docAppointmentList.add(temp);
     isLoading.value = false;
   }
 
   void cancelDoctor(int appointmentId, int index) async {
     isLoading.value = true;
-    docAppointmentList.removeAt(index);
     await appointmentsService.cancelAppointments(appointmentId, doctor: true);
+    docAppointmentList.removeAt(index);
     isLoading.value = false;
   }
 
@@ -164,14 +166,15 @@ class AppointmentController extends GetxController {
     ServiceAppointmentModel temp = ServiceAppointmentModel.fromJson(jsonDecode(
         await appointmentsService.confirmAppointments(appointmentId,
             service: true)));
-    serviceAppointmentList.insert(index, temp);
+    serviceAppointmentList.removeAt(index);
+    serviceAppointmentList.add(temp);
     isLoading.value = false;
   }
 
   void cancelService(int appointmentId, int index) async {
     isLoading.value = true;
-    serviceAppointmentList.removeAt(index);
     await appointmentsService.cancelAppointments(appointmentId, service: true);
+    serviceAppointmentList.removeAt(index);
     isLoading.value = false;
   }
 

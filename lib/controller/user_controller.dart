@@ -29,7 +29,7 @@ class UserController extends GetxController {
       isLoading.value = false;
       log("Fetched user success ${_userData.read("user")} , ${_userData.read("admin")}");
     } catch (e) {
-      log("Error fetching user Data: $e");
+      throw Exception(e.toString());
     }
   }
 

@@ -42,7 +42,7 @@ void main() async {
   await GetStorage.init();
   final notificationService = Get.put(NotificationService());
   await notificationService.getFcmtoken();
-  // await notificationService.initializeNotifications();
+  await notificationService.initializeNotifications();
   runApp(const MainApp());
 }
 

@@ -143,7 +143,7 @@ class _AddNotificationsScreenState extends State<AddNotificationsScreen> {
                   });
                   titleController.clear();
                   bodyController.clear();
-                  Get.back();
+                  Get.back(canPop: true);
                 },
                 child: Container(
                   margin: EdgeInsets.all(20.sp),

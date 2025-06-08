@@ -127,7 +127,8 @@ class AppointmentsService extends GetxService {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json"
       };
-      final newPayload = jsonEncode(payload.toJson());
+
+      final newPayload = jsonEncode(payload);
       final response = await http.post(
           Uri.parse(ApiEndpoints.postBoardingAppointmentUrl),
           headers: headers,

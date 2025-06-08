@@ -37,8 +37,8 @@ class ServiceAppointmentModel {
 
   Map<String, dynamic> toJson() => {
         "appointmentId": appointmentId,
-        "usersId": users?.toJson(),
-        "petsId": pet?.toJson(),
+        "users": users?.toJson(),
+        "pet": pet?.toJson(),
         "date":
             "${date?.year.toString().padLeft(4, '0')}-${date?.month.toString().padLeft(2, '0')}-${date?.day.toString().padLeft(2, '0')}",
         "time": "$time:00",

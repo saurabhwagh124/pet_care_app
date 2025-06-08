@@ -1,8 +1,9 @@
 class ApiEndpoints {
-  // static String baseUrl =baseUrl
-  //     "http://petcarebackend1-env.eba-pkcec8a7.ap-south-1.elasticbeanstalk.com:5000/public";
+  static String baseUrl =
+      "http://petcarebackend1-env.eba-pkcec8a7.ap-south-1.elasticbeanstalk.com:5000";
+
   // static String baseUrl = "https://pet-care-server-jar-v8.onrender.com/public";
-  static String baseUrl = "http://10.144.85.22:5000";
+  // static String baseUrl = "http://10.144.85.22:5000";
   static String loginUrl = "$baseUrl/login";
   static String registerUrl = "$baseUrl/register";
 
@@ -35,8 +36,9 @@ class ApiEndpoints {
 
   // ALL Post
   static String postUserPetUrl = "$baseUrl/pet";
-  static String postUploadFileUrl = "$baseUrl/upload-file";
-  static String postUploadMultipleFilesUrl = "$baseUrl/upload-multiple-files";
+  static String postUploadFileUrl = "$baseUrl/public/upload-file";
+  static String postUploadMultipleFilesUrl =
+      "$baseUrl/public/upload-multiple-files";
   static String postDoctorAppointmentUrl = "$baseUrl/appointments/doctors";
   static String postBoardingAppointmentUrl = "$baseUrl/appointments/boarding";
   static String postServiceAppointmentUrl = "$baseUrl/appointments/service";
@@ -72,4 +74,8 @@ class ApiEndpoints {
 
   // DELETE
   static String deleteUserPetUrl = "$baseUrl/pet/{id}";
+
+  static String postAddProductUrl = "$baseUrl/shopItem";
+
+  static var deleteItemUrl = "$baseUrl/shopItem/{id}";
 }

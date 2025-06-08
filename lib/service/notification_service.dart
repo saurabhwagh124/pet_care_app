@@ -24,14 +24,13 @@ class NotificationService extends GetxService {
     if (message.notification != null) {
       AwesomeNotifications().createNotification(
           content: NotificationContent(
-        id: DateTime.now().millisecondsSinceEpoch.remainder(100000),
-        channelKey: 'basic_channel',
-        title: message.notification?.title,
-        body: message.notification?.body,
-        notificationLayout: NotificationLayout.BigPicture,
-        displayOnBackground: true,
-        // displayOnForeground: true
-      ));
+              id: DateTime.now().millisecondsSinceEpoch.remainder(100000),
+              channelKey: 'basic_channel',
+              title: message.notification?.title,
+              body: message.notification?.body,
+              notificationLayout: NotificationLayout.BigPicture,
+              displayOnBackground: true,
+              displayOnForeground: false));
     }
   }
 
@@ -129,7 +128,12 @@ class NotificationService extends GetxService {
 
   Future<void> addNotificationToAll(NotificationDtoModel payload) async {
     try {
-      final headers = {"Content-Type": "application/json"};
+      String token =
+          await FirebaseAuth.instance.currentUser!.getIdToken() ?? "";
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+      };
       final response = await http.post(
           Uri.parse(ApiEndpoints.postNotificationToAll),
           headers: headers,
