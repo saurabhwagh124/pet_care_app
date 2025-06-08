@@ -273,22 +273,21 @@ class _AddEditBoardingScreenState extends State<AddEditBoardingScreen> {
       if (widget.boarding == null) {
         _boardingController
             .addBoarding(boardingData); // Make sure this returns a Future
-        Get.snackbar("Success", "Boarding service added successfully!",
-            snackPosition: SnackPosition.BOTTOM);
       } else {
         _boardingController
             .updateBoarding(boardingData); // Make sure this returns a Future
-        Get.snackbar("Success", "Boarding service updated successfully!",
-            snackPosition: SnackPosition.BOTTOM);
       }
-      Get.back(); // Go back to the previous screen
+      // Go back to the previous screen
     } catch (e) {
       Get.snackbar("Error", "Operation failed: ${e.toString()}",
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.BOTTOM,
+          colorText: Colors.white,
+          backgroundColor: Colors.red);
     } finally {
       setState(() {
         _isLoading = false;
       });
+      Get.back(canPop: true);
     }
   }
 
@@ -405,8 +404,8 @@ class _AddEditBoardingScreenState extends State<AddEditBoardingScreen> {
                           textStyle: TextStyle(fontSize: 16.sp),
                         ),
                         child: Text(widget.boarding == null
-                            ? 'Add Service'
-                            : 'Update Service'),
+                            ? 'Add Boarding'
+                            : 'Update Boarding'),
                       ),
                 SizedBox(height: 20.h),
               ],

@@ -47,7 +47,9 @@ class BoardingController extends GetxController {
       isLoading.value = true;
       int index = boardingList
           .indexWhere((element) => element.id == updatedBoarding.id);
-      boardingList[index] = await boardingService.editBoarding(updatedBoarding);
+      boardingList.removeAt(index);
+      boardingList.add(await boardingService.editBoarding(updatedBoarding));
+      isLoading.value = false;
     } catch (e) {
       log(e.toString());
     }

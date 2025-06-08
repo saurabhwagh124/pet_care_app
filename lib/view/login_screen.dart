@@ -317,7 +317,7 @@ class _LoginscreenState extends State<Loginscreen> {
   _signInWithGoogle() async {
     final userCred = await _auth.loginWithGoogle();
     if (userCred != null) {
-      userController.fetchUserData(userCred.user?.email ?? "");
+      await userController.fetchUserData(userCred.user?.email ?? "");
       Get.off(() => const DashboardScreen());
       log("Gooogle login success");
     } else {

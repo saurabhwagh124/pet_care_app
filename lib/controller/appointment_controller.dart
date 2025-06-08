@@ -123,7 +123,7 @@ class AppointmentController extends GetxController {
     docAppointmentList.value = allAppointments!.doctor.reversed.toList();
     boardingAppointmentList.value = allAppointments!.boarding.reversed.toList();
     serviceAppointmentList.value = allAppointments!.service.reversed.toList();
-    // log("All Appointments is null ${allAppointments.toString()}");
+    log("All Appointments is null ${allAppointments.toString()}");
     isLoading.value = false;
   }
 
@@ -163,7 +163,7 @@ class AppointmentController extends GetxController {
     isLoading.value = true;
     ServiceAppointmentModel temp = ServiceAppointmentModel.fromJson(jsonDecode(
         await appointmentsService.confirmAppointments(appointmentId,
-            service: false)));
+            service: true)));
     serviceAppointmentList.insert(index, temp);
     isLoading.value = false;
   }
@@ -171,7 +171,7 @@ class AppointmentController extends GetxController {
   void cancelService(int appointmentId, int index) async {
     isLoading.value = true;
     serviceAppointmentList.removeAt(index);
-    await appointmentsService.cancelAppointments(appointmentId, service: false);
+    await appointmentsService.cancelAppointments(appointmentId, service: true);
     isLoading.value = false;
   }
 

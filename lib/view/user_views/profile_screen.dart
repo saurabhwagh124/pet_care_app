@@ -29,9 +29,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-    controller.fetchUserData(FirebaseAuth.instance.currentUser?.email ?? "");
-    nameController.text = controller.finalUser.value?.displayName ?? "";
-    numberController.text = controller.finalUser.value?.phoneNumber ?? "";
+      controller.fetchUserData(FirebaseAuth.instance.currentUser?.email ?? "");
+      nameController.text = controller.finalUser.value?.displayName ?? "";
+      numberController.text = controller.finalUser.value?.phoneNumber ?? "";
     });
     super.initState();
   }
@@ -75,8 +75,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   child: TextFormField(
                     controller: numberController,
-                    keyboardType:
-                        TextInputType.number, // Only allow number input
+                    keyboardType: TextInputType.number,
+                    // Only allow number input
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(
                           10), // Limit input to 10 digits
@@ -230,7 +230,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               GestureDetector(
                                 onTap: () async {
                                   await auth.signOut();
+                                  userData.clear();
                                   userData.remove("user");
+                                  userData.remove("userId");
                                   userData.write("admin", false);
                                   Get.back();
                                   Get.to(() => const Wrapper());
@@ -260,8 +262,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 onPressed: () {},
                                 icon: const Icon(Icons.email),
                               ),
-                              Text(
-                                user?.email ?? "No Name Available",
+                              Expanded(
+                                child: Text(
+                                  user?.email ?? "No Name Available",
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                             ],
                           ),

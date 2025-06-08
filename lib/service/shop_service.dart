@@ -12,7 +12,6 @@ import '../network/api_endpoints.dart';
 class ShopService extends GetxService {
   Future<List<Product>> fetchProductsByCategory(String category) async {
     String url = "${ApiEndpoints.getAllShopItemUrl}$category";
-
     try {
       String token =
           await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";

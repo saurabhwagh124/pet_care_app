@@ -12,17 +12,11 @@ import 'package:pet_care_app/model/service_appointment_model.dart';
 import 'package:pet_care_app/network/api_endpoints.dart';
 
 class AppointmentsService extends GetxService {
-  String token = "";
-
-  Future<String> getToken() async {
-    return await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
-  }
-
   // FETCH TimeSlots Methods
   Future<List<String>> fetchBookedDoctorTimeSlots(
       int doctorId, String date) async {
     try {
-      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {"Authorization": "Bearer $token"};
       final url = ApiEndpoints.getDoctorAppointmentsSlotsUrl
           .replaceAll("{id}", doctorId.toString())
@@ -42,7 +36,7 @@ class AppointmentsService extends GetxService {
   Future<List<String>> fetchBookedServiceTimeSlots(
       int serviceId, String date) async {
     try {
-      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {"Authorization": "Bearer $token"};
       final url = ApiEndpoints.getServiceAppointmentsSlotsUrl
           .replaceAll("{id}", serviceId.toString())
@@ -62,7 +56,7 @@ class AppointmentsService extends GetxService {
   Future<List<String>> fetchBookedBoardingTimeSlots(
       int boardingId, String date) async {
     try {
-      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {"Authorization": "Bearer $token"};
       final url = ApiEndpoints.getBoardingAppointmentsSlotsUrl
           .replaceAll("{id}", boardingId.toString())
@@ -82,7 +76,7 @@ class AppointmentsService extends GetxService {
   // BOOK Appointment Methods
   Future<void> bookDoctorAppointment(DoctorAppointmentModel payload) async {
     try {
-      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json"
@@ -105,7 +99,7 @@ class AppointmentsService extends GetxService {
 
   Future<void> bookServiceAppointment(ServiceAppointmentModel payload) async {
     try {
-      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json"
@@ -128,7 +122,7 @@ class AppointmentsService extends GetxService {
 
   Future<void> bookBoardingAppointment(BoardingAppointmentModel payload) async {
     try {
-      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json"
@@ -151,10 +145,11 @@ class AppointmentsService extends GetxService {
 
   Future<AllAppointmentsModel> fetchAllAppointments(int userId) async {
     try {
-      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {"Authorization": "Bearer $token"};
       final url = ApiEndpoints.getAllAppointmentsUrl
           .replaceAll("{id}", userId.toString());
+      log(url);
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200 || response.statusCode == 201) {
         // log("body${response.body}");
@@ -174,7 +169,7 @@ class AppointmentsService extends GetxService {
       bool doctor = false,
       bool service = false}) async {
     try {
-      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {"Authorization": "Bearer $token"};
       String url = ApiEndpoints.postBoardingConfirmUrl
           .replaceAll("{id}", appointmentId.toString());
@@ -186,6 +181,7 @@ class AppointmentsService extends GetxService {
         url = ApiEndpoints.postServicesConfirmUrl
             .replaceAll("{id}", appointmentId.toString());
       }
+      log(url);
       final response = await http.post(Uri.parse(url), headers: headers);
       if (response.statusCode == 200 || response.statusCode == 201) {
         return response.body;
@@ -202,7 +198,7 @@ class AppointmentsService extends GetxService {
       bool doctor = false,
       bool service = false}) async {
     try {
-      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {"Authorization": "Bearer $token"};
       String url = ApiEndpoints.postBoardingCancelUrl
           .replaceAll("{id}", appointmentId.toString());
@@ -227,7 +223,7 @@ class AppointmentsService extends GetxService {
   Future<List<BoardingAppointmentModel>> fetchBoardingAppointment(
       int id) async {
     try {
-      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {"Authorization": "Bearer $token"};
       String url = ApiEndpoints.getBoardingAppointmentsUrl
           .replaceAll("{id}", id.toString());
@@ -247,7 +243,7 @@ class AppointmentsService extends GetxService {
 
   Future<List<DoctorAppointmentModel>> fetchDoctorAppointment(int id) async {
     try {
-      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {"Authorization": "Bearer $token"};
       String url = ApiEndpoints.getDoctorAppointmentsUrl
           .replaceAll("{id}", id.toString());
@@ -266,7 +262,7 @@ class AppointmentsService extends GetxService {
 
   Future<List<ServiceAppointmentModel>> fetchServiceAppointment(int id) async {
     try {
-      token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {"Authorization": "Bearer $token"};
       String url = ApiEndpoints.getServiceAppointmentsUrl
           .replaceAll("{id}", id.toString());

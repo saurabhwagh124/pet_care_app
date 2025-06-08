@@ -12,9 +12,7 @@ import 'package:pet_care_app/service/notification_service.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
-import 'package:pet_care_app/utils/enums.dart';
 import 'package:pet_care_app/view/category_screen.dart';
-import 'package:pet_care_app/view/user_views/ConfirmedAppointmentsWidget.dart';
 import 'package:pet_care_app/view/user_views/add_pet_screen.dart';
 import 'package:pet_care_app/view/user_views/explore_screen.dart';
 import 'package:pet_care_app/view/user_views/orders_history_screen.dart';
@@ -49,9 +47,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-    userPetController.fetchUserPets();
-    notificationService.getFcmtoken();
-    shopController.fetchFoodProducts();
+      Future.delayed(const Duration(seconds: 1), () {
+        userPetController.fetchUserPets();
+        notificationService.getFcmtoken();
+        shopController.fetchFoodProducts();
+        controller.fetchAllAppointments();
+      });
     });
     super.initState();
   }
@@ -216,18 +217,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     ),
                                   )
                                 : ListView.separated(
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) =>
-                                            UserPetWidgetIcon(
-                                              data: userPetController
-                                                  .userPetList[index],
-                                            ),
-                                        separatorBuilder: (context, index) =>
-                                            SizedBox(
-                                              width: 10.h,
-                                            ),
-                                        itemCount: userPetController
-                                            .userPetList.length)),
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) =>
+                                        UserPetWidgetIcon(
+                                          data: userPetController
+                                              .userPetList[index],
+                                        ),
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
+                                          width: 10.h,
+                                        ),
+                                    itemCount:
+                                        userPetController.userPetList.length)),
                       ),
                     )
                   ],
@@ -267,7 +268,113 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ],
                         ),
                       ),
-                      Expanded(child: ConfirmedAppointmentsWidget()),
+                      Expanded(child: Obx(() {
+                        final confirmedDoctorAppointments = controller
+                            .docAppointmentList
+                            .where((appointment) =>
+                                appointment.status == 'CONFIRMED')
+                            .toList();
+
+                        confirmedDoctorAppointments.sort((a, b) {
+                          return (a.appointmentId ?? 0)
+                              .compareTo(b.appointmentId ?? 0);
+                        });
+
+                        if (controller.isLoading.value) {
+                          return const Center(
+                              child: CircularProgressIndicator(
+                            color: Colors.green,
+                          ));
+                        }
+
+                        if (confirmedDoctorAppointments.isEmpty) {
+                          return const Center(
+                            child: Text(
+                              "No confirmed appointments available.",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          );
+                        }
+
+                        return ListView.builder(
+                          itemCount: confirmedDoctorAppointments.length,
+                          itemBuilder: (context, index) {
+                            final appointment =
+                                confirmedDoctorAppointments[index];
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Card(
+                                color: Colors.white,
+                                margin: const EdgeInsets.symmetric(vertical: 8),
+                                elevation: 2,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                          "Appointment ID: ${appointment.appointmentId ?? 'Unknown'}",
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold)),
+                                      Text(
+                                          "Doctor: ${appointment.doctor?.name ?? 'Unknown'}",
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold)),
+                                      const SizedBox(height: 6),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                              "Pet: ${appointment.pet?.name ?? 'Unknown'}"),
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 8, vertical: 4),
+                                            decoration: BoxDecoration(
+                                              color: Colors.green.shade100,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                            child: const Text(
+                                              "CONFIRMED",
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  color: Colors.green,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "Date: ${appointment.date?.toLocal().toString().split(' ')[0]}",
+                                            style:
+                                                const TextStyle(fontSize: 12),
+                                          ),
+                                          const SizedBox(width: 15),
+                                          Text(
+                                            "Time: ${appointment.time}",
+                                            style:
+                                                const TextStyle(fontSize: 12),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 8),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }))
                     ],
                   )),
               const SizedBox(height: 20),
