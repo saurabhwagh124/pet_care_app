@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "726567938075-87vk9fdhfv61orfvggd6drubh8ko72ne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pet_care_app",
+            "certificate_hash": "c863d41d0812c14310b0ea509e814bfbf58d208c"
+          }
+        },
+        {
           "client_id": "726567938075-a9qdqf9l7s3co16a7re08h782tefepkd.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -27,6 +35,14 @@
           "android_info": {
             "package_name": "com.example.pet_care_app",
             "certificate_hash": "37db5c9dc43e097b0d38ac7428df5d7b97f5aae3"
+          }
+        },
+        {
+          "client_id": "726567938075-m9459vt293g6kcdbmes5pss3t9i0mpvs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pet_care_app",
+            "certificate_hash": "f988f0c43367bdef28b25cb63dce2589d4abc58f"
           }
         },
         {
@@ -63,7 +79,8 @@
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-8462707009151961~2567582887"
     }
   ],
   "configuration_version": "1"

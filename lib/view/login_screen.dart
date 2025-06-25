@@ -2,12 +2,17 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/controller/user_controller.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
 import 'package:pet_care_app/utils/app_images.dart';
 import 'package:pet_care_app/utils/auth_service.dart';
-import 'package:pet_care_app/view/dashboard_screen.dart';
-import 'package:pet_care_app/view/forgot_password.dart';
+import 'package:pet_care_app/utils/user_data.dart';
+import 'package:pet_care_app/view/admin_dashboard_screen.dart';
+import 'package:pet_care_app/view/signup_screen.dart';
+import 'package:pet_care_app/view/user_views/dashboard_screen.dart';
+import 'package:pet_care_app/view/user_views/forgot_password_screen.dart';
 
 class Loginscreen extends StatefulWidget {
   const Loginscreen({super.key});
@@ -17,7 +22,10 @@ class Loginscreen extends StatefulWidget {
 }
 
 class _LoginscreenState extends State<Loginscreen> {
+  final UserData _userData = UserData();
   final _auth = AuthService();
+  final userController = UserController();
+  ValueNotifier<bool> isVisible = ValueNotifier(false);
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -68,6 +76,7 @@ class _LoginscreenState extends State<Loginscreen> {
                 height: 45.h,
                 width: 300.w,
                 child: TextFormField(
+                  controller: _emailController,
                   decoration: InputDecoration(
                       labelText: "Email Address",
                       labelStyle: TextStyle(
@@ -79,34 +88,46 @@ class _LoginscreenState extends State<Loginscreen> {
                       prefixIconColor: const Color.fromRGBO(166, 166, 166, 1),
                       filled: true,
                       fillColor: const Color.fromRGBO(212, 212, 212, 1),
-                      border: const OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(10)))),
+                      border: const OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.all(Radius.circular(10)))),
                 ),
-              ),
-              SizedBox(
-                height: 20.h,
               ),
               SizedBox(
                 height: 45.h,
                 width: 300.w,
-                child: TextFormField(
-                  obscureText: true,
-                  obscuringCharacter: "*",
-                  decoration: InputDecoration(
-                      labelText: "Password",
-                      labelStyle: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w500,
-                        color: const Color.fromRGBO(166, 166, 166, 1),
-                      ),
-                      prefixIcon: const Icon(Icons.lock_outlined),
-                      prefixIconColor: const Color.fromRGBO(166, 166, 166, 1),
-                      filled: true,
-                      fillColor: const Color.fromRGBO(212, 212, 212, 1),
-                      border: const OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.all(Radius.circular(10)))),
+                child: ValueListenableBuilder(
+                  valueListenable: isVisible,
+                  builder: (context, value, _) => TextFormField(
+                    controller: _passwordController,
+                    obscureText: !value,
+                    obscuringCharacter: "*",
+                    decoration: InputDecoration(
+                        labelText: "Password",
+                        labelStyle: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w500,
+                          color: const Color.fromRGBO(166, 166, 166, 1),
+                        ),
+                        prefixIcon: const Icon(Icons.lock_outlined),
+                        prefixIconColor: const Color.fromRGBO(166, 166, 166, 1),
+                        filled: true,
+                        fillColor: const Color.fromRGBO(212, 212, 212, 1),
+                        suffixIcon: IconButton(
+                          icon: Icon((value)
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined),
+                          onPressed: () {
+                            isVisible.value = !isVisible.value;
+                          },
+                        ),
+                        suffixIconColor: const Color.fromRGBO(166, 166, 166, 1),
+                        border: const OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10)))),
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 20.h,
               ),
               Padding(
                 padding: EdgeInsets.only(right: 20.w),
@@ -114,57 +135,84 @@ class _LoginscreenState extends State<Loginscreen> {
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const ForgotPassword(),
-                          ));
+                      Get.to(() => const ForgotPasswordScreen());
                     },
                     child: Text("Forgot Password?",
                         style: GoogleFonts.fredoka(
-                          textStyle: const TextStyle(color: Color.fromRGBO(0, 0, 0, 1), fontSize: 20, fontWeight: FontWeight.w400),
+                          textStyle: const TextStyle(
+                              color: Color.fromRGBO(0, 0, 0, 1),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400),
                         )),
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20.h,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "New here?   ",
+                    style: GoogleFonts.fredoka(
+                        textStyle: const TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 1),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400)),
+                  ),
+                  InkWell(
+                      onTap: () {
+                        Get.to(() => const SignupScreen());
+                      },
+                      child: Text(
+                        "Register",
+                        style: GoogleFonts.fredoka(
+                          textStyle: const TextStyle(
+                              color: Color.fromRGBO(0, 0, 0, 1),
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ))
+                ],
               ),
               GestureDetector(
                 onTap: _loginWithEmail,
                 child: Container(
                   height: 40.h,
                   width: 300.w,
-                  decoration: BoxDecoration(color: AppColors.orangeButton, borderRadius: BorderRadius.circular(10.r)),
+                  decoration: BoxDecoration(
+                      color: AppColors.orangeButton,
+                      borderRadius: BorderRadius.circular(10.r)),
                   margin: EdgeInsets.only(left: 25.w, right: 25.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Login",
-                        style: TextStyle(color: AppColors.white, fontSize: 20.sp, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w400),
                       )
                     ],
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20.h,
-              ),
               Text("Or connect with",
                   style: GoogleFonts.fredoka(
-                    textStyle: const TextStyle(color: Color.fromRGBO(116, 112, 112, 1), fontSize: 25, fontWeight: FontWeight.w400),
+                    textStyle: const TextStyle(
+                        color: Color.fromRGBO(116, 112, 112, 1),
+                        fontSize: 25,
+                        fontWeight: FontWeight.w400),
                   )),
-              SizedBox(
-                height: 20.h,
-              ),
               GestureDetector(
                 onTap: _signInWithGoogle,
                 child: Container(
                   height: 40.h,
                   width: 300.w,
-                  decoration: BoxDecoration(color: AppColors.orangeButton, borderRadius: BorderRadius.circular(10.r)),
-                  margin: EdgeInsets.only(left: 25.w, right: 25.w, bottom: 20.h),
+                  decoration: BoxDecoration(
+                      color: AppColors.orangeButton,
+                      borderRadius: BorderRadius.circular(10.r)),
+                  margin:
+                      EdgeInsets.only(left: 25.w, right: 25.w, bottom: 20.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -178,7 +226,43 @@ class _LoginscreenState extends State<Loginscreen> {
                       ),
                       Text(
                         "Login with Google",
-                        style: TextStyle(color: AppColors.white, fontSize: 16.sp, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w400),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: _signInWithGoogleAdmin,
+                // onTap: () => Get.to(const AdminDashboardScreen()),
+                child: Container(
+                  height: 40.h,
+                  width: 300.w,
+                  decoration: BoxDecoration(
+                      color: AppColors.orangeButton,
+                      borderRadius: BorderRadius.circular(10.r)),
+                  margin:
+                      EdgeInsets.only(left: 25.w, right: 25.w, bottom: 20.h),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 10.r,
+                        backgroundColor: AppColors.orangeButton,
+                        backgroundImage: AssetImage(AppImages.googleLogoImg),
+                      ),
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      Text(
+                        "Admin Login with Google",
+                        style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w400),
                       )
                     ],
                   ),
@@ -200,7 +284,10 @@ class _LoginscreenState extends State<Loginscreen> {
                     ),
                     Text(" All Rights Reserved",
                         style: GoogleFonts.fredoka(
-                          textStyle: const TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontSize: 9, fontWeight: FontWeight.w400),
+                          textStyle: const TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1),
+                              fontSize: 9,
+                              fontWeight: FontWeight.w400),
                         )),
                   ],
                 ),
@@ -213,10 +300,12 @@ class _LoginscreenState extends State<Loginscreen> {
   }
 
   _loginWithEmail() async {
-    final user = await _auth.loginUserWithMailAndPassword(_emailController.text, _passwordController.text);
+    final user = await _auth.loginUserWithMailAndPassword(
+        _emailController.text, _passwordController.text);
     if (user != null) {
+      userController.fetchUserData(user.email ?? "");
       log("user logged in with email");
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashboardScreen()));
+      Get.off(() => const DashboardScreen());
     } else {
       log("Login with email unsuccessfull");
       _emailController.clear();
@@ -228,7 +317,27 @@ class _LoginscreenState extends State<Loginscreen> {
   _signInWithGoogle() async {
     final userCred = await _auth.loginWithGoogle();
     if (userCred != null) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DashboardScreen()));
+      userController.fetchUserData(userCred.user?.email ?? "");
+      Get.off(() => const DashboardScreen());
+      log("Gooogle login success");
+    } else {
+      log("Google login failed");
+    }
+  }
+
+  _signInWithGoogleAdmin() async {
+    final userCred = await _auth.loginWithGoogle();
+    if (userCred != null) {
+      userController.fetchUserData(userCred.user?.email ?? "");
+      await Future.delayed(const Duration(seconds: 1));
+      log(_userData.read("admin").toString());
+      if (_userData.read("admin")) {
+        Get.off(() => const AdminDashboardScreen());
+      } else {
+        _auth.signOut();
+        Get.offAll(() => const Loginscreen());
+        Get.snackbar("Error", "Not an admin", backgroundColor: Colors.red);
+      }
       log("Gooogle login success");
     } else {
       log("Google login failed");

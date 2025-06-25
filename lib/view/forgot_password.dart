@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pet_care_app/utils/app_colors.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});
@@ -13,13 +16,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
+        title: const Text("Forgot Password"),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 25.sp),
+          onPressed: () => Get.back(),
         ),
+        backgroundColor: AppColors.yellowCircle,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -31,7 +33,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   textStyle: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.w600),
                 )),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text('Please enter your email to reset the password',
                 style: GoogleFonts.inter(
                   textStyle: const TextStyle(
@@ -39,7 +41,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       fontSize: 16,
                       fontWeight: FontWeight.w600),
                 )),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Text('Your Email',
                 style: GoogleFonts.inter(
                   textStyle: const TextStyle(
@@ -53,7 +55,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 ),
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -61,13 +63,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   // Action for Reset Password
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   backgroundColor: Colors.orange,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Reset Password',
                   style: TextStyle(
                     fontSize: 16,
