@@ -30,10 +30,10 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-    _razorPay = Razorpay();
-    _razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-    _razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentFailed);
-    _razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handlePaymentExternal);
+      _razorPay = Razorpay();
+      _razorPay.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
+      _razorPay.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentFailed);
+      _razorPay.on(Razorpay.EVENT_EXTERNAL_WALLET, _handlePaymentExternal);
     });
   }
 
@@ -59,12 +59,12 @@ class _CartScreenState extends State<CartScreen> {
         totalPrice: cartController.total.toInt(),
         address: AddressModel(
             id: selectedAddress?.id ?? 0,
-            street: null,
-            city: null,
-            state: null,
-            postalCode: null,
-            country: null,
-            userEmail: null),
+            street: selectedAddress?.street ?? "",
+            city: selectedAddress?.city ?? "",
+            state: selectedAddress?.state ?? "",
+            postalCode: selectedAddress?.postalCode ?? "",
+            country: selectedAddress?.country ?? "",
+            userEmail: selectedAddress?.userEmail ?? ""),
         status: "PENDING",
         remarks: null,
         createdAt: null);

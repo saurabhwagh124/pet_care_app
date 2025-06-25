@@ -266,7 +266,7 @@ class _AddEditBoardingScreenState extends State<AddEditBoardingScreen> {
       // Use formatted string
       photoUrls: finalImageUrls,
       // Use the consolidated list of URLs
-      createdAt: widget.boarding?.createdAt,
+      createdAt: widget.boarding?.createdAt ?? null,
     );
 
     try {

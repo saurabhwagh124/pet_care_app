@@ -123,7 +123,7 @@ class AppointmentController extends GetxController {
     docAppointmentList.value = allAppointments!.doctor.reversed.toList();
     boardingAppointmentList.value = allAppointments!.boarding.reversed.toList();
     serviceAppointmentList.value = allAppointments!.service.reversed.toList();
-    log("All Appointments is null ${allAppointments.toString()}");
+    // log("All Appointments is null ${allAppointments.toString()}");
     isLoading.value = false;
   }
 

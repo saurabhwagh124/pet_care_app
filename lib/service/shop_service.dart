@@ -48,6 +48,7 @@ class ShopService extends GetxService {
       final response = await http.post(Uri.parse(ApiEndpoints.postAddOrderUrl),
           headers: headers, body: jsonEncode(payload.toJson()));
       if (response.statusCode == 200 || response.statusCode == 201) {
+        log(response.body);
         return OrdersModel.fromJson(jsonDecode(response.body));
       } else {
         throw Exception(
