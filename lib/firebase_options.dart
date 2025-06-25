@@ -47,7 +47,6 @@ class DefaultFirebaseOptions {
     projectId: 'project-petcare-app',
     authDomain: 'project-petcare-app.firebaseapp.com',
     storageBucket: 'project-petcare-app.firebasestorage.app',
-    measurementId: 'G-P19G525XC1',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -64,7 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '726567938075',
     projectId: 'project-petcare-app',
     storageBucket: 'project-petcare-app.firebasestorage.app',
-    androidClientId: '726567938075-a9qdqf9l7s3co16a7re08h782tefepkd.apps.googleusercontent.com',
+    androidClientId: '726567938075-hbfhq8dqkbki0n7km67l5iig7pfa4b3u.apps.googleusercontent.com',
     iosClientId: '726567938075-n5i785s2ffsclpq4cmri2dv125rm0ne2.apps.googleusercontent.com',
     iosBundleId: 'com.example.petCareApp',
   );
@@ -75,7 +74,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '726567938075',
     projectId: 'project-petcare-app',
     storageBucket: 'project-petcare-app.firebasestorage.app',
-    androidClientId: '726567938075-a9qdqf9l7s3co16a7re08h782tefepkd.apps.googleusercontent.com',
+    androidClientId: '726567938075-hbfhq8dqkbki0n7km67l5iig7pfa4b3u.apps.googleusercontent.com',
     iosClientId: '726567938075-n5i785s2ffsclpq4cmri2dv125rm0ne2.apps.googleusercontent.com',
     iosBundleId: 'com.example.petCareApp',
   );
@@ -87,7 +86,5 @@ class DefaultFirebaseOptions {
     projectId: 'project-petcare-app',
     authDomain: 'project-petcare-app.firebaseapp.com',
     storageBucket: 'project-petcare-app.firebasestorage.app',
-    measurementId: 'G-2KNJHF5MGW',
   );
-
 }

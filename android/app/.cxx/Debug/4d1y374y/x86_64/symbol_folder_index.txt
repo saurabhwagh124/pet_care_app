@@ -1,1 +1,0 @@
-S:\BE_project\AppFolder\pet_care_app\android\app\build\intermediates\cxx\Debug\4d1y374y\obj\x86_64
