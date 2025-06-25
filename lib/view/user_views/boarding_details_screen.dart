@@ -226,7 +226,7 @@ class _BoardingDetailsScreen extends State<BoardingDetailsScreen> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            Get.to(() => AddEditBoardingScreen(
+                            Get.off(() => AddEditBoardingScreen(
                                   boarding: widget.data,
                                 ));
                           },

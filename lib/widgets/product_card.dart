@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pet_care_app/controller/cart_controller.dart';
+import 'package:pet_care_app/view/user_views/shop_item_detail_screen.dart';
 
 import '../model/product.dart';
 
@@ -51,79 +52,84 @@ class _ProductCardState extends State<ProductCard> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    if (widget.product.category != null)
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.orange[100],
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          widget.product.category!,
-                          style: const TextStyle(
-                            fontSize: 10,
-                            color: Colors.orange,
-                            fontWeight: FontWeight.bold,
+            InkWell(
+              onTap: () {
+                Get.to(() => ShopItemDetailScreen(product: widget.product));
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (widget.product.category != null)
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: Colors.orange[100],
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            widget.product.category!,
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                    if (widget.product.recommendedFor != null)
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.orange[100],
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          widget.product.recommendedFor!,
-                          style: const TextStyle(
-                            fontSize: 10,
-                            color: Colors.orange,
-                            fontWeight: FontWeight.bold,
+                      if (widget.product.recommendedFor != null)
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: Colors.orange[100],
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            widget.product.recommendedFor!,
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: Colors.orange,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  if (widget.product.photoUrl != null)
+                    SizedBox(
+                      height: 78,
+                      child: Image.network(
+                        widget.product.photoUrl!,
+                        fit: BoxFit.cover,
                       ),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                if (widget.product.photoUrl != null)
-                  SizedBox(
-                    height: 78,
-                    child: Image.network(
-                      widget.product.photoUrl!,
-                      fit: BoxFit.cover,
+                    ),
+
+                  // Category & Recommended Labels
+
+                  const SizedBox(height: 8),
+                  Text(
+                    widget.product.itemName ?? "",
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    "RS.${widget.product.price}",
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
-
-                // Category & Recommended Labels
-
-                const SizedBox(height: 8),
-                Text(
-                  widget.product.itemName ?? "",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  "RS.${widget.product.price}",
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
             (widget.addToCart)
                 ? Obx(() {

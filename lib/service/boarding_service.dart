@@ -9,16 +9,9 @@ import 'package:pet_care_app/model/boarding_model.dart';
 import 'package:pet_care_app/network/api_endpoints.dart';
 
 class BoardingService extends GetxService {
-  String token = "";
-
-  @override
-  Future<void> onInit() async {
-    token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
-    super.onInit();
-  }
-
   Future<List<BoardingModel>> fetchBoardings() async {
     try {
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {"Authorization": "Bearer $token"};
       log(ApiEndpoints.getAllBoardingsUrl);
       final response = await http
@@ -36,6 +29,7 @@ class BoardingService extends GetxService {
 
   Future<BoardingModel> addBoarding(BoardingModel boarding) async {
     try {
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json"
@@ -47,6 +41,10 @@ class BoardingService extends GetxService {
           body: jsonEncode(boarding.toJson()));
       if (response.statusCode == 200 || response.statusCode == 201) {
         final responseBody = jsonDecode(response.body);
+        Get.snackbar("Success", "Boarding service added successfully!",
+            snackPosition: SnackPosition.BOTTOM,
+            colorText: Colors.white,
+            backgroundColor: Colors.green);
         return BoardingModel.fromJson(responseBody);
       } else {
         throw Exception("Failed to add boarding : ${response.statusCode}");
@@ -58,6 +56,7 @@ class BoardingService extends GetxService {
 
   Future<BoardingModel> editBoarding(BoardingModel boarding) async {
     try {
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final headers = {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json"
@@ -69,6 +68,10 @@ class BoardingService extends GetxService {
           body: jsonEncode(boarding.toJson()));
       if (response.statusCode == 200 || response.statusCode == 201) {
         final responseBody = jsonDecode(response.body);
+        Get.snackbar("Success", "Boarding service updated successfully!",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.green,
+            colorText: Colors.white);
         return BoardingModel.fromJson(responseBody);
       } else {
         throw Exception("Failed to add boarding : ${response.statusCode}");
@@ -80,8 +83,9 @@ class BoardingService extends GetxService {
 
   Future<void> deleteBoarding(int id) async {
     try {
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final header = {"Authorization": "Bearer $token"};
-      final url = ApiEndpoints.getAllBoardingsUrl + "/$id";
+      final url = "${ApiEndpoints.getAllBoardingsUrl}/$id";
       final response = await http.delete(Uri.parse(url), headers: header);
       if (response.statusCode == 200) {
         Get.snackbar("Deleted", "Boarding deleted successfully",

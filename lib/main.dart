@@ -36,13 +36,13 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
-  await GetStorage.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await GetStorage.init();
   final notificationService = Get.put(NotificationService());
-  notificationService.getFcmtoken();
-  notificationService.initializeNotifications();
+  await notificationService.getFcmtoken();
+  await notificationService.initializeNotifications();
   runApp(const MainApp());
 }
 

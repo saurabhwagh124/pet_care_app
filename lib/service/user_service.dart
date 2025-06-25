@@ -10,12 +10,14 @@ import 'package:pet_care_app/model/users.dart';
 import 'package:pet_care_app/network/api_endpoints.dart';
 
 class UserService extends GetxService {
-  String token = "";
-
   Future<Users> fetchUserData(String email) async {
+    final token =
+        await FB.FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+    final headers = {"Authorization": "Bearer $token"};
     final url = ApiEndpoints.getUserDataUrl.replaceAll("{MAIL}", email);
+    log(url);
     try {
-      final response = await http.get(Uri.parse(url));
+      final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200 || response.statusCode == 201) {
         Map<String, dynamic> responseData = jsonDecode(response.body);
         return Users.fromJson(responseData);
@@ -28,9 +30,12 @@ class UserService extends GetxService {
   }
 
   Future<bool> checkAdmin(String email) async {
+    final token =
+        await FB.FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+    final headers = {"Authorization": "Bearer $token"};
     final url = ApiEndpoints.checkAdminUrl.replaceAll("{MAIL}", email);
     try {
-      final response = await http.get(Uri.parse(url));
+      final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = jsonDecode(response.body);
         return data;
@@ -43,7 +48,8 @@ class UserService extends GetxService {
   }
 
   Future<List<AddressModel>> fetchUserAddress(String email) async {
-    token = await FB.FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+    final token =
+        await FB.FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
     final headers = {"Authorization": "Bearer $token"};
     final url = ApiEndpoints.getAddressUrl.replaceAll("{email}", email);
     try {
@@ -60,7 +66,8 @@ class UserService extends GetxService {
   }
 
   Future<void> deleteUserAddress(int id) async {
-    token = await FB.FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+    final token =
+        await FB.FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
     final headers = {"Authorization": "Bearer $token"};
     final url = ApiEndpoints.deleteAddressUrl.replaceAll("{id}", id.toString());
     try {
@@ -79,7 +86,8 @@ class UserService extends GetxService {
   Future<AddressModel> addUserAddress(AddressModel payload) async {
     try {
       log(payload.toString());
-      token = await FB.FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token =
+          await FB.FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
       final headers = {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json"
@@ -102,7 +110,8 @@ class UserService extends GetxService {
   Future<Users> updateUserDetails(Users payload) async {
     try {
       log(payload.toString());
-      token = await FB.FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
+      final token =
+          await FB.FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
       final headers = {
         "Authorization": "Bearer $token",
         "Content-Type": "application/json"

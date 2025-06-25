@@ -16,7 +16,7 @@ class UserController extends GetxController {
   final Rx<bool> admin = false.obs;
   RxList<AddressModel> addressList = <AddressModel>[].obs;
 
-  void fetchUserData(String email) async {
+  Future<void> fetchUserData(String email) async {
     try {
       isLoading.value = true;
       Users temp = await userService.fetchUserData(email);
@@ -29,7 +29,7 @@ class UserController extends GetxController {
       isLoading.value = false;
       log("Fetched user success ${_userData.read("user")} , ${_userData.read("admin")}");
     } catch (e) {
-      log("Error fetching user Data: $e");
+      throw Exception(e.toString());
     }
   }
 

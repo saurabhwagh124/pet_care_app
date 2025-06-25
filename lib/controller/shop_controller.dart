@@ -64,4 +64,80 @@ class ShopController extends GetxController {
     orders.value = await shopService.getAllOrdersByUser(id);
     isLoading.value = false;
   }
+
+  void addNewProduct(Product product) async {
+    isLoading.value = true;
+    switch (product.category) {
+      case "FOOD":
+        foodList.add(await shopService.addProduct(product));
+        break;
+      case "VET_ITEMS":
+        vetItemsList.add(await shopService.addProduct(product));
+        break;
+      case "ACCESSORIES":
+        accList.add(await shopService.addProduct(product));
+        break;
+      case "IOT_DEVICES":
+        iotList.add(await shopService.addProduct(product));
+        break;
+      default:
+        log("Unknown category");
+    }
+    isLoading.value = false;
+  }
+
+  void updateProduct(Product product) async {
+    isLoading.value = true;
+    switch (product.category) {
+      case "FOOD":
+        int index = foodList.indexWhere((element) => element.id == product.id);
+        foodList.add(await shopService.addProduct(product));
+        foodList.removeAt(index);
+        break;
+      case "VET_ITEMS":
+        int index =
+            vetItemsList.indexWhere((element) => element.id == product.id);
+        vetItemsList.add(await shopService.addProduct(product));
+        vetItemsList.removeAt(index);
+        break;
+      case "ACCESSORIES":
+        int index = accList.indexWhere((element) => element.id == product.id);
+        accList.add(await shopService.addProduct(product));
+        accList.removeAt(index);
+        break;
+      case "IOT_DEVICES":
+        int index = iotList.indexWhere((element) => element.id == product.id);
+        iotList.add(await shopService.addProduct(product));
+        iotList.removeAt(index);
+        break;
+      default:
+        log("Unknown category");
+    }
+    isLoading.value = false;
+  }
+
+  void deleteProduct(int id, String category) async {
+    isLoading.value = true;
+    switch (category) {
+      case "FOOD":
+        foodList.removeWhere((element) => element.id == id);
+        await shopService.deleteProduct(id);
+        break;
+      case "VET_ITEMS":
+        vetItemsList.removeWhere((element) => element.id == id);
+        await shopService.deleteProduct(id);
+        break;
+      case "ACCESSORIES":
+        accList.removeWhere((element) => element.id == id);
+        await shopService.deleteProduct(id);
+        break;
+      case "IOT_DEVICES":
+        iotList.removeWhere((element) => element.id == id);
+        await shopService.deleteProduct(id);
+        break;
+      default:
+        log("Unknown category");
+    }
+    isLoading.value = false;
+  }
 }

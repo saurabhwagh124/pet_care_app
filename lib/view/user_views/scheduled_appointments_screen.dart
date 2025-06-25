@@ -87,14 +87,24 @@ class _ScheduledAppointmentsScreenState
                           controller.docAppointmentList.length * 50.h;
                       return SizedBox(
                         height: (height >= 400.w) ? 400.w : height,
-                        child: Obx(() => ListView.builder(
-                              itemBuilder: (context, index) =>
-                                  AppointmentStatusWidget(
-                                isDoc: true,
-                                doctor: controller.docAppointmentList[index],
+                        child: Obx(() {
+                          final list = controller.docAppointmentList;
+                          if (controller.isLoading.value) {
+                            return const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.green,
                               ),
-                              itemCount: controller.docAppointmentList.length,
-                            )),
+                            );
+                          }
+                          return ListView.builder(
+                            itemBuilder: (context, index) =>
+                                AppointmentStatusWidget(
+                              isDoc: true,
+                              doctor: list[index],
+                            ),
+                            itemCount: list.length,
+                          );
+                        }),
                       );
                     }
                     return const SizedBox.shrink();
@@ -130,16 +140,24 @@ class _ScheduledAppointmentsScreenState
                       ? SizedBox(
                           height:
                               controller.serviceAppointmentList.length * 50.h,
-                          child: Obx(() => ListView.builder(
-                                itemBuilder: (context, index) =>
-                                    AppointmentStatusWidget(
-                                  isService: true,
-                                  service:
-                                      controller.serviceAppointmentList[index],
+                          child: Obx(() {
+                            final list = controller.serviceAppointmentList;
+                            if (controller.isLoading.value) {
+                              return const Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.green,
                                 ),
-                                itemCount:
-                                    controller.serviceAppointmentList.length,
-                              )),
+                              );
+                            }
+                            return ListView.builder(
+                              itemBuilder: (context, index) =>
+                                  AppointmentStatusWidget(
+                                isService: true,
+                                service: list[index],
+                              ),
+                              itemCount: list.length,
+                            );
+                          }),
                         )
                       : const SizedBox.shrink()),
               GestureDetector(
@@ -173,16 +191,25 @@ class _ScheduledAppointmentsScreenState
                       ? SizedBox(
                           height:
                               controller.boardingAppointmentList.length * 50.h,
-                          child: Obx(() => ListView.builder(
-                                itemBuilder: (context, index) =>
-                                    AppointmentStatusWidget(
-                                  isBoarding: true,
-                                  boarding:
-                                      controller.boardingAppointmentList[index],
+                          child: Obx(() {
+                            final list = controller.boardingAppointmentList;
+                            if (controller.isLoading.value) {
+                              return const Center(
+                                child: CircularProgressIndicator(
+                                  color: Colors.green,
                                 ),
-                                itemCount:
-                                    controller.boardingAppointmentList.length,
-                              )),
+                              );
+                            }
+                            return ListView.builder(
+                              itemBuilder: (context, index) {
+                                return AppointmentStatusWidget(
+                                  isBoarding: true,
+                                  boarding: list[index],
+                                );
+                              },
+                              itemCount: list.length,
+                            );
+                          }),
                         )
                       : const SizedBox.shrink()),
             ],

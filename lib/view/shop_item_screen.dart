@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:pet_care_app/controller/shop_controller.dart';
 import 'package:pet_care_app/model/product.dart';
 import 'package:pet_care_app/utils/app_colors.dart';
-import 'package:pet_care_app/widgets/admin/add_edit_shopitem.dart';
+import 'package:pet_care_app/view/product_add_edit_screen.dart';
 import 'package:pet_care_app/widgets/product_card.dart';
 
 class ShopItemScreen extends StatefulWidget {
@@ -23,7 +23,7 @@ class _ShopItemScreenState extends State<ShopItemScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-    shopController.fetchAllProducts();
+      shopController.fetchAllProducts();
     });
   }
 
@@ -136,7 +136,7 @@ class _ShopItemScreenState extends State<ShopItemScreen> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-          Get.to(() => AddUpdateItemView());
+          Get.to(() => const ProductAddEditScreen());
         },
       ),
     );

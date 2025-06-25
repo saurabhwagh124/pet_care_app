@@ -9,19 +9,13 @@ import 'package:pet_care_app/model/user_pet_model.dart';
 import 'package:pet_care_app/network/api_endpoints.dart';
 
 class UserPetService extends GetxService {
-  String token = "";
-
-  @override
-  Future<void> onInit() async {
-    token = await FirebaseAuth.instance.currentUser?.getIdToken() ?? "";
-    super.onInit();
-  }
-
   Future<List<UserPetModel>> fetchUserPets() async {
     try {
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
       final user = FirebaseAuth.instance.currentUser!;
       final headers = {"Authorization": "Bearer $token"};
-      final url = ApiEndpoints.getAllPetsOfUserUrl.replaceAll("{userEmail}", user.email ?? "");
+      final url = ApiEndpoints.getAllPetsOfUserUrl
+          .replaceAll("{userEmail}", user.email ?? "");
       log(url);
       final response = await http.get(Uri.parse(url), headers: headers);
       if (response.statusCode == 200) {
@@ -37,9 +31,14 @@ class UserPetService extends GetxService {
 
   Future<UserPetModel> addPetToUser(UserPetModel payload) async {
     try {
-      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+      };
       log(ApiEndpoints.postUserPetUrl);
-      final response = await http.post(Uri.parse(ApiEndpoints.postUserPetUrl), headers: headers, body: jsonEncode(payload.toJson()));
+      final response = await http.post(Uri.parse(ApiEndpoints.postUserPetUrl),
+          headers: headers, body: jsonEncode(payload.toJson()));
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = jsonDecode(response.body);
         return UserPetModel.fromJson(data);
@@ -53,9 +52,14 @@ class UserPetService extends GetxService {
 
   Future<UserPetModel> editPet(UserPetModel payload) async {
     try {
-      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+      };
       log("Edit Pet Api");
-      final response = await http.put(Uri.parse(ApiEndpoints.postUserPetUrl), headers: headers, body: jsonEncode(payload.toJson()));
+      final response = await http.put(Uri.parse(ApiEndpoints.postUserPetUrl),
+          headers: headers, body: jsonEncode(payload.toJson()));
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = jsonDecode(response.body);
         return UserPetModel.fromJson(data);
@@ -67,19 +71,26 @@ class UserPetService extends GetxService {
     }
   }
 
-  void deletePet(int id) async{
-    try{
-      final headers = {"Authorization": "Bearer $token", "Content-Type": "application/json"};
-      final url = ApiEndpoints.deleteUserPetUrl.replaceAll("{id}", id.toString());
+  void deletePet(int id) async {
+    try {
+      final token = await FirebaseAuth.instance.currentUser?.getIdToken();
+      final headers = {
+        "Authorization": "Bearer $token",
+        "Content-Type": "application/json"
+      };
+      final url =
+          ApiEndpoints.deleteUserPetUrl.replaceAll("{id}", id.toString());
       final response = await http.delete(Uri.parse(url));
-      if(response.statusCode == 200){
-        Get.snackbar("Deleted", "pet deleted successfully",
+      if (response.statusCode == 200) {
+        Get.snackbar(
+          "Deleted",
+          "pet deleted successfully",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red.withOpacity(0.5),
           colorText: Colors.white,
         );
       }
-    }catch(e){
+    } catch (e) {
       throw Exception("Error deleting pet: $e");
     }
   }

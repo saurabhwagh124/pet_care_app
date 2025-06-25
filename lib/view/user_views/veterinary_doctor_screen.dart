@@ -87,6 +87,14 @@ class _VeterinaryDoctorState extends State<VeterinaryDoctor> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
+                                "Clinic Name: ${widget.data.clinicName!}",
+                                style: GoogleFonts.fredoka(
+                                  fontSize: 17,
+                                  color: const Color.fromRGBO(6, 78, 87, 1),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Text(
                                 widget.data.specialization!,
                                 style: GoogleFonts.fredoka(
                                   fontSize: 17,
